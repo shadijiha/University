@@ -1,0 +1,200 @@
+190909 174347.383|CONFIG|Thread-5|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190909 174347.383|INFO|Thread-5|info|
+190909 174347.383|INFO|Thread-5|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190909 174347.383|INFO|Thread-5|info|Login: team40131284 (aka team40131284)
+190909 174347.383|INFO|Thread-5|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190909 174347.383|INFO|Thread-5|startLog|Process id is 1352@DESKTOP-0RQ392J
+190909 174347.383|INFO|Thread-5|info|Attempting to load UI class edu.csus.ecs.pc2.ui.team.TeamView
+190909 174347.390|INFO|Thread-5|info|Loaded UI class edu.csus.ecs.pc2.ui.team.TeamView
+190909 174347.508|INFO|Thread-5|info| handlePacket original LOGIN_SUCCESS after -- all settings loaded 
+190909 174347.509|INFO|Thread-5|info|handlePacket end Packet[LOGIN_SUCCESS] #1529 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174347.509|INFO|Thread-5|info| receiveObject(S) end   got Packet[LOGIN_SUCCESS] #1529 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174937.880|INFO|AWT-EventQueue-0|testOrSubmitRun|submitRun for Hello_World Java file: D:\Wamp64\www\GitHub\University\COMP-248\Demo\src\Main.java
+190909 174937.882|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190909 174937.882|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190909 174937.969|INFO|Thread-8|info| receiveObject(S) start got Packet[RUN_SUBMISSION_CONFIRM] #1531 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174937.970|INFO|Thread-8|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #1531, o#1531 ) recieveObject
+190909 174937.970|INFO|Thread-8|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_0-3482089090175709376)
+190909 174937.970|INFO|Thread-8|dumpPacket|    To: TEAM40131284 @ site 1
+190909 174937.970|INFO|Thread-8|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 77 QUEUED_FOR_COMPUTER_JUDGEMENT 494 min 29699541ms from TEAM40131284 @ site 1 id Run-7510780752212063577 problem Hello_World--6354856345925204234 lang Java-6674820217996524370
+190909 174937.970|INFO|Thread-8|info|handlePacket start Packet[RUN_SUBMISSION_CONFIRM] #1531 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174937.970|INFO|Thread-8|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #1531, o#1531 ) handlePacket
+190909 174937.970|INFO|Thread-8|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_0-3482089090175709376)
+190909 174937.970|INFO|Thread-8|dumpPacket|    To: TEAM40131284 @ site 1
+190909 174937.970|INFO|Thread-8|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 77 QUEUED_FOR_COMPUTER_JUDGEMENT 494 min 29699541ms from TEAM40131284 @ site 1 id Run-7510780752212063577 problem Hello_World--6354856345925204234 lang Java-6674820217996524370
+190909 174939.945|INFO|Thread-9|info| receiveObject(S) start got Packet[RUN_JUDGEMENT] #1535 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174939.945|INFO|Thread-9|dumpPacket|Packet RUN_JUDGEMENT (Seq #1535, o#1535 ) recieveObject
+190909 174939.945|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_0-3482089090175709376)
+190909 174939.945|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+190909 174939.945|INFO|Thread-9|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1465798483082464943
+190909 174939.945|INFO|Thread-9|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190909 174939.945|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 77 JUDGED 494 min 29699541ms from TEAM40131284 @ site 1 id Run-7510780752212063577 problem Hello_World--6354856345925204234 lang Java-6674820217996524370
+190909 174939.945|INFO|Thread-9|info|handlePacket start Packet[RUN_JUDGEMENT] #1535 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174939.945|INFO|Thread-9|dumpPacket|Packet RUN_JUDGEMENT (Seq #1535, o#1535 ) handlePacket
+190909 174939.945|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_0-3482089090175709376)
+190909 174939.946|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+190909 174939.946|INFO|Thread-9|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1465798483082464943
+190909 174939.946|INFO|Thread-9|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190909 174939.946|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 77 JUDGED 494 min 29699541ms from TEAM40131284 @ site 1 id Run-7510780752212063577 problem Hello_World--6354856345925204234 lang Java-6674820217996524370
+190909 174947.180|INFO|Thread-9|runChanged|RunsPane.RunListener: Action=CHANGED; DetailedAction=null; msg=null; run=Run 77 JUDGED 494 min 29699541ms from TEAM40131284 @ site 1 id Run-7510780752212063577 problem Hello_World--6354856345925204234 lang Java-6674820217996524370; runFiles=null
+190909 174947.180|INFO|Thread-9|runChanged|Event not for me: sent to null but my ID is TEAM40131284 @ site 1
+190909 174947.180|INFO|Thread-9|info| receiveObject(S) end   got Packet[RUN_JUDGEMENT] #1535 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190909 174951.372|INFO|Thread-8|info| receiveObject(S) end   got Packet[RUN_SUBMISSION_CONFIRM] #1531 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195607.659|CONFIG|Thread-17|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190923 195607.659|INFO|Thread-17|info|
+190923 195607.659|INFO|Thread-17|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190923 195607.659|INFO|Thread-17|info|Login: team40131284 (aka team40131284)
+190923 195607.659|INFO|Thread-17|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190923 195607.659|INFO|Thread-17|startLog|Process id is 92@DESKTOP-0RQ392J
+190923 195607.660|INFO|Thread-17|info|Attempting to load UI class edu.csus.ecs.pc2.ui.team.TeamView
+190923 195607.667|INFO|Thread-17|info|Loaded UI class edu.csus.ecs.pc2.ui.team.TeamView
+190923 195607.786|INFO|Thread-17|info| handlePacket original LOGIN_SUCCESS after -- all settings loaded 
+190923 195607.786|INFO|Thread-17|info|handlePacket end Packet[LOGIN_SUCCESS] #3062 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195607.786|INFO|Thread-17|info| receiveObject(S) end   got Packet[LOGIN_SUCCESS] #3062 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195812.310|INFO|AWT-EventQueue-0|testOrSubmitRun|submitRun for problem1 Java file: D:\Wamp64\www\GitHub\University\COMP-248\Assignment 1\src\Lab1.java
+190923 195812.312|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[RUN_SUBMISSION] #8 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190923 195812.312|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[RUN_SUBMISSION] #8 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190923 195812.352|INFO|Thread-20|info| receiveObject(S) start got Packet[RUN_SUBMISSION_CONFIRM] #3112 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195812.352|INFO|Thread-20|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #3112, o#3112 ) recieveObject
+190923 195812.352|INFO|Thread-20|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_2_Mon-1945--804060719969381506)
+190923 195812.352|INFO|Thread-20|dumpPacket|    To: TEAM40131284 @ site 1
+190923 195812.353|INFO|Thread-20|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 6 QUEUED_FOR_COMPUTER_JUDGEMENT 9 min 558237ms from TEAM40131284 @ site 1 id Run-172056365596191883 problem problem1-1667713612892653658 lang Java-6674820217996524370
+190923 195812.353|INFO|Thread-20|info|handlePacket start Packet[RUN_SUBMISSION_CONFIRM] #3112 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195812.353|INFO|Thread-20|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #3112, o#3112 ) handlePacket
+190923 195812.353|INFO|Thread-20|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_2_Mon-1945--804060719969381506)
+190923 195812.353|INFO|Thread-20|dumpPacket|    To: TEAM40131284 @ site 1
+190923 195812.353|INFO|Thread-20|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 6 QUEUED_FOR_COMPUTER_JUDGEMENT 9 min 558237ms from TEAM40131284 @ site 1 id Run-172056365596191883 problem problem1-1667713612892653658 lang Java-6674820217996524370
+190923 195814.283|INFO|Thread-21|info| receiveObject(S) start got Packet[RUN_JUDGEMENT] #3116 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195814.283|INFO|Thread-21|dumpPacket|Packet RUN_JUDGEMENT (Seq #3116, o#3116 ) recieveObject
+190923 195814.283|INFO|Thread-21|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_2_Mon-1945--804060719969381506)
+190923 195814.283|INFO|Thread-21|dumpPacket|    To: TEAM40131284 @ site 1
+190923 195814.283|INFO|Thread-21|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1760287910462352895
+190923 195814.283|INFO|Thread-21|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190923 195814.283|INFO|Thread-21|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 6 JUDGED 9 min 558237ms from TEAM40131284 @ site 1 id Run-172056365596191883 problem problem1-1667713612892653658 lang Java-6674820217996524370
+190923 195814.283|INFO|Thread-21|info|handlePacket start Packet[RUN_JUDGEMENT] #3116 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195814.284|INFO|Thread-21|dumpPacket|Packet RUN_JUDGEMENT (Seq #3116, o#3116 ) handlePacket
+190923 195814.284|INFO|Thread-21|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_2_Mon-1945--804060719969381506)
+190923 195814.284|INFO|Thread-21|dumpPacket|    To: TEAM40131284 @ site 1
+190923 195814.284|INFO|Thread-21|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1760287910462352895
+190923 195814.284|INFO|Thread-21|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190923 195814.284|INFO|Thread-21|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 6 JUDGED 9 min 558237ms from TEAM40131284 @ site 1 id Run-172056365596191883 problem problem1-1667713612892653658 lang Java-6674820217996524370
+190923 195816.824|INFO|Thread-21|runChanged|RunsPane.RunListener: Action=CHANGED; DetailedAction=null; msg=null; run=Run 6 JUDGED 9 min 558237ms from TEAM40131284 @ site 1 id Run-172056365596191883 problem problem1-1667713612892653658 lang Java-6674820217996524370; runFiles=null
+190923 195816.824|INFO|Thread-21|runChanged|Event not for me: sent to null but my ID is TEAM40131284 @ site 1
+190923 195816.824|INFO|Thread-21|info| receiveObject(S) end   got Packet[RUN_JUDGEMENT] #3116 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190923 195817.954|INFO|Thread-20|info| receiveObject(S) end   got Packet[RUN_SUBMISSION_CONFIRM] #3112 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 193853.408|CONFIG|Thread-5|setFileHandlers|Now logging to C:\Users\shadi\Google Drive\University\COMP-248\comp248_labs\bin\logs directory.
+190930 193853.408|INFO|Thread-5|info|
+190930 193853.408|INFO|Thread-5|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190930 193853.408|INFO|Thread-5|info|Login: team40131284 (aka team40131284)
+190930 193853.408|INFO|Thread-5|startLog|Working directory is C:\Users\shadi\Google Drive\University\COMP-248\comp248_labs\bin
+190930 193853.408|INFO|Thread-5|startLog|Process id is 17388@DESKTOP-0RQ392J
+190930 193853.408|INFO|Thread-5|info|Attempting to load UI class edu.csus.ecs.pc2.ui.team.TeamView
+190930 193853.416|INFO|Thread-5|info|Loaded UI class edu.csus.ecs.pc2.ui.team.TeamView
+190930 193853.556|INFO|Thread-5|info| handlePacket original LOGIN_SUCCESS after -- all settings loaded 
+190930 193853.557|INFO|Thread-5|info|handlePacket end Packet[LOGIN_SUCCESS] #141 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 193853.557|INFO|Thread-5|info| receiveObject(S) end   got Packet[LOGIN_SUCCESS] #141 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 194649.159|INFO|Thread-6|info| receiveObject(S) start got Packet[CLOCK_STARTED] #298 SERVER0 @ site 1 -> SERVER0 @ site 0
+190930 194649.159|INFO|Thread-6|dumpPacket|Packet CLOCK_STARTED (Seq #298, o#298 ) recieveObject
+190930 194649.159|INFO|Thread-6|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 194649.159|INFO|Thread-6|dumpPacket|    To: SERVER0 @ site 0
+190930 194649.159|INFO|Thread-6|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190930 194649.159|INFO|Thread-6|dumpPacket|   key: SERVER_CLOCK_OFFSET is: java.util.GregorianCalendar java.util.GregorianCalendar[time=1569887100005,areFieldsSet=true,areAllFieldsSet=false,lenient=true,zone=sun.util.calendar.ZoneInfo[id="GMT",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2019,MONTH=8,WEEK_OF_YEAR=40,WEEK_OF_MONTH=5,DAY_OF_MONTH=30,DAY_OF_YEAR=273,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=5,AM_PM=1,HOUR=11,HOUR_OF_DAY=23,MINUTE=45,SECOND=0,MILLISECOND=5,ZONE_OFFSET=0,DST_OFFSET=0]
+190930 194649.159|INFO|Thread-6|dumpPacket|   key: SITE_NUMBER is: java.lang.Integer 1
+190930 194649.159|INFO|Thread-6|info|handlePacket start Packet[CLOCK_STARTED] #298 SERVER0 @ site 1 -> SERVER0 @ site 0
+190930 194649.159|INFO|Thread-6|dumpPacket|Packet CLOCK_STARTED (Seq #298, o#298 ) handlePacket
+190930 194649.160|INFO|Thread-6|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 194649.160|INFO|Thread-6|dumpPacket|    To: SERVER0 @ site 0
+190930 194649.160|INFO|Thread-6|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190930 194649.160|INFO|Thread-6|dumpPacket|   key: SERVER_CLOCK_OFFSET is: java.util.GregorianCalendar java.util.GregorianCalendar[time=1569887100005,areFieldsSet=true,areAllFieldsSet=false,lenient=true,zone=sun.util.calendar.ZoneInfo[id="GMT",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2019,MONTH=8,WEEK_OF_YEAR=40,WEEK_OF_MONTH=5,DAY_OF_MONTH=30,DAY_OF_YEAR=273,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=5,AM_PM=1,HOUR=11,HOUR_OF_DAY=23,MINUTE=45,SECOND=0,MILLISECOND=5,ZONE_OFFSET=0,DST_OFFSET=0]
+190930 194649.160|INFO|Thread-6|dumpPacket|   key: SITE_NUMBER is: java.lang.Integer 1
+190930 194649.160|INFO|Thread-6|info|Clock for site 1 started by SERVER0 @ site 1 elapsed 0:00:00
+190930 194649.160|INFO|Thread-6|info| receiveObject(S) end   got Packet[CLOCK_STARTED] #298 SERVER0 @ site 1 -> SERVER0 @ site 0
+190930 201123.611|INFO|AWT-EventQueue-0|testOrSubmitRun|submitRun for problem1 Java file: C:\Users\shadi\Desktop\hehexd\Lab\src\Lab2.java
+190930 201123.612|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190930 201123.612|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+190930 201123.667|INFO|Thread-9|info| receiveObject(S) start got Packet[RUN_SUBMISSION_CONFIRM] #523 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 201123.667|INFO|Thread-9|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #523, o#523 ) recieveObject
+190930 201123.667|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 201123.667|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+190930 201123.667|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 15 QUEUED_FOR_COMPUTER_JUDGEMENT 24 min 1474595ms from TEAM40131284 @ site 1 id Run-9158040283118474491 problem problem1-7719490092355705557 lang Java-6674820217996524370
+190930 201123.667|INFO|Thread-9|info|handlePacket start Packet[RUN_SUBMISSION_CONFIRM] #523 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 201123.667|INFO|Thread-9|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #523, o#523 ) handlePacket
+190930 201123.667|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 201123.667|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+190930 201123.667|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 15 QUEUED_FOR_COMPUTER_JUDGEMENT 24 min 1474595ms from TEAM40131284 @ site 1 id Run-9158040283118474491 problem problem1-7719490092355705557 lang Java-6674820217996524370
+190930 201125.359|INFO|Thread-10|info| receiveObject(S) start got Packet[RUN_JUDGEMENT] #527 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 201125.359|INFO|Thread-10|dumpPacket|Packet RUN_JUDGEMENT (Seq #527, o#527 ) recieveObject
+190930 201125.359|INFO|Thread-10|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 201125.359|INFO|Thread-10|dumpPacket|    To: TEAM40131284 @ site 1
+190930 201125.359|INFO|Thread-10|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--8585904843246945969
+190930 201125.360|INFO|Thread-10|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190930 201125.360|INFO|Thread-10|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 15 JUDGED 24 min 1474595ms from TEAM40131284 @ site 1 id Run-9158040283118474491 problem problem1-7719490092355705557 lang Java-6674820217996524370
+190930 201125.360|INFO|Thread-10|info|handlePacket start Packet[RUN_JUDGEMENT] #527 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 201125.360|INFO|Thread-10|dumpPacket|Packet RUN_JUDGEMENT (Seq #527, o#527 ) handlePacket
+190930 201125.360|INFO|Thread-10|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_2_2_Mon_1945-6812801169412160031)
+190930 201125.360|INFO|Thread-10|dumpPacket|    To: TEAM40131284 @ site 1
+190930 201125.360|INFO|Thread-10|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--8585904843246945969
+190930 201125.360|INFO|Thread-10|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+190930 201125.360|INFO|Thread-10|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 15 JUDGED 24 min 1474595ms from TEAM40131284 @ site 1 id Run-9158040283118474491 problem problem1-7719490092355705557 lang Java-6674820217996524370
+190930 201126.777|INFO|Thread-10|runChanged|RunsPane.RunListener: Action=CHANGED; DetailedAction=null; msg=null; run=Run 15 JUDGED 24 min 1474595ms from TEAM40131284 @ site 1 id Run-9158040283118474491 problem problem1-7719490092355705557 lang Java-6674820217996524370; runFiles=null
+190930 201126.777|INFO|Thread-10|runChanged|Event not for me: sent to null but my ID is TEAM40131284 @ site 1
+190930 201126.777|INFO|Thread-10|info| receiveObject(S) end   got Packet[RUN_JUDGEMENT] #527 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+190930 201127.468|INFO|Thread-9|info| receiveObject(S) end   got Packet[RUN_SUBMISSION_CONFIRM] #523 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 194632.928|CONFIG|Thread-5|setFileHandlers|Now logging to C:\Users\shadi\Google Drive\University\COMP-248\comp248_labs\bin\logs directory.
+191007 194632.928|INFO|Thread-5|info|
+191007 194632.928|INFO|Thread-5|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+191007 194632.928|INFO|Thread-5|info|Login: team40131284 (aka team40131284)
+191007 194632.928|INFO|Thread-5|startLog|Working directory is C:\Users\shadi\Google Drive\University\COMP-248\comp248_labs\bin
+191007 194632.928|INFO|Thread-5|startLog|Process id is 18944@DESKTOP-0RQ392J
+191007 194632.928|INFO|Thread-5|info|Attempting to load UI class edu.csus.ecs.pc2.ui.team.TeamView
+191007 194632.935|INFO|Thread-5|info|Loaded UI class edu.csus.ecs.pc2.ui.team.TeamView
+191007 194633.056|INFO|Thread-5|info| handlePacket original LOGIN_SUCCESS after -- all settings loaded 
+191007 194633.057|INFO|Thread-5|info|handlePacket end Packet[LOGIN_SUCCESS] #3998 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 194633.057|INFO|Thread-5|info| receiveObject(S) end   got Packet[LOGIN_SUCCESS] #3998 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 194653.280|INFO|Thread-6|info| receiveObject(S) start got Packet[CLOCK_STARTED] #4005 SERVER0 @ site 1 -> SERVER0 @ site 0
+191007 194653.280|INFO|Thread-6|dumpPacket|Packet CLOCK_STARTED (Seq #4005, o#4005 ) recieveObject
+191007 194653.280|INFO|Thread-6|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 194653.280|INFO|Thread-6|dumpPacket|    To: SERVER0 @ site 0
+191007 194653.280|INFO|Thread-6|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+191007 194653.280|INFO|Thread-6|dumpPacket|   key: SERVER_CLOCK_OFFSET is: java.util.GregorianCalendar java.util.GregorianCalendar[time=1570491900001,areFieldsSet=true,areAllFieldsSet=false,lenient=true,zone=sun.util.calendar.ZoneInfo[id="GMT",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2019,MONTH=9,WEEK_OF_YEAR=41,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=280,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=11,HOUR_OF_DAY=23,MINUTE=45,SECOND=0,MILLISECOND=1,ZONE_OFFSET=0,DST_OFFSET=0]
+191007 194653.280|INFO|Thread-6|dumpPacket|   key: SITE_NUMBER is: java.lang.Integer 1
+191007 194653.281|INFO|Thread-6|info|handlePacket start Packet[CLOCK_STARTED] #4005 SERVER0 @ site 1 -> SERVER0 @ site 0
+191007 194653.281|INFO|Thread-6|dumpPacket|Packet CLOCK_STARTED (Seq #4005, o#4005 ) handlePacket
+191007 194653.281|INFO|Thread-6|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 194653.281|INFO|Thread-6|dumpPacket|    To: SERVER0 @ site 0
+191007 194653.281|INFO|Thread-6|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+191007 194653.281|INFO|Thread-6|dumpPacket|   key: SERVER_CLOCK_OFFSET is: java.util.GregorianCalendar java.util.GregorianCalendar[time=1570491900001,areFieldsSet=true,areAllFieldsSet=false,lenient=true,zone=sun.util.calendar.ZoneInfo[id="GMT",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2019,MONTH=9,WEEK_OF_YEAR=41,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=280,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=11,HOUR_OF_DAY=23,MINUTE=45,SECOND=0,MILLISECOND=1,ZONE_OFFSET=0,DST_OFFSET=0]
+191007 194653.281|INFO|Thread-6|dumpPacket|   key: SITE_NUMBER is: java.lang.Integer 1
+191007 194653.282|INFO|Thread-6|info|Clock for site 1 started by SERVER0 @ site 1 elapsed 0:00:00
+191007 194653.282|INFO|Thread-6|info| receiveObject(S) end   got Packet[CLOCK_STARTED] #4005 SERVER0 @ site 1 -> SERVER0 @ site 0
+191007 201508.075|INFO|AWT-EventQueue-0|testOrSubmitRun|submitRun for problem1 Java file: C:\Users\shadi\Desktop\hehexd\Lab3\src\Lab3.java
+191007 201508.076|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+191007 201508.076|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[RUN_SUBMISSION] #2 TEAM40131284 @ site 1 -> SERVER0 @ site 1
+191007 201508.120|INFO|Thread-9|info| receiveObject(S) start got Packet[RUN_SUBMISSION_CONFIRM] #4260 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 201508.120|INFO|Thread-9|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #4260, o#4260 ) recieveObject
+191007 201508.120|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 201508.120|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+191007 201508.120|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 28 QUEUED_FOR_COMPUTER_JUDGEMENT 28 min 1694891ms from TEAM40131284 @ site 1 id Run-6516211314821303213 problem problem1--5926637863093096184 lang Java-6674820217996524370
+191007 201508.120|INFO|Thread-9|info|handlePacket start Packet[RUN_SUBMISSION_CONFIRM] #4260 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 201508.120|INFO|Thread-9|dumpPacket|Packet RUN_SUBMISSION_CONFIRM (Seq #4260, o#4260 ) handlePacket
+191007 201508.120|INFO|Thread-9|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 201508.120|INFO|Thread-9|dumpPacket|    To: TEAM40131284 @ site 1
+191007 201508.120|INFO|Thread-9|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 28 QUEUED_FOR_COMPUTER_JUDGEMENT 28 min 1694891ms from TEAM40131284 @ site 1 id Run-6516211314821303213 problem problem1--5926637863093096184 lang Java-6674820217996524370
+191007 201509.509|INFO|Thread-10|info| receiveObject(S) start got Packet[RUN_JUDGEMENT] #4264 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 201509.509|INFO|Thread-10|dumpPacket|Packet RUN_JUDGEMENT (Seq #4264, o#4264 ) recieveObject
+191007 201509.509|INFO|Thread-10|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 201509.509|INFO|Thread-10|dumpPacket|    To: TEAM40131284 @ site 1
+191007 201509.509|INFO|Thread-10|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1639427516959933977
+191007 201509.509|INFO|Thread-10|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+191007 201509.509|INFO|Thread-10|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 28 JUDGED 28 min 1694891ms from TEAM40131284 @ site 1 id Run-6516211314821303213 problem problem1--5926637863093096184 lang Java-6674820217996524370
+191007 201509.509|INFO|Thread-10|info|handlePacket start Packet[RUN_JUDGEMENT] #4264 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 201509.509|INFO|Thread-10|dumpPacket|Packet RUN_JUDGEMENT (Seq #4264, o#4264 ) handlePacket
+191007 201509.509|INFO|Thread-10|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_3_2_Mon_1945--2364972107457643262)
+191007 201509.510|INFO|Thread-10|dumpPacket|    To: TEAM40131284 @ site 1
+191007 201509.510|INFO|Thread-10|dumpPacket|   key: JUDGEMENT_RECORD is: edu.csus.ecs.pc2.core.model.JudgementRecord Yes by JUDGE1 @ site 1 judgement Yes-5207136193228953640 id JudgementRecord--1639427516959933977
+191007 201509.510|INFO|Thread-10|dumpPacket|   key: CLIENT_ID is: edu.csus.ecs.pc2.core.model.ClientId SERVER0 @ site 1
+191007 201509.510|INFO|Thread-10|dumpPacket|   key: RUN is: edu.csus.ecs.pc2.core.model.Run Run 28 JUDGED 28 min 1694891ms from TEAM40131284 @ site 1 id Run-6516211314821303213 problem problem1--5926637863093096184 lang Java-6674820217996524370
+191007 201510.700|INFO|Thread-10|runChanged|RunsPane.RunListener: Action=CHANGED; DetailedAction=null; msg=null; run=Run 28 JUDGED 28 min 1694891ms from TEAM40131284 @ site 1 id Run-6516211314821303213 problem problem1--5926637863093096184 lang Java-6674820217996524370; runFiles=null
+191007 201510.700|INFO|Thread-10|runChanged|Event not for me: sent to null but my ID is TEAM40131284 @ site 1
+191007 201510.700|INFO|Thread-10|info| receiveObject(S) end   got Packet[RUN_JUDGEMENT] #4264 SERVER0 @ site 1 -> TEAM40131284 @ site 1
+191007 201511.419|INFO|Thread-9|info| receiveObject(S) end   got Packet[RUN_SUBMISSION_CONFIRM] #4260 SERVER0 @ site 1 -> TEAM40131284 @ site 1

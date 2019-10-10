@@ -1,0 +1,24 @@
+190923 194544.544|CONFIG|AWT-EventQueue-0|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190923 194544.544|INFO|AWT-EventQueue-0|info|
+190923 194544.544|INFO|AWT-EventQueue-0|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190923 194544.544|INFO|AWT-EventQueue-0|info|Login: team40131284 (aka team40131284)
+190923 194544.544|INFO|AWT-EventQueue-0|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190923 194544.545|INFO|AWT-EventQueue-0|startLog|Process id is 2172@DESKTOP-0RQ392J
+190923 194544.545|INFO|AWT-EventQueue-0|info|Contacting server at apic1.encs.concordia.ca:50002 as TEAM40131284 @ site 0
+190923 194544.545|INFO|AWT-EventQueue-0|info|sendLoginRequest start - sending from TEAM40131284 @ site 0
+190923 194544.545|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[LOGIN_REQUEST] #14 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194544.545|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[LOGIN_REQUEST] #14 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194544.545|INFO|AWT-EventQueue-0|info|sendLoginRequest end - packet sent.
+190923 194544.545|INFO|Thread-30|run|send(Serializable)
+190923 194544.676|INFO|Thread-1|receive|public void receive(SealedObject TransportPacket, ConnectionHandlerID connectionHandlerID)
+190923 194544.676|INFO|Thread-31|info| receiveObject(S) start got Packet[LOGIN_FAILED] #2654 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194544.676|INFO|Thread-31|dumpPacket|Packet LOGIN_FAILED (Seq #2654, o#2654 ) recieveObject
+190923 194544.676|INFO|Thread-31|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194544.676|INFO|Thread-31|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194544.677|INFO|Thread-31|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194544.677|INFO|Thread-31|info|handlePacket start Packet[LOGIN_FAILED] #2654 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194544.677|INFO|Thread-31|dumpPacket|Packet LOGIN_FAILED (Seq #2654, o#2654 ) handlePacket
+190923 194544.677|INFO|Thread-31|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194544.677|INFO|Thread-31|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194544.677|INFO|Thread-31|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194545.347|INFO|Thread-31|info| receiveObject(S) end   got Packet[LOGIN_FAILED] #2654 SERVER0 @ site 1 -> TEAM40131284 @ site 0

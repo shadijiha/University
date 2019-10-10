@@ -1,0 +1,9 @@
+﻿  Shado.cpp
+C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(182,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(186,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(597,22): warning C4018: '<=': signed/unsigned mismatch
+  ShadoMath.cpp
+C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(622,22): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(23,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  ShadoMath.vcxproj -> C:\Users\shadi\Google Drive\University\Garbage\ShadoMath\Debug\ShadoMath.exe

@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\shadi\Google Drive\University\Garbage\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(62,10): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\shadi\Google Drive\University\Garbage\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(66,10): warning C4244:  'return': conversion from 'float' to 'int', possible loss of data
+  ConsoleApplication1.vcxproj -> C:\Users\shadi\Google Drive\University\Garbage\ConsoleApplication1\Debug\ConsoleApplication1.exe

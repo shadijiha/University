@@ -1,0 +1,72 @@
+190923 194202.315|CONFIG|AWT-EventQueue-0|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190923 194202.315|INFO|AWT-EventQueue-0|info|
+190923 194202.315|INFO|AWT-EventQueue-0|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190923 194202.315|INFO|AWT-EventQueue-0|info|Login: team40131284 (aka team40131284)
+190923 194202.315|INFO|AWT-EventQueue-0|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190923 194202.316|INFO|AWT-EventQueue-0|startLog|Process id is 2172@DESKTOP-0RQ392J
+190923 194202.316|INFO|AWT-EventQueue-0|info|Contacting server at apic1.encs.concordia.ca:50002 as TEAM40131284 @ site 0
+190923 194202.316|INFO|AWT-EventQueue-0|info|sendLoginRequest start - sending from TEAM40131284 @ site 0
+190923 194202.316|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[LOGIN_REQUEST] #4 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194202.316|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[LOGIN_REQUEST] #4 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194202.317|INFO|AWT-EventQueue-0|info|sendLoginRequest end - packet sent.
+190923 194202.317|INFO|Thread-10|run|send(Serializable)
+190923 194202.462|INFO|Thread-1|receive|public void receive(SealedObject TransportPacket, ConnectionHandlerID connectionHandlerID)
+190923 194202.463|INFO|Thread-11|info| receiveObject(S) start got Packet[LOGIN_FAILED] #2474 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194202.463|INFO|Thread-11|dumpPacket|Packet LOGIN_FAILED (Seq #2474, o#2474 ) recieveObject
+190923 194202.463|INFO|Thread-11|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194202.463|INFO|Thread-11|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194202.463|INFO|Thread-11|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194202.463|INFO|Thread-11|info|handlePacket start Packet[LOGIN_FAILED] #2474 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194202.463|INFO|Thread-11|dumpPacket|Packet LOGIN_FAILED (Seq #2474, o#2474 ) handlePacket
+190923 194202.463|INFO|Thread-11|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194202.463|INFO|Thread-11|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194202.463|INFO|Thread-11|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194203.945|INFO|Thread-11|info| receiveObject(S) end   got Packet[LOGIN_FAILED] #2474 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194331.995|CONFIG|AWT-EventQueue-0|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190923 194331.995|INFO|AWT-EventQueue-0|info|
+190923 194331.995|INFO|AWT-EventQueue-0|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190923 194331.995|INFO|AWT-EventQueue-0|info|Login: team40131284 (aka team40131284)
+190923 194331.995|INFO|AWT-EventQueue-0|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190923 194331.996|INFO|AWT-EventQueue-0|startLog|Process id is 2172@DESKTOP-0RQ392J
+190923 194331.996|INFO|AWT-EventQueue-0|info|Contacting server at apic1.encs.concordia.ca:50002 as TEAM40131284 @ site 0
+190923 194331.996|INFO|AWT-EventQueue-0|info|sendLoginRequest start - sending from TEAM40131284 @ site 0
+190923 194331.996|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[LOGIN_REQUEST] #9 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194331.996|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[LOGIN_REQUEST] #9 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194331.996|INFO|AWT-EventQueue-0|info|sendLoginRequest end - packet sent.
+190923 194331.996|INFO|Thread-20|run|send(Serializable)
+190923 194332.123|INFO|Thread-1|receive|public void receive(SealedObject TransportPacket, ConnectionHandlerID connectionHandlerID)
+190923 194332.123|INFO|Thread-21|info| receiveObject(S) start got Packet[LOGIN_FAILED] #2549 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194332.123|INFO|Thread-21|dumpPacket|Packet LOGIN_FAILED (Seq #2549, o#2549 ) recieveObject
+190923 194332.123|INFO|Thread-21|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194332.123|INFO|Thread-21|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194332.123|INFO|Thread-21|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194332.123|INFO|Thread-21|info|handlePacket start Packet[LOGIN_FAILED] #2549 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194332.124|INFO|Thread-21|dumpPacket|Packet LOGIN_FAILED (Seq #2549, o#2549 ) handlePacket
+190923 194332.124|INFO|Thread-21|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194332.124|INFO|Thread-21|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194332.124|INFO|Thread-21|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194332.813|INFO|Thread-21|info| receiveObject(S) end   got Packet[LOGIN_FAILED] #2549 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194641.115|CONFIG|AWT-EventQueue-0|setFileHandlers|Now logging to D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin\logs directory.
+190923 194641.115|INFO|AWT-EventQueue-0|info|
+190923 194641.115|INFO|AWT-EventQueue-0|info|Version 9.6.0 () Java ver 1.8.0_221 build 5102 Windows 10 10.0 (x86) 
+190923 194641.115|INFO|AWT-EventQueue-0|info|Login: team40131284 (aka team40131284)
+190923 194641.115|INFO|AWT-EventQueue-0|startLog|Working directory is D:\Wamp64\www\GitHub\University\COMP-248\comp248_labs\bin
+190923 194641.116|INFO|AWT-EventQueue-0|startLog|Process id is 92@DESKTOP-0RQ392J
+190923 194641.116|INFO|AWT-EventQueue-0|info|Contacting server at apic1.encs.concordia.ca:50002 as TEAM40131284 @ site 0
+190923 194641.116|INFO|AWT-EventQueue-0|info|sendLoginRequest start - sending from TEAM40131284 @ site 0
+190923 194641.116|INFO|AWT-EventQueue-0|sendToLocalServer|Sending packet to server Packet[LOGIN_REQUEST] #4 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194641.116|INFO|AWT-EventQueue-0|sendToLocalServer|Sent    packet to server Packet[LOGIN_REQUEST] #4 TEAM40131284 @ site 0 -> SERVER0 @ site 0
+190923 194641.116|INFO|AWT-EventQueue-0|info|sendLoginRequest end - packet sent.
+190923 194641.116|INFO|Thread-10|run|send(Serializable)
+190923 194641.250|INFO|Thread-1|receive|public void receive(SealedObject TransportPacket, ConnectionHandlerID connectionHandlerID)
+190923 194641.250|INFO|Thread-11|info| receiveObject(S) start got Packet[LOGIN_FAILED] #2739 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194641.250|INFO|Thread-11|dumpPacket|Packet LOGIN_FAILED (Seq #2739, o#2739 ) recieveObject
+190923 194641.250|INFO|Thread-11|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194641.251|INFO|Thread-11|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194641.251|INFO|Thread-11|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194641.251|INFO|Thread-11|info|handlePacket start Packet[LOGIN_FAILED] #2739 SERVER0 @ site 1 -> TEAM40131284 @ site 0
+190923 194641.251|INFO|Thread-11|dumpPacket|Packet LOGIN_FAILED (Seq #2739, o#2739 ) handlePacket
+190923 194641.251|INFO|Thread-11|dumpPacket|  From: SERVER0 @ site 1, oSERVER0 @ site 1 (pc2prod.encs.concordia.ca @ 127.0.0.1) (Contest Id: Lab_1_1_Mon-1230--6930591163389002333)
+190923 194641.251|INFO|Thread-11|dumpPacket|    To: TEAM40131284 @ site 0
+190923 194641.251|INFO|Thread-11|dumpPacket|   key: MESSAGE_STRING is: java.lang.String Account inactive
+190923 194641.987|INFO|Thread-11|info| receiveObject(S) end   got Packet[LOGIN_FAILED] #2739 SERVER0 @ site 1 -> TEAM40131284 @ site 0
