@@ -1,9 +1,12 @@
-#pragma once
+/*#pragma once
 
 #include <string>
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+
+const double PI = 3.14159265359;
+const double E = 2.71828182846;
 
 namespace ShadoMath {
 
@@ -49,6 +52,18 @@ namespace ShadoMath {
 				return Fraction(denumerator, numerator);
 			}
 
+			void simplify() {
+
+				for (int i = 10; i > 0; i--) {
+					if (numerator % i == 0 && denumerator % i == 0) {
+						numerator = numerator / i;
+						denumerator = denumerator / i;
+					}
+				}
+
+
+			}
+
 			void print() {
 				printf("%d / %d", numerator, denumerator);
 			}
@@ -78,10 +93,6 @@ namespace ShadoMath {
 			}
 
 			~Complex() {
-				/*delete &a;
-				delete &b;
-				delete &phi;
-				delete &r;*/
 			}
 
 			void init(float _a, float _b) {
@@ -160,7 +171,7 @@ namespace ShadoMath {
 
 			std::vector<Complex> root(int exposant) {
 
-				/*std::vector<Complex> result(exposant);
+				std::vector<Complex> result(exposant);
 				auto it = result.begin();
 
 
@@ -174,7 +185,7 @@ namespace ShadoMath {
 					result.insert(it, temp);
 				}
 
-				return result;*/
+				return result;
 			}
 
 			void printSqrt(int exposant) {
@@ -590,7 +601,7 @@ namespace ShadoMath {
 
 		}
 
-		unsigned long factorial(unsigned int num) {
+		unsigned long factorial(int num) {
 
 			unsigned long sum = 1;
 
@@ -617,7 +628,7 @@ namespace ShadoMath {
 			return !isEven(num);
 		}
 
-		bool isPrime(unsigned int num) {
+		bool isPrime(int num) {
 
 			for (int i = 2; i < num; i++) {
 				if (devides(num, i)) {
@@ -643,4 +654,4 @@ namespace ShadoMath {
 		}
 
 	}
-}
+}*/

@@ -6,21 +6,17 @@
 #include <fstream>
 #include <string>
 #include "Shado.h"
+#include "Math.h"
 
 int main()
 {
-	namespace Math = ShadoMath::Functions;
 
-	/*std::ofstream file("xd.txt", std::ofstream::binary);
-	file.open("xd.txt");
-	file << "?XD";*/
+	using namespace ShadoMath::Functions;
+	using namespace ShadoMath::Classes;
 
-	// Allocate memeory
-	//std::cout << ShadoMath::Functions::power(2, -2) << std::endl;
-
-	//ShadoMath::Functions::decimalToFraction(1.4645).print();
-
-	int x = Math::power(2, 4);
+	Complex test = Complex(2 * sqrt(3), -2);
+	
+	test.printRoot(4);
 
 }
 
