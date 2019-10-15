@@ -14,10 +14,15 @@ int main()
 	using namespace ShadoMath::Functions;
 	using namespace ShadoMath::Classes;
 
-	Complex test = Complex(2 * sqrt(3), -2);
-	
-	test.printRoot(4);
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (j * j * j * j + i * i * i * i <= 100) {
+				printf("x = %d, y = %d -> x^4 + y^4 = %d \n", j, i, j * j * j * j + i * i * i * i);
+			}			
+		}
+	}
 
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

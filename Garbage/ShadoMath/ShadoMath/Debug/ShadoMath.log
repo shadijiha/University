@@ -1,5 +1,4 @@
 ﻿  ShadoMath.cpp
-C:\wamp64\www\Github\University\Garbage\ShadoMath\ShadoMath\Shado.h(405,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\wamp64\www\Github\University\Garbage\ShadoMath\ShadoMath\Shado.h(409,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\wamp64\www\Github\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(17,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  ShadoMath.vcxproj -> C:\wamp64\www\Github\University\Garbage\ShadoMath\Debug\ShadoMath.exe
+D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Shado.h(409,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Shado.h(413,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  ShadoMath.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\Debug\ShadoMath.exe
