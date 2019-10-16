@@ -11,6 +11,19 @@
 int main()
 {
 
+	/*
+		sqrt(n), n >= 0
+
+		x^2 = n
+
+		x^2 - n = 0
+
+		1) Quadratic formula
+		2) Bisection Method  <-----
+
+		REPLACE 2 with any other root power	
+	*/
+
 	using namespace ShadoMath::Functions;
 	using namespace ShadoMath::Classes;
 
@@ -21,6 +34,8 @@ int main()
 			}			
 		}
 	}
+
+	std::cout << power(2, 4);
 
 	return 0;
 }

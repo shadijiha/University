@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #include <string>
 #include <stdio.h>
@@ -171,7 +171,7 @@ namespace ShadoMath {
 
 			std::vector<Complex> root(int exposant) {
 
-				std::vector<Complex> result(exposant);
+				/*std::vector<Complex> result(exposant);
 				auto it = result.begin();
 
 
@@ -185,7 +185,7 @@ namespace ShadoMath {
 					result.insert(it, temp);
 				}
 
-				return result;
+				return result;*/
 			}
 
 			void printSqrt(int exposant) {
@@ -654,4 +654,4 @@ namespace ShadoMath {
 		}
 
 	}
-}*/
+}
