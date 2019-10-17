@@ -124,21 +124,19 @@ public class Question1 {
 			totalGen++;
 			password = generatePassword(tempLine);
 			
+			if (totalGen >= 1 || failLower > 0)	{
+				generatorFinished = true;
+				break;
+			}
+			
 			// Password attempt failed generate again
 			if (password.equals(""))	{
-				log(totalGen);
 				continue;
-			}			
+			}
 			
 			// Display password since it passed all tests
 			System.out.printf("Password = %s	Newline = %d	Single = %d	Equal = %d	Length = %d	Upper = %d	Lower = %d	Special = %d\n", password, failNewLine, failSingle, failEqual, failLength, failUpper, failLower, failSpecial);
 			
-			
-			if (totalGen >= 10000 || failLower > 0)	{
-				generatorFinished = true;
-				break;
-			}			
-
 		}
 		
 		// Bye screen
@@ -159,6 +157,16 @@ public class Question1 {
 	}
 	
 	public static String generatePassword(String[] tempLine)	{
+		
+		// Reset stats
+		totalGen = 0;
+		failNewLine = 0;
+		failSingle = 0;
+		failEqual = 0;
+		failLength = 0;
+		failUpper = 0;
+		failLower = 0;
+		failSpecial = 0;
 		
 		String password = "";
 		String[] words = {"", "", ""};
