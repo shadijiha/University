@@ -1,7 +1,7 @@
 
 
 // -------------------------------------------------------
-// Assignment #2
+// Assignment #3
 // Written by: Shadi Jiha #40131284
 // For COMP 248 Section (your section) – Fall 2019
 //
@@ -109,18 +109,7 @@ public class Question1 {
 		
 		// Essential variables
 		boolean generatorFinished = false;
-		String[] words = new String[3];
 		String password = "";
-
-		// Reset global vatiables
-		totalGen = 0;
-		failNewLine = 0;
-		failSingle = 0;
-		failEqual = 0;
-		failLength = 0;
-		failUpper = 0;
-		failLower = 0;
-		failSpecial = 0;
 		
 		while(!generatorFinished)	{
 
@@ -133,11 +122,11 @@ public class Question1 {
 			
 			// Reset words and password
 			totalGen++;
-			words = new String[words.length];
 			password = generatePassword(tempLine);
 			
 			// Password attempt failed generate again
 			if (password.equals(""))	{
+				log(totalGen);
 				continue;
 			}			
 			
@@ -147,6 +136,7 @@ public class Question1 {
 			
 			if (totalGen >= 10000 || failLower > 0)	{
 				generatorFinished = true;
+				break;
 			}			
 
 		}
@@ -161,7 +151,11 @@ public class Question1 {
 	}
 	
 	public static void log(String xd)	{
-		System.out.print(xd);
+		System.out.print(xd + "\n");
+	}
+	
+	public static void log(int xd)	{
+		System.out.print(xd + "\n");
 	}
 	
 	public static String generatePassword(String[] tempLine)	{
