@@ -10,34 +10,15 @@
 
 int main()
 {
-
-	/*
-		sqrt(n), n >= 0
-
-		x^2 = n
-
-		x^2 - n = 0
-
-		1) Quadratic formula
-		2) Bisection Method  <-----
-
-		REPLACE 2 with any other root power	
-	*/
-
-	using namespace ShadoMath::Functions;
 	using namespace ShadoMath::Classes;
+	
+	Complex z1 = Complex(2, -1);
+	Complex z2 = Complex(2, -5);
 
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			if (j * j * j * j + i * i * i * i <= 100) {
-				printf("x = %d, y = %d -> x^4 + y^4 = %d \n", j, i, j * j * j * j + i * i * i * i);
-			}			
-		}
-	}
+	Complex result = z1.power(2);
 
-	std::cout << power(2, 4);
+	z1.printSqrt(2);
 
-	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
