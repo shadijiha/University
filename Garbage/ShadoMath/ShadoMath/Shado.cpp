@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include <string>
 #include <stdio.h>
@@ -186,7 +186,7 @@ namespace ShadoMath {
 				}
 
 				return result;*/
-			}
+			/*}
 
 			void printSqrt(int exposant) {
 
@@ -654,4 +654,4 @@ namespace ShadoMath {
 		}
 
 	}
-}
+}*/
