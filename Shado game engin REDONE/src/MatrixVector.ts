@@ -4,6 +4,7 @@
  *
  */
 
+import * as Renderer from "./core";
 
 export class Matrix {
 

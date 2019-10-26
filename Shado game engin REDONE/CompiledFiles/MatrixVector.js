@@ -5,46 +5,46 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-class Matrix {
-    constructor(rows, cols) {
+var Matrix = /** @class */ (function () {
+    function Matrix(rows, cols) {
         this.rows = rows || 2;
         this.cols = cols || this.rows;
         this.data = [];
         // Initialize matrix with 0s
-        for (let i = 0; i < this.rows; i++) {
+        for (var i = 0; i < this.rows; i++) {
             this.data[i] = [];
-            for (let j = 0; j < this.cols; j++) {
+            for (var j = 0; j < this.cols; j++) {
                 this.data[i][j] = 0;
             }
         }
     }
-    setCell(row, col, value) {
+    Matrix.prototype.setCell = function (row, col, value) {
         this.data[row][col] = value;
-    }
-    setMatrix(array) {
+    };
+    Matrix.prototype.setMatrix = function (array) {
         this.data = array;
         this.rows = array.length;
         this.cols = array[0].length;
-    }
-    getData(row, col) {
+    };
+    Matrix.prototype.getData = function (row, col) {
         return this.data[row][col];
-    }
-    randomize(max) {
+    };
+    Matrix.prototype.randomize = function (max) {
         max = Number(max) || 10;
         // Fill matrix with random digits
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
+        for (var i = 0; i < this.rows; i++) {
+            for (var j = 0; j < this.cols; j++) {
                 this.data[i][j] = Math.floor(Math.random() * max);
             }
         }
-    }
-    identity() {
+    };
+    Matrix.prototype.identity = function () {
         if (this.rows != this.cols) {
             console.log("Error! Connot transform current matrix to Identity matrix because rows and colums count doesn\'t match.");
             return;
         }
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
+        for (var i = 0; i < this.rows; i++) {
+            for (var j = 0; j < this.cols; j++) {
                 if (i == j) {
                     this.data[i][j] = 1;
                 }
@@ -53,8 +53,8 @@ class Matrix {
                 }
             }
         }
-    }
-    add(n, overwrite) {
+    };
+    Matrix.prototype.add = function (n, overwrite) {
         overwrite = overwrite || true;
         if (n instanceof Matrix) {
             // Detect errors
@@ -64,8 +64,8 @@ class Matrix {
             }
             // Sum
             var temp = new Matrix(this.rows, this.cols);
-            for (let i = 0; i < temp.rows; i++) {
-                for (let j = 0; j < temp.cols; j++) {
+            for (var i = 0; i < temp.rows; i++) {
+                for (var j = 0; j < temp.cols; j++) {
                     temp.data[i][j] = this.data[i][j] + n.data[i][j];
                 }
             }
@@ -78,8 +78,8 @@ class Matrix {
             }
         }
         else if (!isNaN(Number(n))) {
-            for (let i = 0; i < this.rows; i++) {
-                for (let j = 0; j < this.cols; j++) {
+            for (var i = 0; i < this.rows; i++) {
+                for (var j = 0; j < this.cols; j++) {
                     this.data[i][j] += n;
                 }
             }
@@ -88,8 +88,8 @@ class Matrix {
             console.log("Error! Connot proform Matrix sum because passed argument is neither a %c number %c nor a %c matrix.", "color: red; font-weight: bold", "", "color: blue; font-weight: bold");
             return;
         }
-    }
-    multiply(n, overwrite) {
+    };
+    Matrix.prototype.multiply = function (n, overwrite) {
         overwrite = overwrite || true;
         if (n instanceof Matrix) {
             // Detect error
@@ -98,10 +98,10 @@ class Matrix {
                 return;
             }
             var temp = new Matrix(this.rows, n.cols);
-            for (let i = 0; i < temp.rows; i++) {
-                for (let j = 0; j < temp.cols; j++) {
+            for (var i = 0; i < temp.rows; i++) {
+                for (var j = 0; j < temp.cols; j++) {
                     var sum = 0;
-                    for (let k = 0; k < this.cols; k++) {
+                    for (var k = 0; k < this.cols; k++) {
                         sum += this.data[i][k] * n.data[k][j];
                     }
                     temp.data[i][j] = sum;
@@ -116,8 +116,8 @@ class Matrix {
             }
         }
         else if (!isNaN(Number(n))) {
-            for (let i = 0; i < this.rows; i++) {
-                for (let j = 0; j < this.cols; j++) {
+            for (var i = 0; i < this.rows; i++) {
+                for (var j = 0; j < this.cols; j++) {
                     this.data[i][j] *= n;
                 }
             }
@@ -126,23 +126,23 @@ class Matrix {
             console.log("Error! Connot proform Matrix multiplication because passed argument is neither a %c number %c nor a %c matrix.", "color: red; font-weight: bold", "", "color: blue; font-weight: bold");
             return;
         }
-    }
-    transpose() {
-        let temp = new Matrix(this.cols, this.rows);
-        for (let i = 0; i < temp.rows; i++) {
-            for (let j = 0; j < temp.cols; j++) {
+    };
+    Matrix.prototype.transpose = function () {
+        var temp = new Matrix(this.cols, this.rows);
+        for (var i = 0; i < temp.rows; i++) {
+            for (var j = 0; j < temp.cols; j++) {
                 temp.data[i][j] = this.data[j][i];
             }
         }
         this.data = temp.data;
-    }
-    LUdecomposition() {
-        let U = new Matrix(this.rows, this.cols);
-        let L = new Matrix(this.rows, this.cols);
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
-                let sum = 0;
-                for (let k = 0; k <= i - 1; k++) {
+    };
+    Matrix.prototype.LUdecomposition = function () {
+        var U = new Matrix(this.rows, this.cols);
+        var L = new Matrix(this.rows, this.cols);
+        for (var i = 0; i < this.rows; i++) {
+            for (var j = 0; j < this.cols; j++) {
+                var sum = 0;
+                for (var k = 0; k <= i - 1; k++) {
                     sum = sum + L.data[j][k] * U.data[k][i];
                 }
                 if (i === j) {
@@ -157,8 +157,8 @@ class Matrix {
             }
         }
         return [L, U];
-    }
-    determinant() {
+    };
+    Matrix.prototype.determinant = function () {
         // Detect Error
         if (this.rows != this.cols) {
             console.log("Error! This matrix has diffrent row and colums count. Thus, the determinant cannot be calculated.");
@@ -167,85 +167,87 @@ class Matrix {
         var decomposition = this.LUdecomposition();
         var temp = decomposition[0];
         var mult = 1;
-        for (let i = 0; i < temp.rows; i++) {
-            for (let j = 0; j < temp.cols; j++) {
+        for (var i = 0; i < temp.rows; i++) {
+            for (var j = 0; j < temp.cols; j++) {
                 if (i == j) {
                     mult *= temp.data[i][j];
                 }
             }
         }
         return Math.floor(mult);
-    }
-    log() {
+    };
+    Matrix.prototype.log = function () {
         console.table(this.data);
-    }
-}
+    };
+    return Matrix;
+}());
 exports.Matrix = Matrix;
-class Vector {
-    constructor(x, y, z) {
+var Vector = /** @class */ (function () {
+    function Vector(x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z || 0;
     }
-    random2D() {
+    Vector.prototype.random2D = function () {
         this.x = Math.random();
         this.y = Math.random();
-    }
-    random3D() {
+    };
+    Vector.prototype.random3D = function () {
         this.random2D();
         this.z = Math.random();
-    }
-    getX() {
+    };
+    Vector.prototype.getX = function () {
         return this.x;
-    }
-    getY() {
+    };
+    Vector.prototype.getY = function () {
         return this.y;
-    }
-    getZ() {
+    };
+    Vector.prototype.getZ = function () {
         return this.z;
-    }
-    add(objVector) {
+    };
+    Vector.prototype.add = function (objVector) {
         this.x += objVector.x;
         this.y += objVector.y;
         this.z += objVector.z;
-    }
-    substract(objVector) {
+    };
+    Vector.prototype.substract = function (objVector) {
         this.x -= objVector.x;
         this.y -= objVector.y;
         this.z -= objVector.z;
-    }
-    multiply(k) {
+    };
+    Vector.prototype.multiply = function (k) {
         this.x *= k;
         this.y *= k;
         this.z *= k;
-    }
-    scale(k) {
+    };
+    Vector.prototype.scale = function (k) {
         this.multiply(k);
-    }
-    mag() {
+    };
+    Vector.prototype.mag = function () {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
-    }
-    normalize() {
-        const TEMP = this.mag();
+    };
+    Vector.prototype.normalize = function () {
+        var TEMP = this.mag();
         this.x = this.x / TEMP;
         this.y = this.y / TEMP;
         this.z = this.z / TEMP;
-    }
-    project(objVector) {
-        const CONSTANT = this.dotProduct(objVector) / Math.pow(objVector.mag(), 2);
-        let result = new Vector(objVector.x, objVector.y, objVector.z);
+    };
+    Vector.prototype.project = function (objVector) {
+        var CONSTANT = this.dotProduct(objVector) / Math.pow(objVector.mag(), 2);
+        var result = new Vector(objVector.x, objVector.y, objVector.z);
         result.multiply(CONSTANT);
         return result;
-    }
-    dotProduct(objVector) {
+    };
+    Vector.prototype.dotProduct = function (objVector) {
         return (this.x * objVector.x) + (this.y * objVector.y) + (this.z * objVector.z);
-    }
-    crossProduct(objVector) {
-        let i = (this.y * objVector.z) - (this.z * objVector.y);
-        let j = -((this.x * objVector.z) - (this.z * objVector.x));
-        let k = (this.x * objVector.y) - (this.y * objVector.x);
+    };
+    Vector.prototype.crossProduct = function (objVector) {
+        var i = (this.y * objVector.z) - (this.z * objVector.y);
+        var j = -((this.x * objVector.z) - (this.z * objVector.x));
+        var k = (this.x * objVector.y) - (this.y * objVector.x);
         return new Vector(i, j, k);
-    }
-}
+    };
+    return Vector;
+}());
 exports.Vector = Vector;
 //# sourceMappingURL=MatrixVector.js.map

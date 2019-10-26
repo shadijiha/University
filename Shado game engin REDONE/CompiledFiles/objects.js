@@ -5,10 +5,9 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const ShadoMath = require("./MatrixVector");
-const Renderer = require("./core");
-class Rectangle {
-    constructor(percentX, percentY, percentW, percentH, styles) {
+var Renderer = require("./core");
+var Rectangle = /** @class */ (function () {
+    function Rectangle(percentX, percentY, percentW, percentH, styles) {
         this.percentX = percentX > 1 ? (percentX / 100) : percentX;
         this.percentY = percentY > 1 ? (percentY / 100) : percentY;
         this.percentW = percentW > 1 ? (percentW / 100) : percentW;
@@ -21,13 +20,13 @@ class Rectangle {
         // Styles
         this.styles = styles || { fill: "white", stroke: "black", lineWidth: 1 };
     }
-    updatePercentages() {
+    Rectangle.prototype.updatePercentages = function () {
         this.x = this.percentX * Renderer.canvas.width;
         this.y = this.percentY * Renderer.canvas.height;
         this.w = this.percentW * Renderer.canvas.width;
         this.h = this.percentH * Renderer.canvas.height;
-    }
-    draw(context) {
+    };
+    Rectangle.prototype.draw = function (context) {
         // if context is undefined default to "c"
         context = context || Renderer.c;
         // Draw rectangle
@@ -42,61 +41,63 @@ class Rectangle {
         if (this.autoUpdate) {
             this.updatePercentages();
         }
-    }
+    };
     // Other functions
-    hover(mousePosition) {
+    Rectangle.prototype.hover = function (mousePosition) {
         if (mousePosition.x > this.x && mousePosition.x < (this.x + this.w) && mousePosition.y > this.y && mousePosition.y < (this.y + this.h)) {
             return true;
         }
         else {
             return false;
         }
-    }
-    clicked(lastClickPos) {
+    };
+    Rectangle.prototype.clicked = function (lastClickPos) {
         if (lastClickPos.x > this.x && lastClickPos.x < (this.x + this.w) && lastClickPos.y > this.y && lastClickPos.y < (this.y + this.h)) {
             return true;
         }
-    }
-    move(percentDX, percentDY) {
-        const tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
-        const tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
+    };
+    Rectangle.prototype.move = function (percentDX, percentDY) {
+        var tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
+        var tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
         this.x += Renderer.canvas.width * tempX;
         this.y += Renderer.canvas.height * tempY;
-    }
+    };
     // Setters
-    stroke(color) {
+    Rectangle.prototype.stroke = function (color) {
         this.styles.stroke = color;
-    }
-    fill(color) {
+    };
+    Rectangle.prototype.fill = function (color) {
         this.styles.fill = color;
-    }
-    lineWidth(size) {
+    };
+    Rectangle.prototype.lineWidth = function (size) {
         this.styles.lineWidth = size;
-    }
-    toggleAutoUpdate() {
+    };
+    Rectangle.prototype.toggleAutoUpdate = function () {
         if (this.autoUpdate) {
             this.autoUpdate = false;
         }
         else {
             this.autoUpdate = true;
         }
-    }
+    };
     // getters
-    getCoordinates() {
+    Rectangle.prototype.getCoordinates = function () {
         return { x: this.x, y: this.y };
-    }
-    getDimensions() {
+    };
+    Rectangle.prototype.getDimensions = function () {
         return { w: this.w, h: this.h };
-    }
-    getArea() {
+    };
+    Rectangle.prototype.getArea = function () {
         return this.w * this.h;
-    }
-    getPerimetre() {
+    };
+    Rectangle.prototype.getPerimetre = function () {
         return (this.w + this.h) * 2;
-    }
-}
-class Circle {
-    constructor(percentX, percentY, percentR, styles) {
+    };
+    return Rectangle;
+}());
+exports.Rectangle = Rectangle;
+var Circle = /** @class */ (function () {
+    function Circle(percentX, percentY, percentR, styles) {
         this.percentX = percentX > 1 ? (percentX / 100) : percentX;
         this.percentY = percentY > 1 ? (percentY / 100) : percentY;
         this.percentR = percentR > 1 ? (percentR / 100) : percentR;
@@ -107,12 +108,12 @@ class Circle {
         // Styles
         this.styles = styles || { fill: "white", stroke: "black", lineWidth: 1 };
     }
-    updatePercentages() {
+    Circle.prototype.updatePercentages = function () {
         this.x = this.percentX * Renderer.canvas.width;
         this.y = this.percentY * Renderer.canvas.height;
         this.r = this.percentR * Renderer.canvas.width;
-    }
-    draw(context) {
+    };
+    Circle.prototype.draw = function (context) {
         // if context is undefined default to "c"
         context = context || Renderer.c;
         // Draw rectangle
@@ -127,66 +128,64 @@ class Circle {
         if (this.autoUpdate) {
             this.updatePercentages();
         }
-    }
+    };
     // Other functions
-    hover(mousePosition) {
-        let d = Math.sqrt(Math.pow(mousePosition.x - this.x, 2) + Math.pow(mousePosition.y - this.y, 2));
+    Circle.prototype.hover = function (mousePosition) {
+        var d = Math.sqrt(Math.pow(mousePosition.x - this.x, 2) + Math.pow(mousePosition.y - this.y, 2));
         if (d <= this.r) {
             return true;
         }
         else {
             return false;
         }
-    }
-    clicked(lastClickPos) {
-        let d = Math.sqrt(Math.pow(lastClickPos.x - this.x, 2) + Math.pow(lastClickPos.y - this.y, 2));
+    };
+    Circle.prototype.clicked = function (lastClickPos) {
+        var d = Math.sqrt(Math.pow(lastClickPos.x - this.x, 2) + Math.pow(lastClickPos.y - this.y, 2));
         if (d <= this.r) {
             return true;
         }
         else {
             return false;
         }
-    }
-    move(percentDX, percentDY) {
-        const tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
-        const tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
+    };
+    Circle.prototype.move = function (percentDX, percentDY) {
+        var tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
+        var tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
         this.x += Renderer.canvas.width * tempX;
         this.y += Renderer.canvas.height * tempY;
-    }
+    };
     // Setters
-    stroke(color) {
+    Circle.prototype.stroke = function (color) {
         this.styles.stroke = color;
-    }
-    fill(color) {
+    };
+    Circle.prototype.fill = function (color) {
         this.styles.fill = color;
-    }
-    lineWidth(size) {
+    };
+    Circle.prototype.lineWidth = function (size) {
         this.styles.lineWidth = size;
-    }
-    toggleAutoUpdate() {
+    };
+    Circle.prototype.toggleAutoUpdate = function () {
         if (this.autoUpdate) {
             this.autoUpdate = false;
         }
         else {
             this.autoUpdate = true;
         }
-    }
+    };
     // getters
-    getCoordinates() {
+    Circle.prototype.getCoordinates = function () {
         return { x: this.x, y: this.y };
-    }
-    getRadius() {
+    };
+    Circle.prototype.getRadius = function () {
         return this.r;
-    }
-    getArea() {
+    };
+    Circle.prototype.getArea = function () {
         return Math.PI * this.r * this.r;
-    }
-    getPerimetre() {
+    };
+    Circle.prototype.getPerimetre = function () {
         return 2 * Math.PI * this.r;
-    }
-}
-// test
-let test = new ShadoMath.Matrix(5, 2);
-test.randomize();
-test.log();
+    };
+    return Circle;
+}());
+exports.Circle = Circle;
 //# sourceMappingURL=objects.js.map
