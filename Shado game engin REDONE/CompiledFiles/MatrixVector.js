@@ -250,4 +250,93 @@ var Vector = /** @class */ (function () {
     return Vector;
 }());
 exports.Vector = Vector;
+var Complex = /** @class */ (function () {
+    function Complex(a, b) {
+        this.a = a || 0;
+        this.b = b || 0;
+        this.phi = Math.atan(b / a);
+        this.r = Math.sqrt(a * a + b * b);
+    }
+    Complex.prototype.fromPolar = function (r, phi) {
+        this.phi = phi;
+        this.r = r;
+        this.a = r * Math.cos(phi);
+        this.b = r * Math.sin(phi);
+    };
+    Complex.prototype.equals = function (complexNum) {
+        if (this.a == complexNum.a && this.b == complexNum.b) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    Complex.prototype.render = function (arg) {
+        if (arg != undefined && arg.toLowerCase() == "polar") {
+            return this.r + " * ( cos(" + this.phi + ") + i sin(" + this.phi + ") )";
+        }
+        else {
+            return this.a + " + " + this.b + " i";
+        }
+    };
+    Complex.prototype.sum = function (numB) {
+        return new Complex(this.a + numB.a, this.b + numB.b);
+    };
+    Complex.prototype.substract = function (numB) {
+        return new Complex(this.a - numB.a, this.b - numB.b);
+    };
+    Complex.prototype.multiply = function (numB) {
+        var result = new Complex();
+        result.fromPolar(this.r * numB.r, this.phi + numB.phi);
+        return result;
+    };
+    Complex.prototype.divide = function (numB) {
+        var result = new Complex();
+        result.fromPolar(this.r / numB.r, this.phi - numB.phi);
+        return result;
+    };
+    Complex.prototype.conjugate = function () {
+        return new Complex(this.a, -1 * this.b);
+    };
+    Complex.prototype.power = function (exposant) {
+        var result = new Complex();
+        result.fromPolar(Math.pow(this.r, exposant), this.phi * exposant);
+        return result;
+    };
+    Complex.prototype.root = function (degree) {
+        var result = [];
+        var tempR = Math.pow(this.r, 1 / degree);
+        for (var i = 0; i < degree; i++) {
+            var tempPhi = (this.phi + 2 * Math.PI * i) / degree;
+            var temp = new Complex();
+            temp.fromPolar(tempR, tempPhi);
+            result.push(temp);
+        }
+        return result;
+    };
+    Complex.prototype.renderRoot = function (degree) {
+        var roots = this.root(degree);
+        var str = "";
+        for (var _i = 0, roots_1 = roots; _i < roots_1.length; _i++) {
+            var root = roots_1[_i];
+            str += root.render();
+            str += '\n';
+        }
+        return str;
+    };
+    Complex.prototype.realPart = function () {
+        return this.a;
+    };
+    Complex.prototype.imaginaryPart = function () {
+        return this.b;
+    };
+    Complex.prototype.mag = function () {
+        return this.r;
+    };
+    Complex.prototype.log = function (arg) {
+        console.log(this.render(arg));
+    };
+    return Complex;
+}());
+exports.Complex = Complex;
 //# sourceMappingURL=MatrixVector.js.map

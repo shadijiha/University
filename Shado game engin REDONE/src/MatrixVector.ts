@@ -95,7 +95,7 @@ export class Matrix {
             // Update current Matrix or return new one
             if (overwrite) {
                 this.data = temp.data;
-            } else  {
+            } else {
                 return temp;
             }
 
@@ -142,9 +142,9 @@ export class Matrix {
             // Update current Matrix
             if (overwrite) {
                 this.data = temp.data;
-            } else  {
+            } else {
                 return temp;
-            }            
+            }
 
         } else if (!isNaN(Number(n))) {
             for (let i = 0; i < this.rows; i++) {
@@ -315,4 +315,119 @@ export class Vector {
         return new Vector(i, j, k);
     }
 
+}
+
+export class Complex {
+
+    private a: number;
+    private b: number;
+    private phi: number;
+    private r: number;
+
+    public constructor(a?: number, b?: number) {
+
+        this.a = a || 0;
+        this.b = b || 0;
+        this.phi = Math.atan(b / a);
+        this.r = Math.sqrt(a * a + b * b);
+    }
+
+    public fromPolar(r: number, phi: number): void {
+        this.phi = phi;
+        this.r = r;
+        this.a = r * Math.cos(phi);
+        this.b = r * Math.sin(phi);
+    }
+
+    public equals(complexNum: Complex): boolean {
+        if (this.a == complexNum.a && this.b == complexNum.b) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public render(arg?: string): string {
+        if (arg != undefined && arg.toLowerCase() == "polar") {
+            return `${this.r} * ( cos(${this.phi}) + i sin(${this.phi}) )`;
+        } else {
+            return `${this.a} + ${this.b} i`;
+        }
+    }
+
+    public sum(numB: Complex): Complex {
+        return new Complex(this.a + numB.a, this.b + numB.b);
+    }
+
+    public substract(numB: Complex): Complex {
+        return new Complex(this.a - numB.a, this.b - numB.b);
+    }
+
+    public multiply(numB: Complex): Complex {
+        var result = new Complex();
+        result.fromPolar(this.r * numB.r, this.phi + numB.phi);
+
+        return result;
+    }
+
+    public divide(numB: Complex): Complex {
+        var result = new Complex();
+        result.fromPolar(this.r / numB.r, this.phi - numB.phi);
+
+        return result;
+    }
+
+    public conjugate(): Complex {
+        return new Complex(this.a, -1 * this.b);
+    }
+
+    public power(exposant: number): Complex {
+        var result = new Complex();
+        result.fromPolar(Math.pow(this.r, exposant), this.phi * exposant);
+
+        return result;
+    }
+
+    public root(degree: number): Complex[] {
+        var result = [];
+        var tempR = Math.pow(this.r, 1 / degree);
+
+        for (var i = 0; i < degree; i++) {
+            var tempPhi = (this.phi + 2 * Math.PI * i) / degree;
+            var temp = new Complex();
+            temp.fromPolar(tempR, tempPhi);
+
+            result.push(temp);
+        }
+
+        return result;
+    }
+
+    public renderRoot(degree: number): string {
+        var roots = this.root(degree);
+        var str = "";
+
+        for (let root of roots) {
+            str += root.render();
+            str += '\n';
+        }
+
+        return str;
+    }
+
+    public realPart(): number {
+        return this.a;
+    }
+
+    public imaginaryPart(): number {
+        return this.b;
+    }
+
+    public mag(): number {
+        return this.r;
+    }
+
+    public log(arg?: string): void {
+        console.log(this.render(arg));
+    }
 }
