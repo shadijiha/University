@@ -8,28 +8,22 @@
 #include "Shado.h"
 #include "Math.h"
 
-int sum(int a, int b) {
-	return a + b;
-}
-
-float sum(float a, float b) {
-	return a + b;
-}
-
 int main()
 {
+	using namespace ShadoMath::Functions;
 	using namespace ShadoMath::Classes;
-	
-	int x = 10;
 
-	Vector test(10, 5);
-	Vector test2(15, 2);
+	Complex z1 = Complex(-1.0 / 6.0, 35.0 / 6.0);
+	Complex z2 = Complex(-1.0 / 6.0, -35.0 / 6.0);
 
-	test.setX(12);
+	printZeros(3, 1, 3);
 
-	test.add(test2);
+	printf("\n");
+	z1.print();
 
-	sum(1, 1);
+	printf("\n");
+	z2.print();
+
 
 }
 

@@ -1,177 +1,166 @@
-/*#pragma once
-
 #include <string>
 #include <stdio.h>
 #include <vector>
 #include <iostream>
-
-const double PI = 3.14159265359;
-const double E = 2.71828182846;
+#include "Shado.h"
 
 namespace ShadoMath {
 
 	namespace Classes {
 
-		class Fraction {
-		private:
-			int numerator = 1;
-			int denumerator = 1;
+		Fraction::Fraction(int a, int b) {
+			numerator = a;
+			denumerator = b;
+		}
 
-		public:
-			Fraction(int a, int b) {
-				numerator = a;
-				denumerator = b;
+		Fraction::Fraction(float decimal) {
+
+			int tries = 0;
+			float num = decimal;
+
+			while (num - (int)num != 0) {
+				num *= 10;
+				tries++;
 			}
 
-			Fraction(float decimal) {
+			numerator = (int)num;
 
-				int tries = 0;
-				float num = decimal;
-
-				while (num - (int)num != 0) {
-					num *= 10;
-					tries++;
-				}
-
-				numerator = (int)num;
-
-				for (int i = 0; i < tries; i++) {
-					denumerator *= 10;
-				}
+			for (int i = 0; i < tries; i++) {
+				denumerator *= 10;
 			}
+		}
 
-			int getNumerator() {
-				return numerator;
-			}
+		int Fraction::getNumerator() {
+			return numerator;
+		}
 
-			int getDumerator() {
-				return denumerator;
-			}
+		int Fraction::getDumerator() {
+			return denumerator;
+		}
 
-			Fraction inverse() {
-				return Fraction(denumerator, numerator);
-			}
+		Fraction Fraction::inverse() {
+			return Fraction(denumerator, numerator);
+		}
 
-			void simplify() {
+		void Fraction::simplify() {
 
-				for (int i = 10; i > 0; i--) {
-					if (numerator % i == 0 && denumerator % i == 0) {
-						numerator = numerator / i;
-						denumerator = denumerator / i;
-					}
-				}
-
-
-			}
-
-			void print() {
-				printf("%d / %d", numerator, denumerator);
-			}
-		};
-
-		class Complex {
-
-		private:
-			float a = 0.0f;
-			float b = 0.0f;
-			float phi = 0.0f;
-			float r = 0.0f;
-			const double PI = 3.1416;
-
-		public:
-
-			Complex(float _a, float _b) {
-				a = _a;
-				b = _b;
-				phi = atan(b / a);
-				r = sqrt(a * a + b * b);
-			}
-
-			Complex() {
-				a = 0.0f;
-				b = 0.0f;
-			}
-
-			~Complex() {
-			}
-
-			void init(float _a, float _b) {
-				a = _a;
-				b = _b;
-			}
-
-			void initPolar(float _r, float _phi) {
-				r = _r;
-				phi = _phi;
-				a = r * cos(phi);
-				b = r * sin(phi);
-			}
-
-			bool equals(Complex numB) {
-				if (a == numB.a && b == numB.b) {
-					return true;
-				}
-				else
-				{
-					return false;
+			for (int i = 10; i > 0; i--) {
+				if (numerator % i == 0 && denumerator % i == 0) {
+					numerator = numerator / i;
+					denumerator = denumerator / i;
 				}
 			}
 
-			void print() {
-				printf("%1.2f + %1.2fi", a, b);
+
+		}
+
+		void Fraction::print() {
+			printf("%d / %d", numerator, denumerator);
+		}
+
+		// For Complex
+		Complex::Complex(float _a, float _b) {
+			a = _a;
+			b = _b;
+			phi = atan(b / a);
+			r = sqrt(a * a + b * b);
+		}
+
+		Complex::Complex() {
+			a = 0.0f;
+			b = 0.0f;
+			r = 0.0f;
+			phi = 0.0f;
+		}
+
+		Complex::~Complex() {
+		}
+
+		void Complex::init(float _a, float _b) {
+			a = _a;
+			b = _b;
+		}
+
+		void Complex::initPolar(float _r, float _phi) {
+			r = _r;
+			phi = _phi;
+			a = r * cos(phi);
+			b = r * sin(phi);
+		}
+
+		bool Complex::equals(Complex numB) {
+			if (a == numB.a && b == numB.b) {
+				return true;
 			}
-
-			void printPolar() {
-				printf("%1.2f * ( cos(%1.2f) + i sin(%1.2f) )", r, phi, phi);
+			else
+			{
+				return false;
 			}
+		}
 
-			Complex sum(Complex& numB) const {
-				return Complex(a + numB.a, b + numB.b);
-			}
+		void Complex::print() {
+			printf("%f + %fi", a, b);
+		}
 
-			Complex substract(Complex& numB) const {
-				return Complex(a - numB.a, b - numB.b);
-			}
+		void Complex::printPolar() {
+			printf("%1.5f * ( cos(%1.5f) + i sin(%1.5f) )", r, phi, phi);
+		}
 
-			Complex multiply(Complex& numB) const {
-				return Complex(a * numB.a - b * numB.b, b * numB.a + a * numB.b);
-			}
+		Complex Complex::sum(Complex& numB) const {
+			return Complex(a + numB.a, b + numB.b);
+		}
 
-			Complex divide(Complex numB) const {
+		Complex Complex::substract(Complex& numB) const {
+			return Complex(a - numB.a, b - numB.b);
+		}
 
-				float firstTerm = (a * numB.a + b * numB.b) / (numB.a * numB.a + numB.b * numB.b);
-				float secondTerm = (b * numB.a - a * numB.b) / (numB.a * numB.a + numB.b * numB.b);
+		Complex Complex::multiply(Complex& numB) const {
+			return Complex(a * numB.a - b * numB.b, b * numB.a + a * numB.b);
+		}
 
-				return Complex(firstTerm, secondTerm);
-			}
+		Complex Complex::divide(Complex& numB) const {
 
-			float Re() {
-				return a;
-			}
+			float firstTerm = (a * numB.a + b * numB.b) / (numB.a * numB.a + numB.b * numB.b);
+			float secondTerm = (b * numB.a - a * numB.b) / (numB.a * numB.a + numB.b * numB.b);
 
-			float Im() {
-				return b;
-			}
+			return Complex(firstTerm, secondTerm);
+		}
 
-			Complex conjugat() const {
-				return Complex(a, -1.0f * b);
-			}
+		float Complex::realPart() {
+			return a;
+		}
 
-			float abs() {
-				return sqrt(a * a + b * b);
-			}
+		float Complex::imaginaryPart() {
+			return b;
+		}
 
-			Complex power(int exposant) const {
+		float Complex::module() {
+			return r;
+		}
 
-				Complex* temp = new Complex();
-				temp->initPolar(pow(r, exposant), exposant * phi);
+		float Complex::angle() {
+			return phi;
+		}
 
-				return *temp;
-			}
+		Complex Complex::conjugat() const {
+			return Complex(a, -1.0f * b);
+		}
 
-			std::vector<Complex> root(int exposant) {
+		float Complex::mag() {
+			return sqrt(a * a + b * b);
+		}
 
-				/*std::vector<Complex> result(exposant);
+		Complex Complex::power(int exposant) const {
+
+			Complex* temp = new Complex();
+			temp->initPolar(pow(r, exposant), exposant * phi);
+
+			return *temp;
+		}
+
+		/*std::vector<Complex> Complex::root(int exposant) {
+
+				std::vector<Complex> result(exposant);
 				auto it = result.begin();
 
 
@@ -185,28 +174,27 @@ namespace ShadoMath {
 					result.insert(it, temp);
 				}
 
-				return result;*/
-			/*}
+				return result;
+		}*/
 
-			void printSqrt(int exposant) {
+		void Complex::printSqrt(int exposant) {
 
-				float tempR = pow(r, 1.0 / exposant);
+			float tempR = pow(r, 1.0 / exposant);
 
-				for (int i = 0; i < exposant; i++) {
+			for (int i = 0; i < exposant; i++) {
 
-					float tempPhi = (phi + 2 * PI * i) / exposant;
+				float tempPhi = (phi + 2 * PI * i) / exposant;
 
-					Complex temp(0, 0);
-					temp.initPolar(tempR, tempPhi);
-					temp.print();
-					printf("\n");
-				}
+				Complex temp(0, 0);
+				temp.initPolar(tempR, tempPhi);
+				temp.print();
+				printf("\n");
 			}
+		}
 
-		};
 
-		template <typename T, int R, int C>
-		class Matrix {
+		//template <typename T, int R, int C>
+		/*class Matrix {
 
 		private:
 			T data[R][C];
@@ -453,87 +441,80 @@ namespace ShadoMath {
 				}
 
 			}
-		};
+		};*/
 
-		class Vector {
+		Vector::Vector(float _x, float _y) {
+			x = _x;
+			y = _y;
+			z = 0;
+		}
 
-		private:
-			float x, y, z = 0.0f;
+		Vector::Vector(float _x, float _y, float _z) {
+			x = _x;
+			y = _y;
+			z = _z;
+		}
 
-		public:
+		Vector::Vector() {
+			x = 0.0f;
+			y = 0.0f;
+			z = 0.0f;
+		}
 
-			Vector(float _x, float _y) {
-				x = _x;
-				y = _y;
-				z = 0;
-			}
+		void Vector::set(float _x, float _y, float _z) {
+			x = _x;
+			y = _y;
+			z = _z;
+		}
 
-			Vector(float _x, float _y, float _z) {
-				x = _x;
-				y = _y;
-				z = _z;
-			}
+		void Vector::set(float _x, float _y) {
+			x = _x;
+			y = _y;
+		}
 
-			Vector() {
-				x = 0.0f;
-				y = 0.0f;
-				z = 0.0f;
-			}
+		void Vector::print() {
+			printf("%f i + %f j + %f z", x, y, z);
+		}
 
-			void set(float _x, float _y, float _z) {
-				x = _x;
-				y = _y;
-				z = _z;
-			}
+		float Vector::getX() {
+			return x;
+		}
 
-			void set(float _x, float _y) {
-				x = _x;
-				y = _y;
-			}
+		float Vector::getY() {
+			return y;
+		}
 
-			void print() {
-				printf("%f i + %f j + %f z", x, y, z);
-			}
+		float Vector::getZ() {
+			return z;
+		}
 
-			float getX() {
-				return x;
-			}
+		float Vector::mag() {
+			return sqrt(x * x + y * y + z * z);
+		}
 
-			float getY() {
-				return y;
-			}
+		void Vector::add(Vector& b) {
+			x = x + b.x;
+			y = y + b.y;
+			z = z + b.z;
+		}
 
-			float getZ() {
-				return z;
-			}
+		void Vector::inverse() {
+			x = x * -1.0f;
+			y = y * -1.0f;
+			z = z * -1.0f;
+		}
 
-			float mag() {
-				return sqrt(x * x + y * y + z * z);
-			}
+		void Vector::scale(float n) {
+			x = x * n;
+			y = y * n;
+			z = z * n;
+		}
 
-			void add(Vector& b) {
-				x = x + b.x;
-				y = y + b.y;
-				z = z + b.z;
-			}
+		float Vector::dotProduct(Vector& b) const {
+			return x * b.x + y * b.y + z * b.z;
+		}
 
-			void inverse() {
-				x = x * -1.0f;
-				y = y * -1.0f;
-				z = z * -1.0f;
-			}
-
-			void scale(float n) {
-				x = x * n;
-				y = y * n;
-				z = z * n;
-			}
-
-			float dotProduct(Vector& b) const {
-				return x * b.x + y * b.y + z * b.z;
-			}
-
-			Vector crossProduct(Vector& b) {
+		/*Vector Vector::crossProduct(Vector& b) {
 
 				Matrix<float, 2, 2> i;
 				i.setData(0, 0, y);
@@ -555,15 +536,14 @@ namespace ShadoMath {
 
 				return Vector(i.det(), -1.0f * j.det(), j.det());
 
-			}
+			}*/
 
-		};
-
+	
 	}
 
 	namespace Functions {
-
-		float abs(float number) {
+		// FUNCTIONS
+		float absoluteValue(float number) {
 			if (number < 0.0f) {
 				return -1.0f * number;
 			}
@@ -572,8 +552,8 @@ namespace ShadoMath {
 			}
 		}
 
-		int abs(int number) {
-			return (int)abs((float)number);
+		int absoluteValue(int number) {
+			return (int)absoluteValue((float)number);
 		}
 
 		float power(float base, int exposant) {
@@ -652,6 +632,31 @@ namespace ShadoMath {
 
 			return true;
 		}
+	
+		void printZeros(float a, float b, float c) {
+			
+			float delta = (b * b) - (4 * a * c);
+			float x1 = 0.0f;
+			float x2 = 0.0f;
 
+			if (delta < 0) {
+				x1 = (-b + sqrt(absoluteValue(delta))) / (2 * a);
+				x2 = (-b - sqrt(absoluteValue(delta))) / (2 * a);
+
+				printf("x1 = (%f + %f i) / %f ,", -b, absoluteValue(delta), 2.0 * a);
+				printf("x2 = (%f - %f i) / %f ", -b, absoluteValue(delta), 2.0 * a);
+			}
+			else
+			{
+				x1 = (-b + sqrt(delta) ) / (2 * a);
+				x2 = (-b - sqrt(delta)) / (2 * a);
+
+				printf("x1 = %f, ", x1);
+				printf("x2 = %f", x2);
+
+			}			
+
+		}	
 	}
-}*/
+}
+
