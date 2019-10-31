@@ -13,16 +13,12 @@ int main()
 	using namespace ShadoMath::Functions;
 	using namespace ShadoMath::Classes;
 
-	Complex z1 = Complex(-1.0 / 6.0, 35.0 / 6.0);
-	Complex z2 = Complex(-1.0 / 6.0, -35.0 / 6.0);
+	Fraction x = Fraction(2, 4);
+	Fraction y = Fraction(3, 4);
 
-	printZeros(3, 1, 3);
+	Fraction result = x.devide(y);
 
-	printf("\n");
-	z1.print();
-
-	printf("\n");
-	z2.print();
+	std::cout << result << std::endl;
 
 
 }

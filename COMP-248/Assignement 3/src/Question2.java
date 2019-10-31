@@ -18,16 +18,19 @@ public class Question2 {
 		
 		print("Welcome to the simple class example!\n");
 		
-		print("CPU 1: " + cpu1.hehexd());
-		print("CPU 2: " + cpu2.hehexd());
+		print("CPU 1: " + cpu1.toString());
+		print("CPU 2: " + cpu2.toString());
 		
 		print("CPU 1 Series:" + cpu1.getSeries());
 		print("CPU 1 Suggested price: " + cpu1.getPrice() + " USD");
-		print("CPU 1 Suggested price: (after mutator call): " + cpu1.priceNow("Q3'10") + " USD");
+		
+		cpu1.setPrice(110.00);
+		
+		print("CPU 1 Suggested price: (after mutator call): " + cpu1.getPrice() + " USD");
 		print("Are CPU 1 and CPU 2 equal? " + (cpu1.equals(cpu2) ? "YES" : "NO"));
 		print("Is CPU 1 of hight generation than CPU 2? " + (cpu1.isHigherGeneration(cpu2) ? "YES" : "NO"));
-		print("CPU 1 Price at Q3'19: " + cpu1.priceNow("Q3'19"));
-		print("CPU 2 Price at Q3'19: " + cpu2.priceNow("Q3'19"));
+		System.out.printf("CPU 1 Price at Q3'19 :%1.2f USD\n", cpu1.priceNow("Q3'19"));
+		System.out.printf("CPU 2 Price at Q3'19 :%1.2f USD\n", cpu2.priceNow("Q3'19"));
 		
 		print("\nThank you for testing the simple class example!");
 		

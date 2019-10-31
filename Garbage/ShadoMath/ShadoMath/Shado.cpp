@@ -8,6 +8,10 @@ namespace ShadoMath {
 
 	namespace Classes {
 
+		/**
+		*
+		* For Fraction
+		**/
 		Fraction::Fraction(int a, int b) {
 			numerator = a;
 			denumerator = b;
@@ -54,11 +58,70 @@ namespace ShadoMath {
 
 		}
 
-		void Fraction::print() {
-			printf("%d / %d", numerator, denumerator);
+		std::string Fraction::toString() {
+			return std::to_string(numerator) + " / " + std::to_string(denumerator);
 		}
 
-		// For Complex
+		void Fraction::print() {
+			std::cout << this->toString();
+		}
+
+		Fraction Fraction::add(Fraction& fracB) {
+			
+			// Find common denumerator
+			Fraction commonA = Fraction(numerator * fracB.denumerator, denumerator * fracB.denumerator);
+			Fraction commonB = Fraction(fracB.numerator * denumerator, fracB.denumerator * denumerator);
+
+			Fraction result = Fraction(commonA.numerator + commonB.numerator, commonA.denumerator);
+			result.simplify();
+
+			return result;
+		}
+
+		Fraction Fraction::substract(Fraction& fracB) {
+			// Find common denumerator
+			Fraction commonA = Fraction(numerator * fracB.denumerator, denumerator * fracB.denumerator);
+			Fraction commonB = Fraction(fracB.numerator * denumerator, fracB.denumerator * denumerator);
+
+			Fraction result = Fraction(commonA.numerator - commonB.numerator, commonA.denumerator);
+			result.simplify();
+
+			return result;
+		}
+
+		Fraction Fraction::multiply(float number) {
+			return Fraction( (numerator * number) / denumerator);
+		}
+
+		Fraction Fraction::multiply(Fraction& fracB) {
+			return Fraction(numerator * fracB.numerator, denumerator * fracB.denumerator);
+		}
+
+		Fraction Fraction::devide(Fraction& fracB) {
+			Fraction copy = fracB.inverse();
+
+			return (*this).multiply(copy);
+		}
+
+		Fraction Fraction::devide(float number) {
+			return Fraction( (numerator / number) / denumerator);
+		}
+
+		// Overload operators for Fraction
+		Fraction Fraction::operator+(Fraction& fracB) {
+			return (*this).add(fracB);
+		}
+
+		std::ostream& operator<<(std::ostream& os, Fraction frac)
+		{
+			os << frac.toString();
+			return os;
+		}
+
+		/**
+		*
+		* For Complex
+		**/
 		Complex::Complex(float _a, float _b) {
 			a = _a;
 			b = _b;
@@ -88,7 +151,7 @@ namespace ShadoMath {
 			b = r * sin(phi);
 		}
 
-		bool Complex::equals(Complex numB) {
+		bool Complex::equals(Complex& numB) {
 			if (a == numB.a && b == numB.b) {
 				return true;
 			}
@@ -106,7 +169,7 @@ namespace ShadoMath {
 			printf("%1.5f * ( cos(%1.5f) + i sin(%1.5f) )", r, phi, phi);
 		}
 
-		Complex Complex::sum(Complex& numB) const {
+		Complex Complex::add(Complex& numB) const {
 			return Complex(a + numB.a, b + numB.b);
 		}
 
@@ -192,7 +255,10 @@ namespace ShadoMath {
 			}
 		}
 
-
+		/**
+		*
+		* For Matrix
+		**/
 		//template <typename T, int R, int C>
 		/*class Matrix {
 
@@ -443,6 +509,10 @@ namespace ShadoMath {
 			}
 		};*/
 
+		/**
+		*
+		* For Vector
+		**/
 		Vector::Vector(float _x, float _y) {
 			x = _x;
 			y = _y;
@@ -581,6 +651,23 @@ namespace ShadoMath {
 
 		}
 
+		float root(float number, int exponant) {
+			if (number < 0) {
+				return -1;
+			}
+			else
+			{
+				return pow(number, 1 / exponant);
+			}		
+		}
+
+		Classes::Complex rootNegative(float number, int exponant) {
+
+			Classes::Complex temp = Classes::Complex(0, pow(absoluteValue(number), 1 / exponant));
+			return temp;
+
+		}
+
 		unsigned long factorial(int num) {
 
 			unsigned long sum = 1;
@@ -592,7 +679,7 @@ namespace ShadoMath {
 			return sum;
 		}
 
-		double sum(double a, double b) {
+		double add(double a, double b) {
 			return a + b;
 		}
 

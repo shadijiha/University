@@ -2,15 +2,7 @@
 /***
  * 
  * Main file for CPU class
- * 
- * CLASS CPU
- * @constructor (NULL) : returns CPU with default values to variables
- * @constructor (args[6]):	@param _gen: expects a integer from 1 to 10
- * 							@param _series: expects a String, either "i3", "i5", "i7" or "i9"
- * 							@param _price: expects an unsigned double 
- * 							@param _speed: expects an unsigned double
- * 							@param _launch: expects a String of the form "XQ'XX" where X is any integer
- * 							@param _sgxSupport: expects a boolean
+ *
  * */
 
 public class CPU {
@@ -22,7 +14,10 @@ public class CPU {
 	private String launchDate;
 	private boolean sgxSupport;
 	
-	CPU()	{
+	/** 
+	 * Class constructor.
+	 */
+	public CPU()	{
 		generation = 1;
 		series = "i3";
 		price = 117.0;
@@ -31,7 +26,16 @@ public class CPU {
 		sgxSupport = false;
 	}
 	
-	CPU(int _gen, String _series, double _price, double _speed, String _launch, boolean _sgxSupport)	{
+	/** 
+	 * Class constructor with 
+	 * 	@param _gen:		expects a integer from 1 to 10
+	 *	@param _series: 	expects a String, either "i3", "i5", "i7" or "i9"
+	 * 	@param _price:		expects an unsigned double 
+	 * 	@param _speed:		expects an unsigned double
+	 * 	@param _launch:		expects a String of the form "XQ'XX" where X is any integer
+	 * 	@param _sgxSupport:	expects a boolean
+	 */
+	public CPU(int _gen, String _series, double _price, double _speed, String _launch, boolean _sgxSupport)	{
 		generation = _gen;
 		series = _series;
 		price = _price;
@@ -40,19 +44,19 @@ public class CPU {
 		sgxSupport = _sgxSupport;
 	}
 	
-	int getGeneration()	{	return generation;}
+	public int getGeneration()	{	return generation;}
 	
-	String getSeries()	{	return series;}
+	public String getSeries()	{	return series;}
 	
-	double getPrice()	{	return price;}
+	public double getPrice()	{	return price;}
 	
-	double getSpeed()	{	return speed;}
+	public double getSpeed()	{	return speed;}
 	
-	String getLaunchDate()	{	return launchDate;}
+	public String getLaunchDate()	{	return launchDate;}
 	
-	boolean getSGXSupport()	{	return sgxSupport;}
+	public boolean getSGXSupport()	{	return sgxSupport;}
 	
-	void setPrice(double newPrice)	{
+	public void setPrice(double newPrice)	{
 		price = newPrice;
 	}
 	
@@ -76,7 +80,7 @@ public class CPU {
 	 * @param sQuarterYear: expects a String date of the following form "XQ'XX" where X is any integer
 	 * @returns Return a double price depending on the difference between the lanchDate and the passedDate
 	 * */
-	double priceNow(String sQuarterYear)	{
+	public double priceNow(String sQuarterYear)	{
 		
 		int[] passedDate = parseQuarter(sQuarterYear);
 		int[] initialDate = parseQuarter(launchDate);
@@ -99,15 +103,15 @@ public class CPU {
 		return currentPrice;			
 	}
 	
-	String hehexd()	{
+	public String toString()	{
 		return String.format("This CPU is %dth generation %s (%1.2fGHz), launched: %s with price: %1.2f USD. SGX is %s.", generation, series, speed, launchDate, price, sgxSupport ? "supported": "not supported");
 	}
 	
-	boolean equals(CPU other)	{
+	public boolean equals(CPU other)	{
 		return (generation == other.generation && series.equalsIgnoreCase(other.series) && sgxSupport == other.sgxSupport);
 	}
 	
-	boolean isHigherGeneration(CPU other)	{
+	public boolean isHigherGeneration(CPU other)	{
 		return (generation > other.generation);
 	}
 }

@@ -28,8 +28,26 @@ namespace ShadoMath {
 
 			void simplify();
 
+			std::string toString();
+
 			void print();
+
+			Fraction add(Fraction& fracB);
+
+			Fraction substract(Fraction& fracB);
+
+			Fraction multiply(float number);
+
+			Fraction multiply(Fraction& farcB);
+
+			Fraction devide(Fraction& fracB);
+
+			Fraction devide(float number);
+
+			Fraction operator+(Fraction& fracB);
 		};
+
+		std::ostream& operator<<(std::ostream& os, Fraction frac);
 
 		class Complex {
 
@@ -52,13 +70,13 @@ namespace ShadoMath {
 
 			void initPolar(float _r, float _phi);
 
-			bool equals(Complex numB);
+			bool equals(Complex& numB);
 
 			void print();
 
 			void printPolar();
 
-			Complex sum(Complex& numB) const;
+			Complex add(Complex& numB) const;
 
 			Complex substract(Complex& numB) const;
 
@@ -191,9 +209,13 @@ namespace ShadoMath {
 
 		void power(float base, float exposant);
 
+		float root(float number, int exponant);
+
+		Classes::Complex rootNegative(float number, int exponant);
+
 		unsigned long factorial(int num);
 
-		double sum(double a, double b);
+		double add(double a, double b);
 
 		bool devides(int number, int divider);
 

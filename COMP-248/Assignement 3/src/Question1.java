@@ -5,7 +5,7 @@
 // Written by: Shadi Jiha #40131284
 // For COMP 248 Section (your section) – Fall 2019
 //
-// This program prints how to make coffee at work using programming
+// This program generates random password from a giant String array
 // --------------------------------------------------------
 
 import java.util.Random;
@@ -99,7 +99,7 @@ public class Question1 {
 		boolean generatorFinished = false;		
 		final String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		final String[] alphabetArray = alphabet.split("");
-		boolean passError = false;
+		
 		String password = "";		
 		
 		// Statistic global variable
@@ -111,28 +111,30 @@ public class Question1 {
 		int failUpper = 0;
 		int failLower = 0;
 		int failSpecial = 0;
+		boolean DEBUG_MODE = false;
 		
 		while(!generatorFinished)	{
+			
+			boolean passError = false;
 
 			// Step 2: Generate random numbers
 			int page = random.nextInt(book.length);
 			int paragraph = random.nextInt(book[page].length);
 			int line = random.nextInt(book[page][paragraph].length);
 			
-			String[] tempLine = book[page][paragraph][line].split(" ");
-			
 			password = "";
 			String[] words = {"", "", ""};
 			
-			// Loop breaker
-			if (totalGen >= 10000 || failLower > 0)	{
-				generatorFinished = true;
-				break;
+			// DEBUG
+			if (DEBUG_MODE)	{
+				int[] hehexd = {totalGen, failNewLine, failSingle, failEqual, failLength, failUpper, failLower, failSpecial};
+				log(hehexd);
 			}
-			totalGen++;
 			
 			// Choose 3 words
 			for (int i = 0; i < 3; i++)	{
+				
+				String[] tempLine = book[page][paragraph][line].split(" ");
 				
 				int randomWord = random.nextInt(tempLine.length);
 
@@ -140,20 +142,29 @@ public class Question1 {
 				if (tempLine[randomWord].length() == 1)	{
 					failSingle++;
 					passError = true;
+					break;
 				}				
 				
 				// Chosen word contains \n
 				if (tempLine[randomWord].contains("\n"))	{
 					failNewLine++;
 					passError = true;
+					break;
 				}
 				
 				words[i] = tempLine[randomWord];
-				
 			}
 			
 			// Quit current iteration if there is a single letter error or a new line error			
 			if (passError)	{	continue;}
+			
+			
+			// Loop breaker
+			if (totalGen >= 10000)	{
+				generatorFinished = true;
+				break;
+			}
+			totalGen++;
 			
 			// Check if word exists is in array
 			for (int j = 0; j < words.length; j++)	{
@@ -187,40 +198,37 @@ public class Question1 {
 			if (passError)	{	continue;}
 			
 			// Validate the the password contains at least 1 lower case
-			/*if ( password.equals(password.toLowerCase()))	{
+			if ( password.equals(password.toLowerCase()))	{
 				// return to step 2
-				failLower++;
+				failUpper++;
 				passError = true;
-			}*/
-			
-			// Quit current iteration if there is a lower case error		
-			if (passError)	{	continue;}
+			}
 			
 			// Validate the the password contains at least 1 upper case			
-			/*if (password.equals(password.toUpperCase()))	{
-				failUpper++;
-				passError = true;				
-			}*/
-			
+			if (password.equals(password.toUpperCase()))	{
+				failLower++;	
+				passError = true;
+			}
+		
 			// Quit current iteration if there is an upper case error	
-			//if (passError)	{	continue;}
+			if (passError)	{	continue;}
 			
 			// Validate that the password contains at least 1 special char
-			/*int normalCharCount = 0;
+			int normalCharCount = 0;
 			String[] tempPassArray = password.split("");
 			for (int i = 0; i < tempPassArray.length; i++)	{
 				for (int j = 0; j < alphabetArray.length; j++)	{
-					if (tempPassArray[i] == alphabetArray[j])	{
+					if (tempPassArray[i].toLowerCase().equals(alphabetArray[j]))	{
 						normalCharCount++;
 					}
 				}				
-			}*/
+			}
 			
-			/*if (password.length() - normalCharCount == 0 || password.length() - normalCharCount > 1)	{
+			if (password.length() - normalCharCount == 0 || password.length() - normalCharCount > 1)	{
 				// Password doesn't contain any special char or password contains more than 1 special char
 				failSpecial++;
 				passError = true;
-			}*/
+			}
 			
 			// Quit current iteration if there is a special char error	
 			if (passError)	{	continue;}			
@@ -228,14 +236,16 @@ public class Question1 {
 			// Display password since it passed all tests
 			System.out.printf("Password = %s	Newline = %d	Single = %d	Equal = %d	Length = %d	Upper = %d	Lower = %d	Special = %d\n", password, failNewLine, failSingle, failEqual, failLength, failUpper, failLower, failSpecial);
 			
-			totalGen = 0;
+			// Quit current iteration if there is a lower case error
+			if (failLower != 0)	{ break;}
+			
 			failNewLine = 0;
 			failSingle = 0;
 			failEqual = 0;
 			failLength = 0;
 			failUpper = 0;
 			failLower = 0;
-			failSpecial = 0;		
+			failSpecial = 0;
 		}
 		
 		// Bye screen
@@ -261,6 +271,13 @@ public class Question1 {
 			System.out.print(element + " ");
 		}
 		System.out.print("\n");		
+	}
+	
+	public static void log(int[] array)	{
+		for (int element: array)	{
+			System.out.print(element + " ");
+		}
+		System.out.println();
 	}
 	
 	public static void log(boolean var)	{
