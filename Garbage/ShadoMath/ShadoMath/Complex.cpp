@@ -1,0 +1,143 @@
+#include "Complex.h"
+#include <string>
+#include <stdio.h>
+#include <Math.h>
+
+/*************************
+**************************
+*** Shado Complex  Lib.***
+**************************
+************************/
+
+Complex::Complex(float _a, float _b) {
+	a = _a;
+	b = _b;
+	phi = atan(b / a);
+	r = sqrt(a * a + b * b);
+}
+
+Complex::Complex() {
+	a = 0.0f;
+	b = 0.0f;
+	r = 0.0f;
+	phi = 0.0f;
+}
+
+Complex::~Complex() {
+}
+
+void Complex::init(float _a, float _b) {
+	a = _a;
+	b = _b;
+}
+
+void Complex::initPolar(float _r, float _phi) {
+	r = _r;
+	phi = _phi;
+	a = r * cos(phi);
+	b = r * sin(phi);
+}
+
+bool Complex::equals(Complex& numB) {
+	if (a == numB.a && b == numB.b) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Complex::print() {
+	printf("%f + %fi", a, b);
+}
+
+void Complex::printPolar() {
+	printf("%1.5f * ( cos(%1.5f) + i sin(%1.5f) )", r, phi, phi);
+}
+
+Complex Complex::add(Complex& numB) const {
+	return Complex(a + numB.a, b + numB.b);
+}
+
+Complex Complex::substract(Complex& numB) const {
+	return Complex(a - numB.a, b - numB.b);
+}
+
+Complex Complex::multiply(Complex& numB) const {
+	return Complex(a * numB.a - b * numB.b, b * numB.a + a * numB.b);
+}
+
+Complex Complex::divide(Complex& numB) const {
+
+	float firstTerm = (a * numB.a + b * numB.b) / (numB.a * numB.a + numB.b * numB.b);
+	float secondTerm = (b * numB.a - a * numB.b) / (numB.a * numB.a + numB.b * numB.b);
+
+	return Complex(firstTerm, secondTerm);
+}
+
+float Complex::realPart() {
+	return a;
+}
+
+float Complex::imaginaryPart() {
+	return b;
+}
+
+float Complex::module() {
+	return r;
+}
+
+float Complex::angle() {
+	return phi;
+}
+
+Complex Complex::conjugat() const {
+	return Complex(a, -1.0f * b);
+}
+
+float Complex::mag() {
+	return sqrt(a * a + b * b);
+}
+
+Complex Complex::power(int exposant) const {
+
+	Complex* temp = new Complex();
+	temp->initPolar(pow(r, exposant), exposant * phi);
+
+	return *temp;
+}
+
+/*std::vector<Complex> Complex::root(int exposant) {
+
+		std::vector<Complex> result(exposant);
+		auto it = result.begin();
+
+
+		float tempR = pow(r, 1 / exposant);
+
+		for (int i = 0; i < exposant; i++) {
+			float tempPhi = (phi + 2 * PI * i) / exposant;
+			Complex temp();
+			temp.initPolar(tempR, tempPhi);
+
+			result.insert(it, temp);
+		}
+
+		return result;
+}*/
+
+void Complex::printSqrt(int exposant) {
+
+	float tempR = pow(r, 1.0 / exposant);
+
+	for (int i = 0; i < exposant; i++) {
+
+		float tempPhi = (phi + 2 * PI * i) / exposant;
+
+		Complex temp(0, 0);
+		temp.initPolar(tempR, tempPhi);
+		temp.print();
+		printf("\n");
+	}
+}

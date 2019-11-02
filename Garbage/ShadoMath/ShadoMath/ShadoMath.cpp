@@ -5,20 +5,20 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
+#include "Fraction.h"
+#include "Complex.h"
+#include "ShadoVector.h"
 #include "Shado.h"
 #include "Math.h"
 
 int main()
 {
-	using namespace ShadoMath::Functions;
-	using namespace ShadoMath::Classes;
+	using namespace ShadoMath;
 
-	Fraction x = Fraction(2, 4);
-	Fraction y = Fraction(3, 4);
+	Fraction x = Fraction(3, 10);
+	Fraction y = Fraction(2, 10);
 
-	Fraction result = x.devide(y);
-
-	std::cout << result << std::endl;
+	std::cout << x / Fraction(3, 10) << std::endl;
 
 
 }

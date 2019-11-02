@@ -151,11 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Complex.cpp" />
+    <ClCompile Include="Fraction.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Shado.cpp" />
     <ClCompile Include="ShadoMath.cpp" />
+    <ClCompile Include="ShadoVector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Complex.h" />
+    <ClInclude Include="Fraction.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Shado.h" />
+    <ClInclude Include="ShadoVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
