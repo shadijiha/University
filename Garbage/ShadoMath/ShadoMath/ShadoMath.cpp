@@ -8,6 +8,7 @@
 #include "Fraction.h"
 #include "Complex.h"
 #include "ShadoVector.h"
+#include "Matrix.h"
 #include "Shado.h"
 #include "Math.h"
 
@@ -15,11 +16,13 @@ int main()
 {
 	using namespace ShadoMath;
 
-	Fraction x = Fraction(3, 10);
-	Fraction y = Fraction(2, 10);
+	Fraction y = Fraction(1, 2);
+	Fraction x = Fraction(3, 4);
+	//Matrix<int, 2, 2> x = Matrix<int, 2, 2>();
 
-	std::cout << x / Fraction(3, 10) << std::endl;
+	// TODO ---> Fraction operators > and < not working properly
 
+	printf("%s \n", x < y ? "true" : "false");
 
 }
 

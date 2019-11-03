@@ -8,34 +8,40 @@
 *** Shado Matrix   Lib.***
 **************************
 ************************/
-/*template <typename T, int R, int C>
-Matrix::Matrix(T dataArray[R][C]) {
+/*
+template <typename T, int R, int C>
+Matrix<T, R, C>::Matrix(T dataArray[R][C]) {
 
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				data[i][j] = dataArray[i][j];
-			}
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			data[i][j] = dataArray[i][j];
 		}
-
 	}
 
-Matrix::Matrix() {
-		randomize();
-	}
+}
 
-Matrix::~Matrix() {
-		//delete[] data;
-	}
+template <typename T, int R, int C>
+Matrix<T, R, C>::Matrix() {
+	randomize();
+}
 
-T Matrix::getData(int _r, int _c) {
-		return data[_r][_c];
-	}
+template <typename T, int R, int C>
+Matrix<T, R, C>::~Matrix() {
+	//delete[] data;
+}
 
-void Matrix::setData(int _r, int _c, T temp) {
-		data[_r][_c] = temp;
-	}
+template <typename T, int R, int C>
+T Matrix<T, R, C>::getData(int _r, int _c) {
+	return data[_r][_c];
+}
 
-void Matrix::randomize() {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::setData(int _r, int _c, T temp) {
+	data[_r][_c] = temp;
+}
+
+template <typename T, int R, int C>
+void Matrix<T, R, C>::randomize() {
 
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
@@ -45,7 +51,8 @@ void Matrix::randomize() {
 
 	}
 
-void Matrix::generateIdentity() {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::generateIdentity() {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if (i == j) {
@@ -59,7 +66,8 @@ void Matrix::generateIdentity() {
 		}
 	}
 
-void Matrix::inverse() {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::inverse() {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				data[i][j] = data[i][j] * -1;
@@ -67,7 +75,8 @@ void Matrix::inverse() {
 		}
 	}
 
-void Matrix::print() {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::print() {
 
 		printf("\n");
 		for (int i = 0; i < rows; i++) {
@@ -88,7 +97,8 @@ void Matrix::print() {
 		}
 	}
 
-Matrix Matrix::add(Matrix& b) {
+template <typename T, int R, int C>
+Matrix<T, R, C> Matrix<T, R, C>::add(Matrix& b) {
 
 		if (rows != b.rows || cols != b.cols) {
 			return;
@@ -107,11 +117,13 @@ Matrix Matrix::add(Matrix& b) {
 		}
 	}
 
-Matrix Matrix::operator+(Matrix& b) {
-		add(b);
-	}
+template <typename T, int R, int C>
+Matrix<T, R, C> Matrix<T, R, C>::operator+(Matrix& b) {
+	add(b);
+}
 
-void Matrix::scale(float n) {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::scale(float n) {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				data[i][j] = data[i][j] * n;
@@ -119,11 +131,13 @@ void Matrix::scale(float n) {
 		}
 	}
 
-void Matrix::operator*(float n) {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::operator*(float n) {
 		scale(n);
 	}
 
-Matrix Matrix::multiply(Matrix& n) {
+template <typename T, int R, int C>
+Matrix<T, R, C> Matrix<T, R, C>::multiply(Matrix& n) {
 
 		// Detect error
 		if (this.cols != n.rows) {
@@ -149,11 +163,13 @@ Matrix Matrix::multiply(Matrix& n) {
 		return temp;
 	}
 
-Matrix Matrix::operator*(Matrix& n) {
+template <typename T, int R, int C>
+Matrix<T, R, C> Matrix<T, R, C>::operator*(Matrix& n) {
 		return	multiply(n);
 	}
 
-void Matrix::transpose() {
+template <typename T, int R, int C>
+void Matrix<T, R, C>::transpose() {
 
 		Matrix<T, rows, cols> temp;
 
@@ -166,22 +182,26 @@ void Matrix::transpose() {
 		data = temp.data;
 	}
 
-bool Matrix::equals(Matrix& b) {
+template <typename T, int R, int C>
+bool Matrix<T, R, C>::equals(Matrix& b) {
 		if (det() == b.det())
 			return true;
 		else
 			return false;
 	}
 
-bool Matrix::operator==(Matrix& b) {
+template <typename T, int R, int C>
+bool Matrix<T, R, C>::operator==(Matrix& b) {
 		return equals(b);
 	}
 
-bool Matrix::operator!=(Matrix& b) {
+template <typename T, int R, int C>
+bool Matrix<T, R, C>::operator!=(Matrix& b) {
 		return !equals(b);
 	}
 
-Matrix Matrix::LUdecomposition() {
+template <typename T, int R, int C>
+Matrix<T, R, C> Matrix<T, R, C>::LUdecomposition() {
 
 		Matrix<T, rows, cols> U;
 		Matrix<T, rows, cols> L;
@@ -213,7 +233,8 @@ Matrix Matrix::LUdecomposition() {
 		return result;
 	}
 
-T Matrix::determinant() {
+template <typename T, int R, int C>
+T Matrix<T, R, C>::determinant() {
 
 		// Detect Error
 		if (rows != cols) {
@@ -236,7 +257,8 @@ T Matrix::determinant() {
 		return mult;
 	}
 
-float Matrix::det() {
+template <typename T, int R, int C>
+float Matrix<T, R, C>::det() {
 
 		if (rows == 2 && cols == 2) {
 			return data[0][0] * data[1][1] - data[1][0] * data[0][1];
@@ -247,5 +269,4 @@ float Matrix::det() {
 		}
 
 	}
-
 */

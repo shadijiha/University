@@ -39,6 +39,8 @@ public:
 
 	bool equals(Fraction& fracB);
 
+	bool greaterThan(Fraction& fracB);
+
 	Fraction operator+(Fraction fracB);
 
 	Fraction operator-(Fraction fracB);
@@ -46,6 +48,18 @@ public:
 	Fraction operator*(Fraction fracB);
 
 	Fraction operator/(Fraction fracB);
+
+	bool operator==(Fraction fracB);
+
+	bool operator!=(Fraction fracB);
+
+	bool operator>(Fraction fracB);
+
+	bool operator<(Fraction fracB);
+
+	bool operator>=(Fraction fracB);
+
+	bool operator<=(Fraction fracB);
 };
 
 std::ostream& operator<<(std::ostream& os, Fraction frac);

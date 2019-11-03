@@ -106,7 +106,11 @@ Fraction Fraction::devide(float number) {
 }
 
 bool Fraction::equals(Fraction& fracB) {
-	return (numerator / denumerator) == (fracB.numerator / fracB.denumerator);
+	return fabs(((float)numerator / (float)denumerator) - ((float)fracB.numerator / (float)fracB.denumerator)) < 0.0005f;
+}
+
+bool Fraction::greaterThan(Fraction& fracB) {
+	return ((float)numerator / (float)denumerator) > ((float)fracB.numerator / (float)fracB.denumerator);
 }
 
 // Overload operators for Fraction
@@ -126,6 +130,29 @@ Fraction Fraction::operator/(Fraction fracB) {
 	return (*this).devide(fracB);
 }
 
+bool Fraction::operator==(Fraction fracB) {
+	return equals(fracB);
+}
+
+bool Fraction::operator!=(Fraction fracB) {
+	return !equals(fracB);
+}
+
+bool Fraction::operator>(Fraction fracB) {
+	return this->greaterThan(fracB);
+}
+
+bool Fraction::operator<(Fraction fracB) {
+	return !this->greaterThan(fracB);
+}
+
+bool Fraction::operator>=(Fraction fracB) {
+	return this->equals(fracB) || this->greaterThan(fracB);
+}
+
+bool Fraction::operator<=(Fraction fracB) {
+	return this->equals(fracB) || !this->greaterThan(fracB);
+}
 
 std::ostream& operator<<(std::ostream& os, Fraction frac)
 {

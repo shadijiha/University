@@ -39,7 +39,6 @@ namespace ShadoMath {
 	void printZeros(float a, float b, float c);
 
 	void print(std::string str);
-
 }
 
 #endif

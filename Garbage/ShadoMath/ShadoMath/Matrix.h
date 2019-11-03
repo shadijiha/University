@@ -2,8 +2,8 @@
 #define MATRIX_H
 
 #include <stdio.h>
-
-/*template <typename T, int R, int C>
+/*
+template <typename T, int R, int C>
 class Matrix {
 
 private:
