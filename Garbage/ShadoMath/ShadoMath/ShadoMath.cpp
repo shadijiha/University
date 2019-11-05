@@ -2,9 +2,6 @@
 //
 
 #include <iostream>
-#include <stdio.h>
-#include <fstream>
-#include <string>
 #include "Fraction.h"
 #include "Complex.h"
 #include "ShadoVector.h"
@@ -12,7 +9,7 @@
 #include "Shado.h"
 #include "Math.h"
 
-int main(int argc, char* argv[])
+int main()
 {
 	// TODO ---> Fraction operators > and < not working properly
 
