@@ -39,6 +39,8 @@ namespace ShadoMath {
 	void printZeros(float a, float b, float c);
 
 	void print(std::string str);
+
+	bool compareFloat(float a, float b, float epsilon = 0.005f);
 }
 
 #endif

@@ -96,7 +96,9 @@ public class Question1 {
 		
 		
 		// Essential variables
-		boolean generatorFinished = false;		
+		boolean generatorFinished = false;	
+		final boolean DEBUG_MODE = false;
+		
 		final String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		final String[] alphabetArray = alphabet.split("");
 		
@@ -111,10 +113,10 @@ public class Question1 {
 		int failUpper = 0;
 		int failLower = 0;
 		int failSpecial = 0;
-		boolean DEBUG_MODE = false;
 		
 		while(!generatorFinished)	{
 			
+			// Flag variable to exit while loop in case of an error
 			boolean passError = false;
 
 			// Step 2: Generate random numbers
@@ -127,8 +129,8 @@ public class Question1 {
 			
 			// DEBUG
 			if (DEBUG_MODE)	{
-				int[] hehexd = {totalGen, failNewLine, failSingle, failEqual, failLength, failUpper, failLower, failSpecial};
-				log(hehexd);
+				int[] x = {totalGen, failNewLine, failSingle, failEqual, failLength, failUpper, failLower, failSpecial};
+				log(x);
 			}
 			
 			// Choose 3 words

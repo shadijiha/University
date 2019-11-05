@@ -2,6 +2,7 @@
 #include <string>
 #include <stdio.h>
 #include <Math.h>
+#include "Shado.h"
 
 /*************************
 **************************
@@ -38,8 +39,8 @@ void Complex::initPolar(float _r, float _phi) {
 	b = r * sin(phi);
 }
 
-bool Complex::equals(Complex& numB) {
-	if (a == numB.a && b == numB.b) {
+bool Complex::equals(Complex& other) {
+	if (a == other.a && b == other.b) {
 		return true;
 	}
 	else
@@ -48,8 +49,12 @@ bool Complex::equals(Complex& numB) {
 	}
 }
 
+std::string Complex::toString() {
+	return std::to_string(this->a) + " + " + std::to_string(this->b) + " i";
+}
+
 void Complex::print() {
-	printf("%f + %fi", a, b);
+	this->toString();
 }
 
 void Complex::printPolar() {
@@ -140,4 +145,33 @@ void Complex::printSqrt(int exposant) {
 		temp.print();
 		printf("\n");
 	}
+}
+
+Complex Complex::operator+(Complex other) {
+	return this->add(other);
+}
+
+Complex Complex::operator-(Complex other) {
+	return this->substract(other);
+}
+
+Complex Complex::operator*(Complex other) {
+	return this->multiply(other);
+}
+
+Complex Complex::operator/(Complex other) {
+	return this->divide(other);
+}
+
+void Complex::operator=(Complex other) {
+	this->a = other.a;
+	this->b = other.b;
+}
+
+bool Complex::operator==(Complex other) {
+	return this->equals(other);
+}
+
+bool Complex::operator!=(Complex other) {
+	return !(this->equals(other));
 }

@@ -145,6 +145,8 @@ namespace ShadoMath {
 		std::cout << str << std::endl;
 	}
 
-
+	bool compareFloat(float a, float b, float epsilon) {
+		return fabs(a - b) <= epsilon;
+	}
 }
 

@@ -12,18 +12,18 @@
 #include "Shado.h"
 #include "Math.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-	using namespace ShadoMath;
-
-	Fraction y = Fraction(1, 2);
-	Fraction x = Fraction(3, 4);
-	//Matrix<int, 2, 2> x = Matrix<int, 2, 2>();
-
 	// TODO ---> Fraction operators > and < not working properly
 
-	printf("%s \n", x < y ? "true" : "false");
+	Complex* x = new Complex(2, 10);
+	Complex* y = new Complex(1, 5);
 
+	Complex result = *x + *y;
+
+	std::cout << result.toString() << std::endl;
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

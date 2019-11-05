@@ -25,7 +25,9 @@ public:
 
 	void initPolar(float _r, float _phi);
 
-	bool equals(Complex& numB);
+	bool equals(Complex& other);
+
+	std::string toString();
 
 	void print();
 
@@ -57,6 +59,19 @@ public:
 
 	void printSqrt(int exposant);
 
+	Complex operator+(Complex numB);
+
+	Complex operator-(Complex numB);
+
+	Complex operator*(Complex numB);
+
+	Complex operator/(Complex numB);
+
+	void operator=(Complex numB);
+
+	bool operator==(Complex other);
+
+	bool operator!=(Complex other);
 };
 
 #endif

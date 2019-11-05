@@ -15,7 +15,7 @@ public class CPU {
 	private boolean sgxSupport;
 	
 	/** 
-	 * Class constructor.
+	 * Class default constructor.
 	 */
 	public CPU()	{
 		generation = 1;
@@ -27,13 +27,13 @@ public class CPU {
 	}
 	
 	/** 
-	 * Class constructor with 
-	 * 	@param _gen:		expects a integer from 1 to 10
-	 *	@param _series: 	expects a String, either "i3", "i5", "i7" or "i9"
-	 * 	@param _price:		expects an unsigned double 
-	 * 	@param _speed:		expects an unsigned double
-	 * 	@param _launch:		expects a String of the form "XQ'XX" where X is any integer
-	 * 	@param _sgxSupport:	expects a boolean
+	 * Class constructor 
+	 * 	@param _gen			:	expects an integer from 1 to 10
+	 *	@param _series		: 	expects a String, either "i3", "i5", "i7" or "i9"
+	 * 	@param _price		:	expects an unsigned double 
+	 * 	@param _speed		:	expects an unsigned double
+	 * 	@param _launch		:	expects a String of the form "XQ'XX" where X is any integer
+	 * 	@param _sgxSupport	:	expects a boolean
 	 */
 	public CPU(int _gen, String _series, double _price, double _speed, String _launch, boolean _sgxSupport)	{
 		generation = _gen;
@@ -44,17 +44,17 @@ public class CPU {
 		sgxSupport = _sgxSupport;
 	}
 	
-	public int getGeneration()	{	return generation;}
+	public int getGeneration()		{	return generation;	}
 	
-	public String getSeries()	{	return series;}
+	public String getSeries()		{	return series;		}
 	
-	public double getPrice()	{	return price;}
+	public double getPrice()		{	return price;		}
 	
-	public double getSpeed()	{	return speed;}
+	public double getSpeed()		{	return speed;		}
 	
-	public String getLaunchDate()	{	return launchDate;}
+	public String getLaunchDate()	{	return launchDate;	}
 	
-	public boolean getSGXSupport()	{	return sgxSupport;}
+	public boolean getSGXSupport()	{	return sgxSupport;	}
 	
 	public void setPrice(double newPrice)	{
 		price = newPrice;
@@ -62,8 +62,8 @@ public class CPU {
 	
 	/**
 	 * FUNCTION parseQuarter
-	 * @param quarterYear: expects a String date of the following form "XQ'XX" where X is any integer
-	 * @returns Returns a integer array where array[0] is the Quarter and array[1] is the year
+	 * @param	: quarterYear: expects a String date of the following form "XQ'XX" where X is any integer
+	 * @returns	: Returns a integer array where array[0] is the Quarter and array[1] is the year
 	 * */
 	private int[] parseQuarter(String quarterYear)	{
 		String[] temp = quarterYear.split("'");
@@ -77,8 +77,8 @@ public class CPU {
 	
 	/**
 	 * FUNCTION priceNow
-	 * @param sQuarterYear: expects a String date of the following form "XQ'XX" where X is any integer
-	 * @returns Return a double price depending on the difference between the lanchDate and the passedDate
+	 * @param	: sQuarterYear: expects a String date of the following form "XQ'XX" where X is any integer
+	 * @returns	: Return a double price depending on the difference between the lanchDate and the passedDate
 	 * */
 	public double priceNow(String sQuarterYear)	{
 		
