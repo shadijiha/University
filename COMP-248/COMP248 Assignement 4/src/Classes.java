@@ -92,7 +92,7 @@ class Board {
         String master = "";
 
         for (int i = 0; i < this.board.length; i++)    {
-            master += "Level " + i + "\n";
+            master += "\nLevel " + i + "\n";
             master += "----------\n";
 
             for (int j = 0; j < this.board[i].length; j++) {

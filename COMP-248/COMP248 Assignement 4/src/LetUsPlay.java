@@ -71,7 +71,7 @@ public class LetUsPlay {
 		
 		// Everything OK set up the board
 		board = new Board(userLevelCount, userSize);
-		println("\nYour 3D board has been set up and looks like this:\n\n");
+		println("\nYour 3D board has been set up and looks like this:\n");
 		println(board.toString());
 		
 		// get players names
