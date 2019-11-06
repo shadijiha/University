@@ -96,12 +96,51 @@ public class LetUsPlay {
 			generateEnergy(players[turn], dice);
 		}
 		
-		movePlayer(players[turn], board, dice, players[Math.abs(turn - 1)]);
-		turn = nextTurn(turn);
-	
+		boolean gameOver = false;
+		Player winner = new Player();
+		
+		while (!gameOver)	{
+			
+			println(String.format("It is %s's turn", players[turn].getName()));
+			dice.rollDice();
+			println(String.format("	%s you rolled %s", players[turn].getName(), dice.toString()));
+			movePlayer(players[turn], board, dice, players[Math.abs(turn - 1)]);
+			
+			int energyOnCurrentPos = board.getEnergyAdj(players[turn].getLevel(), players[turn].getX(), players[turn].getY());
+			
+			println(String.format("Your energy is adjusted by %d for langing at (%d,%d) at level %d", energyOnCurrentPos, players[turn].getX(), players[turn].getY(), players[turn].getLevel()));
+			
+			// Adjust energy based on moved <===== THIS SHOULD BE MODIFIED
+			players[turn].setEnergy(players[turn].getEnergy() + energyOnCurrentPos); 
+			
+			// Display end of round results
+			println("At the end of this round: ");
+			println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy", players[0].getName(), players[0].getLevel(), players[0].getX(), players[0].getY(), players[0].getEnergy()));
+			println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy.", players[1].getName(), players[1].getLevel(), players[1].getX(), players[1].getY(), players[1].getEnergy()));
+			
+			// Pause
+			println("Any key to continue to next round ...");
+			String pause = scan.next();
+			
+			
+			// Determine if a player has won at the end of the round
+			for (Player temp : players)	{
+				if (temp.getLevel() >= board.getLevel() && temp.getX() == board.getSize() && temp.getY() == board.getSize())	{
+					winner = new Player(temp);
+					gameOver = true;
+				}
+			}			
+			
+			// Advance turn
+			turn = nextTurn(turn);
+			
+		}
+		
+		// Display end message
+		println("The winner is " + winner.getName() + ". Well done!!!");	
 
 		//======================================
-		scan.close();		
+		scan.close();
 	}
 	
 	public static void debugger(Player p)	{
@@ -154,12 +193,45 @@ public class LetUsPlay {
 				playerWithNewPos.setY(temp.getY() + newY);
 				
 				if (playerWithNewPos.equals(opponent))	{
-					// the new position lead to a position occupied by the opponant
+					// the new position lead to a position occupied by the opponent
 					
+					String action = "";
+	
+					if (action.equalsIgnoreCase("forfeit"))	{
+						
+						/* ******** Code to forfeit ******** */
+						
+						if (playerWithNewPos.getLevel() == 0)	{
+							// Move player to (0, 0)
+							playerWithNewPos.setX(0);
+							playerWithNewPos.setY(0);
+						} else	{
+							// Decrease level
+							playerWithNewPos.setLevel(playerWithNewPos.getLevel() - 1);
+						}
+						
+					} else if (action.equalsIgnoreCase("challenge"))	{
+						
+						/* ******** Code to challenge ******** */
+						int challengeResult = new Random().nextInt(11);
+						
+						if (challengeResult < 6)	{
+							// A has lost
+							playerWithNewPos.setEnergy(playerWithNewPos.getEnergy() / 2);
+						} else	{
+							// Swap A and B
+							playerWithNewPos.setX(opponent.getX());
+							playerWithNewPos.setX(opponent.getY());
+							
+							opponent.setX(p.getX());
+							opponent.setY(p.getY());
+							opponent.setEnergy(opponent.getEnergy() / 2);					
+						}
+						
+					}					
 				}
 				
-				temp.setX(temp.getX() + newX);
-				temp.setY(temp.getY() + newY);
+				p = new Player(playerWithNewPos);
 			}			
 		}		
 	}
