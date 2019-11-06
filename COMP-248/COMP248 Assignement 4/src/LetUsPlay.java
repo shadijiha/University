@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class LetUsPlay {
 	
-	final static boolean DEBUG_MODE = true;
+	final static boolean DEBUG_MODE = false;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -91,27 +91,27 @@ public class LetUsPlay {
 		//============= GAME LOGIC =============
 		debugger(players[turn]);
 		
-		// If player if out of energy generate some
-		if (!hasEnoughEnergy(players[turn]))	{
-			generateEnergy(players[turn], dice);
-		}
-		
 		boolean gameOver = false;
 		Player winner = new Player();
 		
 		while (!gameOver)	{
 			
-			println(String.format("It is %s's turn", players[turn].getName()));
+			println(String.format("\n\nIt is %s's turn", players[turn].getName()));
 			dice.rollDice();
 			println(String.format("	%s you rolled %s", players[turn].getName(), dice.toString()));
-			movePlayer(players[turn], board, dice, players[Math.abs(turn - 1)]);
+			
+			// Roll and Adjust energy based on moved <===== THIS SHOULD BE MODIFIED
+			players[turn].setEnergy(adjustEnergy(players[turn], dice));		
 			
 			int energyOnCurrentPos = board.getEnergyAdj(players[turn].getLevel(), players[turn].getX(), players[turn].getY());
 			
-			println(String.format("Your energy is adjusted by %d for langing at (%d,%d) at level %d", energyOnCurrentPos, players[turn].getX(), players[turn].getY(), players[turn].getLevel()));
+			// Change current player location
+			players[turn] = movePlayer(players[turn], board, dice, players[Math.abs(turn - 1)]);
 			
-			// Adjust energy based on moved <===== THIS SHOULD BE MODIFIED
-			players[turn].setEnergy(players[turn].getEnergy() + energyOnCurrentPos); 
+			// Adjust player energy
+			players[turn].setEnergy(players[turn].getEnergy() + energyOnCurrentPos);
+			
+			println(String.format("	Your energy is adjusted by %d for landing at (%d,%d) at level %d", energyOnCurrentPos, players[turn].getX(), players[turn].getY(), players[turn].getLevel()));
 			
 			// Display end of round results
 			println("At the end of this round: ");
@@ -119,9 +119,8 @@ public class LetUsPlay {
 			println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy.", players[1].getName(), players[1].getLevel(), players[1].getX(), players[1].getY(), players[1].getEnergy()));
 			
 			// Pause
-			println("Any key to continue to next round ...");
-			String pause = scan.next();
-			
+			print("Any key to continue to next round ...");
+			String pause = scan.next();			
 			
 			// Determine if a player has won at the end of the round
 			for (Player temp : players)	{
@@ -132,8 +131,7 @@ public class LetUsPlay {
 			}			
 			
 			// Advance turn
-			turn = nextTurn(turn);
-			
+			turn = nextTurn(turn);			
 		}
 		
 		// Display end message
@@ -152,16 +150,16 @@ public class LetUsPlay {
 		}
 	}
 	
-	public static void movePlayer(Player p, Board b, Dice d, Player opponent)	{
+	public static Player movePlayer(Player p, Board b, Dice d, Player opponent)	{
 		
 		if (!hasEnoughEnergy(p))	{
-			return;
+			return p;
 		} else	{
 			
 			Player temp = new Player(p);
 			boolean allowMove = true;
 			
-			int roll = d.rollDice();	// Roll the dice
+			int roll = d.getDie1() + d.getDie2();	// Roll the dice
 			
 			// Modify TEMP player x and y
 			int newX = temp.getX() + (roll / b.getSize());
@@ -172,7 +170,7 @@ public class LetUsPlay {
 				newY = newY % b.getSize();
 			}
 			
-			if (newX > b.getSize())	{
+			if (newX > b.getSize() - 1)	{
 				
 				// if x is off board increase the level
 				if (temp.getLevel() + 1 >= b.getLevel())	{
@@ -180,7 +178,7 @@ public class LetUsPlay {
 					allowMove = false;
 				} else	{
 					temp.setLevel(temp.getLevel() + 1);
-				}				
+				}
 				
 				newX = 6 % b.getSize();			
 			}
@@ -195,7 +193,7 @@ public class LetUsPlay {
 				if (playerWithNewPos.equals(opponent))	{
 					// the new position lead to a position occupied by the opponent
 					
-					String action = "";
+					String action = "forfeit";
 	
 					if (action.equalsIgnoreCase("forfeit"))	{
 						
@@ -231,8 +229,10 @@ public class LetUsPlay {
 					}					
 				}
 				
-				p = new Player(playerWithNewPos);
-			}			
+				return playerWithNewPos;
+			} else {
+				return p; // <========== CHANGE THIS
+			}		
 		}		
 	}
 	
@@ -244,17 +244,28 @@ public class LetUsPlay {
 		return p.getEnergy() > 0;
 	}
 	
-	public static int generateEnergy(Player p, Dice d)	{
-		//Player temp = new Player(p);
-		// roll the dice 3 times
-		for (int i = 0; i < 3; i++)	{
-			d.rollDice();
-			if (d.isDouble())	{
-				p.setEnergy(p.getEnergy() + 2);
+	public static int adjustEnergy(Player p, Dice d)	{
+		
+		Player tempCopy = new Player(p);
+		
+		if (!hasEnoughEnergy(tempCopy))	{
+			// roll the dice 3 times
+			for (int i = 0; i < 3; i++)	{
+				d.rollDice();
+				if (d.isDouble())	{
+					tempCopy.setEnergy(tempCopy.getEnergy() + 2);
+				}
 			}
-		}			
-	
-		return p.getEnergy();
+		} else	{
+			// Add 2 energy if the roll is a double
+			if (d.isDouble())	{
+				tempCopy.setEnergy(tempCopy.getEnergy() + 2);
+				println("	Congratulations you rolled doube " + d.getDie1() + ". Your energy went up by 2 units");
+			}
+		}
+		
+		return tempCopy.getEnergy();
+
 	}
 	
 	public static <T> void print(T x)	{
