@@ -1,5 +1,8 @@
 // ShadoMath.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include <iostream>
 #include "Fraction.h"
@@ -8,6 +11,31 @@
 #include "Matrix.h"
 #include "Shado.h"
 #include "Math.h"
+#include <chrono>
+#include <ctime>  
+
+class Date {
+	
+public:
+
+	Date() {}
+	
+	long long getTime() {
+		auto getChrono = std::chrono::system_clock::now();
+		std::time_t getTimeT = std::chrono::system_clock::to_time_t(getChrono);
+
+		long long timeNow = getTimeT;
+
+		return timeNow;
+	}
+
+	std::string formateTime(long long value) {
+		std::time_t display = value;
+		return std::ctime(&display);
+	}
+
+};
+
 
 int main()
 {
@@ -18,7 +46,7 @@ int main()
 
 	Complex result = *x + *y;
 
-	std::cout << result.toString() << std::endl;
+	std::cout << new Date->formateTime(new Date->getTime()) << std::endl;
 
 	return 0;
 }
