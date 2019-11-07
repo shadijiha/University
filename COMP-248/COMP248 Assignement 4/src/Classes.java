@@ -142,7 +142,16 @@ class Player	{
 		this.y = _y;
 	}
 
+	// Copy constructor and method
 	Player(Player objToCopy)	{
+		
+		if (objToCopy == null)	{
+			StackTraceElement l = new Exception().getStackTrace()[0];
+			System.err.println(String.format("The object to copy is not defined! @ %s.%s:%s", l.getClassName(), l.getMethodName(), l.getLineNumber()));
+			
+			System.exit(-1);
+		}
+		
 		this.name = objToCopy.getName();
 		this.level = objToCopy.getLevel();
 		this.x = objToCopy.getX();
@@ -150,16 +159,23 @@ class Player	{
 		this.energy = objToCopy.getEnergy();
 	}
 	
-	public String getName()		{	return this.name;}
-	public int getLevel()		{	return this.level;}
-	public int getX()			{	return this.x;}
-	public int getY()			{	return this.y;}
-	public int getEnergy()		{	return this.energy;}
+	Player copy()	{
+		return new Player(this);
+	}
 	
-	public void setName(String value)	{	this.name = value;}
+	// Getters
+	public String getName()		{	return this.name;	}
+	public int getLevel()		{	return this.level;	}
+	public int getX()			{	return this.x;		}
+	public int getY()			{	return this.y;		}
+	public int getEnergy()		{	return this.energy;	}
+	
+	
+	// Setters
+	public void setName(String value)	{	this.name = value;	}
 	public void setLevel(int _level)	{	this.level = _level;}
-	public void setX(int _x)			{	this.x = _x;}
-	public void setY(int _y)			{	this.y = _y;}
+	public void setX(int _x)			{	this.x = _x;		}
+	public void setY(int _y)			{	this.y = _y;		}
 	public void setEnergy(int value)	{	this.energy = value;}
 	
 	public void moveTo(Player p)	{

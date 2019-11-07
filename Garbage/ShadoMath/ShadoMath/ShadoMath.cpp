@@ -12,41 +12,79 @@
 #include "Shado.h"
 #include "Math.h"
 #include <chrono>
-#include <ctime>  
+#include <ctime>
+#include <stdlib.h>     /* srand, rand */
 
 class Date {
+
+private:
+	int seconds, minutes, hours, day, month, year, weekday, dayOfYear, daylightSavings;
 	
 public:
 
 	Date() {}
 	
-	long long getTime() {
+	uint64_t getTime() {
 		auto getChrono = std::chrono::system_clock::now();
 		std::time_t getTimeT = std::chrono::system_clock::to_time_t(getChrono);
 
-		long long timeNow = getTimeT;
+		uint64_t timeNow = getTimeT;
 
 		return timeNow;
 	}
 
-	std::string formateTime(long long value) {
+	std::string formateTime(uint64_t value) {
 		std::time_t display = value;
 		return std::ctime(&display);
 	}
 
+	void printDate() {
+		std::cout << this->formateTime(this->getTime()) << std::endl;
+	}
+
+	void refresh() {
+		time_t t = time(NULL);
+		tm* timePtr = localtime(&t);
+
+		seconds = timePtr->tm_sec;
+		minutes = timePtr->tm_min;
+		hours = timePtr->tm_hour;
+		day = timePtr->tm_mday;
+		month = timePtr->tm_mon;
+		year = timePtr->tm_year;
+		weekday = timePtr->tm_wday;
+		dayOfYear = timePtr->tm_yday;
+		daylightSavings = timePtr->tm_isdst;
+	}
+
+	int getSeconds()			{ return this->seconds;			}
+	int getMinutes()			{ return this->minutes;			}
+	int getHours()				{ return this->hours;			}
+	int getDay()				{ return this->day;				}
+	int getMonth()				{ return this->month;			}
+	int getYear()				{ return this->year;			}
+	int getWeekday()			{ return this->weekday;			}
+	int getDayOfYear()			{ return this->dayOfYear;		}
+	int getDaylightSavings()	{ return this->daylightSavings; }
 };
 
+int random(int min, int max) {
+	
+	if (min >= max) {
+		int temp = max;
+		max = min;
+		min = temp;	
+	}
+	return rand() % (max - min) + min;
+}
 
 int main()
 {
 	// TODO ---> Fraction operators > and < not working properly
 
-	Complex* x = new Complex(2, 10);
-	Complex* y = new Complex(1, 5);
-
-	Complex result = *x + *y;
-
-	std::cout << new Date->formateTime(new Date->getTime()) << std::endl;
+	for (int i = 0; i < 20; i++) {
+		std::cout << random(10, 20) << std::endl;
+	}
 
 	return 0;
 }

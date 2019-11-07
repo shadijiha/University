@@ -1,3 +1,2 @@
 ﻿  ShadoMath.cpp
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(49,23): error C2143: syntax error: missing ';' before '->'
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(49,23): error C2059: syntax error: '->'
+  ShadoMath.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\x64\Debug\ShadoMath.exe
