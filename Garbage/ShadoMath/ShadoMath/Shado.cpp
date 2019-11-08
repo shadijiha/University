@@ -5,6 +5,7 @@
 #include "Shado.h"
 #include "Complex.h"
 #include "Fraction.h"
+#include <stdlib.h>     /* srand, rand */
 
 namespace ShadoMath {
 
@@ -147,6 +148,16 @@ namespace ShadoMath {
 
 	bool compareFloat(float a, float b, float epsilon) {
 		return fabs(a - b) <= epsilon;
+	}
+
+	int random(int min, int max) {
+
+		if (min >= max) {
+			int temp = max;
+			max = min;
+			min = temp;
+		}
+		return rand() % (max - min) + min;
 	}
 }
 
