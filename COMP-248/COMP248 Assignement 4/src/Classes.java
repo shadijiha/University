@@ -24,7 +24,11 @@ class Dice  {
         this.die2 = random.nextInt(6) + 1;
 
         return this.die1 + this.die2;
-    }
+	}
+	
+	public int sumOfDice()	{
+		return this.die1 + this.die2;
+	}
 
     public boolean isDouble()   {
         return this.die1 == this.die2;
@@ -108,8 +112,43 @@ class Board {
         return master;
     }
 
-}
+	public String toStringWithPlayers(Player[] players)	{
+		String master = "";
 
+        for (int i = 0; i < this.board.length; i++)    {
+            master += "\nLevel " + i + "\n";
+            master += "----------\n";
+
+            for (int j = 0; j < this.board[i].length; j++) {
+                for (int k = 0; k < this.board[i][j].length; k++)  {
+
+					boolean playerExistsHere = false;
+					String playerExistsName = "";
+
+					for (Player temp : players)	{
+						if (temp.isAtLocation(i, j, k))	{
+							playerExistsHere = true;
+							playerExistsName = temp.getName();
+						}
+					}
+
+					if (playerExistsHere)	{
+						master += playerExistsName + "\t";
+					} else	{
+						master += this.board[i][j][k] + "\t";
+					}
+                    
+                }
+                master += "\n";
+            }
+        }
+        
+        master += "\n";
+
+        return master;		
+	}
+
+}
 
 class Player	{
 	
@@ -183,9 +222,13 @@ class Player	{
 		this.x = p.getX();
 		this.y = p.getY();
 	}
+
+	public boolean isAtLocation(int __level, int __x, int __y)	{
+		return (this.level == __level && this.x == __x && this.y == __y);
+	}
 	
 	public boolean won(Board b)	{
-		if (this.level == b.getLevel() && this.x == b.getSize() -1 && this.y == b.getSize() - 1)
+		if (this.level >= b.getLevel() - 1 && this.x >= b.getSize() -1 && this.y >= b.getSize() - 1)
 			return true;
 		else
 			return false;
