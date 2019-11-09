@@ -1,5 +1,4 @@
-﻿  Shado.cpp
-  ShadoMath.cpp
-  Generating Code...
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(63,9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  ShadoMath.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\x64\Debug\ShadoMath.exe
+﻿  ShadoMath.cpp
+C:\wamp64\www\Github\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(19,20): warning C4018: '<': signed/unsigned mismatch
+C:\wamp64\www\Github\University\Garbage\ShadoMath\ShadoMath\ShadoMath.cpp(20,19): warning C4244: '+=': conversion from 'double' to 'uint64_t', possible loss of data
+  ShadoMath.vcxproj -> C:\wamp64\www\Github\University\Garbage\ShadoMath\x64\Debug\ShadoMath.exe

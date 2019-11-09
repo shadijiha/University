@@ -13,13 +13,20 @@
 #include "Math.h"
 #include "Date.h"
 
-typedef std::string String;
-typedef std::string string;
+uint64_t infiniteSum(int x, unsigned int ITERATION = 10) {
+
+	uint64_t sum = 0;
+	for (int n = 0; n < ITERATION; n++) {
+		sum += pow(x, n);
+	}
+
+	return sum;
+}
 
 int main()
 {
 	// TODO ---> Fraction operators > and < not working properly
-	auto test = ShadoMath::root(4, 2);
+	std::cout << infiniteSum(2, 20) << std::endl;
 
 	//string x = test[0].toString();
 	//test[0].printPolar();
