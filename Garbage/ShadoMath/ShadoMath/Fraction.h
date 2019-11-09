@@ -2,6 +2,7 @@
 #define FRACTION_H
 
 #include <string>
+#include <iostream>
 
 class Fraction {
 private:

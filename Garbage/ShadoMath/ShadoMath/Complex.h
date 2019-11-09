@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class Complex {
 
@@ -73,5 +74,7 @@ public:
 
 	bool operator!=(Complex other);
 };
+
+std::ostream& operator<<(std::ostream& os, Complex num);
 
 #endif

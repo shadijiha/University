@@ -18,13 +18,9 @@ namespace ShadoMath {
 
 	void power(float base, float exposant);
 
-	float root(float number, int exponant);
-
-	Complex rootNegative(float number, int exponant);
+	std::vector<Complex> root(float number, int exponant);
 
 	unsigned long factorial(int num);
-
-	double add(double a, double b);
 
 	bool devides(int number, int divider);
 

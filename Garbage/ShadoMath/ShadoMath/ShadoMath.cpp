@@ -13,13 +13,20 @@
 #include "Math.h"
 #include "Date.h"
 
+typedef std::string String;
+typedef std::string string;
 
 int main()
 {
 	// TODO ---> Fraction operators > and < not working properly
-	Date* test = new Date();
-	Date().printDate();
+	auto test = ShadoMath::root(4, 2);
 
+	//string x = test[0].toString();
+	//test[0].printPolar();
+	//std::cout << x << std::endl;
+	
+	Complex xd = Complex(2, 0);
+	xd.printPolar();
 
 	return 0;
 }

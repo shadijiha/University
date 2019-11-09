@@ -4,6 +4,7 @@
 #include <Math.h>
 #include "Shado.h"
 
+
 /*************************
 **************************
 *** Shado Complex  Lib.***
@@ -54,7 +55,7 @@ std::string Complex::toString() {
 }
 
 void Complex::print() {
-	this->toString();
+	std::cout << this->toString() << std::endl;
 }
 
 void Complex::printPolar() {
@@ -113,24 +114,22 @@ Complex Complex::power(int exposant) const {
 	return *temp;
 }
 
-/*std::vector<Complex> Complex::root(int exposant) {
+std::vector<Complex> Complex::root(int exposant) {
 
-		std::vector<Complex> result(exposant);
-		auto it = result.begin();
+		std::vector<Complex> result (exposant);
 
+		float tempR = pow(this->r, 1 / exposant);
 
-		float tempR = pow(r, 1 / exposant);
-
-		for (int i = 0; i < exposant; i++) {
+		for (int i = 0; i < result.size(); i++) {
 			float tempPhi = (phi + 2 * PI * i) / exposant;
-			Complex temp();
+			Complex temp = Complex();
 			temp.initPolar(tempR, tempPhi);
 
-			result.insert(it, temp);
+			result[i] = temp;
 		}
 
 		return result;
-}*/
+}
 
 void Complex::printSqrt(int exposant) {
 
@@ -175,3 +174,11 @@ bool Complex::operator==(Complex other) {
 bool Complex::operator!=(Complex other) {
 	return !(this->equals(other));
 }
+
+std::ostream& operator<<(std::ostream& os, Complex num)
+{
+	os << num.toString();
+	return os;
+}
+
+

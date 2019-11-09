@@ -42,27 +42,91 @@ namespace ShadoMath {
 
 	void power(float base, float exposant) {
 
-		Fraction exp = Fraction(exposant);
+		using namespace std;
 
-		exp.print();
+		float a;   					// Base
+		float n;     				// Exponent
+		int num;	 				// Numerator of the exponent
+		int den = 1; 				// Denominator of the exponent
+	
+		cout << "Base: ";
+		cin >> a;
+		cout << "Exponent: ";
+		cin >> n;
+	
+		//----------------------------------------------------------------
+	
+		while (n != (int) n) {		// Convert n from decimal to fraction:
+			n = n*10;				// Multiplying numerator and denominator x10 
+			den = den*10;			// until both become whole integers
+		}
+		num = n;					// Now: a^n --> a^(num/den)
+
+		//----------------------------------------------------------------
+
+		int t_x = num;
+		int t_y = den;
+		int temp;
+	
+		while (t_y != 0){
+			temp = t_x%t_y;
+			t_x = t_y;
+			t_y = temp;
+		}
+	
+		num = num/t_x;
+		den = den/t_x;				// Simplifying the (num/den) expression to lowest terms
+
+		//----------------------------------------------------------------
+
+								//  Solve x = a^(num/den)
+								//  Rising both sides to the (den) power: x^(den) = a^(num)
+								//  Passing all the terms to one side of the equation:
+								//  x^(den) - a^(num) = 0
+								//  Finding the root with Newton's method
+	
+		float x;				// Next x - Newton's method
+		float x0 = 1;			// Current x - Newton's method, initial value set to 1
+		float tol = 1;			// Tolerance - Newton's method
+		float atonum = a;		// Variable for computing a^(num)
+		float xtoden;			// Variable for computing x0^(den)
+	
+		for (int i = 1; i < num; i++) {
+			atonum = atonum * a;
+		}
+
+		cout << endl <<"  Solving:  x^" << den << " - " << atonum << " = 0" << endl << endl;
+	
+		while (tol > 0.001){										//
+			xtoden = x0;											//
+			for (int i=1; i<den; i++) xtoden = xtoden*x0;			//
+			x = x0 - (xtoden-atonum) / ((den)*(xtoden/x0));			//
+			tol = ((x-x0)/x0)*100;									//  Newton's Method Iterations
+			if (tol < 0) tol = tol*(-1);							//
+			cout << "x0 = " << x0 << endl;							//
+			cout << "x = " << x << endl;							//
+			cout << "tol = " << tol << endl << endl;				//
+			x0 = x;													//
+		}
+	
+		cout << "Result = " << x;   				//  Displaying the result
 
 	}
 
-	float root(float number, int exponant) {
+	std::vector<Complex> root(float number, int exponant) {
 		if (number < 0) {
-			return -1;
+			Complex temp = Complex(number, 0);
+			std::vector<Complex> result = temp.root(exponant);
+
+			return result;
 		}
 		else
 		{
-			return pow(number, 1 / exponant);
+			std::vector<Complex> result(1);
+			result[0] = Complex(pow(number, 1 / exponant), 0);
+
+			return result;
 		}
-	}
-
-	Complex rootNegative(float number, int exponant) {
-
-		Complex temp = Complex(0, pow(absoluteValue(number), 1 / exponant));
-		return temp;
-
 	}
 
 	unsigned long factorial(int num) {
@@ -74,10 +138,6 @@ namespace ShadoMath {
 		}
 
 		return sum;
-	}
-
-	double add(double a, double b) {
-		return a + b;
 	}
 
 	bool devides(int number, int divider) {
