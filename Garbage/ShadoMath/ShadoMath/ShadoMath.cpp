@@ -12,28 +12,70 @@
 #include "Shado.h"
 #include "Math.h"
 #include "Date.h"
+#include <windows.h>
 
-uint64_t infiniteSum(int x, unsigned int ITERATION = 10) {
+class Logger {
 
-	uint64_t sum = 0;
-	for (int n = 0; n < ITERATION; n++) {
-		sum += pow(x, n);
+public:
+	static const int logLevelError = 0;
+	static const int logLevelWarnning = 1;
+	static const int logLevelInfo = 2;
+
+private:
+	int logLevel = logLevelInfo;
+	bool DEBUG_MODE = true;
+	bool ALLOW_COLOR = false;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+public:
+	Logger() {}
+	Logger(int level) {
+		logLevel = level;
 	}
 
-	return sum;
-}
+	void log(std::string message)
+	{
+		if (DEBUG_MODE && logLevel <= logLevelInfo) {
+			SetConsoleTextAttribute(hConsole, 10);
+			std::cout << "[INFO]	";
+			SetConsoleTextAttribute(hConsole, 15);
+			std::cout << message << std::endl;
+		}
+	}
+
+	void warn(std::string message)
+	{
+		if (DEBUG_MODE && logLevel <= logLevelWarnning) {
+			SetConsoleTextAttribute(hConsole, 14);
+			std::cout << "[WARNNING]	";
+			SetConsoleTextAttribute(hConsole, 15);
+			std::cout << message << std::endl;
+		}
+	}
+
+	void error(std::string message)
+	{
+		if (DEBUG_MODE && logLevel <= logLevelError) {
+			SetConsoleTextAttribute(hConsole, 12);
+			std::cout << "[ERROR]	";
+			SetConsoleTextAttribute(hConsole, 15);
+			std::cout << message << std::endl;
+		}
+	}
+
+	void toggleDebugMode()
+	{
+		DEBUG_MODE = !DEBUG_MODE;
+	}
+};
 
 int main()
 {
 	// TODO ---> Fraction operators > and < not working properly
-	std::cout << infiniteSum(2, 20) << std::endl;
 
-	//string x = test[0].toString();
-	//test[0].printPolar();
-	//std::cout << x << std::endl;
-	
-	Complex xd = Complex(2, 0);
-	xd.printPolar();
+	Logger* DEBUGGER = new Logger();
+
+	DEBUGGER->error("hehexd");
 
 	return 0;
 }

@@ -1,8 +1,10 @@
-/***
- * 
- *  Main java file for "Nancy's 3D Warrior Game"
- * 
- */
+// -------------------------------------------------------
+// Assignment #3
+// Written by: Shadi Jiha #40131284
+// For COMP 248 Section (your section) – Fall 2019
+//
+// Nancy's 3D warrior game
+// --------------------------------------------------------
 
 import java.util.Scanner;
 import java.util.Random;
@@ -12,7 +14,8 @@ public class LetUsPlay {
 	final static Logger DEBUGGER = new Logger();
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		// Enable debugger
 		DEBUGGER.toggleDebugMode();
 		
 		// Variables

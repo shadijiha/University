@@ -1,6 +1,6 @@
 /**
  * 
- * Logger class for debug
+ * This file contains the Logger class to help with debugging
  * 
  */
 
