@@ -3,6 +3,8 @@
  * 
  */
 
+ const TILE_SIZE = 150;
+
 class Dice  {
     constructor()  {
         this.die1 = 0;
@@ -112,7 +114,8 @@ class Tile  {
         // Draw player
         for (let temp of playersArray)  {
             if (this.x == temp.x && this.y == temp.y && levelID == temp.level)  {
-                temp.draw();
+                console.log(temp);
+                temp.draw(temp.x * TILE_SIZE, temp.y * TILE_SIZE);               
             }
         }
 
@@ -125,7 +128,7 @@ class Level {
         this.size = size;
         this.data = [];
         this.levelID = id;
-        this.tileSize = 150;
+        this.tileSize = TILE_SIZE;
     }
 
     generate()  {
@@ -206,6 +209,13 @@ class Board {
         }
 
     }
+
+    getEnergyAdj(l, x, y)   {
+        return this.data[l].data[x][y].energyAdj;
+    }
+
+    getSize()   {   return this.size;}
+    getLevel()  {   return this.level;}
 }
 
 class Player    {
@@ -218,19 +228,41 @@ class Player    {
         this.energy = 10;
     }
 
-    draw()  {
+    draw(x, y)  {
         push();
+        translate(x, y);
         fill(this.color.r, this.color.g, this.color.b);
         rotateX(Math.PI / 2);
         cylinder(30, 50);
         pop();
     }
 
-    copy(original)  {
-        let tempCopy = new Player(original.name);
-        tempCopy = original.x;
-        tempCopy = original.y;
-        tempCopy = original.level;
-        tempCopy = original.energy;
+    copy()  {
+        let tempCopy = new Player(this.name);
+        tempCopy.x = this.x;
+        tempCopy.y = this.y;
+        tempCopy.level = this.level;
+        tempCopy.energy = this.energy;
+        return tempCopy;
+    }
+
+    getX()  {   return this.x;  }
+    getY()  {   return this.y;  }
+    getEnergy() {   return this.energy;}
+    getLevel()  {   return this.level;}
+
+    setX(x) {   return this.x = x;}
+    setY(y) {   return this.y = y;}
+    setEnergy()   {   return this.energy;}
+    setLevel()  {return this.level;}
+
+    equals(other)    {
+        return (this.level == other.level && this.x == other.x && this.y == other.y);
+    }
+
+    moveTo(temp)    {
+        this.level = temp.level;
+        this.x = temp.x;
+        this.y = temp.y;
     }
 }

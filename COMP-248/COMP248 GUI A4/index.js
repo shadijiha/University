@@ -25,6 +25,9 @@ function setup()   {
     players[1] = new Player("XD");
     dice = new Dice();
     dice.rollDice();
+
+    players[1].x = 2;
+    players[1].y = 2;
 }
 
 function draw()    {
@@ -41,6 +44,10 @@ function draw()    {
     dice.draw(500, 500);
 }
 
+function mouseClicked() {
+    movePlayer(players[0], testBoard, dice, players[1]);
+}
+
 function movePlayer(p, b, d, opponent, scanner)	{
 		
     if (!hasEnoughEnergy(p))	{
@@ -49,20 +56,20 @@ function movePlayer(p, b, d, opponent, scanner)	{
         
         let temp = p.copy();
         let allowMove = true;
-        
+
         let roll = d.sumOfDice();
         
         // Modify TEMP player x and y
-        let newX = temp.getX() + (roll / b.getSize());
-        let newY = temp.getY() + (roll % b.getSize());
+        let newX = Math.floor(temp.getX() + (roll / b.getSize()));
+        let newY = Math.floor(temp.getY() + (roll % b.getSize()));
 
         if (newY >= b.getSize())	{
-            newX = newX + newY / b.getSize();
-            newY = newY % b.getSize();
+            newX = Math.floor(newX + newY / b.getSize());
+            newY = Math.floor(newY % b.getSize());
         }
 
         if (newX >= b.getSize())	{
-            newX = newX % b.getSize();
+            newX = Math.floor(newX % b.getSize());
             temp.setLevel(temp.getLevel() + 1);
         }
 
@@ -89,23 +96,23 @@ function movePlayer(p, b, d, opponent, scanner)	{
 
                 // the new position lead to a position occupied by the opponent
                 // Prompt the user to get his choice					
-                let action = "-1";
+                let action = "1";
 
                 //println("Player " + opponent.getName() + " is at your new location");
                 //println("What do you want to do?");
                 //println("\t0 - Challenge and risk loosing 50% of your energy units if you loose or move to new location and get 50% of ther players energy units");
                 //println("\t1 - to move down one lovel or move to (0,0) if at level 0 and lose 2 energy units");
 
-                do	{
+               /* do	{
                     action = scanner.next();
 
                     if (!action.equalsIgnoreCase("0") && !action.equalsIgnoreCase("1"))	{
                         println("Sorry but " + action + " is not a legal choice.");
                     }
 
-                } while(!action.equalsIgnoreCase("0") && !action.equalsIgnoreCase("1"));
+                } while(!action.equalsIgnoreCase("0") && !action.equalsIgnoreCase("1"));*/
 
-                if (action.equalsIgnoreCase("1"))	{
+                if (action == "1")	{
                     
                     /* ******** Code to forfeit ******** */
                     
@@ -118,10 +125,10 @@ function movePlayer(p, b, d, opponent, scanner)	{
                         temp.setLevel(temp.getLevel() - 1);
                     }
                     
-                } else if (action.equalsIgnoreCase("0"))	{
+                } else if (action == "0")	{
                     
                     /* ******** Code to challenge ******** */
-                    let challengeResult = new Random().nextInt(11);
+                    let challengeResult = Math.floor(Math.random() * 11);
                     
                     if (challengeResult < 6)	{
                         // A has lost
@@ -130,7 +137,7 @@ function movePlayer(p, b, d, opponent, scanner)	{
 
                     } else	{
                         // Swap A and B
-                        println("Bravo!! You won the challenge.");
+                        //println("Bravo!! You won the challenge.");
 
                         let energyToTransfer = opponent.getEnergy() / 2;
 
