@@ -14,53 +14,13 @@
 #include "Date.h"
 #include <functional>
 
-class Rectangle {
-protected:
-	int w, h;
+#define extends :
 
-public:
-	Rectangle() {
-		this->w = 10;
-		this->h = 20;
-	}
 
-	Rectangle(int width, int height) {
-		this->w = width;
-		this->h = height;
-	}
-
-	int getArea() { return this->w * this->h; }
-
-	void printArea() {
-		std::cout << this->w << " x " << this->h << " = " << this->getArea() << std::endl;
-	}
-};
-
-class Square : Rectangle {
-public:
-	Square() {
-		this->w = 15, this->h = 15;
-	}
-
-	Square(int dimension) {
-		this->w = dimension, this->h = dimension;
-	}
-
-	void printArea() {
-		std::cout << "Area of square: " << this->w << " x " << this->h << " = " << this->getArea() << std::endl;
-	}
-};
-
-typedef std::string string;
 int main()
 {
+	typedef std::string string;
 	// TODO ---> Fraction operators > and < not working 
-	Rectangle* rect = new Rectangle();
-	Square* sqrt = new Square();
-	string xd = "?XD";
-
-	rect->printArea();
-	sqrt->printArea();
 
 	std::cout << "\n\n\n" << std::endl;
 
