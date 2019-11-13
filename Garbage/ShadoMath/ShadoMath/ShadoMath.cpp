@@ -15,12 +15,18 @@
 #include <functional>
 
 #define extends :
+#define of :
 
 
 int main()
 {
 	typedef std::string string;
-	// TODO ---> Fraction operators > and < not working 
+	// TODO ---> Fraction operators > and < not working
+	std::vector<string> hehexd = {"Hehe", "xd", "T1", "alpha"};
+
+	for (string temp of hehexd) {
+		std::cout << temp << std::endl;
+	}
 
 	std::cout << "\n\n\n" << std::endl;
 
