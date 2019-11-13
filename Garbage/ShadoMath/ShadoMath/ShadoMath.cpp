@@ -17,16 +17,19 @@
 #define extends :
 #define of :
 
+std::function<int(int)> factory(int mult) {
+	auto temp = [mult](int x) {return mult * x; };
+	return temp;
+}
+
 
 int main()
 {
 	typedef std::string string;
 	// TODO ---> Fraction operators > and < not working
-	std::vector<string> hehexd = {"Hehe", "xd", "T1", "alpha"};
+	auto triple = factory(3);
 
-	for (string temp of hehexd) {
-		std::cout << temp << std::endl;
-	}
+	std::cout << triple(5) << std::endl;
 
 	std::cout << "\n\n\n" << std::endl;
 
