@@ -15,6 +15,12 @@
 #include <functional>
 
 #define extends :
+#define of :
+
+std::function<int(int)> factory(int mult) {
+	auto temp = [mult](int x) {return mult * x; };
+	return temp;
+}
 
 double avrage(int a, ...) {
 	int sum = 0;
@@ -27,9 +33,10 @@ double avrage(int a, ...) {
 int main()
 {
 	typedef std::string string;
-	// TODO ---> Nothing :D
-	double hehexd = avrage(1, 2, 3, 4, 5, 6);
-		
+	// TODO ---> Fraction operators > and < not working
+	auto triple = factory(3);
+
+	std::cout << triple(5) << std::endl;
 
 	std::cout << powf((float)2, (float)(1 / 2)) << "\n\n\n" << std::endl;
 
