@@ -97,7 +97,7 @@ public class LetUsPlay {
 		
 		while (winner == null)	{
 			
-			println(String.format("\n\nIt is %s's turn", players[turn].getName()));
+			println(String.format("\nIt is %s's turn", players[turn].getName()));
 			dice.rollDice();
 			println(String.format("	%s you rolled %s", players[turn].getName(), dice.toString()));
 			
@@ -112,18 +112,23 @@ public class LetUsPlay {
 			println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy", players[0].getName(), players[0].getLevel(), players[0].getX(), players[0].getY(), players[0].getEnergy()));
 			println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy.", players[1].getName(), players[1].getLevel(), players[1].getX(), players[1].getY(), players[1].getEnergy()));
 			
+			
+			// Determine if a player has won at the end of the round
+			boolean hasWinner = false;
+			for (Player temp : players)	{
+				if (temp.won(board))	{
+					winner = temp.copy();
+					hasWinner = true;
+					break;
+				}
+			}
+			
+			if (hasWinner)	{	break;}
+			
 			// Pause and debug settings
 			print("Any key to continue to next round ...");
 			String pause = scan.next();	
 			DEBUGGER.debugMethodes(pause, board, players, dice, scan);
-			
-			// Determine if a player has won at the end of the round
-			for (Player temp : players)	{
-				if (temp.won(board))	{
-					winner = temp.copy();
-					break;
-				}
-			}			
 			
 			// Advance turn
 			turn = nextTurn(turn);			
