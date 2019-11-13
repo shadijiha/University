@@ -18,6 +18,10 @@ public:
 
 	int getDumerator();
 
+	void setNumerator(int value);
+
+	void setDumerator(int value);
+
 	Fraction inverse();
 
 	void simplify();

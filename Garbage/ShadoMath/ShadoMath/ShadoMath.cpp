@@ -16,13 +16,22 @@
 
 #define extends :
 
+double avrage(int a, ...) {
+	int sum = 0;
+	for (int i = 0; i < args.length; i++) {
+		sum += args[i];
+	}
+	return (double)sum / args.length;
+}
 
 int main()
 {
 	typedef std::string string;
-	// TODO ---> Fraction operators > and < not working 
+	// TODO ---> Nothing :D
+	double hehexd = avrage(1, 2, 3, 4, 5, 6);
+		
 
-	std::cout << "\n\n\n" << std::endl;
+	std::cout << powf((float)2, (float)(1 / 2)) << "\n\n\n" << std::endl;
 
 	return 0;
 }
