@@ -39,6 +39,14 @@ int Fraction::getDumerator() {
 	return denumerator;
 }
 
+void Fraction::setNumerator(int value) {
+	this->numerator = value;
+}
+
+void Fraction::setDumerator(int value) {
+	this->denumerator = value;
+}
+
 Fraction Fraction::inverse() {
 	return Fraction(denumerator, numerator);
 }

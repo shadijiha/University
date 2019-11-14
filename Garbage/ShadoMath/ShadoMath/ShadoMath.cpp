@@ -41,6 +41,13 @@ void test() {
 	std::cout << "hahaa" << std::endl;
 }
 
+double avrage(int a, ...) {
+	int sum = 0;
+	for (int i = 0; i < args.length; i++) {
+		sum += args[i];
+	}
+	return (double)sum / args.length;
+}
 
 int main()
 {
@@ -48,7 +55,7 @@ int main()
 	// TODO ---> Fraction operators > and < not working
 	Interval myInterval = Interval(test, 1000);
 
-	std::cout << "\n\n\n" << std::endl;
+	std::cout << powf((float)2, (float)(1 / 2)) << "\n\n\n" << std::endl;
 
 	return 0;
 }
