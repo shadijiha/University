@@ -13,13 +13,32 @@
 #include "Math.h"
 #include "Date.h"
 #include <functional>
+#include <thread>
 
 #define extends :
 #define of :
 
-std::function<int(int)> factory(int mult) {
-	auto temp = [mult](int x) {return mult * x; };
-	return temp;
+class Interval {
+private:
+	int threadId;
+	unsigned int millis;
+	std::function<void()> func;
+
+public:
+	Interval(std::function<void()> functionToCall, unsigned int intervalInMilliSeconds) {
+		func = functionToCall;
+		millis = intervalInMilliSeconds;
+
+		// Start thread
+		using namespace std::literals::chrono_literals;
+		std::thread worker(func);
+		std::this_thread::sleep_for(std::chrono::milliseconds(millis));
+	}
+
+};
+
+void test() {
+	std::cout << "hahaa" << std::endl;
 }
 
 
@@ -27,9 +46,7 @@ int main()
 {
 	typedef std::string string;
 	// TODO ---> Fraction operators > and < not working
-	auto triple = factory(3);
-
-	std::cout << triple(5) << std::endl;
+	Interval myInterval = Interval(test, 1000);
 
 	std::cout << "\n\n\n" << std::endl;
 
