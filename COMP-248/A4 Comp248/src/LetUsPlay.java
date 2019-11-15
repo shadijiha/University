@@ -1,8 +1,7 @@
-package package1;
 // -------------------------------------------------------
-// Assignment #3
+// Assignment #4
 // Written by: Shadi Jiha #40131284
-// For COMP 248 Section (your section) â€“ Fall 2019
+// For COMP 248 Section (your section) – Fall 2019
 //
 // Nancy's 3D warrior game
 // --------------------------------------------------------
@@ -11,7 +10,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class LetUsPlay {
-
+	
 	final static Logger DEBUGGER = new Logger();
 
 	public static void main(String[] args) {

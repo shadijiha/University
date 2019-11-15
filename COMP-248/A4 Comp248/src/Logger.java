@@ -1,4 +1,3 @@
-package package1;
 /**
  * 
  * This file contains the Logger class to help with debugging
@@ -28,9 +27,9 @@ import java.util.Scanner;
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    Logger()    {}
+    public Logger()    {}
 
-    Logger(int level)    {
+    public Logger(int level)    {
         logLevel = level;
     }
 
