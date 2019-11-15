@@ -14,6 +14,7 @@
 #include "Date.h"
 #include <functional>
 #include <thread>
+#include<stdarg.h>
 
 #define extends :
 #define of :
@@ -37,25 +38,25 @@ public:
 
 };
 
-void test() {
-	std::cout << "hahaa" << std::endl;
-}
-
-double avrage(int a, ...) {
-	int sum = 0;
-	for (int i = 0; i < args.length; i++) {
-		sum += args[i];
+int maxof(int n_args, ...)
+{
+	va_list ap;
+	va_start(ap, n_args);
+	int max = va_arg(ap, int);
+	for (int i = 2; i <= n_args; i++) {
+		int a = va_arg(ap, int);
+		if (a > max) max = a;
 	}
-	return (double)sum / args.length;
+	va_end(ap);
+	return max;
 }
 
 int main()
 {
 	typedef std::string string;
 	// TODO ---> Fraction operators > and < not working
-	Interval myInterval = Interval(test, 1000);
 
-	std::cout << powf((float)2, (float)(1 / 2)) << "\n\n\n" << std::endl;
+	std::cout << maxof(10, 2, 5, 9, 8, 7, 6, 3) << "\n\n\n" << std::endl;
 
 	return 0;
 }
