@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     bool gameHasEnded = false;
     public float restartDelay = 1.0f;
+    public GameObject completeLevelUI;
     public void endGame()
     {
         // Toggle flag variable
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+    }
+
+    public void completeLevel() 
+    {
+        completeLevelUI.SetActive(true);
     }
 }
 
