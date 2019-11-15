@@ -83,6 +83,13 @@ public class LetUsPlay {
 			print(String.format("What is player %d's name (one word only): ", i));
 			String tempName = scan.next();
 			
+			// Check if players have the same name
+			if (i != 0 && tempName.equalsIgnoreCase(players[0].getName()))	{
+				print("Players cannot have the same name! ");
+				i -= 1;
+				continue;
+			}
+			
 			players[i] = new Player(tempName);
 		}
 		
@@ -95,7 +102,7 @@ public class LetUsPlay {
 		//============= GAME LOGIC =============
 		Player winner = null;
 		
-		while (winner == null)	{
+		for(;;)	{
 			
 			println(String.format("\nIt is %s's turn", players[turn].getName()));
 			dice.rollDice();
@@ -114,16 +121,14 @@ public class LetUsPlay {
 			
 			
 			// Determine if a player has won at the end of the round
-			boolean hasWinner = false;
 			for (Player temp : players)	{
 				if (temp.won(board))	{
 					winner = temp.copy();
-					hasWinner = true;
 					break;
 				}
 			}
 			
-			if (hasWinner)	{	break;}
+			if (winner != null)	{	break;}
 			
 			// Pause and debug settings
 			print("Any key to continue to next round ...");
