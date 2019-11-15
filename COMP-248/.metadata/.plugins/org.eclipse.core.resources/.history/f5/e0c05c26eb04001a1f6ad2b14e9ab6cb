@@ -1,0 +1,32 @@
+
+import java.util.Scanner;
+
+public class Lab6 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Enter array size (minimum size 5)? ");		
+		int n = scan.nextInt();
+		int[] resultArray = new int[n];
+		
+		
+		System.out.printf("Enter %d distinct integer values to store in the array: ", n);
+		
+		String rawDate = scan.nextLine();		
+		System.out.println();
+		
+		String[] data = rawDate.split(" ");
+		
+		// fill array
+		System.out.println("Original array:");
+		for (int i = 0; i < resultArray.length; i++)	{
+			resultArray[i] = Integer.parseInt(data[i]);
+		}
+		
+
+	}
+
+}

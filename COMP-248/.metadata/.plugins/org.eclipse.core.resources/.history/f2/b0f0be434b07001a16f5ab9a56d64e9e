@@ -1,0 +1,11 @@
+package mainPackage;
+/***
+ * 
+ * This file contains the main classes used for "Nancy's 3D Warrior game"
+ * 
+ */
+
+import java.util.Random;
+class Board {
+
+}
