@@ -1,14 +1,2 @@
-﻿  Complex.cpp
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Complex.cpp(124,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Complex.cpp(136,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Date.cpp
-  Fraction.cpp
-  Matrix.cpp
-  Shado.cpp
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Complex.cpp(140,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  ShadoMath.cpp
-  ShadoVector.cpp
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\Shado.cpp(63,9): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\ShadoMath\ShadoVector.cpp(68,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  ShadoMath.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\ShadoMath\x64\Debug\ShadoMath.exe
+﻿  ShadoMath.cpp
+  ShadoMath.vcxproj -> C:\wamp64\www\Github\University\Garbage\ShadoMath\x64\Debug\ShadoMath.exe

@@ -16,7 +16,11 @@ namespace ShadoMath {
 
 	float power(float base, int exposant);
 
-	void power(float base, float exposant);
+	double power(double base, double exposant);
+
+	double root(int number, int exposant);
+
+	double root(double number, int exposant);
 
 	std::vector<Complex> root(float number, int exponant);
 

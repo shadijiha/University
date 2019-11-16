@@ -40,28 +40,29 @@ namespace ShadoMath {
 		return sum;
 	}
 
-	void power(float base, float exposant) {
+	double power(double base, double exposant) {
 
 		using namespace std;
 
-		float a;   					// Base
-		float n;     				// Exponent
-		int num;	 				// Numerator of the exponent
-		int den = 1; 				// Denominator of the exponent
-	
-		cout << "Base: ";
-		cin >> a;
-		cout << "Exponent: ";
-		cin >> n;
-	
+		double a = base;   			// Base
+		double n = exposant;     	// Exponent
+		//int num;	 				// Numerator of the exponent
+		//int den = 1; 				// Denominator of the exponent
+
+		Fraction frac = Fraction(n);
+		frac.simplify();
+
+		int num = frac.getNumerator();
+		int den = frac.getDumerator();
+
 		//----------------------------------------------------------------
 	
-		while (n != (int) n) {		// Convert n from decimal to fraction:
+		/*while (n != (int) n) {		// Convert n from decimal to fraction:
 			n = n*10;				// Multiplying numerator and denominator x10 
 			den = den*10;			// until both become whole integers
 		}
 		num = n;					// Now: a^n --> a^(num/den)
-
+		*/
 		//----------------------------------------------------------------
 
 		int t_x = num;
@@ -85,17 +86,17 @@ namespace ShadoMath {
 								//  x^(den) - a^(num) = 0
 								//  Finding the root with Newton's method
 	
-		float x;				// Next x - Newton's method
-		float x0 = 1;			// Current x - Newton's method, initial value set to 1
-		float tol = 1;			// Tolerance - Newton's method
-		float atonum = a;		// Variable for computing a^(num)
-		float xtoden;			// Variable for computing x0^(den)
+		double x;				// Next x - Newton's method
+		double x0 = 1;			// Current x - Newton's method, initial value set to 1
+		double tol = 1;			// Tolerance - Newton's method
+		double atonum = a;		// Variable for computing a^(num)
+		double xtoden;			// Variable for computing x0^(den)
 	
 		for (int i = 1; i < num; i++) {
 			atonum = atonum * a;
 		}
 
-		cout << endl <<"  Solving:  x^" << den << " - " << atonum << " = 0" << endl << endl;
+		//cout << endl <<"  Solving:  x^" << den << " - " << atonum << " = 0" << endl << endl;
 	
 		while (tol > 0.001){										//
 			xtoden = x0;											//
@@ -103,14 +104,23 @@ namespace ShadoMath {
 			x = x0 - (xtoden-atonum) / ((den)*(xtoden/x0));			//
 			tol = ((x-x0)/x0)*100;									//  Newton's Method Iterations
 			if (tol < 0) tol = tol*(-1);							//
-			cout << "x0 = " << x0 << endl;							//
-			cout << "x = " << x << endl;							//
-			cout << "tol = " << tol << endl << endl;				//
+			//cout << "x0 = " << x0 << endl;							//
+			//cout << "x = " << x << endl;							//
+			//cout << "tol = " << tol << endl << endl;				//
 			x0 = x;													//
 		}
 	
-		cout << "Result = " << x;   				//  Displaying the result
+		//cout << "Result = " << x;   				//  Displaying the result
 
+		return x;
+	}
+
+	double root(int number, int exposant) {
+		return power((double)number, (double)1 / (double)exposant);
+	}
+
+	double root(double number, int exposant) {
+		return power(number, (double)1 / (double)exposant);
 	}
 
 	std::vector<Complex> root(float number, int exponant) {

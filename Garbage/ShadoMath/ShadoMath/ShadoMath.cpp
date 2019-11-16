@@ -14,7 +14,7 @@
 #include "Date.h"
 #include <functional>
 #include <thread>
-#include<stdarg.h>
+#include <stdarg.h>
 
 #define extends :
 #define of :
@@ -35,28 +35,19 @@ public:
 		std::thread worker(func);
 		std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 	}
-
 };
-
-int maxof(int n_args, ...)
-{
-	va_list ap;
-	va_start(ap, n_args);
-	int max = va_arg(ap, int);
-	for (int i = 2; i <= n_args; i++) {
-		int a = va_arg(ap, int);
-		if (a > max) max = a;
-	}
-	va_end(ap);
-	return max;
-}
 
 int main()
 {
 	typedef std::string string;
 	// TODO ---> Fraction operators > and < not working
+	const char hehexd[] = "Hahaha";
 
-	std::cout << maxof(10, 2, 5, 9, 8, 7, 6, 3) << "\n\n\n" << std::endl;
+	double xd = ShadoMath::root(25, 2);
+
+	std::cout << xd << std::endl;
+
+	std::cout << "\n\n\n" << std::endl;
 
 	return 0;
 }
