@@ -13,41 +13,22 @@
 #include "Math.h"
 #include "Date.h"
 #include <functional>
-#include <thread>
-#include <stdarg.h>
+#include "ShadoFile.h"
 
 #define extends :
 #define of :
 
-class Interval {
-private:
-	int threadId;
-	unsigned int millis;
-	std::function<void()> func;
-
-public:
-	Interval(std::function<void()> functionToCall, unsigned int intervalInMilliSeconds) {
-		func = functionToCall;
-		millis = intervalInMilliSeconds;
-
-		// Start thread
-		using namespace std::literals::chrono_literals;
-		std::thread worker(func);
-		std::this_thread::sleep_for(std::chrono::milliseconds(millis));
-	}
-};
-
 int main()
 {
 	typedef std::string string;
-	// TODO ---> Fraction operators > and < not working
-	const char hehexd[] = "Hahaha";
+	//===================================
 
-	double xd = ShadoMath::root(25, 2);
 
-	std::cout << xd << std::endl;
+
+	//===================================
 
 	std::cout << "\n\n\n" << std::endl;
+	std::cin.get();
 
 	return 0;
 }

@@ -91,7 +91,7 @@ float Complex::imaginaryPart() {
 }
 
 float Complex::module() {
-	return r;
+	return sqrt(a * a + b * b);
 }
 
 float Complex::angle() {
