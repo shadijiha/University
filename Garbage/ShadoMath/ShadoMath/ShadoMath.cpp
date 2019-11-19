@@ -18,11 +18,25 @@
 #define extends :
 #define of :
 
+int question3(int index) {
+
+	if (index == 0) {
+		return 2;
+	}
+	else
+	{
+		return question3(index - 1) * question3(index - 1) - 1;
+	}
+
+
+}
+
 int main()
 {
 	typedef std::string string;
 	//===================================
-
+	
+	std::cout << question3(0);
 
 
 	//===================================
