@@ -19,6 +19,7 @@ global.FPS = 60;
 global.setFPS = newFPS => {
 	global.FPS = newFPS;
 };
+global.collisionObjects = [];
 
 const Time = new Namespace("time");
 Time.deltaTime = 1000 / global.FPS;

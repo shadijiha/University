@@ -7,7 +7,7 @@
 class GameObject {
 	constructor(name) {
 		this.name = name;
-		this.id = "object_" + Math.floor(Math.random() * 1e6);
+		this.id = "object_" + random(0, 1e8);
 		this.buffer = {};
 	}
 
@@ -134,6 +134,7 @@ class Circle extends GameObject {
 		this.stroke = "black";
 		this.lineWidth = 1;
 		this.movable = true;
+		this.collision = false;
 	}
 
 	render(targetCanvas) {
@@ -144,6 +145,40 @@ class Circle extends GameObject {
 		targetCanvas.ctx.lineWidth = this.lineWidth;
 		targetCanvas.ctx.fill();
 		targetCanvas.ctx.stroke();
+	}
+
+	enableCollision() {
+		this.collision = true;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Add object if it doesn't exist
+		if (!exist) global.collisionObjects.push(this);
+	}
+
+	disableCollision() {
+		this.collision = false;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Remove the object if it exists
+		if (exist) {
+			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
+		}
 	}
 
 	setFill(newFill) {
@@ -178,5 +213,39 @@ class Text extends GameObject {
 		targetCanvas.ctx.strokeStyle = this.stroke;
 		targetCanvas.ctx.fillText(this.text, this.x, this.y);
 		targetCanvas.ctx.strokeText(this.text, this.x, this.y);
+	}
+
+	enableCollision() {
+		this.collision = true;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Add object if it doesn't exist
+		if (!exist) global.collisionObjects.push(this);
+	}
+
+	disableCollision() {
+		this.collision = false;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Remove the object if it exists
+		if (exist) {
+			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
+		}
 	}
 }
