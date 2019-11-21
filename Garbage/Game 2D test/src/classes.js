@@ -134,7 +134,7 @@ class Circle extends GameObject {
 		this.stroke = "black";
 		this.lineWidth = 1;
 		this.movable = true;
-		this.collision = false;
+		this.collision = true;
 	}
 
 	render(targetCanvas) {
@@ -247,5 +247,76 @@ class Text extends GameObject {
 		if (exist) {
 			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
 		}
+	}
+}
+
+class Rectangle extends GameObject {
+	constructor(x, y, w, h) {
+		super("rectangle");
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.fill = "white";
+		this.stroke = "black";
+		this.lineWidth = 1;
+		this.movable = true;
+		this.collision = true;
+	}
+
+	render(targetCanvas) {
+		targetCanvas.ctx.beginPath();
+		targetCanvas.ctx.rect(this.x, this.y, this.w, this.h);
+		targetCanvas.ctx.fillStyle = this.fill;
+		targetCanvas.ctx.strokeStyle = this.stroke;
+		targetCanvas.ctx.lineWidth = this.lineWidth;
+		targetCanvas.ctx.fill();
+		targetCanvas.ctx.stroke();
+	}
+
+	enableCollision() {
+		this.collision = true;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Add object if it doesn't exist
+		if (!exist) global.collisionObjects.push(this);
+	}
+
+	disableCollision() {
+		this.collision = false;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Remove the object if it exists
+		if (exist) {
+			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
+		}
+	}
+
+	setFill(newFill) {
+		this.fill = newFill;
+	}
+
+	setStroke(newStroke) {
+		this.stroke = newStroke;
+	}
+
+	setLineWidth(newLineWidth) {
+		this.lineWidth = newLineWidth;
 	}
 }
