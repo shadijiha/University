@@ -22,5 +22,5 @@ function render() {
 	);
 
 	circy.render(canvas);
-	circy.move(0.1, 0);
+	circy.move(new Vector(0.1, 0));
 }
