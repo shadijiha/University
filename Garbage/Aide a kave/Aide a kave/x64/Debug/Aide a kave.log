@@ -1,0 +1,4 @@
+﻿  main.c
+D:\Wamp64\www\GitHub\University\Garbage\Aide a kave\Aide a kave\main.c(9,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'Player *'
+D:\Wamp64\www\GitHub\University\Garbage\Aide a kave\Aide a kave\main.c(9,9): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'Player *'
+  Aide a kave.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\Aide a kave\x64\Debug\Aide a kave.exe

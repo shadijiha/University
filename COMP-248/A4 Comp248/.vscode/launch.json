@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LetUsPlay",
+            "request": "launch",
+            "mainClass": "LetUsPlay",
+            "projectName": "A4 Comp248"
+        }
+    ]
+}

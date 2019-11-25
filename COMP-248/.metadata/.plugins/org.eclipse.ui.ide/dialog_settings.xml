@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="D:\Wamp64\www\GitHub\University\COMP-248\ShadoMathJava"/>
 		<item value="C:\wamp64\www\Github\University\COMP-248\Lab7"/>
 		<item value="D:\Wamp64\www\GitHub\University\COMP-248\COMP248 Assignement 4"/>
 	</list>
