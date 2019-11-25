@@ -31,7 +31,7 @@ function clearFrame() {
     exports.c.clearRect(0, 0, exports.canvas.width, exports.canvas.height);
 }
 exports.clearFrame = clearFrame;
-var animator = setInterval(function () {
+let animator = setInterval(function () {
     if (exports.render == undefined || exports.render == null) {
         error("The function \"render\" is undefined or null. Thus, cannot render canvas.");
         return;
