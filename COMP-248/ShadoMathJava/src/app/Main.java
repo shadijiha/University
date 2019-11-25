@@ -16,16 +16,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Matrix test = new Matrix(2, 2);
-		Matrix test2 = new Matrix(2, 2);
-
-		test.print();
-		print("");
-		test.inverse().print();
-		print("\n" + test.determinant2D());
-
-		System.out.print("\n\n\n\n");
-
+		// TODO: Transpose Matrix, inverse Matrix, projection Vector
+		
+		
 	}
 
 	public static <T> void print(T element) {

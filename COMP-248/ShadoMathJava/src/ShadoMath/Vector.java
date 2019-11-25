@@ -48,13 +48,13 @@ public class Vector {
 		this.random2D(10);
 	}
 	
-	public void random(int scale)	{
+	public void random3D(int scale)	{
 		this.random2D(scale);
 		this.z = Math.floor(Math.random() * scale);
 	}
 	
-	public void random()	{
-		this.random(10);
+	public void random3D()	{
+		this.random3D(10);
 	}
 
 	public void inverse()	{
@@ -94,30 +94,44 @@ public class Vector {
 		return this.x * b.x + this.y * b.y + this.z * b.z;
 	}
 	
-	/*Vector Vector::crossProduct(Vector& b) {
-
-	Matrix<float, 2, 2> i;
-	i.setData(0, 0, y);
-	i.setData(0, 1, z);
-	i.setData(1, 0, b.y);
-	i.setData(1, 1, b.z);
-
-	Matrix<float, 2, 2> j;
-	j.setData(0, 0, x);
-	j.setData(0, 1, z);
-	j.setData(1, 0, b.x);
-	j.setData(1, 1, b.z);
-
-	Matrix<float, 2, 2> k;
-	k.setData(0, 0, x);
-	k.setData(0, 1, y);
-	k.setData(1, 0, b.x);
-	k.setData(1, 1, b.y);
-
-	return Vector(i.det(), -1.0f * j.det(), j.det());
-
-}*/
+	public Vector crossProduct(final Vector b) {
+		Matrix i = new Matrix(2, 2);
+		i.setData(0, 0, y);
+		i.setData(0, 1, z);
+		i.setData(1, 0, b.y);
+		i.setData(1, 1, b.z);
 	
+		Matrix j = new Matrix(2, 2);
+		j.setData(0, 0, x);
+		j.setData(0, 1, z);
+		j.setData(1, 0, b.x);
+		j.setData(1, 1, b.z);
+	
+		Matrix k = new Matrix(2, 2);
+		k.setData(0, 0, x);
+		k.setData(0, 1, y);
+		k.setData(1, 0, b.x);
+		k.setData(1, 1, b.y);
+	
+		return new Vector(i.determinant(), -1.0f * j.determinant(), k.determinant());
+	}
+	
+	public Matrix multiply(final Matrix matrix)	{
+		Matrix vec = Matrix.vectorToMatrix(this);
+		
+		return vec.multiply(matrix);
+	}
+	
+	// Static methodes
+	public static Vector matrixToVector(Matrix matrix)	{
+		if (matrix.is2D())	{
+			return new Vector(matrix.getData(0, 0), matrix.getData(1, 0), 0.0);
+		} else	{
+			return new Vector(matrix.getData(0, 0), matrix.getData(1, 0), matrix.getData(2, 0));
+		}		
+	}
+	
+	// Printers
 	public String toString()	{
 		return String.format("(x: %f, y: %f, z: %f)", this.x, this.y, this.z);
 	}
