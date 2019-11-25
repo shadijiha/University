@@ -18,7 +18,8 @@ public class Matrix {
 	private int cols;
 	
 	/**
-	 * 
+	 * @param {Double[][]} array: Takes a 2D array and push the data
+	 * to this.data. All colonnes must have the same size.
 	 */
 	public Matrix(Double[][] array) {
 		// TODO Auto-generated constructor stub
@@ -27,6 +28,10 @@ public class Matrix {
 		this.cols = array[0].length;
 	}
 	
+	/**
+	 * @param {Integer[][]} array: Takes a 2D array and push the data
+	 * to this.data. All colonnes must have the same size.
+	 */
 	public Matrix(Integer[][] array) {
 		this.rows = array.length;
 		this.cols = this.getBiggestCol(array);

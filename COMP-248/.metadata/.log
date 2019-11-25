@@ -3756,3 +3756,229 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-11-25 14:34:05.570 -----------------------------------------------
+eclipse.buildId=4.12.0.I20190605-1800
+java.version=12.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.mylyn.bugzilla.core 4 0 2019-11-25 14:34:06.218
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.bugzilla.core [272]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.xmlrpc; bundle-version="[3.8.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.commons.xmlrpc; bundle-version="3.24.2.v20180904-2231"; singleton:="true"
+       org.eclipse.mylyn.commons.xmlrpc [289]
+         Unresolved requirement: Require-Bundle: org.apache.xmlrpc; bundle-version="[3.0.0,4.0.0)"
+           -> Bundle-SymbolicName: org.apache.xmlrpc; bundle-version="3.0.0.v20100427-1100"
+              org.apache.xmlrpc [59]
+                Unresolved requirement: Import-Package: javax.xml.bind
+  Unresolved requirement: Require-Bundle: org.apache.xmlrpc
+    -> Bundle-SymbolicName: org.apache.xmlrpc; bundle-version="3.0.0.v20100427-1100"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:457)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$1.run(ModuleContainer.java:1820)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$2$1.execute(EquinoxContainerAdaptor.java:150)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1813)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1769)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1735)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1661)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.bugzilla.ui 4 0 2019-11-25 14:34:06.220
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.bugzilla.ui [274]
+  Unresolved requirement: Require-Bundle: org.eclipse.mylyn.bugzilla.core; bundle-version="[3.8.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.mylyn.bugzilla.core; bundle-version="3.24.2.v20180905-0003"; singleton:="true"
+       org.eclipse.mylyn.bugzilla.core [272]
+         Unresolved requirement: Require-Bundle: org.eclipse.mylyn.commons.xmlrpc; bundle-version="[3.8.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.mylyn.commons.xmlrpc; bundle-version="3.24.2.v20180904-2231"; singleton:="true"
+              org.eclipse.mylyn.commons.xmlrpc [289]
+                Unresolved requirement: Require-Bundle: org.apache.xmlrpc; bundle-version="[3.0.0,4.0.0)"
+                  -> Bundle-SymbolicName: org.apache.xmlrpc; bundle-version="3.0.0.v20100427-1100"
+                     org.apache.xmlrpc [59]
+                       Unresolved requirement: Import-Package: javax.xml.bind
+         Unresolved requirement: Require-Bundle: org.apache.xmlrpc
+           -> Bundle-SymbolicName: org.apache.xmlrpc; bundle-version="3.0.0.v20100427-1100"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:457)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$1.run(ModuleContainer.java:1820)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$2$1.execute(EquinoxContainerAdaptor.java:150)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1813)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1769)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1735)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1661)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.mylyn.commons.xmlrpc 4 0 2019-11-25 14:34:06.222
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.mylyn.commons.xmlrpc [289]
+  Unresolved requirement: Require-Bundle: org.apache.xmlrpc; bundle-version="[3.0.0,4.0.0)"
+    -> Bundle-SymbolicName: org.apache.xmlrpc; bundle-version="3.0.0.v20100427-1100"
+       org.apache.xmlrpc [59]
+         Unresolved requirement: Import-Package: javax.xml.bind
+
+	at org.eclipse.osgi.container.Module.start(Module.java:457)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$1.run(ModuleContainer.java:1820)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$2$1.execute(EquinoxContainerAdaptor.java:150)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1813)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1769)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1735)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1661)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.egit.core 1 0 2019-11-25 14:34:18.691
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2019-11-25 14:34:20.563
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2019-11-25 14:34:20.563
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-11-25 14:34:22.630
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\shadi'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.engine 4 4 2019-11-25 14:39:35.929
+!MESSAGE An error occurred while collecting items to be installed
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2019-11-25 14:39:35.929
+!MESSAGE session context was:(profile=D__Apps data_Eclipse_eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=).
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.bugzilla.core,3.25.0.v20190128-2356
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.bugzilla.ide,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.bugzilla.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.builds.core,1.17.0.v20190129-0014
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.builds.ui,1.17.0.v20190111-2151
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.core,3.25.0.v20190131-2250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.identity.core,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.net,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.core,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.feed,1.17.0.v20190115-0848
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.ui,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.repositories.core,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.repositories.http.core,1.17.0.v20190116-2232
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.repositories.ui,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.screenshots,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.ui,3.25.0.v20180706-1510
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.workbench,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.xmlrpc,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.context.core,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.context.tasks.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.context.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.debug.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.discovery.core,3.25.0.v20190131-2250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.discovery.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.git.core,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.git.ui,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.help.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.hudson.core,1.17.0.v20190115-0250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.hudson.ui,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.ide.ant,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.ide.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.java.tasks,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.java.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.monitor.core,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.monitor.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.resources.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.bugs,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.core,3.25.0.v20190128-2356
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.index.core,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.index.ui,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.search,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.tasks.ui,3.25.0.v20190128-2356
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.team.ui,3.25.0.v20180922-1243
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.versions.core,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.versions.ui,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.bugzilla_feature,3.25.0.v20190128-2356
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.builds,1.17.0.v20190129-0014
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons,3.25.0.v20190131-2250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.identity,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.notifications,1.17.0.v20190115-0848
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.repositories,1.17.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.repositories.http,1.17.0.v20190116-2232
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.context_feature,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.discovery,3.25.0.v20190131-2250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.929
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.git,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.hudson,1.17.0.v20190115-0250
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.ide_feature,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.java_feature,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.monitor,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.tasks.ide,3.25.0.v20180628-1730
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.team_feature,3.25.0.v20180922-1243
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.versions,1.17.0.v20180628-1737
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2019-11-25 14:39:35.931
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn_feature,3.25.0.v20190128-2356
