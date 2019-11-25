@@ -5,9 +5,9 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var Renderer = require("./core");
-var Rectangle = /** @class */ (function () {
-    function Rectangle(percentX, percentY, percentW, percentH, styles) {
+const Renderer = require("./core");
+class Rectangle {
+    constructor(percentX, percentY, percentW, percentH, styles) {
         this.percentX = percentX > 1 ? (percentX / 100) : percentX;
         this.percentY = percentY > 1 ? (percentY / 100) : percentY;
         this.percentW = percentW > 1 ? (percentW / 100) : percentW;
@@ -20,13 +20,13 @@ var Rectangle = /** @class */ (function () {
         // Styles
         this.styles = styles || { fill: "white", stroke: "black", lineWidth: 1 };
     }
-    Rectangle.prototype.updatePercentages = function () {
+    updatePercentages() {
         this.x = this.percentX * Renderer.canvas.width;
         this.y = this.percentY * Renderer.canvas.height;
         this.w = this.percentW * Renderer.canvas.width;
         this.h = this.percentH * Renderer.canvas.height;
-    };
-    Rectangle.prototype.draw = function (context) {
+    }
+    draw(context) {
         // if context is undefined default to "c"
         context = context || Renderer.c;
         // Draw rectangle
@@ -41,63 +41,62 @@ var Rectangle = /** @class */ (function () {
         if (this.autoUpdate) {
             this.updatePercentages();
         }
-    };
+    }
     // Other functions
-    Rectangle.prototype.hover = function (mousePosition) {
+    hover(mousePosition) {
         if (mousePosition.x > this.x && mousePosition.x < (this.x + this.w) && mousePosition.y > this.y && mousePosition.y < (this.y + this.h)) {
             return true;
         }
         else {
             return false;
         }
-    };
-    Rectangle.prototype.clicked = function (lastClickPos) {
+    }
+    clicked(lastClickPos) {
         if (lastClickPos.x > this.x && lastClickPos.x < (this.x + this.w) && lastClickPos.y > this.y && lastClickPos.y < (this.y + this.h)) {
             return true;
         }
-    };
-    Rectangle.prototype.move = function (percentDX, percentDY) {
-        var tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
-        var tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
+    }
+    move(percentDX, percentDY) {
+        const tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
+        const tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
         this.x += Renderer.canvas.width * tempX;
         this.y += Renderer.canvas.height * tempY;
-    };
+    }
     // Setters
-    Rectangle.prototype.stroke = function (color) {
+    stroke(color) {
         this.styles.stroke = color;
-    };
-    Rectangle.prototype.fill = function (color) {
+    }
+    fill(color) {
         this.styles.fill = color;
-    };
-    Rectangle.prototype.lineWidth = function (size) {
+    }
+    lineWidth(size) {
         this.styles.lineWidth = size;
-    };
-    Rectangle.prototype.toggleAutoUpdate = function () {
+    }
+    toggleAutoUpdate() {
         if (this.autoUpdate) {
             this.autoUpdate = false;
         }
         else {
             this.autoUpdate = true;
         }
-    };
+    }
     // getters
-    Rectangle.prototype.getCoordinates = function () {
+    getCoordinates() {
         return { x: this.x, y: this.y };
-    };
-    Rectangle.prototype.getDimensions = function () {
+    }
+    getDimensions() {
         return { w: this.w, h: this.h };
-    };
-    Rectangle.prototype.getArea = function () {
+    }
+    getArea() {
         return this.w * this.h;
-    };
-    Rectangle.prototype.getPerimetre = function () {
+    }
+    getPerimetre() {
         return (this.w + this.h) * 2;
-    };
-    return Rectangle;
-}());
+    }
+}
 exports.Rectangle = Rectangle;
-var Circle = /** @class */ (function () {
-    function Circle(percentX, percentY, percentR, styles) {
+class Circle {
+    constructor(percentX, percentY, percentR, styles) {
         this.percentX = percentX > 1 ? (percentX / 100) : percentX;
         this.percentY = percentY > 1 ? (percentY / 100) : percentY;
         this.percentR = percentR > 1 ? (percentR / 100) : percentR;
@@ -108,12 +107,12 @@ var Circle = /** @class */ (function () {
         // Styles
         this.styles = styles || { fill: "white", stroke: "black", lineWidth: 1 };
     }
-    Circle.prototype.updatePercentages = function () {
+    updatePercentages() {
         this.x = this.percentX * Renderer.canvas.width;
         this.y = this.percentY * Renderer.canvas.height;
         this.r = this.percentR * Renderer.canvas.width;
-    };
-    Circle.prototype.draw = function (context) {
+    }
+    draw(context) {
         // if context is undefined default to "c"
         context = context || Renderer.c;
         // Draw rectangle
@@ -128,64 +127,63 @@ var Circle = /** @class */ (function () {
         if (this.autoUpdate) {
             this.updatePercentages();
         }
-    };
+    }
     // Other functions
-    Circle.prototype.hover = function (mousePosition) {
-        var d = Math.sqrt(Math.pow(mousePosition.x - this.x, 2) + Math.pow(mousePosition.y - this.y, 2));
+    hover(mousePosition) {
+        let d = Math.sqrt(Math.pow(mousePosition.x - this.x, 2) + Math.pow(mousePosition.y - this.y, 2));
         if (d <= this.r) {
             return true;
         }
         else {
             return false;
         }
-    };
-    Circle.prototype.clicked = function (lastClickPos) {
-        var d = Math.sqrt(Math.pow(lastClickPos.x - this.x, 2) + Math.pow(lastClickPos.y - this.y, 2));
+    }
+    clicked(lastClickPos) {
+        let d = Math.sqrt(Math.pow(lastClickPos.x - this.x, 2) + Math.pow(lastClickPos.y - this.y, 2));
         if (d <= this.r) {
             return true;
         }
         else {
             return false;
         }
-    };
-    Circle.prototype.move = function (percentDX, percentDY) {
-        var tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
-        var tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
+    }
+    move(percentDX, percentDY) {
+        const tempX = percentDX > 1 ? (percentDX / 100) : percentDX;
+        const tempY = percentDY > 1 ? (percentDY / 100) : percentDY;
         this.x += Renderer.canvas.width * tempX;
         this.y += Renderer.canvas.height * tempY;
-    };
+    }
     // Setters
-    Circle.prototype.stroke = function (color) {
+    stroke(color) {
         this.styles.stroke = color;
-    };
-    Circle.prototype.fill = function (color) {
+    }
+    fill(color) {
         this.styles.fill = color;
-    };
-    Circle.prototype.lineWidth = function (size) {
+    }
+    lineWidth(size) {
         this.styles.lineWidth = size;
-    };
-    Circle.prototype.toggleAutoUpdate = function () {
+    }
+    toggleAutoUpdate() {
         if (this.autoUpdate) {
             this.autoUpdate = false;
         }
         else {
             this.autoUpdate = true;
         }
-    };
+    }
     // getters
-    Circle.prototype.getCoordinates = function () {
+    getCoordinates() {
         return { x: this.x, y: this.y };
-    };
-    Circle.prototype.getRadius = function () {
+    }
+    getRadius() {
         return this.r;
-    };
-    Circle.prototype.getArea = function () {
+    }
+    getArea() {
         return Math.PI * this.r * this.r;
-    };
-    Circle.prototype.getPerimetre = function () {
+    }
+    getPerimetre() {
         return 2 * Math.PI * this.r;
-    };
-    return Circle;
-}());
+    }
+}
 exports.Circle = Circle;
 //# sourceMappingURL=objects.js.map
