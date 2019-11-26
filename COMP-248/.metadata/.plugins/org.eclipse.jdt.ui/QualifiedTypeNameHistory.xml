@@ -6,12 +6,13 @@
     <fullyQualifiedTypeName name="ShadoMath.Fraction"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="ShadoMath.Vector"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
     <fullyQualifiedTypeName name="ShadoMath.Matrix"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="nancy3D.Dice"/>
+    <fullyQualifiedTypeName name="ShadoMath.Vector"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="nancy3D.Dice"/>
+    <fullyQualifiedTypeName name="app.Engin3D.Mesh"/>
 </qualifiedTypeNameHistroy>
