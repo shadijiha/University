@@ -122,6 +122,21 @@ public class Vector {
 		return vec.multiply(matrix);
 	}
 	
+	public Vector multiply(double scale)	{
+		Vector result = new Vector(this.x, this.y, this.z);
+		result.scale(scale);
+		return result;		
+	}
+	
+	public Vector project(final Vector other)	{
+		
+		double multiplier = other.dotProduct(this);
+
+		multiplier = multiplier / (other.mag() * other.mag());
+		
+		return other.multiply(multiplier);
+	}
+	
 	// Static methodes
 	public static Vector matrixToVector(Matrix matrix)	{
 		if (matrix.is2D())	{

@@ -107,7 +107,7 @@ public class Matrix {
 				return this.determinant2D();
 			}
 			
-			// ELSE use the recurtion rule:\
+			// ELSE use the recurtion rule:
 			// det(A_nxn) = a_11 * det(A_11) - a_12 * det(A_12) 
 			// 				+ a_13 * det(A_13) - ... 
 			//				+- a_1xn * det(A_1xn)
@@ -224,12 +224,14 @@ public class Matrix {
 	
 	public Matrix inverse()	throws Error	{
 
-		throw new Error("inverse() is not working hehexd");
-		
+		throw new Error("ERROR!!!!!!!");
 		/*if (this.is2D())	{
-			return this.multiply( 1 / this.determinant2D());
+			double temp = 1 / this.determinant2D();
+			this.data[0][1] = -1.0 * this.data[0][1];
+			this.data[1][0] = -1.0 * this.data[1][0];
+			return this.multiply(temp);
 		} else	{
-			throw new Error("Cannot inverse a non 2x2 matrix");
+			return this.inverse().multiply(1 / this.determinant());
 		}*/
 		
 	}
