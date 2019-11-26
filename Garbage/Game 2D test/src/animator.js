@@ -12,6 +12,7 @@ canvas.setBackground("lightblue"); // Render is implicitly called
 const circy = new Circle(500, 500, 50);
 circy.setFill("red");
 
+// For game Loop see "index.js"
 function render() {
 	// Clear canvas
 	canvas.clear();
@@ -21,6 +22,16 @@ function render() {
 		canvas
 	);
 
+	// SHow pause/Resume Text
+	const pauseText = new Text("Abort", 400, 100, { size: 20 });
+	pauseText.render(canvas);
+
+	if (pauseText.hover(canvas)) {
+		pauseText.text = "Game loop exited";
+		pause();
+	}
+
+	// Draw stuff
 	circy.render(canvas);
 	circy.move(new Vector(0.1, 0));
 }
