@@ -20,6 +20,11 @@ async function gameLoop() {
 		t1 = new Date().getTime();
 
 		// Sleep for the target FPS
+		// Detect if FPS = 0
+		if (global.FPS == 0) {
+			console.log("Game loop has been exited");
+			break;
+		}
 		await sleep(1000 / global.FPS);
 	}
 }

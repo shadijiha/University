@@ -33,6 +33,6 @@ public abstract class Engin3D {
 		
 		public List<Triangle> tris = new ArrayList<Triangle>();
 		
-		public Mesh()	{}	
+		public Mesh()	{}
 	}
 }
