@@ -234,6 +234,16 @@ public class Matrix {
 		
 	}
 	
+	public Matrix transpose()	{
+		Matrix mat = new Matrix(this.cols, this.rows);
+		
+		for (int i = 0; i < this.getRows(); i++)	{
+			for (int j = 0; j < this.getCols(); j++)
+				mat.setData(j, i, this.data[i][j]);
+		}		
+		return mat;
+	}
+	
 	// Private functions	
 	private int factorial(int number)	{
 		if (number == 1)	{return 1;}
@@ -301,7 +311,7 @@ public class Matrix {
 			System.out.println(e.getMessage());
 		}
 	}    
-	
+
 	// Static methodes	
 	public static Matrix vectorToMatrix(final Vector vector)	{
 		Matrix temp = new Matrix(3, 1);		
