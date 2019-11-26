@@ -20,11 +20,7 @@ public abstract class Main {
 	public static void main(String[] args) {
 
 		// TODO: Transpose Matrix, inverse Matrix, projection Vector
-		Matrix mat = new Matrix(4, 3);
-		
-		mat.print();
-		print("");
-		mat.transpose().print();
+		Engin3D.Mesh test = new Engin3D.Mesh();
 	}
 
 	public static <T> void print(T element) {
