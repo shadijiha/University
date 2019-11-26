@@ -8370,3 +8370,61 @@ Caused by: org.eclipse.jgit.errors.InvalidObjectIdException: Invalid id:        
 	at org.eclipse.jgit.lib.ObjectId.fromString(ObjectId.java:224)
 	at org.eclipse.jgit.internal.storage.file.RefDirectory.scanRef(RefDirectory.java:1195)
 	... 17 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2019-11-26 13:06:56.103
+!MESSAGE Errors occurred while applying Git decorations to resources.
+!STACK 1
+org.eclipse.core.runtime.CoreException: Errors occurred while applying Git decorations to resource 'P/ShadoMathJava'.
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorateResource(GitLightweightDecorator.java:233)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorate(GitLightweightDecorator.java:201)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:346)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:333)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:300)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: Not a ref: refs/remotes/origin/master:                                          
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.scanRef(RefDirectory.java:1208)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.readRef(RefDirectory.java:1125)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.readAndResolve(RefDirectory.java:326)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.exactRef(RefDirectory.java:348)
+	at org.eclipse.jgit.lib.Repository.exactRef(Repository.java:1087)
+	at org.eclipse.jgit.lib.BranchTrackingStatus.of(BranchTrackingStatus.java:82)
+	at org.eclipse.egit.ui.internal.decorators.DecoratableResourceHelper.getBranchStatus(DecoratableResourceHelper.java:74)
+	at org.eclipse.egit.ui.internal.decorators.DecoratableResourceAdapter.<init>(DecoratableResourceAdapter.java:77)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorateResource(GitLightweightDecorator.java:231)
+	... 9 more
+Caused by: org.eclipse.jgit.errors.InvalidObjectIdException: Invalid id:                                         
+	at org.eclipse.jgit.lib.ObjectId.fromHexString(ObjectId.java:250)
+	at org.eclipse.jgit.lib.ObjectId.fromString(ObjectId.java:224)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.scanRef(RefDirectory.java:1195)
+	... 17 more
+!SUBENTRY 1 org.eclipse.egit.ui 4 0 2019-11-26 13:06:56.103
+!MESSAGE Errors occurred while applying Git decorations to resource 'P/ShadoMathJava'.
+!STACK 0
+java.io.IOException: Not a ref: refs/remotes/origin/master:                                          
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.scanRef(RefDirectory.java:1208)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.readRef(RefDirectory.java:1125)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.readAndResolve(RefDirectory.java:326)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.exactRef(RefDirectory.java:348)
+	at org.eclipse.jgit.lib.Repository.exactRef(Repository.java:1087)
+	at org.eclipse.jgit.lib.BranchTrackingStatus.of(BranchTrackingStatus.java:82)
+	at org.eclipse.egit.ui.internal.decorators.DecoratableResourceHelper.getBranchStatus(DecoratableResourceHelper.java:74)
+	at org.eclipse.egit.ui.internal.decorators.DecoratableResourceAdapter.<init>(DecoratableResourceAdapter.java:77)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorateResource(GitLightweightDecorator.java:231)
+	at org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator.decorate(GitLightweightDecorator.java:201)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition.decorate(LightweightDecoratorDefinition.java:247)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager$LightweightRunnable.run(LightweightDecoratorManager.java:105)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.decorate(LightweightDecoratorManager.java:360)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:346)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:333)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:300)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.InvalidObjectIdException: Invalid id:                                         
+	at org.eclipse.jgit.lib.ObjectId.fromHexString(ObjectId.java:250)
+	at org.eclipse.jgit.lib.ObjectId.fromString(ObjectId.java:224)
+	at org.eclipse.jgit.internal.storage.file.RefDirectory.scanRef(RefDirectory.java:1195)
+	... 17 more
