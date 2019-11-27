@@ -9,8 +9,10 @@
 class GameObject {
 	constructor(name) {
 		this.name = name;
-		this.id = "object_" + random(0, 1e8);
+		this.id = "object_" + Math.floor(random(0, 1e8));
 		this.buffer = {};
+
+		this.collision = false;
 	}
 
 	/**
@@ -37,13 +39,67 @@ class GameObject {
 			amountY = tempVector.y;
 		}
 
-		if (this.movable) {
+		if (this.static) {
 			this.x += amountX * Time.deltaTime;
 			this.y += amountY * Time.deltaTime;
 		} else {
 			throw new Error(
-				`Cannot move ${this.name} (id: ${this.id}) because object is immovable`
+				`Cannot move ${this.name} (id: ${this.id}) because object is imstatic`
 			);
+		}
+	}
+
+	draw(targetCanvas) {
+		this.render(targetCanvas);
+	}
+
+	enableCollision() {
+		// If the object is an instance of canvas, don't add it
+		if (this instanceof Canvas) {
+			throw new Error("Cannnot tag CANVAS objects as collidable.");
+		}
+		this.collision = true;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Add object if it doesn't exist
+		if (!exist) global.collisionObjects.push(this);
+	}
+
+	disableCollision() {
+		this.collision = false;
+
+		// See if the object exits already int the global.collisionObjects array
+		let exist = false;
+		for (let element of global.collisionObjects) {
+			if (element.id == this.id) {
+				exist = true;
+				break;
+			}
+		}
+
+		// Remove the object if it exists
+		if (exist) {
+			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
+		}
+	}
+
+	collides(other) {
+		if (this instanceof Circle && other instanceof Circle) {
+			let dist = distance(this.x, this.y, other.x, other.y);
+			if (dist == 0) {
+				console.log(this);
+				console.log(other);
+				//throw new Error("");
+			}
+			return dist <= this.r + other.r;
 		}
 	}
 }
@@ -55,12 +111,14 @@ class Canvas extends GameObject {
 		this.y = posY;
 		this.w = width;
 		this.h = height;
+		this.width = width;
+		this.height = height;
 		this.background = "transparent";
 		this.canvas = null;
 		this.ctx = null;
 		this.overwrite = false;
 		this.parent = parent || document.querySelector("body");
-		this.movable = false;
+		this.static = false;
 	}
 
 	render() {
@@ -119,11 +177,13 @@ class Canvas extends GameObject {
 
 	setWidth(newWidth) {
 		this.w = newWidth;
+		this.width = newWidth;
 		this.render();
 	}
 
 	setHeight(newHeight) {
 		this.h = newHeight;
+		this.height = newHeight;
 		this.render();
 	}
 
@@ -142,11 +202,33 @@ class Circle extends GameObject {
 		this.fill = "white";
 		this.stroke = "black";
 		this.lineWidth = 1;
-		this.movable = true;
-		this.collision = true;
+		this.static = true;
 	}
 
 	render(targetCanvas) {
+		// Handle no Canvas error
+		if (!targetCanvas) {
+			throw new Error(
+				"Connot render " +
+					this.name +
+					" on a non specific Canvas. Must provide Canvas object in argument of Object.render()"
+			);
+		}
+
+		// Handle no Corrdinates error
+		if (
+			this.x == undefined ||
+			this.x == null ||
+			isNaN(this.x) ||
+			this.y == undefined ||
+			this.y == null ||
+			isNaN(this.y)
+		) {
+			throw new Error(
+				`${this.name} (${this.id}) X and/or coordinate is/are either undefined, null or NaN.`
+			);
+		}
+
 		targetCanvas.ctx.beginPath();
 		targetCanvas.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
 		targetCanvas.ctx.fillStyle = this.fill;
@@ -156,42 +238,10 @@ class Circle extends GameObject {
 		targetCanvas.ctx.stroke();
 	}
 
-	enableCollision() {
-		this.collision = true;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Add object if it doesn't exist
-		if (!exist) global.collisionObjects.push(this);
-	}
-
-	disableCollision() {
-		this.collision = false;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Remove the object if it exists
-		if (exist) {
-			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
-		}
-	}
-
 	hover() {
-		let d = distance(this.x, this.y, mouse.x, mouse.y);
+		let d = Math.sqrt(
+			Math.pow(mouse.x - this.x, 2) + Math.pow(mouse.y - this.y, 2)
+		);
 		if (d <= this.r) {
 			return true;
 		}
@@ -232,11 +282,33 @@ class Rectangle extends GameObject {
 		this.fill = "white";
 		this.stroke = "black";
 		this.lineWidth = 1;
-		this.movable = true;
-		this.collision = true;
+		this.static = true;
 	}
 
 	render(targetCanvas) {
+		// Handle no Canvas error
+		if (!targetCanvas) {
+			throw new Error(
+				"Connot render " +
+					this.name +
+					" on a non specific Canvas. Must provide Canvas object in argument of Object.render()"
+			);
+		}
+
+		// Handle no Corrdinates error
+		if (
+			this.x == undefined ||
+			this.x == null ||
+			isNaN(this.x) ||
+			this.y == undefined ||
+			this.y == null ||
+			isNaN(this.y)
+		) {
+			throw new Error(
+				`${this.name} (${this.id}) X and/or coordinate is/are either undefined, null or NaN.`
+			);
+		}
+
 		targetCanvas.ctx.beginPath();
 		targetCanvas.ctx.rect(this.x, this.y, this.w, this.h);
 		targetCanvas.ctx.fillStyle = this.fill;
@@ -244,40 +316,6 @@ class Rectangle extends GameObject {
 		targetCanvas.ctx.lineWidth = this.lineWidth;
 		targetCanvas.ctx.fill();
 		targetCanvas.ctx.stroke();
-	}
-
-	enableCollision() {
-		this.collision = true;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Add object if it doesn't exist
-		if (!exist) global.collisionObjects.push(this);
-	}
-
-	disableCollision() {
-		this.collision = false;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Remove the object if it exists
-		if (exist) {
-			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
-		}
 	}
 
 	hover() {
@@ -325,7 +363,7 @@ class Rectangle extends GameObject {
 }
 
 class Text extends GameObject {
-	constructor(text, x, y, { font, size, color, stroke }) {
+	constructor(text, x, y, { font, size, color, stroke, background }) {
 		super("text");
 		this.text = text;
 		this.x = x;
@@ -334,50 +372,60 @@ class Text extends GameObject {
 		this.size = size || 14;
 		this.color = color || "black";
 		this.stroke = stroke || this.color;
-		this.movable = true;
+		this.background = background || "transparent";
+		this.static = true;
 		this.fullStyle = `${this.size}px ${this.font}`;
+		this.hitBox = null;
 	}
 
 	render(targetCanvas) {
+		// Handle no canvas error
+		if (!targetCanvas) {
+			throw new Error(
+				"Connot render " +
+					this.name +
+					" on a non specific Canvas. Must provide Canvas object in argument of Object.render()"
+			);
+		}
+
+		// Handle no Corrdinates error
+		if (
+			this.x == undefined ||
+			this.x == null ||
+			isNaN(this.x) ||
+			this.y == undefined ||
+			this.y == null ||
+			isNaN(this.y)
+		) {
+			throw new Error(
+				`${this.name} (${this.id}) X and/or coordinate is/are either undefined, null or NaN.`
+			);
+		}
+
+		// Draw text
 		targetCanvas.ctx.font = `${this.size}px ${this.font}`;
+
+		// Draw background
+		// Draw BG from -10% to +20%
+		this.buildHitBox(targetCanvas);
+
 		targetCanvas.ctx.fillStyle = this.color;
 		targetCanvas.ctx.strokeStyle = this.stroke;
 		targetCanvas.ctx.fillText(this.text, this.x, this.y);
 		targetCanvas.ctx.strokeText(this.text, this.x, this.y);
 	}
 
-	enableCollision() {
-		this.collision = true;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Add object if it doesn't exist
-		if (!exist) global.collisionObjects.push(this);
-	}
-
-	disableCollision() {
-		this.collision = false;
-
-		// See if the object exits already int the global.collisionObjects array
-		let exist = false;
-		for (let element of global.collisionObjects) {
-			if (element.id == this.id) {
-				exist = true;
-				break;
-			}
-		}
-
-		// Remove the object if it exists
-		if (exist) {
-			global.collisionObjects.splice(global.collisionObjects.indexOf(this), 1);
-		}
+	buildHitBox(targetCanvas) {
+		// Hitbox from -10% to +20%
+		this.hitBox = new Rectangle(
+			this.x - this.width(targetCanvas) * 0.1,
+			this.y - this.height(targetCanvas) / 2,
+			this.width(targetCanvas) * 1.2,
+			this.height(targetCanvas)
+		);
+		this.hitBox.setFill(this.background);
+		this.hitBox.setStroke("transparent");
+		this.hitBox.render(targetCanvas);
 	}
 
 	width(targetCanvas) {
@@ -393,23 +441,17 @@ class Text extends GameObject {
 	}
 
 	hover(targetCanvas) {
-		const hitBox = new Rectangle(
-			this.x,
-			this.y,
-			this.width(targetCanvas),
-			this.height(targetCanvas)
-		);
-		return hitBox.hover();
+		if (this.hitBox == null) {
+			buildHitBox(targetCanvas);
+		}
+		return this.hitBox.hover();
 	}
 
 	clicked(targetCanvas) {
-		const hitBox = new Rectangle(
-			this.x,
-			this.y,
-			this.width(targetCanvas),
-			this.height(targetCanvas)
-		);
-		return hitBox.clicked();
+		if (this.hitBox == null) {
+			buildHitBox(targetCanvas);
+		}
+		return this.hitBox.clicked();
 	}
 }
 
@@ -441,7 +483,30 @@ class Image extends GameObject {
 		});
 	}
 
-	draw() {
+	render() {
+		// Handle no Canvas error
+		if (!targetCanvas) {
+			throw new Error(
+				"Connot render " +
+					this.name +
+					" on a non specific Canvas. Must provide Canvas object in argument of Object.render()"
+			);
+		}
+
+		// Handle no Corrdinates error
+		if (
+			this.x == undefined ||
+			this.x == null ||
+			isNaN(this.x) ||
+			this.y == undefined ||
+			this.y == null ||
+			isNaN(this.y)
+		) {
+			throw new Error(
+				`${this.name} (${this.id}) X and/or coordinate is/are either undefined, null or NaN.`
+			);
+		}
+
 		this.hitBox.x = this.x;
 		this.hitBox.y = this.y;
 

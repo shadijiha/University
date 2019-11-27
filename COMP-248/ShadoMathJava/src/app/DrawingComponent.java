@@ -16,7 +16,12 @@ import java.awt.Font;
 
 public class DrawingComponent extends JComponent    {
 
-    public void paintComponent(Graphics g)  {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4659119803554492770L;
+
+	public void paintComponent(Graphics g)  {
         Graphics2D g2 = (Graphics2D)g;
 
         // Draw stuff        

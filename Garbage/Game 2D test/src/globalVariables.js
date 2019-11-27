@@ -15,7 +15,7 @@ class Namespace {
 // Setup global Variables
 const global = new Namespace("global");
 global.globalBuffer = {};
-global.FPS = 60;
+global.FPS = 244;
 global.setFPS = newFPS => {
 	global.FPS = newFPS;
 };

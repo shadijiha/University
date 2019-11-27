@@ -10,7 +10,15 @@ function sleep(ms) {
 }
 
 function random(min, max) {
-	return Math.floor(Math.random() * (max - min) + min);
+	if (max == undefined || max == null) {
+		max = min;
+		min = 0;
+	}
+	return Math.random() * (max - min) + min;
+}
+
+function distance(x1, y1, x2, y2) {
+	return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 
 function pause() {

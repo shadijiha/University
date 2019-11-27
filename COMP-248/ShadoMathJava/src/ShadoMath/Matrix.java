@@ -4,7 +4,6 @@
 package ShadoMath;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -247,7 +246,7 @@ public class Matrix {
 	}
 	
 	// Private functions	
-	private int factorial(int number)	{
+	protected int factorial(int number)	{
 		if (number == 1)	{return 1;}
 		return number * factorial(number - 1);
 	}
@@ -283,11 +282,8 @@ public class Matrix {
     	this.cols = this.getBiggestCol(this.data);
     	
     	// find number of rows that aren't {} and put all {} to null
-    	int numberOfRows = 0;
     	for (int i = 0; i < this.data.length; i++)	{
-    		if (this.data[i].length > 0)	{
-    			numberOfRows++;
-    		} else	{
+    		if (this.data[i].length <= 0)	{
     			this.data[i] = null;
     		}	
     	}

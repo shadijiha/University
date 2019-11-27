@@ -6,11 +6,22 @@
 
 // Setup main canvas
 const canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
-canvas.setBackground("lightblue"); // Render is implicitly called
+canvas.setBackground("#191970"); // Render is implicitly called
 
 // Test
-const circy = new Circle(500, 500, 50);
-circy.setFill("red");
+let snow = [];
+for (let i = 0; i < 2; i++) {
+	const temp = new Circle(
+		random(0, canvas.width),
+		random(0, canvas.height),
+		random(1, 50)
+	);
+	temp.enableCollision();
+	temp.dx = random(0.01, 0.05);
+	temp.dy = random(0, 0.02);
+	temp.setFill("white");
+	snow.push(temp);
+}
 
 // For game Loop see "index.js"
 function render() {
@@ -18,12 +29,17 @@ function render() {
 	canvas.clear();
 
 	// Show FPS
-	new Text((1000 / Time.deltaTime).toFixed(2), 100, 100, { size: 70 }).render(
-		canvas
-	);
+	new Text((1000 / Time.deltaTime).toFixed(2), 100, 100, {
+		size: 70,
+		color: "white"
+	}).render(canvas);
 
 	// SHow pause/Resume Text
-	const pauseText = new Text("Abort", 400, 100, { size: 20 });
+	const pauseText = new Text("Abort", 400, 100, {
+		size: 20,
+		background: "black",
+		color: "white"
+	});
 	pauseText.render(canvas);
 
 	if (pauseText.hover(canvas)) {
@@ -32,6 +48,28 @@ function render() {
 	}
 
 	// Draw stuff
-	circy.render(canvas);
-	circy.move(new Vector(0.1, 0));
+	for (let temp of snow) {
+		temp.move(temp.dx, temp.dy);
+		if (temp.x + temp.r > canvas.width) {
+			temp.x = -random(100);
+		}
+		if (temp.y > canvas.height) {
+			temp.y = -random(100);
+		}
+		if (
+			temp.x > -temp.r &&
+			temp.x < canvas.width &&
+			temp.y > -temp.r &&
+			temp.y < canvas.height
+		) {
+			for (let other of snow) {
+				if (temp.collides(other)) {
+					temp.setFill("green");
+					break;
+				}
+			}
+			temp.render(canvas);
+			temp.setFill("white");
+		}
+	}
 }
