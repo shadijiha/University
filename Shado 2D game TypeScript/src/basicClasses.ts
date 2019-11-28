@@ -105,13 +105,7 @@ class GameObject {
 
 	collides(other: GameObject): boolean {
 		if (this instanceof Circle && other instanceof Circle) {
-			let dist = distance(this.x, this.y, other.x, other.y);
-			if (dist == 0) {
-				console.log(this);
-				console.log(other);
-				//throw new Error("");
-			}
-			return dist <= this.r + other.r;
+			return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
 		}
 	}
 }
@@ -133,7 +127,7 @@ class Canvas extends GameObject {
 		posY: number,
 		width: any,
 		height: any,
-		parent: HTMLElement
+		parent?: HTMLElement
 	) {
 		super("canvas");
 		this.x = posX;
@@ -184,7 +178,7 @@ class Canvas extends GameObject {
 		this.ctx = this.canvas.getContext("2d");
 	}
 
-	clear(fromX: number, fromY: number, toX: number, toY: number): void {
+	clear(fromX?: number, fromY?: number, toX?: number, toY?: number): void {
 		fromX = fromX || 0;
 		fromY = fromY || 0;
 		toX = toX || this.w;
@@ -223,7 +217,15 @@ class Canvas extends GameObject {
 }
 
 class Circle extends GameObject {
-	constructor(x, y, r) {
+	public x: number;
+	public y: number;
+	public r: any;
+	public fill: string;
+	public stroke: string;
+	public lineWidth: number;
+	public static: boolean;
+
+	constructor(x: number, y: number, r: any) {
 		super("circle");
 		this.x = x;
 		this.y = y;
@@ -234,7 +236,7 @@ class Circle extends GameObject {
 		this.static = true;
 	}
 
-	render(targetCanvas) {
+	render(targetCanvas: Canvas): void {
 		// Handle no Canvas error
 		if (!targetCanvas) {
 			throw new Error(
@@ -267,7 +269,7 @@ class Circle extends GameObject {
 		targetCanvas.ctx.stroke();
 	}
 
-	hover() {
+	hover(): boolean {
 		let d = Math.sqrt(
 			Math.pow(mouse.x - this.x, 2) + Math.pow(mouse.y - this.y, 2)
 		);
@@ -276,7 +278,7 @@ class Circle extends GameObject {
 		}
 	}
 
-	clicked() {
+	clicked(): boolean {
 		/*let d = distance(this.x, this.y, lastClick.x, lastClick.y);
 		if (d <= this.r) {
 			return true;
@@ -284,25 +286,34 @@ class Circle extends GameObject {
 		throw new Error("LastClick is not coded yet!");
 	}
 
-	area() {
+	area(): number {
 		return Math.PI * Math.pow(this.r, 2);
 	}
 
-	setFill(newFill) {
+	setFill(newFill: string): void {
 		this.fill = newFill;
 	}
 
-	setStroke(newStroke) {
+	setStroke(newStroke: string): void {
 		this.stroke = newStroke;
 	}
 
-	setLineWidth(newLineWidth) {
+	setLineWidth(newLineWidth: number): void {
 		this.lineWidth = newLineWidth;
 	}
 }
 
 class Rectangle extends GameObject {
-	constructor(x, y, w, h) {
+	public x: number;
+	public y: number;
+	public w: any;
+	public h: any;
+	public fill: string;
+	public stroke: string;
+	public lineWidth: number;
+	public staitc: boolean;
+
+	constructor(x: number, y: number, w: any, h: any) {
 		super("rectangle");
 		this.x = x;
 		this.y = y;
@@ -314,7 +325,7 @@ class Rectangle extends GameObject {
 		this.static = true;
 	}
 
-	render(targetCanvas) {
+	render(targetCanvas: Canvas): void {
 		// Handle no Canvas error
 		if (!targetCanvas) {
 			throw new Error(
@@ -347,7 +358,7 @@ class Rectangle extends GameObject {
 		targetCanvas.ctx.stroke();
 	}
 
-	hover() {
+	hover(): boolean {
 		// is mouse to right of the left-side of the rectangle
 		// is mouse to left of the right-side of the rectangle
 		// is mouse below the top of the rectangle
@@ -362,7 +373,7 @@ class Rectangle extends GameObject {
 		}
 	}
 
-	clicked() {
+	clicked(): boolean {
 		/*if (
 			lastClick.x > this.x &&
 			lastClick.x < this.x + this.w &&
@@ -374,25 +385,41 @@ class Rectangle extends GameObject {
 		throw new Error("LastClick has not been coded yet! @ Rectangle");
 	}
 
-	area() {
+	area(): number {
 		return this.w * this.h;
 	}
 
-	setFill(newFill) {
+	setFill(newFill: string): void {
 		this.fill = newFill;
 	}
 
-	setStroke(newStroke) {
+	setStroke(newStroke: string): void {
 		this.stroke = newStroke;
 	}
 
-	setLineWidth(newLineWidth) {
+	setLineWidth(newLineWidth: number): void {
 		this.lineWidth = newLineWidth;
 	}
 }
 
-class Text extends GameObject {
-	constructor(text, x, y, { font, size, color, stroke, background }) {
+class ShadoText extends GameObject {
+	public text: string;
+	public x: number;
+	public y: number;
+	public font: string;
+	public size: number;
+	public color: string;
+	public stroke: string;
+	public background: string;
+	public fullStyle: string;
+	public hitBox: Rectangle;
+
+	constructor(
+		text: string,
+		x: number,
+		y: number,
+		{ font, size, color, stroke, background }
+	) {
 		super("text");
 		this.text = text;
 		this.x = x;
@@ -407,7 +434,7 @@ class Text extends GameObject {
 		this.hitBox = null;
 	}
 
-	render(targetCanvas) {
+	render(targetCanvas: Canvas): void {
 		// Handle no canvas error
 		if (!targetCanvas) {
 			throw new Error(
@@ -444,7 +471,7 @@ class Text extends GameObject {
 		targetCanvas.ctx.strokeText(this.text, this.x, this.y);
 	}
 
-	buildHitBox(targetCanvas) {
+	buildHitBox(targetCanvas: Canvas): void {
 		// Hitbox from -10% to +20%
 		this.hitBox = new Rectangle(
 			this.x - this.width(targetCanvas) * 0.1,
@@ -457,35 +484,52 @@ class Text extends GameObject {
 		this.hitBox.render(targetCanvas);
 	}
 
-	width(targetCanvas) {
+	width(targetCanvas: Canvas): number {
 		targetCanvas.ctx.font = this.fullStyle;
 		return targetCanvas.ctx.measureText(this.text).width;
 	}
 
-	height(targetCanvas) {
+	height(targetCanvas: Canvas): number {
 		//return this.size - this.size / 5;
 		targetCanvas.ctx.font = this.fullStyle;
 		let height = parseInt(targetCanvas.ctx.font.match(/\d+/), 10) * 2;
 		return height;
 	}
 
-	hover(targetCanvas) {
+	hover(targetCanvas: Canvas): boolean {
 		if (this.hitBox == null) {
-			buildHitBox(targetCanvas);
+			this.buildHitBox(targetCanvas);
 		}
 		return this.hitBox.hover();
 	}
 
-	clicked(targetCanvas) {
+	clicked(targetCanvas: Canvas): boolean {
 		if (this.hitBox == null) {
-			buildHitBox(targetCanvas);
+			this.buildHitBox(targetCanvas);
 		}
 		return this.hitBox.clicked();
 	}
 }
 
-class Image extends GameObject {
-	constructor(src, x, y, w, h, id, showHitBox) {
+class ShadoImage extends GameObject {
+	public src: string;
+	public x: number;
+	public y: number;
+	public w: any;
+	public h: any;
+	public id: string;
+	public hitBox: Rectangle;
+	public showHitBox: boolean;
+
+	constructor(
+		src: string,
+		x: number,
+		y: number,
+		w: any,
+		h: any,
+		id: string,
+		showHitBox: boolean
+	) {
 		super("image");
 		this.src = src;
 		this.x = x;
@@ -506,13 +550,12 @@ class Image extends GameObject {
 			body.appendChild(img);
 		}
 
-		this.hitBox = new Rectangle(this.x, this.y, this.w, this.h, {
-			stroke: "red",
-			fill: "transparent"
-		});
+		this.hitBox = new Rectangle(this.x, this.y, this.w, this.h);
+		this.hitBox.setStroke("red");
+		this.hitBox.setFill("transparent");
 	}
 
-	render() {
+	render(targetCanvas: Canvas): void {
 		// Handle no Canvas error
 		if (!targetCanvas) {
 			throw new Error(
@@ -543,19 +586,19 @@ class Image extends GameObject {
 			let myImage = document.getElementById(this.id);
 			myImage.src = this.src;
 
-			c.drawImage(myImage, this.x, this.y, this.w, this.h);
+			targetCanvas.ctx.drawImage(myImage, this.x, this.y, this.w, this.h);
 
 			if (this.showHitBox) {
-				this.hitBox.draw();
+				this.hitBox.render(targetCanvas);
 			}
 		}
 	}
 
-	hover() {
+	hover(): boolean {
 		return this.hitBox.hover();
 	}
 
-	clicked() {
+	clicked(): boolean {
 		/*if (lastClick.x > this.x && lastClick.x < (this.x + this.width) && lastClick.y < this.y && lastClick.y > (this.y - this.height))	{
 			return true;
 		}*/
@@ -568,7 +611,7 @@ class Image extends GameObject {
 		throw new Error("lastClick has not been defined yet @ Image");
 	}
 
-	updateDimensions(newW, newH) {
+	updateDimensions(newW: any, newH: any): void {
 		this.w = newW;
 		this.h = newH;
 		this.hitBox.w = newW;

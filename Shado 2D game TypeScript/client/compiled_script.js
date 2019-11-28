@@ -14,6 +14,12 @@ function random(min, max) {
     }
     return Math.random() * (max - min) + min;
 }
+function floor(number) {
+    return Math.floor(number);
+}
+function randomColor() {
+    return "rgb(" + floor(random(0, 255)) + ", " + floor(random(0, 255)) + ", " + floor(random(0, 255)) + ")";
+}
 function distance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
@@ -40,7 +46,6 @@ window.addEventListener("mousemove", function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
 });
-"use strict";
 /***
  *
  * Shado MATRIX and VECTOR Library
@@ -59,7 +64,7 @@ var Matrix = /** @class */ (function () {
             }
         }
     }
-    Matrix.prototype.setCell = function (row, col, value) {
+    Matrix.prototype.setData = function (row, col, value) {
         this.data[row][col] = value;
     };
     Matrix.prototype.setMatrix = function (array) {
@@ -393,7 +398,7 @@ var Namespace = /** @class */ (function () {
 // Setup EnginGlobal Variables
 var EnginGlobal = new Namespace("EnginEnginGlobal");
 EnginGlobal.EnginGlobalBuffer = {};
-EnginGlobal.FPS = 244;
+EnginGlobal.FPS = 60;
 EnginGlobal.setFPS = function (newFPS) {
     EnginGlobal.FPS = newFPS;
 };
@@ -498,13 +503,7 @@ var GameObject = /** @class */ (function () {
     };
     GameObject.prototype.collides = function (other) {
         if (this instanceof Circle && other instanceof Circle) {
-            var dist = distance(this.x, this.y, other.x, other.y);
-            if (dist == 0) {
-                console.log(this);
-                console.log(other);
-                //throw new Error("");
-            }
-            return dist <= this.r + other.r;
+            return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
         }
     };
     return GameObject;
@@ -730,9 +729,9 @@ var Rectangle = /** @class */ (function (_super) {
     };
     return Rectangle;
 }(GameObject));
-var Text = /** @class */ (function (_super) {
-    __extends(Text, _super);
-    function Text(text, x, y, _a) {
+var ShadoText = /** @class */ (function (_super) {
+    __extends(ShadoText, _super);
+    function ShadoText(text, x, y, _a) {
         var font = _a.font, size = _a.size, color = _a.color, stroke = _a.stroke, background = _a.background;
         var _this = _super.call(this, "text") || this;
         _this.text = text;
@@ -748,7 +747,7 @@ var Text = /** @class */ (function (_super) {
         _this.hitBox = null;
         return _this;
     }
-    Text.prototype.render = function (targetCanvas) {
+    ShadoText.prototype.render = function (targetCanvas) {
         // Handle no canvas error
         if (!targetCanvas) {
             throw new Error("Connot render " +
@@ -774,40 +773,40 @@ var Text = /** @class */ (function (_super) {
         targetCanvas.ctx.fillText(this.text, this.x, this.y);
         targetCanvas.ctx.strokeText(this.text, this.x, this.y);
     };
-    Text.prototype.buildHitBox = function (targetCanvas) {
+    ShadoText.prototype.buildHitBox = function (targetCanvas) {
         // Hitbox from -10% to +20%
         this.hitBox = new Rectangle(this.x - this.width(targetCanvas) * 0.1, this.y - this.height(targetCanvas) / 2, this.width(targetCanvas) * 1.2, this.height(targetCanvas));
         this.hitBox.setFill(this.background);
         this.hitBox.setStroke("transparent");
         this.hitBox.render(targetCanvas);
     };
-    Text.prototype.width = function (targetCanvas) {
+    ShadoText.prototype.width = function (targetCanvas) {
         targetCanvas.ctx.font = this.fullStyle;
         return targetCanvas.ctx.measureText(this.text).width;
     };
-    Text.prototype.height = function (targetCanvas) {
+    ShadoText.prototype.height = function (targetCanvas) {
         //return this.size - this.size / 5;
         targetCanvas.ctx.font = this.fullStyle;
         var height = parseInt(targetCanvas.ctx.font.match(/\d+/), 10) * 2;
         return height;
     };
-    Text.prototype.hover = function (targetCanvas) {
+    ShadoText.prototype.hover = function (targetCanvas) {
         if (this.hitBox == null) {
-            buildHitBox(targetCanvas);
+            this.buildHitBox(targetCanvas);
         }
         return this.hitBox.hover();
     };
-    Text.prototype.clicked = function (targetCanvas) {
+    ShadoText.prototype.clicked = function (targetCanvas) {
         if (this.hitBox == null) {
-            buildHitBox(targetCanvas);
+            this.buildHitBox(targetCanvas);
         }
         return this.hitBox.clicked();
     };
-    return Text;
+    return ShadoText;
 }(GameObject));
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(src, x, y, w, h, id, showHitBox) {
+var ShadoImage = /** @class */ (function (_super) {
+    __extends(ShadoImage, _super);
+    function ShadoImage(src, x, y, w, h, id, showHitBox) {
         var _this = _super.call(this, "image") || this;
         _this.src = src;
         _this.x = x;
@@ -825,13 +824,12 @@ var Image = /** @class */ (function (_super) {
             img.setAttribute("style", "display: none");
             body.appendChild(img);
         }
-        _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h, {
-            stroke: "red",
-            fill: "transparent"
-        });
+        _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h);
+        _this.hitBox.setStroke("red");
+        _this.hitBox.setFill("transparent");
         return _this;
     }
-    Image.prototype.render = function () {
+    ShadoImage.prototype.render = function (targetCanvas) {
         // Handle no Canvas error
         if (!targetCanvas) {
             throw new Error("Connot render " +
@@ -852,16 +850,16 @@ var Image = /** @class */ (function (_super) {
         if (this.x + this.w >= 0 && this.x <= canvas.width) {
             var myImage = document.getElementById(this.id);
             myImage.src = this.src;
-            c.drawImage(myImage, this.x, this.y, this.w, this.h);
+            targetCanvas.ctx.drawImage(myImage, this.x, this.y, this.w, this.h);
             if (this.showHitBox) {
-                this.hitBox.draw();
+                this.hitBox.render(targetCanvas);
             }
         }
     };
-    Image.prototype.hover = function () {
+    ShadoImage.prototype.hover = function () {
         return this.hitBox.hover();
     };
-    Image.prototype.clicked = function () {
+    ShadoImage.prototype.clicked = function () {
         /*if (lastClick.x > this.x && lastClick.x < (this.x + this.width) && lastClick.y < this.y && lastClick.y > (this.y - this.height))	{
             return true;
         }*/
@@ -873,13 +871,13 @@ var Image = /** @class */ (function (_super) {
         }*/
         throw new Error("lastClick has not been defined yet @ Image");
     };
-    Image.prototype.updateDimensions = function (newW, newH) {
+    ShadoImage.prototype.updateDimensions = function (newW, newH) {
         this.w = newW;
         this.h = newH;
         this.hitBox.w = newW;
         this.hitBox.h = newH;
     };
-    return Image;
+    return ShadoImage;
 }(GameObject));
 /***
  * This file contais the render function that will go
@@ -891,7 +889,7 @@ var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
 canvas.setBackground("#191970"); // Render is implicitly called
 // Test
 var snow = [];
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 100; i++) {
     var temp = new Circle(random(0, canvas.width), random(0, canvas.height), random(1, 50));
     temp.enableCollision();
     temp.dx = random(0.01, 0.05);
@@ -904,12 +902,12 @@ function render() {
     // Clear canvas
     canvas.clear();
     // Show FPS
-    new Text((1000 / Time.deltaTime).toFixed(2), 100, 100, {
+    new ShadoText((1000 / Time.deltaTime).toFixed(2), 100, 100, {
         size: 70,
         color: "white"
     }).render(canvas);
     // SHow pause/Resume Text
-    var pauseText = new Text("Abort", 400, 100, {
+    var pauseText = new ShadoText("Abort", 400, 100, {
         size: 20,
         background: "black",
         color: "white"
@@ -922,25 +920,38 @@ function render() {
     // Draw stuff
     for (var _i = 0, snow_1 = snow; _i < snow_1.length; _i++) {
         var temp = snow_1[_i];
+        // Move the circles
         temp.move(temp.dx, temp.dy);
+        // If they go outside the canvas return them to the beginning
         if (temp.x + temp.r > canvas.width) {
             temp.x = -random(100);
         }
         if (temp.y > canvas.height) {
             temp.y = -random(100);
         }
+        // Detect collision if cicle if insdie canvas
         if (temp.x > -temp.r &&
             temp.x < canvas.width &&
             temp.y > -temp.r &&
             temp.y < canvas.height) {
             for (var _a = 0, snow_2 = snow; _a < snow_2.length; _a++) {
                 var other = snow_2[_a];
-                if (temp.collides(other)) {
-                    temp.setFill("green");
-                    break;
+                // Avoid to detect collision with itself
+                if (temp != other) {
+                    if (temp.collides(other)) {
+                        // Set a random color for the circle only if it doesn't
+                        // have 1. (To avoid flicker)
+                        if (!temp.storedColor) {
+                            temp.storedColor = randomColor();
+                        }
+                        temp.setFill(temp.storedColor);
+                        break;
+                    }
                 }
             }
+            // Redner the circle
             temp.render(canvas);
+            // Reset its color
             temp.setFill("white");
         }
     }

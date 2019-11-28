@@ -14,7 +14,7 @@ var Namespace = /** @class */ (function () {
 // Setup EnginGlobal Variables
 var EnginGlobal = new Namespace("EnginEnginGlobal");
 EnginGlobal.EnginGlobalBuffer = {};
-EnginGlobal.FPS = 244;
+EnginGlobal.FPS = 60;
 EnginGlobal.setFPS = function (newFPS) {
     EnginGlobal.FPS = newFPS;
 };

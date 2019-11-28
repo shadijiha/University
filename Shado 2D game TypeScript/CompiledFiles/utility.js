@@ -14,6 +14,12 @@ function random(min, max) {
     }
     return Math.random() * (max - min) + min;
 }
+function floor(number) {
+    return Math.floor(number);
+}
+function randomColor() {
+    return "rgb(" + floor(random(0, 255)) + ", " + floor(random(0, 255)) + ", " + floor(random(0, 255)) + ")";
+}
 function distance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }

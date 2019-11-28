@@ -25,7 +25,7 @@ class Namespace {
 // Setup EnginGlobal Variables
 const EnginGlobal = new Namespace("EnginEnginGlobal");
 EnginGlobal.EnginGlobalBuffer = {};
-EnginGlobal.FPS = 244;
+EnginGlobal.FPS = 60;
 EnginGlobal.setFPS = newFPS => {
 	EnginGlobal.FPS = newFPS;
 };

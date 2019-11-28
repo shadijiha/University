@@ -1,4 +1,3 @@
-"use strict";
 /***
  *
  * Shado MATRIX and VECTOR Library
@@ -17,7 +16,7 @@ var Matrix = /** @class */ (function () {
             }
         }
     }
-    Matrix.prototype.setCell = function (row, col, value) {
+    Matrix.prototype.setData = function (row, col, value) {
         this.data[row][col] = value;
     };
     Matrix.prototype.setMatrix = function (array) {

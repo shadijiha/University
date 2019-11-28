@@ -1,45 +1,35 @@
+"use strict";
 /***
  *
  * Shado MATRIX and VECTOR Library
  *
  */
 class Matrix {
-	private rows: number;
-	private cols: number;
-	private data: any[];
-
-	public constructor(rows: number, cols: number) {
+	constructor(rows, cols) {
 		this.rows = rows || 2;
 		this.cols = cols || this.rows;
 		this.data = [];
-
 		// Initialize matrix with 0s
 		for (let i = 0; i < this.rows; i++) {
 			this.data[i] = [];
-
 			for (let j = 0; j < this.cols; j++) {
 				this.data[i][j] = 0;
 			}
 		}
 	}
-
-	public setData(row: number, col: number, value: any): void {
+	setCell(row, col, value) {
 		this.data[row][col] = value;
 	}
-
-	public setMatrix(array: any[]): void {
+	setMatrix(array) {
 		this.data = array;
 		this.rows = array.length;
 		this.cols = array[0].length;
 	}
-
-	public getData(row: number, col: number): any {
+	getData(row, col) {
 		return this.data[row][col];
 	}
-
-	public randomize(max?: number): void {
+	randomize(max) {
 		max = Number(max) || 10;
-
 		// Fill matrix with random digits
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.cols; j++) {
@@ -47,15 +37,13 @@ class Matrix {
 			}
 		}
 	}
-
-	public identity(): void {
+	identity() {
 		if (this.rows != this.cols) {
 			console.log(
 				"Error! Connot transform current matrix to Identity matrix because rows and colums count doesn't match."
 			);
 			return;
 		}
-
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.cols; j++) {
 				if (i == j) {
@@ -66,10 +54,8 @@ class Matrix {
 			}
 		}
 	}
-
-	public add(n: any, overwrite?: boolean): any {
+	add(n, overwrite) {
 		overwrite = overwrite || true;
-
 		if (n instanceof Matrix) {
 			// Detect errors
 			if (this.cols != n.cols || this.rows != n.rows) {
@@ -78,7 +64,6 @@ class Matrix {
 				);
 				return;
 			}
-
 			// Sum
 			var temp = new Matrix(this.rows, this.cols);
 			for (let i = 0; i < temp.rows; i++) {
@@ -86,7 +71,6 @@ class Matrix {
 					temp.data[i][j] = this.data[i][j] + n.data[i][j];
 				}
 			}
-
 			// Update current Matrix or return new one
 			if (overwrite) {
 				this.data = temp.data;
@@ -109,10 +93,8 @@ class Matrix {
 			return;
 		}
 	}
-
-	public multiply(n: any, overwrite?: boolean): any {
+	multiply(n, overwrite) {
 		overwrite = overwrite || true;
-
 		if (n instanceof Matrix) {
 			// Detect error
 			if (this.cols != n.rows) {
@@ -121,21 +103,16 @@ class Matrix {
 				);
 				return;
 			}
-
 			var temp = new Matrix(this.rows, n.cols);
-
 			for (let i = 0; i < temp.rows; i++) {
 				for (let j = 0; j < temp.cols; j++) {
 					var sum = 0;
-
 					for (let k = 0; k < this.cols; k++) {
 						sum += this.data[i][k] * n.data[k][j];
 					}
-
 					temp.data[i][j] = sum;
 				}
 			}
-
 			// Update current Matrix
 			if (overwrite) {
 				this.data = temp.data;
@@ -158,30 +135,24 @@ class Matrix {
 			return;
 		}
 	}
-
-	public transpose(): void {
+	transpose() {
 		let temp = new Matrix(this.cols, this.rows);
-
 		for (let i = 0; i < temp.rows; i++) {
 			for (let j = 0; j < temp.cols; j++) {
 				temp.data[i][j] = this.data[j][i];
 			}
 		}
-
 		this.data = temp.data;
 	}
-
-	private LUdecomposition(): Matrix[] {
+	LUdecomposition() {
 		let U = new Matrix(this.rows, this.cols);
 		let L = new Matrix(this.rows, this.cols);
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.cols; j++) {
 				let sum = 0;
-
 				for (let k = 0; k <= i - 1; k++) {
 					sum = sum + L.data[j][k] * U.data[k][i];
 				}
-
 				if (i === j) {
 					U.data[i][j] = 1;
 				}
@@ -192,11 +163,9 @@ class Matrix {
 				}
 			}
 		}
-
 		return [L, U];
 	}
-
-	public determinant(): number {
+	determinant() {
 		// Detect Error
 		if (this.rows != this.cols) {
 			console.log(
@@ -204,11 +173,9 @@ class Matrix {
 			);
 			return;
 		}
-
 		var decomposition = this.LUdecomposition();
 		var temp = decomposition[0];
 		var mult = 1;
-
 		for (let i = 0; i < temp.rows; i++) {
 			for (let j = 0; j < temp.cols; j++) {
 				if (i == j) {
@@ -216,11 +183,9 @@ class Matrix {
 				}
 			}
 		}
-
 		return Math.floor(mult);
 	}
-
-	public log(): void {
+	log() {
 		console.table(this.data);
 	}
 }
@@ -230,7 +195,7 @@ class Vector {
 	public y: number;
 	public z: number;
 
-	public constructor(x: number, y: number, z?: number) {
+	public constructor(x: number, y: number, z: number) {
 		this.x = x;
 		this.y = y;
 		this.z = z || 0;
@@ -245,185 +210,144 @@ class Vector {
 		this.random2D();
 		this.z = Math.random();
 	}
-
 	public getX(): number {
 		return this.x;
 	}
-
 	public getY(): number {
 		return this.y;
 	}
-
 	public getZ(): number {
 		return this.z;
 	}
-
 	public add(objVector: Vector): void {
 		this.x += objVector.x;
 		this.y += objVector.y;
 		this.z += objVector.z;
 	}
-
 	public substract(objVector: Vector): void {
 		this.x -= objVector.x;
 		this.y -= objVector.y;
 		this.z -= objVector.z;
 	}
-
 	public multiply(k: number) {
 		this.x *= k;
 		this.y *= k;
 		this.z *= k;
 	}
-
-	public scale(k: number) {
+	public scale(k: number): void {
 		this.multiply(k);
 	}
-
 	public mag(): number {
 		return Math.sqrt(
 			Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2)
 		);
 	}
-
 	public normalize(): void {
 		const TEMP = this.mag();
-
 		this.x = this.x / TEMP;
 		this.y = this.y / TEMP;
 		this.z = this.z / TEMP;
 	}
-
 	public project(objVector: Vector): Vector {
 		const CONSTANT = this.dotProduct(objVector) / Math.pow(objVector.mag(), 2);
 		let result = new Vector(objVector.x, objVector.y, objVector.z);
 		result.multiply(CONSTANT);
-
 		return result;
 	}
-
 	public dotProduct(objVector: Vector): number {
 		return this.x * objVector.x + this.y * objVector.y + this.z * objVector.z;
 	}
-
 	public crossProduct(objVector: Vector): Vector {
 		let i = this.y * objVector.z - this.z * objVector.y;
 		let j = -(this.x * objVector.z - this.z * objVector.x);
 		let k = this.x * objVector.y - this.y * objVector.x;
-
 		return new Vector(i, j, k);
 	}
 }
 
 class Complex {
-	private a: number;
-	private b: number;
-	private phi: number;
-	private r: number;
-
-	public constructor(a?: number, b?: number) {
+	constructor(a, b) {
 		this.a = a || 0;
 		this.b = b || 0;
 		this.phi = Math.atan(b / a);
 		this.r = Math.sqrt(a * a + b * b);
 	}
-
-	public fromPolar(r: number, phi: number): void {
+	fromPolar(r, phi) {
 		this.phi = phi;
 		this.r = r;
 		this.a = r * Math.cos(phi);
 		this.b = r * Math.sin(phi);
 	}
-
-	public equals(complexNum: Complex): boolean {
+	equals(complexNum) {
 		if (this.a == complexNum.a && this.b == complexNum.b) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-	public render(arg?: string): string {
+	render(arg) {
 		if (arg != undefined && arg.toLowerCase() == "polar") {
 			return `${this.r} * ( cos(${this.phi}) + i sin(${this.phi}) )`;
 		} else {
 			return `${this.a} + ${this.b} i`;
 		}
 	}
-
-	public sum(numB: Complex): Complex {
+	sum(numB) {
 		return new Complex(this.a + numB.a, this.b + numB.b);
 	}
-
-	public substract(numB: Complex): Complex {
+	substract(numB) {
 		return new Complex(this.a - numB.a, this.b - numB.b);
 	}
-
-	public multiply(numB: Complex): Complex {
+	multiply(numB) {
 		var result = new Complex();
 		result.fromPolar(this.r * numB.r, this.phi + numB.phi);
-
 		return result;
 	}
-
-	public divide(numB: Complex): Complex {
+	divide(numB) {
 		var result = new Complex();
 		result.fromPolar(this.r / numB.r, this.phi - numB.phi);
-
 		return result;
 	}
-
-	public conjugate(): Complex {
+	conjugate() {
 		return new Complex(this.a, -1 * this.b);
 	}
-
-	public power(exposant: number): Complex {
+	power(exposant) {
 		var result = new Complex();
 		result.fromPolar(Math.pow(this.r, exposant), this.phi * exposant);
-
 		return result;
 	}
-
-	public root(degree: number): Complex[] {
+	root(degree) {
 		var result = [];
 		var tempR = Math.pow(this.r, 1 / degree);
-
 		for (var i = 0; i < degree; i++) {
 			var tempPhi = (this.phi + 2 * Math.PI * i) / degree;
 			var temp = new Complex();
 			temp.fromPolar(tempR, tempPhi);
-
 			result.push(temp);
 		}
-
 		return result;
 	}
-
-	public renderRoot(degree: number): string {
+	renderRoot(degree) {
 		var roots = this.root(degree);
 		var str = "";
-
 		for (let root of roots) {
 			str += root.render();
 			str += "\n";
 		}
-
 		return str;
 	}
-
-	public realPart(): number {
+	realPart() {
 		return this.a;
 	}
-
-	public imaginaryPart(): number {
+	imaginaryPart() {
 		return this.b;
 	}
-
-	public mag(): number {
+	mag() {
 		return this.r;
 	}
-
-	public log(arg?: string): void {
+	log(arg) {
 		console.log(this.render(arg));
 	}
 }
+
+//# sourceMappingURL=MatrixVector.js.map

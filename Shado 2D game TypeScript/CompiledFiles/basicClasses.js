@@ -96,13 +96,7 @@ var GameObject = /** @class */ (function () {
     };
     GameObject.prototype.collides = function (other) {
         if (this instanceof Circle && other instanceof Circle) {
-            var dist = distance(this.x, this.y, other.x, other.y);
-            if (dist == 0) {
-                console.log(this);
-                console.log(other);
-                //throw new Error("");
-            }
-            return dist <= this.r + other.r;
+            return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
         }
     };
     return GameObject;
@@ -328,9 +322,9 @@ var Rectangle = /** @class */ (function (_super) {
     };
     return Rectangle;
 }(GameObject));
-var Text = /** @class */ (function (_super) {
-    __extends(Text, _super);
-    function Text(text, x, y, _a) {
+var ShadoText = /** @class */ (function (_super) {
+    __extends(ShadoText, _super);
+    function ShadoText(text, x, y, _a) {
         var font = _a.font, size = _a.size, color = _a.color, stroke = _a.stroke, background = _a.background;
         var _this = _super.call(this, "text") || this;
         _this.text = text;
@@ -346,7 +340,7 @@ var Text = /** @class */ (function (_super) {
         _this.hitBox = null;
         return _this;
     }
-    Text.prototype.render = function (targetCanvas) {
+    ShadoText.prototype.render = function (targetCanvas) {
         // Handle no canvas error
         if (!targetCanvas) {
             throw new Error("Connot render " +
@@ -372,40 +366,40 @@ var Text = /** @class */ (function (_super) {
         targetCanvas.ctx.fillText(this.text, this.x, this.y);
         targetCanvas.ctx.strokeText(this.text, this.x, this.y);
     };
-    Text.prototype.buildHitBox = function (targetCanvas) {
+    ShadoText.prototype.buildHitBox = function (targetCanvas) {
         // Hitbox from -10% to +20%
         this.hitBox = new Rectangle(this.x - this.width(targetCanvas) * 0.1, this.y - this.height(targetCanvas) / 2, this.width(targetCanvas) * 1.2, this.height(targetCanvas));
         this.hitBox.setFill(this.background);
         this.hitBox.setStroke("transparent");
         this.hitBox.render(targetCanvas);
     };
-    Text.prototype.width = function (targetCanvas) {
+    ShadoText.prototype.width = function (targetCanvas) {
         targetCanvas.ctx.font = this.fullStyle;
         return targetCanvas.ctx.measureText(this.text).width;
     };
-    Text.prototype.height = function (targetCanvas) {
+    ShadoText.prototype.height = function (targetCanvas) {
         //return this.size - this.size / 5;
         targetCanvas.ctx.font = this.fullStyle;
         var height = parseInt(targetCanvas.ctx.font.match(/\d+/), 10) * 2;
         return height;
     };
-    Text.prototype.hover = function (targetCanvas) {
+    ShadoText.prototype.hover = function (targetCanvas) {
         if (this.hitBox == null) {
-            buildHitBox(targetCanvas);
+            this.buildHitBox(targetCanvas);
         }
         return this.hitBox.hover();
     };
-    Text.prototype.clicked = function (targetCanvas) {
+    ShadoText.prototype.clicked = function (targetCanvas) {
         if (this.hitBox == null) {
-            buildHitBox(targetCanvas);
+            this.buildHitBox(targetCanvas);
         }
         return this.hitBox.clicked();
     };
-    return Text;
+    return ShadoText;
 }(GameObject));
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(src, x, y, w, h, id, showHitBox) {
+var ShadoImage = /** @class */ (function (_super) {
+    __extends(ShadoImage, _super);
+    function ShadoImage(src, x, y, w, h, id, showHitBox) {
         var _this = _super.call(this, "image") || this;
         _this.src = src;
         _this.x = x;
@@ -423,13 +417,12 @@ var Image = /** @class */ (function (_super) {
             img.setAttribute("style", "display: none");
             body.appendChild(img);
         }
-        _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h, {
-            stroke: "red",
-            fill: "transparent"
-        });
+        _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h);
+        _this.hitBox.setStroke("red");
+        _this.hitBox.setFill("transparent");
         return _this;
     }
-    Image.prototype.render = function () {
+    ShadoImage.prototype.render = function (targetCanvas) {
         // Handle no Canvas error
         if (!targetCanvas) {
             throw new Error("Connot render " +
@@ -450,16 +443,16 @@ var Image = /** @class */ (function (_super) {
         if (this.x + this.w >= 0 && this.x <= canvas.width) {
             var myImage = document.getElementById(this.id);
             myImage.src = this.src;
-            c.drawImage(myImage, this.x, this.y, this.w, this.h);
+            targetCanvas.ctx.drawImage(myImage, this.x, this.y, this.w, this.h);
             if (this.showHitBox) {
-                this.hitBox.draw();
+                this.hitBox.render(targetCanvas);
             }
         }
     };
-    Image.prototype.hover = function () {
+    ShadoImage.prototype.hover = function () {
         return this.hitBox.hover();
     };
-    Image.prototype.clicked = function () {
+    ShadoImage.prototype.clicked = function () {
         /*if (lastClick.x > this.x && lastClick.x < (this.x + this.width) && lastClick.y < this.y && lastClick.y > (this.y - this.height))	{
             return true;
         }*/
@@ -471,11 +464,11 @@ var Image = /** @class */ (function (_super) {
         }*/
         throw new Error("lastClick has not been defined yet @ Image");
     };
-    Image.prototype.updateDimensions = function (newW, newH) {
+    ShadoImage.prototype.updateDimensions = function (newW, newH) {
         this.w = newW;
         this.h = newH;
         this.hitBox.w = newW;
         this.hitBox.h = newH;
     };
-    return Image;
+    return ShadoImage;
 }(GameObject));
