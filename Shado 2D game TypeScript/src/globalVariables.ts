@@ -13,6 +13,8 @@ class Namespace {
 	public collisionObjects: any[];
 	public deltaTime: number;
 	public setFPS: Function;
+	public PAUSED: boolean;
+	public oldFPS: number;
 
 	constructor(name: string) {
 		this.name = name;

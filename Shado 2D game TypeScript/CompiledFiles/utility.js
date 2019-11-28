@@ -18,12 +18,12 @@ function distance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 }
 function pause() {
-    global.oldFPS = global.FPS;
-    global.FPS = 0;
-    global.PAUSED = true;
+    EnginGlobal.oldFPS = EnginGlobal.FPS;
+    EnginGlobal.FPS = 0;
+    EnginGlobal.PAUSED = true;
 }
 function resume() {
-    global.FPS = global.oldFPS;
-    global.PAUSED = false;
+    EnginGlobal.FPS = EnginGlobal.oldFPS;
+    EnginGlobal.PAUSED = false;
     gameLoop();
 }
