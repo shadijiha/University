@@ -1,1 +1,0 @@
-tsc test.ts

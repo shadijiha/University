@@ -18,23 +18,54 @@
 #define extends :
 #define of :
 
-int question3(int index) {
-	if (index == 0) {
+int fibonacci(int n) {
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int lucas(int n) {
+	if (n == 0)
 		return 2;
-	}
-	else
-	{
-		return question3(index - 1) * question3(index - 1) - 1;
-	}
+	if (n == 1)
+		return 1;
+	return lucas(n - 1) + lucas(n - 2);
 }
 
 int main()
 {
 	typedef std::string string;
 	//===================================
+	int n = 0;
+	int action = 0;
+	int choice = 1;
 
+	while (action == 0) {
+		std::cout << "Do you want fibonacci or Lucas (1 or 0): ";
+		std::cin >> choice;
 
-
+		if (choice == 1) {
+			std::cout << "Enter the nth fibonacci number you want: ";
+			std::cin >> n;
+			std::cout << "\n You want the " << n << "th number of fibonacci series which is " << fibonacci(n);
+			std::cout << "\n f_" << n << " = " << fibonacci(n) << std::endl;
+			std::cout << "\n\n Do you want to exit (1 or 0)? ";
+			std::cin >> action;
+			std::cout << "\n\n";
+		}
+		else
+		{
+			std::cout << "Enter the nth Lucas number you want: ";
+			std::cin >> n;
+			std::cout << "\n You want the " << n << "th number of Lucas series which is " << lucas(n);
+			std::cout << "\n l_" << n << " = " << lucas(n) << std::endl;
+			std::cout << "\n\n Do you want to exit (1 or 0)? ";
+			std::cin >> action;
+			std::cout << "\n\n";
+		}
+	}
 
 	//===================================
 
