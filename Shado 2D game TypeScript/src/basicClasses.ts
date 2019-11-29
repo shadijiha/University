@@ -11,9 +11,12 @@ class GameObject {
 	protected id: string;
 	protected buffer: any;
 	protected collision: boolean;
-	protected static: boolean;
+	public static: boolean;
 	public x: number;
 	public y: number;
+	public dx: number;
+	public dy: number;
+	public r: number;
 
 	constructor(name: string) {
 		this.name = name;
@@ -104,8 +107,37 @@ class GameObject {
 	}
 
 	collides(other: GameObject): boolean {
+		if (!this.collision || !other.collision) {
+			return;
+		}
+
 		if (this instanceof Circle && other instanceof Circle) {
 			return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
+		} else if (this instanceof Circle && other instanceof Rectangle) {
+			const hitbox = new Rectangle(this.x, this.y, this.r * 2, this.r * 2);
+
+			return (
+				hitbox.x + hitbox.w >= other.x &&
+				hitbox.x <= other.x + other.w &&
+				hitbox.y + hitbox.h >= other.y &&
+				hitbox.y <= other.y + other.h
+			);
+		} else if (this instanceof Rectangle && other instanceof Circle) {
+			const hitbox = new Rectangle(other.x, other.y, other.r * 2, other.r * 2);
+
+			return (
+				this.x + this.w >= hitbox.x &&
+				this.x <= hitbox.x + hitbox.w &&
+				this.y + this.h >= hitbox.y &&
+				this.y <= hitbox.y + hitbox.h
+			);
+		} else if (this instanceof Rectangle && other instanceof Rectangle) {
+			return (
+				this.x + this.w >= other.x &&
+				this.x <= other.x + other.w &&
+				this.y + this.h >= other.y &&
+				this.y <= other.y + other.h
+			);
 		}
 	}
 }
@@ -185,6 +217,10 @@ class Canvas extends GameObject {
 		toY = toY || this.h;
 
 		this.ctx.clearRect(fromX, fromY, toX, toY);
+	}
+
+	scale(x: number, y: number) {
+		this.ctx.scale(x, y);
 	}
 
 	setPosition(newX: number, newY: number): void {
@@ -402,6 +438,17 @@ class Rectangle extends GameObject {
 	}
 }
 
+class Vertex extends GameObject {
+	public x: number;
+	public y: number;
+
+	public constructor(x: number, y: number) {
+		super("vertex");
+		this.x = x;
+		this.y = y;
+	}
+}
+
 class ShadoText extends GameObject {
 	public text: string;
 	public x: number;
@@ -418,7 +465,19 @@ class ShadoText extends GameObject {
 		text: string,
 		x: number,
 		y: number,
-		{ font, size, color, stroke, background }
+		{
+			font,
+			size,
+			color,
+			stroke,
+			background
+		}: {
+			font?: string;
+			size?: number;
+			color?: string;
+			stroke?: string;
+			background?: string;
+		}
 	) {
 		super("text");
 		this.text = text;
@@ -583,7 +642,7 @@ class ShadoImage extends GameObject {
 		this.hitBox.y = this.y;
 
 		if (this.x + this.w >= 0 && this.x <= canvas.width) {
-			let myImage = document.getElementById(this.id);
+			let myImage = <HTMLImageElement>document.getElementById(this.id);
 			myImage.src = this.src;
 
 			targetCanvas.ctx.drawImage(myImage, this.x, this.y, this.w, this.h);

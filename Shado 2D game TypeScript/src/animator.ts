@@ -9,13 +9,23 @@ const canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
 canvas.setBackground("#191970"); // Render is implicitly called
 
 // Test
-let snow = [];
-for (let i = 0; i < 100; i++) {
-	const temp = new Circle(
-		random(0, canvas.width),
-		random(0, canvas.height),
-		random(1, 50)
-	);
+let snow: any[] = [];
+for (let i = 0; i < 200; i++) {
+	const d: number = random(1, 30);
+	let temp: any;
+
+	// generate random number to determine if object is Circle or Rectangle
+	if (random(0, 1) > 0.5) {
+		temp = new Rectangle(
+			random(0, canvas.width),
+			random(0, canvas.height),
+			d,
+			d
+		);
+	} else {
+		temp = new Circle(random(0, canvas.width), random(0, canvas.height), d);
+	}
+
 	temp.enableCollision();
 	temp.dx = random(0.01, 0.05);
 	temp.dy = random(0, 0.02);
@@ -24,9 +34,19 @@ for (let i = 0; i < 100; i++) {
 }
 
 // For game Loop see "index.js"
+const SCALER = {
+	x: 0.75,
+	y: 0.75
+};
+canvas.scale(SCALER.x, SCALER.y);
 function render() {
 	// Clear canvas
-	canvas.clear();
+	canvas.clear(
+		0,
+		0,
+		canvas.width * (1 + (1 - SCALER.x)),
+		canvas.height * (1 + (1 - SCALER.y))
+	);
 
 	// Show FPS
 	new ShadoText((1000 / Time.deltaTime).toFixed(2), 100, 100, {
@@ -49,6 +69,11 @@ function render() {
 
 	// Draw stuff
 	for (let temp of snow) {
+		// If the object is a Rectangle define R for it
+		if (temp instanceof Rectangle) {
+			temp.r = temp.w;
+		}
+
 		// Move the circles
 		temp.move(temp.dx, temp.dy);
 
@@ -60,7 +85,7 @@ function render() {
 			temp.y = -random(100);
 		}
 
-		// Detect collision if cicle if insdie canvas
+		// Detect collision if Shape if insdie canvas
 		if (
 			temp.x > -temp.r &&
 			temp.x < canvas.width &&
@@ -71,7 +96,7 @@ function render() {
 				// Avoid to detect collision with itself
 				if (temp != other) {
 					if (temp.collides(other)) {
-						// Set a random color for the circle only if it doesn't
+						// Set a random color for the shape only if it doesn't
 						// have 1. (To avoid flicker)
 						if (!temp.storedColor) {
 							temp.storedColor = randomColor();
@@ -82,7 +107,7 @@ function render() {
 				}
 			}
 
-			// Redner the circle
+			// Redner the shape
 			temp.render(canvas);
 
 			// Reset its color

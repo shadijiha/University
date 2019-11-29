@@ -4,5 +4,8 @@
 		"target": "es5",
 		"module": "commonjs",
 		"sourceMap": false
-    }
+    },
+	"exclude": [
+        "src/old/*.ts"
+    ]
 }

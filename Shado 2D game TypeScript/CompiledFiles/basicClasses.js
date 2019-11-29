@@ -95,8 +95,31 @@ var GameObject = /** @class */ (function () {
         }
     };
     GameObject.prototype.collides = function (other) {
+        if (!this.collision || !other.collision) {
+            return;
+        }
         if (this instanceof Circle && other instanceof Circle) {
             return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
+        }
+        else if (this instanceof Circle && other instanceof Rectangle) {
+            var hitbox = new Rectangle(this.x, this.y, this.r * 2, this.r * 2);
+            return (hitbox.x + hitbox.w >= other.x &&
+                hitbox.x <= other.x + other.w &&
+                hitbox.y + hitbox.h >= other.y &&
+                hitbox.y <= other.y + other.h);
+        }
+        else if (this instanceof Rectangle && other instanceof Circle) {
+            var hitbox = new Rectangle(other.x, other.y, other.r * 2, other.r * 2);
+            return (this.x + this.w >= hitbox.x &&
+                this.x <= hitbox.x + hitbox.w &&
+                this.y + this.h >= hitbox.y &&
+                this.y <= hitbox.y + hitbox.h);
+        }
+        else if (this instanceof Rectangle && other instanceof Rectangle) {
+            return (this.x + this.w >= other.x &&
+                this.x <= other.x + other.w &&
+                this.y + this.h >= other.y &&
+                this.y <= other.y + other.h);
         }
     };
     return GameObject;
@@ -155,6 +178,9 @@ var Canvas = /** @class */ (function (_super) {
         toX = toX || this.w;
         toY = toY || this.h;
         this.ctx.clearRect(fromX, fromY, toX, toY);
+    };
+    Canvas.prototype.scale = function (x, y) {
+        this.ctx.scale(x, y);
     };
     Canvas.prototype.setPosition = function (newX, newY) {
         this.x = newX || this.x;
@@ -321,6 +347,16 @@ var Rectangle = /** @class */ (function (_super) {
         this.lineWidth = newLineWidth;
     };
     return Rectangle;
+}(GameObject));
+var Vertex = /** @class */ (function (_super) {
+    __extends(Vertex, _super);
+    function Vertex(x, y) {
+        var _this = _super.call(this, "vertex") || this;
+        _this.x = x;
+        _this.y = y;
+        return _this;
+    }
+    return Vertex;
 }(GameObject));
 var ShadoText = /** @class */ (function (_super) {
     __extends(ShadoText, _super);

@@ -502,8 +502,31 @@ var GameObject = /** @class */ (function () {
         }
     };
     GameObject.prototype.collides = function (other) {
+        if (!this.collision || !other.collision) {
+            return;
+        }
         if (this instanceof Circle && other instanceof Circle) {
             return distance(this.x, this.y, other.x, other.y) <= this.r + other.r;
+        }
+        else if (this instanceof Circle && other instanceof Rectangle) {
+            var hitbox = new Rectangle(this.x, this.y, this.r * 2, this.r * 2);
+            return (hitbox.x + hitbox.w >= other.x &&
+                hitbox.x <= other.x + other.w &&
+                hitbox.y + hitbox.h >= other.y &&
+                hitbox.y <= other.y + other.h);
+        }
+        else if (this instanceof Rectangle && other instanceof Circle) {
+            var hitbox = new Rectangle(other.x, other.y, other.r * 2, other.r * 2);
+            return (this.x + this.w >= hitbox.x &&
+                this.x <= hitbox.x + hitbox.w &&
+                this.y + this.h >= hitbox.y &&
+                this.y <= hitbox.y + hitbox.h);
+        }
+        else if (this instanceof Rectangle && other instanceof Rectangle) {
+            return (this.x + this.w >= other.x &&
+                this.x <= other.x + other.w &&
+                this.y + this.h >= other.y &&
+                this.y <= other.y + other.h);
         }
     };
     return GameObject;
@@ -562,6 +585,9 @@ var Canvas = /** @class */ (function (_super) {
         toX = toX || this.w;
         toY = toY || this.h;
         this.ctx.clearRect(fromX, fromY, toX, toY);
+    };
+    Canvas.prototype.scale = function (x, y) {
+        this.ctx.scale(x, y);
     };
     Canvas.prototype.setPosition = function (newX, newY) {
         this.x = newX || this.x;
@@ -729,6 +755,16 @@ var Rectangle = /** @class */ (function (_super) {
     };
     return Rectangle;
 }(GameObject));
+var Vertex = /** @class */ (function (_super) {
+    __extends(Vertex, _super);
+    function Vertex(x, y) {
+        var _this = _super.call(this, "vertex") || this;
+        _this.x = x;
+        _this.y = y;
+        return _this;
+    }
+    return Vertex;
+}(GameObject));
 var ShadoText = /** @class */ (function (_super) {
     __extends(ShadoText, _super);
     function ShadoText(text, x, y, _a) {
@@ -889,8 +925,16 @@ var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
 canvas.setBackground("#191970"); // Render is implicitly called
 // Test
 var snow = [];
-for (var i = 0; i < 100; i++) {
-    var temp = new Circle(random(0, canvas.width), random(0, canvas.height), random(1, 50));
+for (var i = 0; i < 200; i++) {
+    var d = random(1, 30);
+    var temp = void 0;
+    // generate random number to determine if object is Circle or Rectangle
+    if (random(0, 1) > 0.5) {
+        temp = new Rectangle(random(0, canvas.width), random(0, canvas.height), d, d);
+    }
+    else {
+        temp = new Circle(random(0, canvas.width), random(0, canvas.height), d);
+    }
     temp.enableCollision();
     temp.dx = random(0.01, 0.05);
     temp.dy = random(0, 0.02);
@@ -898,9 +942,14 @@ for (var i = 0; i < 100; i++) {
     snow.push(temp);
 }
 // For game Loop see "index.js"
+var SCALER = {
+    x: 0.75,
+    y: 0.75
+};
+canvas.scale(SCALER.x, SCALER.y);
 function render() {
     // Clear canvas
-    canvas.clear();
+    canvas.clear(0, 0, canvas.width * (1 + (1 - SCALER.x)), canvas.height * (1 + (1 - SCALER.y)));
     // Show FPS
     new ShadoText((1000 / Time.deltaTime).toFixed(2), 100, 100, {
         size: 70,
@@ -920,6 +969,10 @@ function render() {
     // Draw stuff
     for (var _i = 0, snow_1 = snow; _i < snow_1.length; _i++) {
         var temp = snow_1[_i];
+        // If the object is a Rectangle define R for it
+        if (temp instanceof Rectangle) {
+            temp.r = temp.w;
+        }
         // Move the circles
         temp.move(temp.dx, temp.dy);
         // If they go outside the canvas return them to the beginning
@@ -929,7 +982,7 @@ function render() {
         if (temp.y > canvas.height) {
             temp.y = -random(100);
         }
-        // Detect collision if cicle if insdie canvas
+        // Detect collision if Shape if insdie canvas
         if (temp.x > -temp.r &&
             temp.x < canvas.width &&
             temp.y > -temp.r &&
@@ -939,7 +992,7 @@ function render() {
                 // Avoid to detect collision with itself
                 if (temp != other) {
                     if (temp.collides(other)) {
-                        // Set a random color for the circle only if it doesn't
+                        // Set a random color for the shape only if it doesn't
                         // have 1. (To avoid flicker)
                         if (!temp.storedColor) {
                             temp.storedColor = randomColor();
@@ -949,7 +1002,7 @@ function render() {
                     }
                 }
             }
-            // Redner the circle
+            // Redner the shape
             temp.render(canvas);
             // Reset its color
             temp.setFill("white");
