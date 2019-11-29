@@ -5,6 +5,11 @@
 
 package app;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ShadoMath.Vector;
+
 public abstract class Main {
 
 	public static final void main(String[] args) {
@@ -29,6 +34,20 @@ public abstract class Main {
 //			}
 //		}, 0, 1000);
 
+		List<Vector> test = new ArrayList<Vector>();
+
+		for (int i = 0; i < 5; i++) {
+			test.add(new Vector());
+		}
+
+		// Test stream
+		test.stream().forEach(Vector::print);
+
+	}
+
+	public static String getObjectName(Object obj) {
+		String[] temp = obj.getClass().getName().split("\\.");
+		return temp[temp.length - 1];
 	}
 
 	public static <T> void print(T... args) {
