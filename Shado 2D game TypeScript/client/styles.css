@@ -1,0 +1,11 @@
+@media (prefers-color-scheme: dark) {
+	canvas {
+		background-color: rgb(0, 0, 155);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	canvas {
+		background-color: lightblue;
+	}
+}

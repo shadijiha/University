@@ -31,7 +31,7 @@ public abstract class Main {
 
 	}
 
-	public static <T> void print(T... args) {
+	public static <T> void print(@SuppressWarnings("unchecked") T... args) {
 		for (T arg : args)
 			System.out.print(arg + " ");
 		System.out.println();

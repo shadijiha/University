@@ -3,7 +3,6 @@
  * to the game loop
  *
  */
-
 // Setup main canvas
 const canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
 canvas.setBackground("#191970"); // Render is implicitly called

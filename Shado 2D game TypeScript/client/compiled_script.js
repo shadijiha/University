@@ -883,7 +883,7 @@ var ShadoImage = /** @class */ (function (_super) {
         }
         this.hitBox.x = this.x;
         this.hitBox.y = this.y;
-        if (this.x + this.w >= 0 && this.x <= canvas.width) {
+        if (this.x + this.w >= 0 && this.x <= targetCanvas.width) {
             var myImage = document.getElementById(this.id);
             myImage.src = this.src;
             targetCanvas.ctx.drawImage(myImage, this.x, this.y, this.w, this.h);
