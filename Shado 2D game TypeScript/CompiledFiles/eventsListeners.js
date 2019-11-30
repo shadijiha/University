@@ -1,8 +1,3 @@
-/**
- *
- * Events
- *
- */
 var mouse = {
     x: undefined,
     y: undefined

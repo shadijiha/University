@@ -1,14 +1,8 @@
-/***
- *
- * Shado MATRIX and VECTOR Library
- *
- */
-var Matrix = /** @class */ (function () {
+var Matrix = (function () {
     function Matrix(rows, cols) {
         this.rows = rows || 2;
         this.cols = cols || this.rows;
         this.data = [];
-        // Initialize matrix with 0s
         for (var i = 0; i < this.rows; i++) {
             this.data[i] = [];
             for (var j = 0; j < this.cols; j++) {
@@ -29,7 +23,6 @@ var Matrix = /** @class */ (function () {
     };
     Matrix.prototype.randomize = function (max) {
         max = Number(max) || 10;
-        // Fill matrix with random digits
         for (var i = 0; i < this.rows; i++) {
             for (var j = 0; j < this.cols; j++) {
                 this.data[i][j] = Math.floor(Math.random() * max);
@@ -55,19 +48,16 @@ var Matrix = /** @class */ (function () {
     Matrix.prototype.add = function (n, overwrite) {
         overwrite = overwrite || true;
         if (n instanceof Matrix) {
-            // Detect errors
             if (this.cols != n.cols || this.rows != n.rows) {
                 console.log("Error! Connot proform Matrix sum operation on matrices with diffrent rows and/or colums count.");
                 return;
             }
-            // Sum
             var temp = new Matrix(this.rows, this.cols);
             for (var i = 0; i < temp.rows; i++) {
                 for (var j = 0; j < temp.cols; j++) {
                     temp.data[i][j] = this.data[i][j] + n.data[i][j];
                 }
             }
-            // Update current Matrix or return new one
             if (overwrite) {
                 this.data = temp.data;
             }
@@ -90,7 +80,6 @@ var Matrix = /** @class */ (function () {
     Matrix.prototype.multiply = function (n, overwrite) {
         overwrite = overwrite || true;
         if (n instanceof Matrix) {
-            // Detect error
             if (this.cols != n.rows) {
                 console.log("Error! Connot proform Matrix multiplication operation on matrices because Matrix A colums is not equal to Matrix B rows.");
                 return;
@@ -105,7 +94,6 @@ var Matrix = /** @class */ (function () {
                     temp.data[i][j] = sum;
                 }
             }
-            // Update current Matrix
             if (overwrite) {
                 this.data = temp.data;
             }
@@ -157,7 +145,6 @@ var Matrix = /** @class */ (function () {
         return [L, U];
     };
     Matrix.prototype.determinant = function () {
-        // Detect Error
         if (this.rows != this.cols) {
             console.log("Error! This matrix has diffrent row and colums count. Thus, the determinant cannot be calculated.");
             return;
@@ -179,7 +166,7 @@ var Matrix = /** @class */ (function () {
     };
     return Matrix;
 }());
-var Vector = /** @class */ (function () {
+var Vector = (function () {
     function Vector(x, y, z) {
         this.x = x;
         this.y = y;
@@ -246,7 +233,7 @@ var Vector = /** @class */ (function () {
     };
     return Vector;
 }());
-var Complex = /** @class */ (function () {
+var Complex = (function () {
     function Complex(a, b) {
         this.a = a || 0;
         this.b = b || 0;
