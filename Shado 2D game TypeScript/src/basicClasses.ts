@@ -138,6 +138,39 @@ class GameObject {
 				this.y + this.h >= other.y &&
 				this.y <= other.y + other.h
 			);
+		} else if (this instanceof Circle && other instanceof Vertex) {
+			return distance(this.x, this.y, other.x, other.y) <= this.r;
+		} else if (this instanceof Rectangle && other instanceof Vertex) {
+			return (
+				other.x > this.x &&
+				other.x < this.x + this.w &&
+				other.y > this.y &&
+				other.y < this.y + this.h
+			);
+		}
+	}
+
+	protected parseToWidth(percentage: any): number {
+		if (isNaN(percentage)) {
+			percentage = percentage.split("");
+			percentage.pop();
+			percentage = percentage.join("");
+			percentage = Number(percentage / 100) * window.innerWidth;
+			return percentage;
+		} else {
+			return percentage;
+		}
+	}
+
+	protected parseToHeight(percentage: any): number {
+		if (isNaN(percentage)) {
+			percentage = percentage.split("");
+			percentage.pop();
+			percentage = percentage.join("");
+			percentage = Number(percentage / 100) * window.innerHeight;
+			return percentage;
+		} else {
+			return percentage;
 		}
 	}
 }

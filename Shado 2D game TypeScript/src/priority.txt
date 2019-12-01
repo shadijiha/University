@@ -3,5 +3,6 @@ eventsListeners.js
 MatrixVector.js
 globalVariables.js
 basicClasses.js
+gameModules.js
 animator.js
 index.js

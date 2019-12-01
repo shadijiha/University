@@ -96,6 +96,39 @@ var GameObject = (function () {
                 this.y + this.h >= other.y &&
                 this.y <= other.y + other.h);
         }
+        else if (this instanceof Circle && other instanceof Vertex) {
+            return distance(this.x, this.y, other.x, other.y) <= this.r;
+        }
+        else if (this instanceof Rectangle && other instanceof Vertex) {
+            return (other.x > this.x &&
+                other.x < this.x + this.w &&
+                other.y > this.y &&
+                other.y < this.y + this.h);
+        }
+    };
+    GameObject.prototype.parseToWidth = function (percentage) {
+        if (isNaN(percentage)) {
+            percentage = percentage.split("");
+            percentage.pop();
+            percentage = percentage.join("");
+            percentage = Number(percentage / 100) * window.innerWidth;
+            return percentage;
+        }
+        else {
+            return percentage;
+        }
+    };
+    GameObject.prototype.parseToHeight = function (percentage) {
+        if (isNaN(percentage)) {
+            percentage = percentage.split("");
+            percentage.pop();
+            percentage = percentage.join("");
+            percentage = Number(percentage / 100) * window.innerHeight;
+            return percentage;
+        }
+        else {
+            return percentage;
+        }
     };
     return GameObject;
 }());
