@@ -6,7 +6,6 @@ const fs = require("fs");
 async function compileFiles() {
 	const OUTPUT = "compiled_script";
 	const outputPath = __dirname + `/client/${OUTPUT}.js`;
-	//let inputPathList = []; //fs.readdirSync(__dirname + "/CompiledFiles/");
 
 	priorityList = path.join(__dirname, "/src/priority.txt");
 	fs.readFile(priorityList, { encoding: "utf-8" }, async function(err, data) {
