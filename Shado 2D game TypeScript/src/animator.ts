@@ -3,50 +3,18 @@
  * to the game loop
  *
  */
-
 // Setup main canvas
 const canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
-canvas.setBackground("#191970"); // Render is implicitly called
+canvas.setBackground("#87CEEB"); // Render is implicitly called
 
-// Test
-let snow: any[] = [];
-for (let i = 0; i < 200; i++) {
-	const d: number = random(1, 30);
-	let temp: any;
-
-	// generate random number to determine if object is Circle or Rectangle
-	if (random(0, 1) > 0.5) {
-		temp = new Rectangle(
-			random(0, canvas.width),
-			random(0, canvas.height),
-			d,
-			d
-		);
-	} else {
-		temp = new Circle(random(0, canvas.width), random(0, canvas.height), d);
-	}
-
-	temp.enableCollision();
-	temp.dx = random(0.01, 0.05);
-	temp.dy = random(0, 0.02);
-	temp.setFill("white");
-	snow.push(temp);
-}
+// Main Stuff
+const player = new Player(100, "66%", 50, 100);
+new Ground(0, "66%", "100%", "34%", Ground.default);
 
 // For game Loop see "index.js"
-const SCALER = {
-	x: 0.75,
-	y: 0.75
-};
-canvas.scale(SCALER.x, SCALER.y);
 function render() {
 	// Clear canvas
-	canvas.clear(
-		0,
-		0,
-		canvas.width * (1 + (1 - SCALER.x)),
-		canvas.height * (1 + (1 - SCALER.y))
-	);
+	canvas.clear(0, 0, canvas.width, canvas.height);
 
 	// Show FPS
 	new ShadoText((1000 / Time.deltaTime).toFixed(2), 100, 100, {
@@ -67,51 +35,14 @@ function render() {
 		pause();
 	}
 
-	// Draw stuff
-	for (let temp of snow) {
-		// If the object is a Rectangle define R for it
-		if (temp instanceof Rectangle) {
-			temp.r = temp.w;
-		}
+	/*****************************
+	 ********* DRAW ALL ***********
+	 *****************************/
+	// Draw grounds
+	Ground.allGrounds.forEach(g => {
+		if (g.display) g.render(canvas);
+	});
 
-		// Move the circles
-		temp.move(temp.dx, temp.dy);
-
-		// If they go outside the canvas return them to the beginning
-		if (temp.x + temp.r > canvas.width) {
-			temp.x = -random(100);
-		}
-		if (temp.y > canvas.height) {
-			temp.y = -random(100);
-		}
-
-		// Detect collision if Shape if insdie canvas
-		if (
-			temp.x > -temp.r &&
-			temp.x < canvas.width &&
-			temp.y > -temp.r &&
-			temp.y < canvas.height
-		) {
-			for (let other of snow) {
-				// Avoid to detect collision with itself
-				if (temp != other) {
-					if (temp.collides(other)) {
-						// Set a random color for the shape only if it doesn't
-						// have 1. (To avoid flicker)
-						if (!temp.storedColor) {
-							temp.storedColor = randomColor();
-						}
-						temp.setFill(temp.storedColor);
-						break;
-					}
-				}
-			}
-
-			// Redner the shape
-			temp.render(canvas);
-
-			// Reset its color
-			temp.setFill("white");
-		}
-	}
+	// Draw player
+	player.draw(canvas);
 }

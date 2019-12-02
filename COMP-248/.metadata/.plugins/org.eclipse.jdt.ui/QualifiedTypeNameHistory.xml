@@ -20,4 +20,5 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.sun.net.httpserver.Filter"/>
     <fullyQualifiedTypeName name="ShadoMath.Vector"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
 </qualifiedTypeNameHistroy>

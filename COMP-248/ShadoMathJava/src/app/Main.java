@@ -53,7 +53,7 @@ public abstract class Main {
 		return temp[temp.length - 1];
 	}
 
-	public static <T> void print(T... args) {
+	public static <T> void print(@SuppressWarnings("unchecked") T... args) {
 		for (T arg : args)
 			System.out.print(arg + " ");
 		System.out.println();

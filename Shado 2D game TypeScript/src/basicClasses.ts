@@ -18,7 +18,7 @@ class GameObject {
 	public dy: number;
 	public r: number;
 
-	constructor(name: string) {
+	public constructor(name: string) {
 		this.name = name;
 		this.id = "object_" + Math.floor(random(0, 1e8));
 		this.buffer = {};
@@ -138,6 +138,39 @@ class GameObject {
 				this.y + this.h >= other.y &&
 				this.y <= other.y + other.h
 			);
+		} else if (this instanceof Circle && other instanceof Vertex) {
+			return distance(this.x, this.y, other.x, other.y) <= this.r;
+		} else if (this instanceof Rectangle && other instanceof Vertex) {
+			return (
+				other.x > this.x &&
+				other.x < this.x + this.w &&
+				other.y > this.y &&
+				other.y < this.y + this.h
+			);
+		}
+	}
+
+	protected parseToWidth(percentage: any): number {
+		if (isNaN(percentage)) {
+			percentage = percentage.split("");
+			percentage.pop();
+			percentage = percentage.join("");
+			percentage = Number(percentage / 100) * window.innerWidth;
+			return percentage;
+		} else {
+			return percentage;
+		}
+	}
+
+	protected parseToHeight(percentage: any): number {
+		if (isNaN(percentage)) {
+			percentage = percentage.split("");
+			percentage.pop();
+			percentage = percentage.join("");
+			percentage = Number(percentage / 100) * window.innerHeight;
+			return percentage;
+		} else {
+			return percentage;
 		}
 	}
 }
@@ -154,7 +187,7 @@ class Canvas extends GameObject {
 	public parent: HTMLElement;
 	public static: boolean;
 
-	constructor(
+	public constructor(
 		posX: number,
 		posY: number,
 		width: any,
@@ -261,7 +294,7 @@ class Circle extends GameObject {
 	public lineWidth: number;
 	public static: boolean;
 
-	constructor(x: number, y: number, r: any) {
+	public constructor(x: number, y: number, r: any) {
 		super("circle");
 		this.x = x;
 		this.y = y;
@@ -349,7 +382,7 @@ class Rectangle extends GameObject {
 	public lineWidth: number;
 	public staitc: boolean;
 
-	constructor(x: number, y: number, w: any, h: any) {
+	public constructor(x: number, y: number, w: any, h: any) {
 		super("rectangle");
 		this.x = x;
 		this.y = y;
@@ -461,7 +494,7 @@ class ShadoText extends GameObject {
 	public fullStyle: string;
 	public hitBox: Rectangle;
 
-	constructor(
+	public constructor(
 		text: string,
 		x: number,
 		y: number,
@@ -580,7 +613,7 @@ class ShadoImage extends GameObject {
 	public hitBox: Rectangle;
 	public showHitBox: boolean;
 
-	constructor(
+	public constructor(
 		src: string,
 		x: number,
 		y: number,
@@ -641,7 +674,7 @@ class ShadoImage extends GameObject {
 		this.hitBox.x = this.x;
 		this.hitBox.y = this.y;
 
-		if (this.x + this.w >= 0 && this.x <= canvas.width) {
+		if (this.x + this.w >= 0 && this.x <= targetCanvas.width) {
 			let myImage = <HTMLImageElement>document.getElementById(this.id);
 			myImage.src = this.src;
 
