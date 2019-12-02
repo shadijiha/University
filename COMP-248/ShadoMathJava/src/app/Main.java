@@ -6,9 +6,8 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import ShadoMath.Vector;
 
 public abstract class Main {
 
@@ -34,18 +33,20 @@ public abstract class Main {
 //			}
 //		}, 0, 1000);
 
-		List<Vector> test = new ArrayList<Vector>();
+		List<Integer> A = Arrays.asList(1, 2, 3, 4, 5);
+		List<Integer> B = Arrays.asList(6, 7, 8, 9, 10);
 
-		for (int i = 0; i < 10; i++) {
-			test.add(new Vector());
-		}
+		List<List<Integer>> R = new ArrayList<List<Integer>>();
 
-		// Test stream
-		test.stream().forEach(v -> {
-			if (v.x > 5)
-				v.print();
+		/*
+		 * for (int a : A) { for (int b : B) { R.add(Arrays.asList(a, b)); } }
+		 */
+
+		A.stream().forEach(a -> {
+			B.stream().forEach(b -> R.add(Arrays.asList(a, b)));
 		});
 
+		R.stream().forEach(System.out::println);
 	}
 
 	public static String getObjectName(Object obj) {

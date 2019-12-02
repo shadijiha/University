@@ -8,7 +8,6 @@
     <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
     <fullyQualifiedTypeName name="ShadoMath.Matrix"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="nancy3D.Dice"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="app.Engin3D.Mesh"/>
@@ -21,4 +20,6 @@
     <fullyQualifiedTypeName name="com.sun.net.httpserver.Filter"/>
     <fullyQualifiedTypeName name="ShadoMath.Vector"/>
     <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
 </qualifiedTypeNameHistroy>
