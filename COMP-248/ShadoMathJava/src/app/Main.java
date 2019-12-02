@@ -36,12 +36,15 @@ public abstract class Main {
 
 		List<Vector> test = new ArrayList<Vector>();
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			test.add(new Vector());
 		}
 
 		// Test stream
-		test.stream().forEach(Vector::print);
+		test.stream().forEach(v -> {
+			if (v.x > 5)
+				v.print();
+		});
 
 	}
 
