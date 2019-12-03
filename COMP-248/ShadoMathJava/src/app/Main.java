@@ -41,7 +41,7 @@ public abstract class Main {
 		}
 
 		// Test stream
-		test.stream().forEach(Vector::print);
+		test.parallelStream().forEach(Vector::print);
 
 	}
 

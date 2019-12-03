@@ -23,7 +23,7 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="JavaSearchPage">
-		<item key="CASE_SENSITIVE" value="false"/>
+		<item key="CASE_SENSITIVE" value="true"/>
 		<item key="INCLUDE_MASK" value="15"/>
 		<item key="HISTORY_SIZE" value="0"/>
 	</section>
