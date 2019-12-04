@@ -25,6 +25,10 @@ class Namespace {
 }
 
 class Logger {
+	public static allLoggers: Logger[] = [];
+	private static collisionWarn: boolean = true;
+	public static maxCollisionWarn: number = 0;
+
 	private logLevel: number;
 	public static LOG_LEVEL_ERROR: number = 1;
 	public static LOG_LEVEL_WARNNING: number = 2;
@@ -33,6 +37,13 @@ class Logger {
 
 	public constructor(level?: number) {
 		this.logLevel = level || Logger.LOG_LEVEL_WARNNING;
+
+		// push to global array if object doesn't already exit
+		let exits: boolean = false;
+		Logger.allLoggers.forEach(temp => {
+			exits = temp == this ? true : false;
+		});
+		if (!exits) Logger.allLoggers.push(this);
 	}
 
 	public setLevel(newLevel: number) {
@@ -77,6 +88,10 @@ class Logger {
 		this.buffer.forEach(e =>
 			console.log(e, "color:orange; font-weight:bold;", "")
 		);
+	}
+
+	public static disableCollisionWarn() {
+		Logger.collisionWarn = !Logger.collisionWarn;
 	}
 }
 

@@ -1,14 +1,10 @@
-
 public class board {
-	static final int MIN_LEVEL = 3;
-	static final int MIN_SIZE = 3;
-	public int level;
-	public int size;
-	private int sum;
-	int[][][] board;
-	int levelR;
-	int sizeR;
-	int energyAdj;
+	static final int MIN_LEVEL = 3; // The minimum amount of levels there can be for a custom board
+	static final int MIN_SIZE = 3; // The minimum amount each side of the levels can be
+	public int level; // An integer for the level number
+	public int size; // An integer for the size of a level
+	private int sum; //
+	int[][][] board; //
 	public int l;
 	public int x;
 	public int y;
@@ -16,7 +12,7 @@ public class board {
 	public board() {
 		this.level = 3;
 		this.size = 4;
-		this.createBoard(this.level, this.size);
+		createBoard(this.level, this.size);
 	}
 
 	public board(int l, int x) {
@@ -29,9 +25,6 @@ public class board {
 	private int[][][] createBoard(int levelB, int sizeB) {
 
 		board = new int[levelB][sizeB][sizeB];
-		int l = 0;
-		int x = 0;
-		int y = 0;
 		for (l = 0; l < levelB; l++) {
 			for (x = 0; x < sizeB; x++) {
 				for (y = 0; y < sizeB; y++) {
@@ -59,36 +52,26 @@ public class board {
 
 	}
 
-	public void level() {
-		int[][][] b = this.board;
-		levelR = b.length;
-	}
-
-	public void size() {
-		int[][][] b = this.board;
-		sizeR = b[b.length].length;
-	}
-
 	public int getLevel() {
-		return levelR;
+		return this.level;
 	}
 
 	public int getSize() {
-		return sizeR;
+		return this.size;
 	}
 
 	public int getEnergyAdj(int l, int x, int y) {
-		energyAdj = board[l][x][y];
+		int energyAdj = this.board[l][x][y];
 		return energyAdj;
 	}
 
 	public String toString() {
 		String print = "";
-		for (l = 0; l < levelR; l++) {
+		for (l = 0; l < level; l++) {
 			print += ("\nLevel " + l + "\n");
-			for (x = 0; x < sizeR; x++) {
+			for (x = 0; x < size; x++) {
 				print += "\n";
-				for (y = 0; y < sizeR; y++) {
+				for (y = 0; y < size; y++) {
 					print += (board[l][x][y] + "\t");
 				}
 			}

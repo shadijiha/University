@@ -9,8 +9,15 @@ var Namespace = (function () {
 }());
 var Logger = (function () {
     function Logger(level) {
+        var _this = this;
         this.buffer = [];
         this.logLevel = level || Logger.LOG_LEVEL_WARNNING;
+        var exits = false;
+        Logger.allLoggers.forEach(function (temp) {
+            exits = temp == _this ? true : false;
+        });
+        if (!exits)
+            Logger.allLoggers.push(this);
     }
     Logger.prototype.setLevel = function (newLevel) {
         this.logLevel = newLevel;
@@ -49,6 +56,12 @@ var Logger = (function () {
             return console.log(e, "color:orange; font-weight:bold;", "");
         });
     };
+    Logger.disableCollisionWarn = function () {
+        Logger.collisionWarn = !Logger.collisionWarn;
+    };
+    Logger.allLoggers = [];
+    Logger.collisionWarn = true;
+    Logger.maxCollisionWarn = 0;
     Logger.LOG_LEVEL_ERROR = 1;
     Logger.LOG_LEVEL_WARNNING = 2;
     Logger.LOG_LEVEL_INFO = 3;

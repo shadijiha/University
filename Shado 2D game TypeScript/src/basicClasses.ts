@@ -108,6 +108,19 @@ class GameObject {
 
 	collides(other: GameObject): boolean {
 		if (!this.collision || !other.collision) {
+			// Warn user that he is trying to use collision while turned off on objects
+			for (const element of Logger.allLoggers) {
+				if (Logger.collisionWarn && Logger.maxCollisionWarn <= 10) {
+					element.warn(
+						"Attemting to evaluat collision on disableCollision objects. Use Logger.disableCollisionWarn() if you wish to hide this message"
+					);
+					Logger.maxCollisionWarn += 1;
+				}
+			}
+
+			if (Logger.allLoggers.length == 0) {
+				throw new Error("No valid instance of Logger was found");
+			}
 			return;
 		}
 
@@ -148,6 +161,10 @@ class GameObject {
 				other.y < this.y + this.h
 			);
 		}
+	}
+
+	equals(other: GameObject) {
+		return this.id == other.id;
 	}
 
 	protected parseToWidth(percentage: any): number {

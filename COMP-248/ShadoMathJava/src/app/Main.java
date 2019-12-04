@@ -5,10 +5,6 @@
 
 package app;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public abstract class Main {
 
 	public static final void main(String[] args) {
@@ -33,22 +29,8 @@ public abstract class Main {
 		// }
 		// }, 0, 1000);
 
-		List<Integer> A = Arrays.asList(1, 2, 3, 4, 5);
-		List<Integer> B = Arrays.asList(6, 7, 8, 9, 10);
+		print(1380 % 6);
 
-		List<List<Integer>> R = new ArrayList<List<Integer>>();
-
-		/*
-		 * for (int a : A) { for (int b : B) { R.add(Arrays.asList(a, b)); } }
-		 */
-
-		// Test stream
-		test.parallelStream().forEach(Vector::print);
-		A.stream().forEach(a -> {
-			B.stream().forEach(b -> R.add(Arrays.asList(a, b)));
-		});
-
-		R.stream().forEach(System.out::println);
 	}
 
 	public static String getObjectName(Object obj) {

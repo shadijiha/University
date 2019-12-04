@@ -71,6 +71,16 @@ var GameObject = (function () {
     };
     GameObject.prototype.collides = function (other) {
         if (!this.collision || !other.collision) {
+            for (var _i = 0, _a = Logger.allLoggers; _i < _a.length; _i++) {
+                var element = _a[_i];
+                if (Logger.collisionWarn && Logger.maxCollisionWarn <= 10) {
+                    element.warn("Attemting to evaluat collision on disableCollision objects. Use Logger.disableCollisionWarn() if you wish to hide this message");
+                    Logger.maxCollisionWarn += 1;
+                }
+            }
+            if (Logger.allLoggers.length == 0) {
+                throw new Error("No valid instance of Logger was found");
+            }
             return;
         }
         if (this instanceof Circle && other instanceof Circle) {
@@ -105,6 +115,9 @@ var GameObject = (function () {
                 other.y > this.y &&
                 other.y < this.y + this.h);
         }
+    };
+    GameObject.prototype.equals = function (other) {
+        return this.id == other.id;
     };
     GameObject.prototype.parseToWidth = function (percentage) {
         if (isNaN(percentage)) {

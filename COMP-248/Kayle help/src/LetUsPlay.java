@@ -1,4 +1,11 @@
 
+// -------------------------------------------------------
+// Assignment #4
+// Written by: Kyle Chabot-Rudick (40092712)
+// For COMP 248 Fall 2019
+//
+// Nancy's 3D warrior game
+// --------------------------------------------------------
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,19 +24,15 @@ public class LetUsPlay {
 	static player player1;
 	static int[] player0R = new int[4];
 	static int[] player1R = new int[4];
+	static board board = new board();
+	static player temp0 = new player("temp");
+	static player temp1 = new player("temp");
+	static int sum = 0;
+	static int roll = 0;
 
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		int i;
-		int[][][] b;
-		int l0 = 0;
-		int x0 = 0;
-		int y0 = 0;
-		int energy0 = 10;
-		int l1 = 0;
-		int x1 = 0;
-		int y1 = 0;
-		int energy1 = 10;
 		String roundContinue;
 		for (i = 1; i < 23; i++) {
 			System.out.print("* ");
@@ -74,14 +77,14 @@ public class LetUsPlay {
 		if (decision == -1) {
 			System.out.print("How many levels would you like? (minimum size 3, max 10) ");
 			level = keyboard.nextInt();
-			if (level < 3 || level > 10) {
+			if (level < board.MIN_LEVEL || level > 10) {
 				System.out.println("Sorry but " + level + " is not a legal choice.");
 				level = keyboard.nextInt();
 			}
 			System.out.print(
 					"What size do you want the nxn boards on each level to be? \nMinimum size is 3x3, max is 10x10.\n==> Enter the value of n: ");
 			size = keyboard.nextInt();
-			if (size < 3 || size > 10) {
+			if (size < board.MIN_SIZE || size > 10) {
 				System.out.println("Sorry but " + size + " is not a legal choice.");
 				size = keyboard.nextInt();
 			}
@@ -98,7 +101,9 @@ public class LetUsPlay {
 
 		String[] playerArray = new String[2];
 		playerArray[0] = play0;
+		sum = 0;
 		playerArray[1] = play1;
+		sum = 0;
 		Random random = new Random();
 		playerChooser = random.nextInt(2);
 		System.out.println("The game has started " + playerArray[playerChooser] + " goes first");
@@ -107,10 +112,15 @@ public class LetUsPlay {
 		}
 		System.out.println();
 
-		while (player0.won(board) == false || player1.won(board) == false) {
+		while (true) {
 			if (playerChooser == 0) {
 				p0Run();
 				p1Run();
+				System.out.println("At the end of this round: ");
+				System.out.println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy",
+						player0.getName(), player0.getLevel(), player0.getX(), player0.getY(), player0.getEnergy()));
+				System.out.println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy",
+						player1.getName(), player1.getLevel(), player1.getX(), player1.getY(), player1.getEnergy()));
 				System.out.print("Any key to continue to next round ...");
 				roundContinue = keyboard.next();
 				if (roundContinue != "") {
@@ -118,7 +128,14 @@ public class LetUsPlay {
 				}
 			} else {
 				p1Run();
+				sum = 0;
 				p0Run();
+				sum = 0;
+				System.out.println("At the end of this round: ");
+				System.out.println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy",
+						player0.getName(), player0.getLevel(), player0.getX(), player0.getY(), player0.getEnergy()));
+				System.out.println(String.format("	%s is on level %d at location (%d,%d) and has %d units of energy",
+						player1.getName(), player1.getLevel(), player1.getX(), player1.getY(), player1.getEnergy()));
 				System.out.print("Any key to continue to next round ...");
 				roundContinue = keyboard.next();
 				if (roundContinue != "") {
@@ -126,69 +143,58 @@ public class LetUsPlay {
 				}
 			}
 
+			if (player0.won(board) == true) {
+				System.out.println("\n\nThe winner is " + player0.getName() + ". Well done!!!");
+
+				break;
+			}
+			if (player1.won(board) == true) {
+				System.out.println("\n\nThe winner is " + player0.getName() + ". Well done!!!");
+				break;
+			}
+
 		}
 
 	}
 
-	public static player player0Creator() {
+	public static player player0Creator() // This method creates player0
+	{
 		System.out.print("What is player 0's name (one word only): ");
 		play0 = keyboard.next();
 		player player0 = new player(play0);
 		return player0;
 	}
 
-	public static player player1Creator() {
+	public static player player1Creator() // This method creates player1
+	{
 		System.out.print("What is player ]1's name (one word only): ");
 		play1 = keyboard.next();
 		player player1 = new player(play1);
 		return player1;
 	}
 
-	public static void normalRoll() {
+	public static void roll() // This method is for a roll
+	{
 		dice dice = new dice();
 		int sum = 0;
 		int energyAdj = 0;
-		sum = sum + dice.rollDice();
+		roll = dice.rollDice();
+		sum = sum + roll;
 		if (dice.isDouble() == true) {
 			energyAdj = energyAdj + 2;
 			System.out.println("Congratulations you rolled double " + dice.die1 + ". Your energy went up by 2 units.");
 		}
-		dice.toString();
+		System.out.println(String.format("Die 1: " + "%d" + " Die 2: " + "%d" + ".", dice.die1, dice.die2));
 	}
 
-	public static void noEnergyRoll() {
-		dice dice = new dice();
-		int sum = 0;
-		int energyAdj = 0;
-
-		sum = sum + dice.rollDice();
-		if (dice.isDouble() == true) {
-			energyAdj = energyAdj + 2;
-			System.out.println("Congratulations you rolled double " + dice.die1 + ". Your energy went up by 2 units.");
-		}
-		dice.toString();
-		sum = sum + dice.rollDice();
-		if (dice.isDouble() == true) {
-			energyAdj = energyAdj + 2;
-			System.out.println("Congratulations you rolled double " + dice.die1 + ". Your energy went up by 2 units.");
-		}
-		dice.toString();
-		sum = sum + dice.rollDice();
-		if (dice.isDouble() == true) {
-			energyAdj = energyAdj + 2;
-			System.out.println("Congratulations you rolled double " + dice.die1 + ". Your energy went up by 2 units.");
-		}
-		dice.toString();
-
-	}
-
-	public static int[] movementp0() {
+	public static void movementp0() // This method is for the
+	{
 		board board = new board();
-		int sum = 0;
 		int energyAdj = 0;
 		int calculatedX = player0.getX() + sum / 4;
 		int calculatedY = player0.getY() + sum % 4;
 		int calculatedLevel = player0.getLevel();
+		temp0.setEnergy(player0.getEnergy());
 		if (calculatedY > board.getSize()) {
 			calculatedY = calculatedY % 4;
 		}
@@ -207,28 +213,24 @@ public class LetUsPlay {
 		} else {
 			energyAdj = board.board[calculatedLevel][calculatedX][calculatedY];
 		}
-		player0R[0] = calculatedLevel;
-		player0R[1] = calculatedX;
-		player0R[2] = calculatedY;
-		player0R[3] = energyAdj;
-		return player0R;
+		temp0.setLevel(calculatedLevel);
+		temp0.setX(calculatedX);
+		temp0.setY(calculatedY);
+		temp0.setEnergy(temp0.getEnergy() + energyAdj);
 	}
 
-	public static void setMovementp0() {
-		movementp0();
-		player0.setLevel(player0.getLevel() + player0R[0]);
-		player0.setX(player0.getX() + player0R[1]);
-		player0.setY(player0.getY() + player0R[2]);
-		player0.setEnergy(player0.getEnergy() + player0R[3]);
+	public static void setUpP0() {
+		player0.moveTo(temp0);
+		player0.setEnergy(temp0.getEnergy());
 	}
 
-	public static int[] movementp1() {
+	public static void movementp1() {
 		board board = new board();
-		int sum = 0;
 		int energyAdj = 0;
 		int calculatedX = player1.getX() + sum / 4;
 		int calculatedY = player1.getY() + sum % 4;
 		int calculatedLevel = player1.getLevel();
+		temp1.setEnergy(player1.getEnergy());
 		if (calculatedY > board.getSize()) {
 			calculatedY = calculatedY % 4;
 		}
@@ -237,7 +239,7 @@ public class LetUsPlay {
 			calculatedX = (calculatedX + 1) % 4;
 
 		}
-		if (calculatedLevel + player1.getLevel() > board.getLevel()) {
+		if (calculatedLevel + player0.getLevel() > board.getLevel()) {
 			calculatedLevel = 0;
 			calculatedX = 0;
 			calculatedY = 0;
@@ -247,60 +249,44 @@ public class LetUsPlay {
 		} else {
 			energyAdj = board.board[calculatedLevel][calculatedX][calculatedY];
 		}
-		player1R[0] = calculatedLevel;
-		player1R[1] = calculatedX;
-		player1R[2] = calculatedY;
-		player1R[3] = energyAdj;
-		return player1R;
+		temp1.setLevel(calculatedLevel);
+		temp1.setX(calculatedX);
+		temp1.setY(calculatedY);
+		temp1.setEnergy(temp1.getEnergy() + energyAdj);
 	}
 
-	public static void setMovementp1() {
-		movementp1();
-		player1.setLevel(player1.getLevel() + player1R[0]);
-		player1.setX(player1.getX() + player1R[1]);
-		player1.setY(player1.getY() + player1R[2]);
-		player1.setEnergy(player1.getEnergy() + player1R[3]);
+	public static void setUpP1() {
+		player1.moveTo(temp1);
+		player1.setEnergy(temp1.getEnergy());
 	}
 
-	public static void challengep0() // If player0 on board 1 lands on player1
+	public static void challengep0() // If player0 on board lands on player1
 	{
-		movementp0();
-
+		movementp1();
+		System.out.println("Player " + play1 + " is at your new location");
+		System.out.println(
+				"What do you want to do?\n\t0 - Challenge and risk losing 50% of your energy units if you lose\n\t\tor move to new location and get 50% of other player's energy units.");
+		System.out.println("1 - to move down one level or move to (0,0) if at level 0 and lose 2 energy\nunits");
 		int challenge = (int) (Math.random() * 11);
+
+		temp1.setLevel(player1.getLevel());
+		temp1.setX(player1.getX());
+		temp1.setY(player1.getY());
+
+		temp0.setLevel(player0.getLevel());
+		temp0.setX(player0.getX());
+		temp0.setY(player0.getY());
 		if (challenge < 6) {
-			player0.setLevel(player0.getLevel());
-			player0.setX(player0.getX());
-			player0.setY(player0.getY());
-			player0.setEnergy(player0.getEnergy() / 2);
+			temp0.setEnergy(temp0.getEnergy() / 2);
+			player0.moveTo(temp0);
 
 		} else {
-			int player0NL = player1.getLevel();
-			int player0NX = player1.getX();
-			int player0NY = player1.getY();
-			int player0OL = player0.getLevel();
-			int player0OX = player0.getX();
-			int player0OY = player0.getY();
-			player0.setLevel(player0NL);
-			player0.setX(player0NX);
-			player0.setY(player0NY);
-			player1.setLevel(player0OL);
-			player1.setX(player0OX);
-			player1.setY(player0OY);
-			player1.setEnergy(player1.getEnergy() / 2);
+			player0.moveTo(temp1);
+			player1.moveTo(temp0);
+			player1.setEnergy(temp1.getEnergy() / 2);
 			System.out.println("Bravo!! You won the challenge.");
 
 		}
-	}
-
-	public static void setupp0() {
-		movementp0();
-		int calculatedLevel = player0.getLevel();
-		int calculatedX = player0.getX();
-		int calculatedY = player0.getY();
-		player0.setLevel(player0.getLevel() + calculatedLevel);
-		player0.setX(player0.getX() + calculatedX);
-		player0.setY(player0.getY() + calculatedY);
-
 	}
 
 	public static void challengep1() // If player1 on board 1 lands on player0
@@ -311,40 +297,25 @@ public class LetUsPlay {
 				"What do you want to do?\n\t0 - Challenge and risk losing 50% of your energy units if you lose\n\t\tor move to new location and get 50% of other player's energy units.");
 		System.out.println("1 - to move down one level or move to (0,0) if at level 0 and lose 2 energy\nunits");
 		int challenge = (int) (Math.random() * 11);
+
+		temp0.setLevel(player0.getLevel());
+		temp0.setX(player0.getX());
+		temp0.setY(player0.getY());
+
+		temp1.setLevel(player1.getLevel());
+		temp1.setX(player1.getX());
+		temp1.setY(player1.getY());
 		if (challenge < 6) {
-			player1.setLevel(player1.getLevel());
-			player1.setX(player1.getX());
-			player1.setY(player1.getY());
-			player1.setEnergy(player1.getEnergy() / 2);
+			temp1.setEnergy(temp1.getEnergy() / 2);
+			player1.moveTo(temp1);
 
 		} else {
-			int player1NL = player0.getLevel();
-			int player1NX = player0.getX();
-			int player1NY = player0.getY();
-			int player1OL = player1.getLevel();
-			int player1OX = player1.getX();
-			int player1OY = player1.getY();
-			player1.setLevel(player1NL);
-			player1.setX(player1NX);
-			player1.setY(player1NY);
-			player0.setLevel(player1OL);
-			player0.setX(player1OX);
-			player0.setY(player1OY);
-			player0.setEnergy(player0.getEnergy() / 2);
+			player1.moveTo(temp0);
+			player0.moveTo(temp1);
+			player0.setEnergy(temp0.getEnergy() / 2);
 			System.out.println("Bravo!! You won the challenge.");
 
 		}
-	}
-
-	public static void setupp1() {
-		movementp1();
-		int calculatedLevel = player1.getLevel();
-		int calculatedX = player1.getX();
-		int calculatedY = player1.getY();
-		player1.setLevel(player1.getLevel() + calculatedLevel);
-		player1.setX(player1.getX() + calculatedX);
-		player1.setY(player1.getY() + calculatedY);
-
 	}
 
 	public static void forfeitChallengep0() {
@@ -362,10 +333,11 @@ public class LetUsPlay {
 	}
 
 	public static void p0Run() {
-		Scanner keyboard = new Scanner(System.in);
 		System.out.println("It is " + play0 + "'s turn\n\t");
 		if (player0.getEnergy() == 0) {
-			noEnergyRoll();
+			roll();
+			roll();
+			roll();
 			if (player0.getEnergy() == 0) {
 				System.out.println("Sorry but you are too weak to move.");
 				return;
@@ -391,10 +363,12 @@ public class LetUsPlay {
 
 					}
 				}
-				setMovementp0();
+				setUpP0();
+				System.out.println(String.format("%s is on level %d at location (%d,%d) and has %d units of energy.",
+						player0.getName(), player0.getLevel(), player0.getX(), player0.getY(), player0.getEnergy()));
 			}
 		} else {
-			normalRoll();
+			roll();
 			movementp0();
 			if (player0.getLevel() + player0R[0] == player1.getLevel() && player0.getX() + player0R[1] == player1.getX()
 					&& player0R[2] + player0.getY() == player1.getY()) {
@@ -415,16 +389,18 @@ public class LetUsPlay {
 
 				}
 			}
-			setMovementp0();
+			setUpP0();
 		}
-		player0.toString();
+		System.out.println(String.format("%s is on level %d at location (%d,%d) and has %d units of energy.",
+				player0.getName(), player0.getLevel(), player0.getX(), player0.getY(), player0.getEnergy()));
 	}
 
 	public static void p1Run() {
-		Scanner keyboard = new Scanner(System.in);
 		System.out.println("It is " + play1 + "'s turn\n\t");
 		if (player1.getEnergy() == 0) {
-			noEnergyRoll();
+			roll();
+			roll();
+			roll();
 			if (player1.getEnergy() == 0) {
 				System.out.println("Sorry but you are too weak to move.");
 				return;
@@ -449,10 +425,12 @@ public class LetUsPlay {
 
 				}
 
-				setMovementp1();
+				setUpP1();
+				System.out.println(String.format("%s is on level %d at location (%d,%d) and has %d units of energy.",
+						player1.getName(), player1.getLevel(), player1.getX(), player1.getY(), player1.getEnergy()));
 			}
 		} else {
-			normalRoll();
+			roll();
 			movementp1();
 			if (player1.getLevel() + player1R[0] == player0.getLevel() && player1.getX() + player1R[1] == player0.getX()
 					&& player1R[2] + player1.getY() == player0.getY()) {
@@ -473,8 +451,10 @@ public class LetUsPlay {
 
 				}
 			}
-			setMovementp1();
+			setUpP1();
 		}
-		player1.toString();
+		System.out.println(String.format("%s is on level %d at location (%d,%d) and has %d units of energy.",
+				player1.getName(), player1.getLevel(), player1.getX(), player1.getY(), player1.getEnergy()));
 	}
+
 }
