@@ -236,14 +236,22 @@ class Vector {
 		this.z = z || 0;
 	}
 
-	public random2D(): void {
-		this.x = Math.random();
-		this.y = Math.random();
+	public random2D(max?: number): void {
+		max = max || 1;
+		this.x = Math.random() * max;
+		this.y = Math.random() * max;
 	}
 
-	public random3D(): void {
-		this.random2D();
-		this.z = Math.random();
+	public random3D(max?: number): void {
+		max = max || 1;
+		this.random2D(max);
+		this.z = Math.random() * max;
+	}
+
+	public floor(): void {
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
+		this.z = Math.floor(this.z);
 	}
 
 	public getX(): number {
@@ -258,26 +266,36 @@ class Vector {
 		return this.z;
 	}
 
-	public add(objVector: Vector): void {
-		this.x += objVector.x;
-		this.y += objVector.y;
-		this.z += objVector.z;
+	public add(objVector: Vector): Vector {
+		return new Vector(
+			this.x + objVector.x,
+			this.y + objVector.y,
+			this.z + objVector.z
+		);
 	}
 
-	public substract(objVector: Vector): void {
-		this.x -= objVector.x;
-		this.y -= objVector.y;
-		this.z -= objVector.z;
+	public substract(objVector: Vector): Vector {
+		return new Vector(
+			this.x - objVector.x,
+			this.y - objVector.y,
+			this.z - objVector.z
+		);
 	}
 
-	public multiply(k: number) {
-		this.x *= k;
-		this.y *= k;
-		this.z *= k;
+	public multiply(k: any): Vector {
+		if (k instanceof Vector) {
+			return this.crossProduct(k);
+		} else if (!isNaN(k)) {
+			const copy = new Vector(this.x, this.y, this.x);
+			copy.scale(k);
+			return copy;
+		}
 	}
 
 	public scale(k: number) {
-		this.multiply(k);
+		this.x *= k;
+		this.y *= k;
+		this.z *= k;
 	}
 
 	public mag(): number {

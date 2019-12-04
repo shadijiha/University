@@ -22,33 +22,61 @@ var Logger = (function () {
     Logger.prototype.setLevel = function (newLevel) {
         this.logLevel = newLevel;
     };
-    Logger.prototype.error = function (msg) {
-        msg = "%cERROR:	%c" + msg;
-        this.buffer.push(msg);
-        if (this.logLevel >= Logger.LOG_LEVEL_ERROR)
-            console.log(msg, "color: red; font-weight: bold;", "");
-    };
-    Logger.prototype.warn = function (msg) {
-        msg = "%cWARNNING:	%c" + msg;
-        this.buffer.push(msg);
-        if (this.logLevel >= Logger.LOG_LEVEL_WARNNING)
-            console.log(msg, "color: yellow; font-weight: bold;", "");
-    };
-    Logger.prototype.info = function (msg) {
-        msg = "%cINFO:	%c" + msg;
-        this.buffer.push(msg);
-        if (this.logLevel >= Logger.LOG_LEVEL_INFO)
-            console.log(msg, "color: green; font-weight: bold;", "");
-    };
-    Logger.prototype.log = function (msg) {
-        if (msg instanceof Array) {
-            console.table(msg);
+    Logger.prototype.error = function () {
+        var messages = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            messages[_i] = arguments[_i];
         }
-        else if (msg instanceof Object) {
-            console.log(msg);
+        for (var _a = 0, messages_1 = messages; _a < messages_1.length; _a++) {
+            var temp = messages_1[_a];
+            var msg = "%cERROR:	%c" + temp;
+            this.buffer.push(msg);
+            if (this.logLevel >= Logger.LOG_LEVEL_ERROR)
+                console.log(msg, "color: red; font-weight: bold;", "");
         }
-        else {
-            this.info(msg);
+    };
+    Logger.prototype.warn = function () {
+        var messages = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            messages[_i] = arguments[_i];
+        }
+        for (var _a = 0, messages_2 = messages; _a < messages_2.length; _a++) {
+            var temp = messages_2[_a];
+            var msg = "%cWARNNING:	%c" + temp;
+            this.buffer.push(msg);
+            if (this.logLevel >= Logger.LOG_LEVEL_WARNNING)
+                console.log(msg, "color: yellow; font-weight: bold;", "");
+        }
+    };
+    Logger.prototype.info = function () {
+        var messages = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            messages[_i] = arguments[_i];
+        }
+        for (var _a = 0, messages_3 = messages; _a < messages_3.length; _a++) {
+            var temp = messages_3[_a];
+            var msg = "%cINFO:	%c" + temp;
+            this.buffer.push(msg);
+            if (this.logLevel >= Logger.LOG_LEVEL_INFO)
+                console.log(msg, "color: green; font-weight: bold;", "");
+        }
+    };
+    Logger.prototype.log = function () {
+        var messages = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            messages[_i] = arguments[_i];
+        }
+        for (var _a = 0, messages_4 = messages; _a < messages_4.length; _a++) {
+            var msg = messages_4[_a];
+            if (msg instanceof Array) {
+                console.table(msg);
+            }
+            else if (msg instanceof Object) {
+                console.log(msg);
+            }
+            else {
+                this.info(msg);
+            }
         }
     };
     Logger.prototype.history = function () {

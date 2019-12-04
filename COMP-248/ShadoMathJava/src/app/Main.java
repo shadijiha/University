@@ -28,9 +28,6 @@ public abstract class Main {
 		// print("?XD");
 		// }
 		// }, 0, 1000);
-
-		print(1380 % 6);
-
 	}
 
 	public static String getObjectName(Object obj) {

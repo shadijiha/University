@@ -172,13 +172,20 @@ var Vector = (function () {
         this.y = y;
         this.z = z || 0;
     }
-    Vector.prototype.random2D = function () {
-        this.x = Math.random();
-        this.y = Math.random();
+    Vector.prototype.random2D = function (max) {
+        max = max || 1;
+        this.x = Math.random() * max;
+        this.y = Math.random() * max;
     };
-    Vector.prototype.random3D = function () {
-        this.random2D();
-        this.z = Math.random();
+    Vector.prototype.random3D = function (max) {
+        max = max || 1;
+        this.random2D(max);
+        this.z = Math.random() * max;
+    };
+    Vector.prototype.floor = function () {
+        this.x = Math.floor(this.x);
+        this.y = Math.floor(this.y);
+        this.z = Math.floor(this.z);
     };
     Vector.prototype.getX = function () {
         return this.x;
@@ -190,22 +197,25 @@ var Vector = (function () {
         return this.z;
     };
     Vector.prototype.add = function (objVector) {
-        this.x += objVector.x;
-        this.y += objVector.y;
-        this.z += objVector.z;
+        return new Vector(this.x + objVector.x, this.y + objVector.y, this.z + objVector.z);
     };
     Vector.prototype.substract = function (objVector) {
-        this.x -= objVector.x;
-        this.y -= objVector.y;
-        this.z -= objVector.z;
+        return new Vector(this.x - objVector.x, this.y - objVector.y, this.z - objVector.z);
     };
     Vector.prototype.multiply = function (k) {
+        if (k instanceof Vector) {
+            return this.crossProduct(k);
+        }
+        else if (!isNaN(k)) {
+            var copy = new Vector(this.x, this.y, this.x);
+            copy.scale(k);
+            return copy;
+        }
+    };
+    Vector.prototype.scale = function (k) {
         this.x *= k;
         this.y *= k;
         this.z *= k;
-    };
-    Vector.prototype.scale = function (k) {
-        this.multiply(k);
     };
     Vector.prototype.mag = function () {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));

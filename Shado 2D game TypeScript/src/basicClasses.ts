@@ -43,7 +43,7 @@ class GameObject {
 	 * @param {number} amountY: the amount of y to move the object
 	 * @returns {void}
 	 */
-	move(amountX: any, amountY: number): void {
+	move(amountX: any, amountY?: number): void {
 		// If the argument passed is a vector
 		if (amountX instanceof Vector) {
 			const tempVector = amountX;
@@ -51,12 +51,12 @@ class GameObject {
 			amountY = tempVector.y;
 		}
 
-		if (this.static) {
+		if (!this.static) {
 			this.x += amountX * Time.deltaTime;
 			this.y += amountY * Time.deltaTime;
 		} else {
 			throw new Error(
-				`Cannot move ${this.name} (id: ${this.id}) because object is imstatic`
+				`Cannot move ${this.name} (id: ${this.id}) because object is immovable`
 			);
 		}
 	}
@@ -319,7 +319,7 @@ class Circle extends GameObject {
 		this.fill = "white";
 		this.stroke = "black";
 		this.lineWidth = 1;
-		this.static = true;
+		this.static = false;
 	}
 
 	render(targetCanvas: Canvas): void {
@@ -408,7 +408,7 @@ class Rectangle extends GameObject {
 		this.fill = "white";
 		this.stroke = "black";
 		this.lineWidth = 1;
-		this.static = true;
+		this.static = false;
 	}
 
 	render(targetCanvas: Canvas): void {
@@ -538,7 +538,7 @@ class ShadoText extends GameObject {
 		this.color = color || "black";
 		this.stroke = stroke || this.color;
 		this.background = background || "transparent";
-		this.static = true;
+		this.static = false;
 		this.fullStyle = `${this.size}px ${this.font}`;
 		this.hitBox = null;
 	}
@@ -647,6 +647,7 @@ class ShadoImage extends GameObject {
 		this.h = h;
 		this.id = id;
 		this.showHitBox = showHitBox;
+		this.static = false;
 
 		let allImgs = document.getElementById(this.id);
 
@@ -726,4 +727,147 @@ class ShadoImage extends GameObject {
 		this.hitBox.w = newW;
 		this.hitBox.h = newH;
 	}
+}
+
+class Line extends GameObject {
+	public fromX: number;
+	public fromY: number;
+	public toX: number;
+	public toY: number;
+
+	public constructor(fromX: any, fromY: any, toX: number, toY: number) {
+		super("line");
+		if (fromX instanceof Vertex && fromY instanceof Vertex) {
+			this.fromX = fromX.x;
+			this.fromY = fromX.y;
+			this.toX = fromY.x;
+			this.toY = fromY.y;
+		} else {
+			this.fromX = fromX;
+			this.fromY = fromY;
+			this.toX = toX;
+			this.toY = toY;
+		}
+		this.static = false;
+	}
+
+	public render(targetCanvas: Canvas): void {
+		targetCanvas.ctx.beginPath();
+		targetCanvas.ctx.moveTo(this.fromX, this.fromY);
+		targetCanvas.ctx.lineTo(this.toX, this.toY);
+		targetCanvas.ctx.stroke();
+	}
+
+	public length(): number {
+		const temp = new Vector(this.toX - this.fromX, this.toY - this.fromY);
+		return temp.mag();
+	}
+
+	public split(x: any, y?: number): Line[] {
+		// if x is a percentage e.g. "50%"
+		if (isNaN(x)) {
+			let tempX: string[] = x.split("");
+			tempX.pop();
+			const str = tempX.join("");
+			let percentage = Number(str) / 100;
+
+			// Cut the line at that percentage
+			const line1Length: number = this.length() * percentage;
+			const line2Length: number = this.length() - line1Length;
+
+			// find the angle the line forms
+			const angle = Math.atan2(this.toX - this.fromX, this.toY - this.fromY);
+
+			const line1Coord: Vertex = new Vertex(
+				Math.sin(angle) * line1Length + this.fromX,
+				Math.cos(angle) * line1Length + this.fromY
+			);
+			const line2Coord: Vertex = new Vertex(
+				Math.sin(angle) * line2Length + this.fromX,
+				Math.cos(angle) * line2Length + this.fromY
+			);
+
+			const line1: Line = new Line(
+				this.fromX,
+				this.fromY,
+				line1Coord.x,
+				line1Coord.y
+			);
+			const line2: Line = new Line(
+				line1Coord.x,
+				line1Coord.y,
+				this.toX,
+				this.toY
+			);
+
+			return [line1, line2];
+		} else {
+			throw new Error("This code isn't working @ Line.split(number, number)");
+		}
+	}
+
+	move(amountX: any, amountY?: number): void {
+		// If the argument passed is a vector
+		if (amountX instanceof Vector) {
+			const tempVector = amountX;
+			amountX = tempVector.x;
+			amountY = tempVector.y;
+		}
+
+		if (!this.static) {
+			this.fromX += amountX * Time.deltaTime;
+			this.toX += amountX * Time.deltaTime;
+			this.fromY += amountY * Time.deltaTime;
+			this.toY += amountY * Time.deltaTime;
+		} else {
+			throw new Error(
+				`Cannot move ${this.name} (id: ${this.id}) because object is imstatic`
+			);
+		}
+	}
+}
+
+class Shape extends GameObject {
+	private vertices: Vertex[];
+	public fill: string;
+	public stroke: string;
+	public lineWidth: number;
+
+	public constructor(
+		vertices: Vertex[],
+		{
+			fill,
+			stroke,
+			lineWidth
+		}: {
+			fill?: string;
+			stroke?: string;
+			lineWidth?: number;
+		}
+	) {
+		super("shape");
+		this.vertices = vertices;
+		this.fill = fill || "transparent";
+		this.stroke = stroke || "black";
+		this.lineWidth = lineWidth || 1;
+		this.static = false;
+	}
+
+	public render(targetCanvas: Canvas): void {
+		targetCanvas.ctx.beginPath();
+		targetCanvas.ctx.fillStyle = this.fill;
+		targetCanvas.ctx.strokeStyle = this.stroke;
+		targetCanvas.ctx.lineWidth = this.lineWidth;
+
+		targetCanvas.ctx.moveTo(this.vertices[0].x, this.vertices[0].y);
+
+		for (const vertex of this.vertices) {
+			targetCanvas.ctx.lineTo(vertex.x, vertex.y);
+		}
+
+		targetCanvas.ctx.fill();
+		targetCanvas.ctx.stroke();
+	}
+
+	private generateHitBox(): void {}
 }

@@ -4,5 +4,6 @@ MatrixVector.js
 globalVariables.js
 basicClasses.js
 gameModules.js
+testStuff.js
 animator.js
 index.js

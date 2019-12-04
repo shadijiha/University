@@ -65,3 +65,13 @@ var Player = (function (_super) {
     Player.default = "pink";
     return Player;
 }(GameObject));
+var Terrain = (function (_super) {
+    __extends(Terrain, _super);
+    function Terrain() {
+        return _super.call(this, "terrain") || this;
+    }
+    Terrain.prototype.generateHitBox = function () {
+        this.hitBox;
+    };
+    return Terrain;
+}(GameObject));
