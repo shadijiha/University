@@ -37,7 +37,7 @@ public class DrawingComponent extends JComponent implements ActionListener {
 	// Need to define global variables to animate them (to avoid flicker)
 	List<Shado.Circle> circles = new ArrayList<Shado.Circle>();
 
-	// Initi stuff
+	// Init stuff
 	private void init() {
 
 		// Example generate 20 circles
@@ -63,8 +63,8 @@ public class DrawingComponent extends JComponent implements ActionListener {
 		}
 
 		// Draw stuff
-		circles.stream()
-				.forEach(e -> e.draw(g2));
+		circles.parallelStream()
+				.forEachOrdered(e -> e.draw(g2));
 
 //		g2.setFont(new Font("Times new Roman", Font.BOLD, 14));
 //		g2.drawString("hehexd", 50, 50);
