@@ -5,12 +5,9 @@
 
 package app;
 
-import ShadoMath.Vector;
-
 import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class Main {
@@ -27,7 +24,6 @@ public abstract class Main {
 
 		DrawingComponent DC = new DrawingComponent();
 		window.add(DC);
-		Engin3D.Mesh test = new Engin3D.Mesh();
 
 		// SetInterval(function() {}, 1000);
 		// new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -36,27 +32,26 @@ public abstract class Main {
 		// print("?XD");
 		// }
 		// }, 0, 1000);
-	}
 
-	private static List<Character> vowelCount(Character[] charArray) {
-		List<Character> vowel = Arrays.asList('a', 'e', 'i', 'o', 'u');
-		List<Character> input = Arrays.asList(charArray);
-
-		return input.parallelStream()
-				.filter(e -> vowel
-						.parallelStream()
-						.anyMatch(v -> e == v))
-				.collect(Collectors.toList());
-	}
-
-	public static String getObjectName(Object obj) {
-		String[] temp = obj.getClass().getName().split("\\.");
-		return temp[temp.length - 1];
-	}
-
-	public static <T> void print(@SuppressWarnings("unchecked") T... args) {
-		for (T arg : args)
-			System.out.print(arg + " ");
-		System.out.println();
+		Hehexd test = new Hehexd();
+		Alpha test2 = new Alpha();
+		Alpha test3 = (Alpha) test;
 	}
 }
+
+class Hehexd {
+	public String emote;
+
+	public Hehexd() {
+		emote = "LULW";
+	}
+}
+
+class Alpha extends Hehexd {
+	public String emote;
+
+	public Alpha() {
+		emote = "OMEGALUL";
+	}
+}
+

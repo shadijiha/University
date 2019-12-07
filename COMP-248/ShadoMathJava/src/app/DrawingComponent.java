@@ -5,6 +5,7 @@
 
 package app;
 
+import ShadoMath.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.*;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static ShadoMath.Util.random;
@@ -32,24 +34,26 @@ public class DrawingComponent extends JComponent implements ActionListener {
 
 	private final int FPS = 60;
 	private boolean HAS_INIT = false;
-	private Timer tm = new Timer(1 / FPS, this);
+	private Timer tm = new Timer(1000 / FPS, this);
 
 	// Need to define global variables to animate them (to avoid flicker)
 	List<Shado.Circle> circles = new ArrayList<Shado.Circle>();
+	List<Vector> velocities = new ArrayList<Vector>();
 
 	// Init stuff
 	private void init() {
-
-		// Example generate 20 circles
+		// Example generate 100 circles
 		for (int i = 0; i < 100; i++) {
 			int x = random(0, (int) getSize().getWidth());
 			int y = random(0, (int) getSize().getHeight());
 			int r = random(10, 50);
 			Shado.Circle temp = new Shado.Circle(x, y, r);
-			temp.setColor(randomColor());
+			temp.setFill(randomColor());
 			circles.add(temp);
-		}
 
+			// Random velocities
+			velocities.add(new Vector(random(-0.5, 0.5), random(-0.5, 0.5)));
+		}
 	}
 
 	// This is the renderer (Only draw). You also can put logic here (collision, forces, etc)
@@ -64,10 +68,21 @@ public class DrawingComponent extends JComponent implements ActionListener {
 
 		// Draw stuff
 		circles.parallelStream()
-				.forEachOrdered(e -> e.draw(g2));
+				.forEachOrdered(circle -> {
 
-//		g2.setFont(new Font("Times new Roman", Font.BOLD, 14));
-//		g2.drawString("hehexd", 50, 50);
+					int vectorIndex = circles.indexOf(circle);
+					circle.move(velocities.get(vectorIndex));
+
+					if (circle.getX() + circle.getR() > getSize().getWidth() || circle.getX() < 0) {
+						velocities.get(vectorIndex).x *= -1;
+					}
+
+					if (circle.getY() + circle.getR() > getSize().getHeight() || circle.getY() < 0) {
+						velocities.get(vectorIndex).y *= -1;
+					}
+
+					circle.draw(g2);
+				});
 
 		tm.start();
 	}

@@ -39,7 +39,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="ShadoMathJava" />
       <extension name="coverage">
@@ -52,11 +52,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -96,25 +91,25 @@
       <screen x="2560" y="-69" width="2560" height="1400" />
     </state>
     <state x="3340" y="803" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575636647079" />
-    <state width="2517" height="193" key="GridCell.Tab.0.bottom" timestamp="1575672192673">
+    <state width="2517" height="193" key="GridCell.Tab.0.bottom" timestamp="1575675115478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="193" key="GridCell.Tab.0.bottom/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575672192673" />
+    <state width="2517" height="193" key="GridCell.Tab.0.bottom/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575675115478" />
     <state width="2517" height="380" key="GridCell.Tab.0.bottom/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575641946692" />
-    <state width="2517" height="193" key="GridCell.Tab.0.center" timestamp="1575672192673">
+    <state width="2517" height="193" key="GridCell.Tab.0.center" timestamp="1575675115478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="193" key="GridCell.Tab.0.center/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575672192673" />
+    <state width="2517" height="193" key="GridCell.Tab.0.center/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575675115478" />
     <state width="2517" height="380" key="GridCell.Tab.0.center/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575641946692" />
-    <state width="2517" height="193" key="GridCell.Tab.0.left" timestamp="1575672192673">
+    <state width="2517" height="193" key="GridCell.Tab.0.left" timestamp="1575675115478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="193" key="GridCell.Tab.0.left/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575672192673" />
+    <state width="2517" height="193" key="GridCell.Tab.0.left/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575675115478" />
     <state width="2517" height="380" key="GridCell.Tab.0.left/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575641946692" />
-    <state width="2517" height="193" key="GridCell.Tab.0.right" timestamp="1575672192673">
+    <state width="2517" height="193" key="GridCell.Tab.0.right" timestamp="1575675115478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="193" key="GridCell.Tab.0.right/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575672192673" />
+    <state width="2517" height="193" key="GridCell.Tab.0.right/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575675115478" />
     <state width="2517" height="380" key="GridCell.Tab.0.right/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575641946692" />
     <state x="1016" y="296" key="SettingsEditor" timestamp="1575642165207">
       <screen x="0" y="0" width="2560" height="1400" />
@@ -130,9 +125,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="984" y="592" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575643273051" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1575642037449">
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1575674317990">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575642037449" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575674317990" />
   </component>
 </project>
