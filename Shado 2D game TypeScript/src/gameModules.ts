@@ -68,3 +68,16 @@ class Player extends GameObject {
 		rect.render(targetCanvas);
 	}
 }
+
+class Terrain extends GameObject {
+	private positions: Vertex[];
+	private hitBox: Rectangle[];
+
+	public constructor() {
+		super("terrain");
+	}
+
+	private generateHitBox(): void {
+		this.hitBox;
+	}
+}

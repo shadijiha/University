@@ -1,26 +1,12 @@
 var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
-canvas.setBackground("#87CEEB");
-var player = new Player(100, "66%", 50, 100);
-new Ground(0, "66%", "100%", "34%", Ground.default);
+canvas.setBackground("rgb(0, 0, 100)");
 function render() {
     canvas.clear(0, 0, canvas.width, canvas.height);
-    new ShadoText((1000 / Time.deltaTime).toFixed(2), 100, 100, {
-        size: 70,
-        color: "white"
-    }).render(canvas);
-    var pauseText = new ShadoText("Abort", 400, 100, {
-        size: 20,
-        background: "black",
-        color: "white"
-    });
-    pauseText.render(canvas);
-    if (pauseText.hover(canvas)) {
-        pauseText.text = "Game loop exited";
-        pause();
+    testShape.render(canvas);
+    for (var _i = 0, testSplit_1 = testSplit; _i < testSplit_1.length; _i++) {
+        var l = testSplit_1[_i];
+        l.render(canvas);
     }
-    Ground.allGrounds.forEach(function (g) {
-        if (g.display)
-            g.render(canvas);
-    });
-    player.draw(canvas);
+    testSplit[0].move(0, 0.1);
+    testSplit[1].move(0, -0.1);
 }

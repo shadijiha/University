@@ -28,12 +28,12 @@ var GameObject = (function () {
             amountX = tempVector.x;
             amountY = tempVector.y;
         }
-        if (this.static) {
+        if (!this.static) {
             this.x += amountX * Time.deltaTime;
             this.y += amountY * Time.deltaTime;
         }
         else {
-            throw new Error("Cannot move " + this.name + " (id: " + this.id + ") because object is imstatic");
+            throw new Error("Cannot move " + this.name + " (id: " + this.id + ") because object is immovable");
         }
     };
     GameObject.prototype.draw = function (targetCanvas) {
@@ -71,6 +71,16 @@ var GameObject = (function () {
     };
     GameObject.prototype.collides = function (other) {
         if (!this.collision || !other.collision) {
+            for (var _i = 0, _a = Logger.allLoggers; _i < _a.length; _i++) {
+                var element = _a[_i];
+                if (Logger.collisionWarn && Logger.maxCollisionWarn <= 10) {
+                    element.warn("Attemting to evaluat collision on disableCollision objects. Use Logger.disableCollisionWarn() if you wish to hide this message");
+                    Logger.maxCollisionWarn += 1;
+                }
+            }
+            if (Logger.allLoggers.length == 0) {
+                throw new Error("No valid instance of Logger was found");
+            }
             return;
         }
         if (this instanceof Circle && other instanceof Circle) {
@@ -105,6 +115,9 @@ var GameObject = (function () {
                 other.y > this.y &&
                 other.y < this.y + this.h);
         }
+    };
+    GameObject.prototype.equals = function (other) {
+        return this.id == other.id;
     };
     GameObject.prototype.parseToWidth = function (percentage) {
         if (isNaN(percentage)) {
@@ -223,7 +236,7 @@ var Circle = (function (_super) {
         _this.fill = "white";
         _this.stroke = "black";
         _this.lineWidth = 1;
-        _this.static = true;
+        _this.static = false;
         return _this;
     }
     Circle.prototype.render = function (targetCanvas) {
@@ -282,7 +295,7 @@ var Rectangle = (function (_super) {
         _this.fill = "white";
         _this.stroke = "black";
         _this.lineWidth = 1;
-        _this.static = true;
+        _this.static = false;
         return _this;
     }
     Rectangle.prototype.render = function (targetCanvas) {
@@ -355,7 +368,7 @@ var ShadoText = (function (_super) {
         _this.color = color || "black";
         _this.stroke = stroke || _this.color;
         _this.background = background || "transparent";
-        _this.static = true;
+        _this.static = false;
         _this.fullStyle = _this.size + "px " + _this.font;
         _this.hitBox = null;
         return _this;
@@ -421,6 +434,7 @@ var ShadoImage = (function (_super) {
         _this.h = h;
         _this.id = id;
         _this.showHitBox = showHitBox;
+        _this.static = false;
         var allImgs = document.getElementById(_this.id);
         if (allImgs == undefined || allImgs == null) {
             var body = document.querySelector("body");
@@ -473,4 +487,98 @@ var ShadoImage = (function (_super) {
         this.hitBox.h = newH;
     };
     return ShadoImage;
+}(GameObject));
+var Line = (function (_super) {
+    __extends(Line, _super);
+    function Line(fromX, fromY, toX, toY) {
+        var _this = _super.call(this, "line") || this;
+        if (fromX instanceof Vertex && fromY instanceof Vertex) {
+            _this.fromX = fromX.x;
+            _this.fromY = fromX.y;
+            _this.toX = fromY.x;
+            _this.toY = fromY.y;
+        }
+        else {
+            _this.fromX = fromX;
+            _this.fromY = fromY;
+            _this.toX = toX;
+            _this.toY = toY;
+        }
+        _this.static = false;
+        return _this;
+    }
+    Line.prototype.render = function (targetCanvas) {
+        targetCanvas.ctx.beginPath();
+        targetCanvas.ctx.moveTo(this.fromX, this.fromY);
+        targetCanvas.ctx.lineTo(this.toX, this.toY);
+        targetCanvas.ctx.stroke();
+    };
+    Line.prototype.length = function () {
+        var temp = new Vector(this.toX - this.fromX, this.toY - this.fromY);
+        return temp.mag();
+    };
+    Line.prototype.split = function (x, y) {
+        if (isNaN(x)) {
+            var tempX = x.split("");
+            tempX.pop();
+            var str = tempX.join("");
+            var percentage = Number(str) / 100;
+            var line1Length = this.length() * percentage;
+            var line2Length = this.length() - line1Length;
+            var angle = Math.atan2(this.toX - this.fromX, this.toY - this.fromY);
+            var line1Coord = new Vertex(Math.sin(angle) * line1Length + this.fromX, Math.cos(angle) * line1Length + this.fromY);
+            var line2Coord = new Vertex(Math.sin(angle) * line2Length + this.fromX, Math.cos(angle) * line2Length + this.fromY);
+            var line1 = new Line(this.fromX, this.fromY, line1Coord.x, line1Coord.y);
+            var line2 = new Line(line1Coord.x, line1Coord.y, this.toX, this.toY);
+            return [line1, line2];
+        }
+        else {
+            throw new Error("This code isn't working @ Line.split(number, number)");
+        }
+    };
+    Line.prototype.move = function (amountX, amountY) {
+        if (amountX instanceof Vector) {
+            var tempVector = amountX;
+            amountX = tempVector.x;
+            amountY = tempVector.y;
+        }
+        if (!this.static) {
+            this.fromX += amountX * Time.deltaTime;
+            this.toX += amountX * Time.deltaTime;
+            this.fromY += amountY * Time.deltaTime;
+            this.toY += amountY * Time.deltaTime;
+        }
+        else {
+            throw new Error("Cannot move " + this.name + " (id: " + this.id + ") because object is imstatic");
+        }
+    };
+    return Line;
+}(GameObject));
+var Shape = (function (_super) {
+    __extends(Shape, _super);
+    function Shape(vertices, _a) {
+        var fill = _a.fill, stroke = _a.stroke, lineWidth = _a.lineWidth;
+        var _this = _super.call(this, "shape") || this;
+        _this.vertices = vertices;
+        _this.fill = fill || "transparent";
+        _this.stroke = stroke || "black";
+        _this.lineWidth = lineWidth || 1;
+        _this.static = false;
+        return _this;
+    }
+    Shape.prototype.render = function (targetCanvas) {
+        targetCanvas.ctx.beginPath();
+        targetCanvas.ctx.fillStyle = this.fill;
+        targetCanvas.ctx.strokeStyle = this.stroke;
+        targetCanvas.ctx.lineWidth = this.lineWidth;
+        targetCanvas.ctx.moveTo(this.vertices[0].x, this.vertices[0].y);
+        for (var _i = 0, _a = this.vertices; _i < _a.length; _i++) {
+            var vertex = _a[_i];
+            targetCanvas.ctx.lineTo(vertex.x, vertex.y);
+        }
+        targetCanvas.ctx.fill();
+        targetCanvas.ctx.stroke();
+    };
+    Shape.prototype.generateHitBox = function () { };
+    return Shape;
 }(GameObject));
