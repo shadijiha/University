@@ -6,7 +6,6 @@
 package app;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class Main {
@@ -33,20 +32,23 @@ public abstract class Main {
 //			}
 //		}, 0, 1000);
 
-		List<Integer> A = Arrays.asList(1, 2, 3, 4, 5);
-		List<Integer> B = Arrays.asList(6, 7, 8, 9, 10);
+		Integer x[] = { 1, 2, 3, 4, 5 };
 
-		List<List<Integer>> R = new ArrayList<List<Integer>>();
+		System.out.println(test(x));
+	}
 
-		/*
-		 * for (int a : A) { for (int b : B) { R.add(Arrays.asList(a, b)); } }
-		 */
+	private static int test(Integer[] array) {
+		List<Integer> x = toList(array);
 
-		A.stream().forEach(a -> {
-			B.stream().forEach(b -> R.add(Arrays.asList(a, b)));
-		});
+		return x.stream().filter(e -> e < 5).reduce((acc, e) -> acc += e).orElse(-1);
+	}
 
-		R.stream().forEach(System.out::println);
+	private static <T> List<T> toList(T[] array) {
+		List<T> result = new ArrayList<T>();
+		for (final T temp : array) {
+			result.add(temp);
+		}
+		return result;
 	}
 
 	public static String getObjectName(Object obj) {
