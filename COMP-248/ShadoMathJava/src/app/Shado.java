@@ -54,7 +54,7 @@ public abstract class Shado {
 
 		// Constructors
 		public Circle(double x, double y, double r) {
-			this.ellipse = new Ellipse2D.Double(x, y, r, r);
+			this.ellipse = new Ellipse2D.Double(x, y, r * 2, r * 2);
 		}
 
 		// Graphics operations
@@ -79,6 +79,12 @@ public abstract class Shado {
 			return new Vertex(this.getX() + this.ellipse.width / 2, this.getY() + this.ellipse.height / 2);
 		}
 
+		public boolean collides(Circle other) {
+			Vertex posThis = this.getCenter();
+			Vertex posOther = other.getCenter();
+			return posThis.getDistance(posOther) <= this.getR() + other.getR();
+		}
+
 		// Setters
 		public void setFill(Color c) {
 			this.fill = c;
@@ -86,6 +92,16 @@ public abstract class Shado {
 
 		public void setStroke(Color c) {
 			this.stroke = c;
+		}
+
+		public void setPosition(Vertex newPosition) {
+			this.ellipse.x = newPosition.x;
+			this.ellipse.y = newPosition.y;
+		}
+
+		public void setRadius(double r) {
+			this.ellipse.width = r * 2;
+			this.ellipse.height = r * 2;
 		}
 
 		// Getters
@@ -106,7 +122,7 @@ public abstract class Shado {
 		}
 
 		public double getR() {
-			return this.ellipse.width;
+			return this.ellipse.width / 2;
 		}
 	}
 

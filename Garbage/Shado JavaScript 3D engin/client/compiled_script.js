@@ -221,8 +221,8 @@ var Matrix = (function () {
 }());
 var Vector = (function () {
     function Vector(x, y, z) {
-        this.x = x;
-        this.y = y;
+        this.x = x || 0;
+        this.y = y || 0;
         this.z = z || 0;
     }
     Vector.prototype.random2D = function (max) {
@@ -294,6 +294,7 @@ var Vector = (function () {
         var k = this.x * objVector.y - this.y * objVector.x;
         return new Vector(i, j, k);
     };
+    Vector.unitVector = new Vector(1, 1, 1);
     return Vector;
 }());
 var Complex = (function () {
@@ -724,17 +725,39 @@ matProj.setData(2, 2, fFar / (fFar - fNear));
 matProj.setData(3, 2, (-fFar * fNear) / (fFar - fNear));
 matProj.setData(2, 3, 1.0);
 matProj.setData(3, 3, 0.0);
+var fTheta = 0;
 function render() {
     canvas.clear(0, 0, canvas.width, canvas.height);
+    var matRotZ = new Matrix(4, 4);
+    var matRotX = new Matrix(4, 4);
+    fTheta += 1 * Time.deltaTime;
+    matRotZ.setData(0, 0, Math.cos(fTheta));
+    matRotZ.setData(0, 1, Math.sin(fTheta));
+    matRotZ.setData(1, 0, -Math.sin(fTheta));
+    matRotZ.setData(1, 1, Math.cos(fTheta));
+    matRotZ.setData(2, 2, 1);
+    matRotZ.setData(3, 3, 1);
+    matRotX.setData(0, 0, 1);
+    matRotX.setData(1, 1, Math.cos(fTheta * 0.5));
+    matRotX.setData(1, 2, Math.sin(fTheta * 0.5));
+    matRotX.setData(2, 1, -Math.sin(fTheta * 0.5));
+    matRotX.setData(2, 2, Math.cos(fTheta * 0.5));
+    matRotX.setData(3, 3, 1);
     for (var _i = 0, _a = meshCube.tris; _i < _a.length; _i++) {
         var tri = _a[_i];
-        var triTranslated = new Triangle(tri);
+        var triRotatedZ = new Triangle(Vector.unitVector, Vector.unitVector, Vector.unitVector);
+        for (var i = 0; i < triRotatedZ.p.length; i++) {
+            triRotatedZ.p[i] = Matrix.mult4x4WithVector(tri.p[i], matRotZ);
+        }
+        var triTranslated = triRotatedZ;
+        var OFFSET = 3.0;
         for (var i = 0; i < triTranslated.p.length; i++) {
-            triTranslated.p[i].z = tri.p[i].z;
+            triTranslated.p[i].z = tri.p[i].z + OFFSET;
         }
         var triProjected = new Triangle();
         for (var i = 0; i < triProjected.p.length; i++) {
             triProjected.p[i] = Matrix.mult4x4WithVector(triTranslated.p[i], matProj);
+            tri.p[i].z -= OFFSET;
         }
         for (var i = 0; i < triProjected.p.length; i++) {
             triProjected.p[i].x += 1.0;

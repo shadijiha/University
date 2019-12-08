@@ -192,8 +192,8 @@ var Matrix = (function () {
 }());
 var Vector = (function () {
     function Vector(x, y, z) {
-        this.x = x;
-        this.y = y;
+        this.x = x || 0;
+        this.y = y || 0;
         this.z = z || 0;
     }
     Vector.prototype.random2D = function (max) {
@@ -265,6 +265,7 @@ var Vector = (function () {
         var k = this.x * objVector.y - this.y * objVector.x;
         return new Vector(i, j, k);
     };
+    Vector.unitVector = new Vector(1, 1, 1);
     return Vector;
 }());
 var Complex = (function () {

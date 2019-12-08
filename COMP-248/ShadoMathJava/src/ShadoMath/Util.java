@@ -1,6 +1,9 @@
 package ShadoMath;
 
 import java.awt.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Util {
 
@@ -25,5 +28,12 @@ public class Util {
 		for (T arg : args)
 			System.out.print(arg + " ");
 		System.out.println();
+	}
+
+	public static int getHour() {
+		Date date = new Date();   // given date
+		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+		calendar.setTime(date);   // assigns calendar to given date
+		return calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
 	}
 }
