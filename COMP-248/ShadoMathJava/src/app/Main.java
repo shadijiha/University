@@ -7,8 +7,7 @@ package app;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 import static ShadoMath.Util.getHour;
 
@@ -26,7 +25,6 @@ public abstract class Main {
 		window.setVisible(true);
 
 		DrawingComponent DC = new DrawingComponent(window);
-
 		window.add(DC);
 
 		// SetInterval(function() {}, 1000);

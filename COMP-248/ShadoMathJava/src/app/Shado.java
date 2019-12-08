@@ -6,27 +6,32 @@ package app;
 
 import ShadoMath.Vector;
 import ShadoMath.Vertex;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
+import org.w3c.dom.css.Rect;
+
 public abstract class Shado {
 
 	public static class Rectangle {
-		private Rectangle2D.Double rectangle;                        // Stores shape
-		private Color color = new Color(0, 0, 0);    // Stores color
+		private Rectangle2D.Double rectangle; // Stores shape
+		private Color fill = new Color(255, 255, 255, 255); // Stores color
+		private Color stroke = new Color(0, 0, 0);
 
 		// Main constructor
 		public Rectangle(double x, double y, double w, double h) {
 			rectangle = new Rectangle2D.Double(x, y, w, h);
 		}
 
+		// Renderer
 		public void draw(Graphics2D graphics) {
-			graphics.setColor(this.color);
+			graphics.setColor(this.fill);
 			graphics.fill(this.rectangle);
+			graphics.setColor(this.stroke);
+			graphics.draw(this.rectangle);
 		}
 
 		public void move(double dx, double dy) {
@@ -38,19 +43,56 @@ public abstract class Shado {
 			this.move(v.x, v.y);
 		}
 
-		public Color getColor() {
-			return this.color;
+		// Math operations
+		public boolean collides(Rectangle other) {
+			return this.getX() + this.getWidth() >= other.getX() && this.getX() <= other.getX() + other.getWidth()
+					&& this.getY() + this.getHeight() >= other.getY()
+					&& this.getY() <= other.getY() + other.getHeight();
 		}
 
-		public void setColor(Color c) {
-			this.color = c;
+		public boolean collides(Circle circle) {
+			return circle.collides(this);
+		}
+
+		// Getters
+		public Color getFill() {
+			return this.fill;
+		}
+
+		public Color getStroke() {
+			return this.stroke;
+		}
+
+		public double getX() {
+			return this.rectangle.x;
+		}
+
+		public double getY() {
+			return this.rectangle.y;
+		}
+
+		public double getWidth() {
+			return this.rectangle.width;
+		}
+
+		public double getHeight() {
+			return this.rectangle.width;
+		}
+
+		// Setters
+		public void setFill(Color c) {
+			this.fill = c;
+		}
+
+		public void setStroke(Color c) {
+			this.stroke = c;
 		}
 	}
 
 	public static class Circle {
-		private Ellipse2D.Double ellipse;    // Stores shape
-		private Color fill = new Color(255, 255, 255, 255);  // Stores fill color
-		private Color stroke = Color.BLACK;     // Stores stroke color
+		private Ellipse2D.Double ellipse; // Stores shape
+		private Color fill = new Color(255, 255, 255, 255); // Stores fill color
+		private Color stroke = Color.BLACK; // Stores stroke color
 
 		// Constructors
 		public Circle(double x, double y, double r) {
@@ -74,7 +116,7 @@ public abstract class Shado {
 			this.move(v.x, v.y);
 		}
 
-		// Math operations
+		// Math operations and collisions
 		public Vertex getCenter() {
 			return new Vertex(this.getX() + this.ellipse.width / 2, this.getY() + this.ellipse.height / 2);
 		}
@@ -83,6 +125,11 @@ public abstract class Shado {
 			Vertex posThis = this.getCenter();
 			Vertex posOther = other.getCenter();
 			return posThis.getDistance(posOther) <= this.getR() + other.getR();
+		}
+
+		public boolean collides(Rectangle rect) {
+			Rectangle hitBox = new Rectangle(this.getX(), this.getY(), this.getR() * 2, this.getR() * 2);
+			return hitBox.collides(rect);
 		}
 
 		// Setters
@@ -127,8 +174,8 @@ public abstract class Shado {
 	}
 
 	public static class Line {
-		private Line2D.Double line;        // Stores shape
-		private Color color;            // Store color
+		private Line2D.Double line; // Stores shape
+		private Color color; // Store color
 
 		public Line(int fromX, int fromY, int toX, int toY) {
 			this.line = new Line2D.Double(fromX, fromY, toX, toY);
@@ -188,6 +235,12 @@ public abstract class Shado {
 			graphics.drawString(this.text, (int) vertex.x, (int) vertex.y);
 		}
 
+		// Math operations & collisions
+		public boolean collides(Rectangle other) throws Exception {
+			throw new Exception("Not coded yet");
+			// Rectangle hitBox = new Rectangle(this.vertex.x, this.vertex.y,)
+		}
+
 		// Setters
 		public void setCoordinates(Vertex v) {
 			this.vertex = v;
@@ -231,5 +284,3 @@ public abstract class Shado {
 		}
 	}
 }
-
-

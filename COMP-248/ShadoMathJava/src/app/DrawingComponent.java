@@ -6,18 +6,12 @@
 package app;
 
 import ShadoMath.Vector;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.*;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,7 +62,8 @@ public class DrawingComponent extends JComponent implements ActionListener {
 		}
 	}
 
-	// This is the renderer (Only draw). You also can put logic here (collision, forces, etc)
+	// This is the renderer (Only draw). You also can put logic here (collision,
+	// forces, etc)
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
@@ -79,29 +74,28 @@ public class DrawingComponent extends JComponent implements ActionListener {
 		}
 
 		// Draw stuff
-		circles.parallelStream()
-				.forEachOrdered(circle -> {
+		circles.parallelStream().forEachOrdered(circle -> {
 
-					int vectorIndex = circles.indexOf(circle);
-					circle.move(velocities.get(vectorIndex));
+			int vectorIndex = circles.indexOf(circle);
+			circle.move(velocities.get(vectorIndex));
 
-					if (circle.getX() + circle.getR() * 2 > getSize().getWidth() || circle.getX() < 0) {
-						velocities.get(vectorIndex).x *= -1;
-					}
+			if (circle.getX() + circle.getR() * 2 > getSize().getWidth() || circle.getX() < 0) {
+				velocities.get(vectorIndex).x *= -1;
+			}
 
-					if (circle.getY() + circle.getR() * 2 > getSize().getHeight() || circle.getY() < 0) {
-						velocities.get(vectorIndex).y *= -1;
-					}
+			if (circle.getY() + circle.getR() * 2 > getSize().getHeight() || circle.getY() < 0) {
+				velocities.get(vectorIndex).y *= -1;
+			}
 
-					circles.parallelStream().forEachOrdered(other -> {
-						if (circle != other && circle.collides(other)) {
-							velocities.get(vectorIndex).inverse();
-							velocities.get(vectorIndex).scale(0.80);    // Circles losese 20% Eenergy on collision
-						}
-					});
+			circles.parallelStream().forEachOrdered(other -> {
+				if (circle != other && circle.collides(other)) {
+					velocities.get(vectorIndex).inverse();
+					velocities.get(vectorIndex).scale(0.80); // Circles losese 20% Eenergy on collision
+				}
+			});
 
-					circle.draw(g2);
-				});
+			circle.draw(g2);
+		});
 
 		tm.start();
 
