@@ -1,0 +1,9 @@
+# Exported from 3D Builder
+
+newmtl mtl_diorama_141_0
+Kd 1.000000 1.000000 1.000000
+map_Kd texture_0_6195987693227547908.png
+
+newmtl mtl_diorama_2_b18467_0
+Kd 1.000000 1.000000 1.000000
+map_Kd texture_9_11563080508590297124.png
