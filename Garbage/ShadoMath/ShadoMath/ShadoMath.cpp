@@ -18,11 +18,16 @@
 #define extends :
 #define of :
 
+struct Container
+{
+	std::vector<Vector> data;
+	std::vector<Vector> velocity;
+};
+
 int main()
 {
 	typedef std::string string;
 	//===================================
-
 
 	//===================================
 
