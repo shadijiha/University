@@ -1,4 +1,0 @@
-INDEX VERSION 1.131+D:\Wamp64\www\GitHub\University\COMP-248\.metadata\.plugins\org.eclipse.jdt.core
-3558061183.index
-2069039560.index
-113558702.index
