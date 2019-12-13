@@ -20,7 +20,7 @@ class GameObject {
 
 	public constructor(name: string) {
 		this.name = name;
-		this.id = "object_" + Math.floor(random(0, 1e8));
+		this.id = this.name + "_" + Math.floor(random(0, 1e8));
 		this.buffer = {};
 
 		this.collision = false;
@@ -167,36 +167,37 @@ class GameObject {
 		return this.id == other.id;
 	}
 
-	protected parseToWidth(percentage: any): number {
-		if (isNaN(percentage)) {
-			percentage = percentage.split("");
-			percentage.pop();
-			percentage = percentage.join("");
-			percentage = Number(percentage / 100) * window.innerWidth;
-			return percentage;
+	protected parseToWidth(input: number | string): number {
+		if (typeof input === "string") {
+			const array: string[] = input.split("");
+			array.pop();
+			const percentage: string = array.join("");
+			const result: number = (Number(percentage) / 100) * window.innerWidth;
+			return result;
 		} else {
-			return percentage;
+			return input;
 		}
 	}
 
-	protected parseToHeight(percentage: any): number {
-		if (isNaN(percentage)) {
-			percentage = percentage.split("");
-			percentage.pop();
-			percentage = percentage.join("");
-			percentage = Number(percentage / 100) * window.innerHeight;
-			return percentage;
+	protected parseToHeight(input: number | string): number {
+		if (typeof input === "string") {
+			let array: string[] = input.split("");
+			array.pop();
+			const percentage: string = array.join("");
+			const result: number = (Number(percentage) / 100) * window.innerHeight;
+			return result;
 		} else {
-			return percentage;
+			return input;
 		}
 	}
 }
 
 class Canvas extends GameObject {
-	public w: any;
-	public h: any;
-	public width: any;
-	public height: any;
+	public w: number;
+	public h: number;
+	public width: number;
+	public height: number;
+	public positionStyle: string;
 	public background: string;
 	public canvas: any;
 	public ctx: any;
@@ -205,45 +206,31 @@ class Canvas extends GameObject {
 	public static: boolean;
 
 	public constructor(
-		posX: number,
-		posY: number,
-		width: any,
-		height: any,
+		posX: number | string,
+		posY: number | string,
+		width: number | string,
+		height: number | string,
+		positionStyle?: string,
 		parent?: HTMLElement
 	) {
 		super("canvas");
-		this.x = posX;
-		this.y = posY;
-		this.w = width;
-		this.h = height;
-		this.width = width;
-		this.height = height;
+		this.x = this.parseToWidth(posX);
+		this.y = this.parseToHeight(posY);
+		this.w = this.parseToWidth(width);
+		this.h = this.parseToHeight(height);
+		this.width = this.w;
+		this.height = this.h;
+		this.positionStyle = positionStyle || "absolute";
 		this.background = "transparent";
 		this.canvas = null;
 		this.ctx = null;
 		this.overwrite = false;
 		this.parent = parent || document.querySelector("body");
-		this.static = false;
+		this.static = true;
 	}
 
 	render(): void {
-		// Detect if width or height is passed as a precentage. It must have the following
-		// form: "75%"
-		if (isNaN(this.w)) {
-			this.w = this.w.split("");
-			this.w.pop();
-			this.w = this.w.join("");
-			this.w = Number(this.w / 100) * window.innerWidth;
-		}
-
-		if (isNaN(this.h)) {
-			this.h = this.h.split("");
-			this.h.pop();
-			this.h = this.h.join("");
-			this.h = Number(this.h / 100) * window.innerHeight;
-		}
-
-		let DOM = `<canvas id="${this.id}" style="position: absolute; top: ${this.y}; left: ${this.x}; background: ${this.background};" width="${this.w}" height="${this.h}">`;
+		let DOM = `<canvas id="${this.id}" style="position: ${this.positionStyle}; top: ${this.y}; left: ${this.x}; background: ${this.background};" width="${this.w}" height="${this.h}">`;
 
 		// if element doesn't exist add it to the page
 		if (!document.getElementById(this.id)) {
@@ -273,27 +260,34 @@ class Canvas extends GameObject {
 		this.ctx.scale(x, y);
 	}
 
-	setPosition(newX: number, newY: number): void {
-		this.x = newX || this.x;
-		this.y = newY || this.y;
+	setPosition(newX?: number | string, newY?: number | string): void {
+		this.x = this.parseToWidth(newX);
+		this.y = this.parseToHeight(newY);
 		this.render();
 	}
 
 	setBackground(color: string): void {
 		this.background = color;
 		this.render();
+		document.getElementById(this.id).style.background = this.background;
 	}
 
-	setWidth(newWidth: any): void {
-		this.w = newWidth;
-		this.width = newWidth;
+	setWidth(newWidth: number | string): void {
+		this.w = this.parseToWidth(newWidth);
+		this.width = this.w;
 		this.render();
 	}
 
-	setHeight(newHeight: any): void {
-		this.h = newHeight;
-		this.height = newHeight;
+	setHeight(newHeight: number | string): void {
+		this.h = this.parseToHeight(newHeight);
+		this.height = this.h;
 		this.render();
+	}
+
+	getMousePosition(): { x: number; y: number } {
+		const x = mouse.x - getOffsetLeft(this.canvas);
+		const y = mouse.y - getOffsetTop(this.canvas);
+		return { x, y };
 	}
 
 	toggleOverwrite(booleanValue: boolean): void {
@@ -365,11 +359,13 @@ class Circle extends GameObject {
 	}
 
 	clicked(): boolean {
-		/*let d = distance(this.x, this.y, lastClick.x, lastClick.y);
+		let d = Math.sqrt(
+			Math.pow(mouse.lastClicked.x - this.x, 2) +
+				Math.pow(mouse.lastClicked.y - this.y, 2)
+		);
 		if (d <= this.r) {
 			return true;
-		}*/
-		throw new Error("LastClick is not coded yet!");
+		}
 	}
 
 	area(): number {
@@ -460,15 +456,14 @@ class Rectangle extends GameObject {
 	}
 
 	clicked(): boolean {
-		/*if (
-			lastClick.x > this.x &&
-			lastClick.x < this.x + this.w &&
-			lastClick.y > this.y &&
-			lastClick.y < this.y + this.h
+		if (
+			mouse.lastClicked.x > this.x &&
+			mouse.lastClicked.x < this.x + this.w &&
+			mouse.lastClicked.y > this.y &&
+			mouse.lastClicked.y < this.y + this.h
 		) {
 			return true;
-		}*/
-		throw new Error("LastClick has not been coded yet! @ Rectangle");
+		}
 	}
 
 	area(): number {
@@ -763,9 +758,9 @@ class Line extends GameObject {
 		return temp.mag();
 	}
 
-	public split(x: any, y?: number): Line[] {
+	public split(x: number | string, y?: number): Line[] {
 		// if x is a percentage e.g. "50%"
-		if (isNaN(x)) {
+		if (typeof x === "string") {
 			let tempX: string[] = x.split("");
 			tempX.pop();
 			const str = tempX.join("");
@@ -806,7 +801,7 @@ class Line extends GameObject {
 		}
 	}
 
-	move(amountX: any, amountY?: number): void {
+	move(amountX: number | Vector, amountY?: number): void {
 		// If the argument passed is a vector
 		if (amountX instanceof Vector) {
 			const tempVector = amountX;
@@ -828,10 +823,13 @@ class Line extends GameObject {
 }
 
 class Shape extends GameObject {
-	private vertices: Vertex[];
+	private vertices: Vertex[] = [];
+	private hitBox: Rectangle[] = [];
 	public fill: string;
 	public stroke: string;
 	public lineWidth: number;
+	public window: ShadoWindow;
+	private editor: Canvas;
 
 	public constructor(
 		vertices: Vertex[],
@@ -851,9 +849,38 @@ class Shape extends GameObject {
 		this.stroke = stroke || "black";
 		this.lineWidth = lineWidth || 1;
 		this.static = false;
+
+		// Set up collision debug GUI
+		this.window = new ShadoWindow(
+			100,
+			100,
+			600,
+			800,
+			"Set " + this.id + " free-shape hitbox"
+		);
+		this.window.CENTER_X();
+		this.window.CENTER_Y();
+		this.window.generate();
+		this.window.setContent("<h1>Unregular shap hitBox setter:</h1>");
+		this.window.close();
+
+		this.editor = new Canvas(
+			0,
+			0,
+			(this.window.getWidth() * 1.6) / 2, // Keep the 16:9 aspect ratio
+			(this.window.getWidth() * 0.9) / 2,
+			"relative",
+			this.window.getBodyElement()
+		);
+		this.editor.setBackground("rgb(100, 100, 100)");
+		this.editor.render();
 	}
 
 	public render(targetCanvas: Canvas): void {
+		if (this.hitBox.length <= 0) {
+			this.generateHitBox();
+		}
+
 		targetCanvas.ctx.beginPath();
 		targetCanvas.ctx.fillStyle = this.fill;
 		targetCanvas.ctx.strokeStyle = this.stroke;
@@ -867,7 +894,270 @@ class Shape extends GameObject {
 
 		targetCanvas.ctx.fill();
 		targetCanvas.ctx.stroke();
+
+		// Draw hitboxes
+		for (const temp of this.hitBox) {
+			temp.draw(targetCanvas);
+			if (temp.clicked()) {
+				if (!this.window.isOpen()) {
+					this.window.open();
+					console.log("clicked!");
+				}
+			}
+		}
+
+		// Draw shape in the other canvas
+		if (this.window.isOpen()) {
+			this.editor.render();
+			this.editor.clear();
+			this.editor.ctx.beginPath();
+			this.editor.ctx.fillStyle = this.fill;
+			this.editor.ctx.strokeStyle = this.stroke;
+			this.editor.ctx.lineWidth = this.lineWidth;
+
+			const firstX =
+				(this.vertices[0].x / targetCanvas.width) * this.editor.width;
+			const firstY =
+				(this.vertices[0].y / targetCanvas.height) * this.editor.height;
+			this.editor.ctx.moveTo(firstX, firstY);
+
+			for (const vertex of this.vertices) {
+				const tempX = (vertex.x / targetCanvas.width) * this.editor.width;
+				const tempY = (vertex.y / targetCanvas.height) * this.editor.height;
+				this.editor.ctx.lineTo(tempX, tempY);
+			}
+
+			this.editor.ctx.fill();
+			this.editor.ctx.stroke();
+		}
 	}
 
-	private generateHitBox(): void {}
+	private generateHitBox(): void {
+		const x = this.vertices[0].x;
+		const y = this.vertices[0].y;
+		const w = this.vertices[1].x - x;
+		const h = this.vertices[1].y - y;
+
+		const temp = new Rectangle(x, y, w, h);
+		temp.setFill("rgba(255, 0, 100, 0.3)");
+
+		this.hitBox.push(temp);
+	}
+}
+
+class ShadoWindow extends GameObject {
+	private DOM: HTMLElement;
+	private titleBar: HTMLElement;
+	private body: HTMLElement;
+	private x: number;
+	private y: number;
+	private w: number;
+	private h: number;
+	private title: string;
+	private generated: boolean;
+	private openned: boolean = false;
+	constructor(
+		x: number | string,
+		y: number | string,
+		width: number | string,
+		height: number | string,
+		title: string
+	) {
+		super("ShadoWindow");
+		this.x = this.parseToWidth(x);
+		this.y = this.parseToHeight(y);
+		this.w = this.parseToWidth(width);
+		this.h = this.parseToHeight(height);
+
+		this.title = title;
+		this.generated = false;
+		this.static = false;
+
+		this.DOM = createElement("div", $("body"));
+		this.DOM.id = this.id;
+		this.DOM.style.position = "absolute";
+	}
+
+	generate(): void {
+		const COLOR = "rgb(50, 0, 190)";
+
+		// Set correct width
+		this.DOM.draggable = false;
+		this.DOM.style.userSelect = "none"; // Don't allow selection On window
+		this.DOM.style.left = this.x.toString();
+		this.DOM.style.top = this.y.toString();
+		this.DOM.style.width = this.w + "px";
+		this.DOM.style.height = this.h + "px";
+		this.DOM.style.zIndex = "+3";
+		this.DOM.style.backgroundColor = "white";
+		this.DOM.style.border = "solid 2px " + COLOR;
+		this.DOM.style.borderBottomRightRadius = "10px";
+		this.DOM.style.borderBottomLeftRadius = "10px";
+		this.DOM.style.overflow = "auto";
+
+		// Generate Title bar
+		const TITLEBAR_PADDING = 10;
+		const TITLEBAR_HEIGHT = 35;
+		this.titleBar = createElement("div", this.DOM);
+		this.titleBar.id = this.id + "_titleBar";
+		this.titleBar.draggable = false;
+		this.titleBar.style.width = `calc(100% - ${TITLEBAR_PADDING * 2}px)`;
+		this.titleBar.style.height = TITLEBAR_HEIGHT + "px";
+		this.titleBar.style.backgroundColor = COLOR;
+		this.titleBar.style.color = "white";
+		this.titleBar.style.padding = TITLEBAR_PADDING + "px";
+		this.titleBar.style.fontWeight = "bold";
+		this.titleBar.style.fontFamily = "'IBM Plex Serif', sans-serif";
+		this.titleBar.style.fontSize = "16pt";
+		this.titleBar.innerHTML = this.title;
+
+		// Generate close Button
+		const closeButton: HTMLElement = createElement("div", this.DOM);
+		closeButton.id = this.id + "_closeButton";
+		closeButton.style.position = "absolute";
+		closeButton.style.left = `calc(100% - ${TITLEBAR_HEIGHT +
+			TITLEBAR_PADDING * 2}px)`;
+		closeButton.style.top = "0px";
+		closeButton.style.width = TITLEBAR_HEIGHT + TITLEBAR_PADDING * 2 + "px";
+		closeButton.style.height = TITLEBAR_HEIGHT + TITLEBAR_PADDING * 2 + "px";
+		closeButton.style.backgroundColor = "rgb(230, 50, 50)";
+		closeButton.style.textAlign = "center";
+		closeButton.style.verticalAlign = "middle";
+		closeButton.style.color = "white";
+		closeButton.style.fontFamily = "'IBM Plex Serif', sans-serif";
+		closeButton.style.fontSize = "20pt";
+		closeButton.style.cursor = "pointer";
+		closeButton.innerHTML = "X";
+
+		// Add close window event
+		window.addEventListener("load", () => {
+			$(`#${this.id}_closeButton`).addEventListener("click", () => {
+				$("#" + this.id).style.display = "none";
+			});
+
+			$(`#${this.id}_titleBar`).addEventListener("mousemove", () => {
+				if (mouse.isDown) {
+					this.setX(mouse.x - this.w / 2);
+					this.setY(mouse.y - TITLEBAR_HEIGHT / 2);
+				}
+			});
+		});
+
+		// Generate the Body dive
+		const BODY_PADDING = 10;
+
+		this.body = createElement("div", this.DOM);
+		this.body.id = this.id + "_body";
+		this.body.style.width = `calc(100% - ${BODY_PADDING * 2}px)`;
+		this.body.style.padding = BODY_PADDING + "px";
+		this.body.style.fontFamily = "'IBM Plex Serif', serif";
+		this.body.style.overflow = "auto";
+
+		this.body.innerHTML += "Placeholder...";
+		this.generated = true;
+	}
+
+	CENTER_X(): void {
+		let newPosX = window.innerWidth / 2 - this.w / 2;
+		this.setX(newPosX);
+	}
+
+	CENTER_Y(): void {
+		let newPosY = window.innerHeight / 2 - this.h / 2;
+		this.setY(newPosY);
+	}
+
+	show(): void {
+		if (!this.generated) {
+			this.generate();
+		}
+
+		$(`#${this.id}`).style.display = "block";
+		this.openned = true;
+	}
+
+	open(): void {
+		this.show();
+	}
+
+	hide(): void {
+		$(`#${this.id}`).style.display = "none";
+		this.openned = false;
+	}
+
+	close(): void {
+		this.hide();
+	}
+
+	move(): void {}
+
+	// Getters
+	getX(): number {
+		return this.x;
+	}
+
+	getY(): number {
+		return this.y;
+	}
+
+	getWidth(): number {
+		return this.w;
+	}
+
+	getHeight(): number {
+		return this.h;
+	}
+
+	getTitle(): string {
+		return this.title;
+	}
+
+	getContent(): string {
+		return this.body.innerHTML;
+	}
+
+	getID(): string {
+		return this.id;
+	}
+
+	getBodyElement(): HTMLElement {
+		return $(`#${this.id}_body`);
+	}
+
+	isOpen() {
+		return this.openned;
+	}
+
+	// Setters
+	setX(newX: number | string): void {
+		this.x = this.parseToWidth(newX);
+		$(`#${this.id}`).style.left = this.x.toString() + "px";
+	}
+
+	setY(newY: number | string): void {
+		this.y = this.parseToHeight(newY);
+		$(`#${this.id}`).style.top = this.y.toString() + "px";
+	}
+
+	setWidth(newWidth: number | string): void {
+		this.w = this.parseToWidth(newWidth);
+		$(`#${this.id}`).style.width = this.w + "px";
+	}
+
+	setHeight(newHeight: number | string): void {
+		this.h = this.parseToHeight(newHeight);
+		$(`#${this.id}`).style.height = this.h + "px";
+	}
+
+	setTitle(newTitle: string): void {
+		$(`#${this.id}_titleBar`).innerHTML = newTitle;
+	}
+
+	setContent(newContent: string): void {
+		$(`#${this.id}_body`).innerHTML = newContent;
+	}
+
+	addContent(content: string): void {
+		$(`#${this.id}_body`).innerHTML += content;
+	}
 }

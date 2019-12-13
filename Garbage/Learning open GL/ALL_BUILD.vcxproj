@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3EB3A4B9-D75E-3BD9-AE59-D2C8CDC92340}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\include;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\extern\glfw-3.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\include;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\extern\glfw-3.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\include;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\extern\glfw-3.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\include;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\extern\glfw-3.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" "-BD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" --check-stamp-file "D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCXXCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeRCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeSystem.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\build\templates\vs2013.vcxproj.user.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" "-BD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" --check-stamp-file "D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCXXCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeRCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeSystem.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\build\templates\vs2013.vcxproj.user.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" "-BD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" --check-stamp-file "D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCXXCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeRCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeSystem.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\build\templates\vs2013.vcxproj.user.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" "-BD:/Wamp64/www/GitHub/University/Garbage/Learning open GL" --check-stamp-file "D:/Wamp64/www/GitHub/University/Garbage/Learning open GL/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenMP.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeCXXCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeRCCompiler.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\3.16.1\CMakeSystem.cmake;D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\build\templates\vs2013.vcxproj.user.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\ZERO_CHECK.vcxproj">
+      <Project>{BC28A06E-5A69-3DD6-817B-829D48B4B895}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\alienrain.vcxproj">
+      <Project>{E9D064C6-069A-3001-B97D-A4449708AF8B}</Project>
+      <Name>alienrain</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\basicfbo.vcxproj">
+      <Project>{C370F60F-5864-3957-B7ED-250B7C02161F}</Project>
+      <Name>basicfbo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\bindlesstex.vcxproj">
+      <Project>{F61F2249-FC09-3986-9C90-8E0B73BFC365}</Project>
+      <Name>bindlesstex</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\blendmatrix.vcxproj">
+      <Project>{B6F1E2E9-6BB7-385F-A506-B8B55499AE4C}</Project>
+      <Name>blendmatrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\blinnphong.vcxproj">
+      <Project>{070AEA66-65C2-3B8C-AFF8-3CB61DCAAB86}</Project>
+      <Name>blinnphong</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\bumpmapping.vcxproj">
+      <Project>{E5459221-618E-3C47-8F5A-4F6F2849ACDC}</Project>
+      <Name>bumpmapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\clipdistance.vcxproj">
+      <Project>{F7E02657-E0C3-317D-841D-0C116E06116D}</Project>
+      <Name>clipdistance</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\compressrgtc.vcxproj">
+      <Project>{F5BBE016-B13B-3DEE-9111-00227940D31B}</Project>
+      <Name>compressrgtc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\csflocking.vcxproj">
+      <Project>{00AFD624-DF67-3BE6-9703-975AF0536F23}</Project>
+      <Name>csflocking</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\cubemapenv.vcxproj">
+      <Project>{C69BA0B7-790D-3AFD-8C12-D963AAF7EFAF}</Project>
+      <Name>cubemapenv</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\cubicbezier.vcxproj">
+      <Project>{03CE123D-B17A-3538-8BE6-D0D5B9AD5917}</Project>
+      <Name>cubicbezier</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\cullindirect.vcxproj">
+      <Project>{449FF80E-32F5-3D19-A916-736D3DD77ABA}</Project>
+      <Name>cullindirect</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\deferredshading.vcxproj">
+      <Project>{06A6DB87-E0D3-3EDC-82EE-24D5E8A647E3}</Project>
+      <Name>deferredshading</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\depthclamp.vcxproj">
+      <Project>{409DEC54-C880-35D7-903B-6608D09741FA}</Project>
+      <Name>depthclamp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\dflandscape.vcxproj">
+      <Project>{47FDE021-7892-3B05-BAA1-60E0CC3F2FCB}</Project>
+      <Name>dflandscape</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\dispmap.vcxproj">
+      <Project>{8CCA1664-53AA-3030-85F3-041D883B08A5}</Project>
+      <Name>dispmap</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\dof.vcxproj">
+      <Project>{8D4BDE25-06E7-33D9-A692-2280366BA5E9}</Project>
+      <Name>dof</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\envmapsphere.vcxproj">
+      <Project>{CD4E3EA7-F6CC-3B64-BC8D-5E951AEB5546}</Project>
+      <Name>envmapsphere</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\equirectangular.vcxproj">
+      <Project>{4222217A-AD90-37A7-8913-03E204BB8CA9}</Project>
+      <Name>equirectangular</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\fontdemo.vcxproj">
+      <Project>{89FD0D71-4E24-3BBF-8BAE-15E1E50F2477}</Project>
+      <Name>fontdemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\fragcolorfrompos.vcxproj">
+      <Project>{90F0272D-2E3C-3EC6-881C-981FE32A27B6}</Project>
+      <Name>fragcolorfrompos</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\fragmentlist.vcxproj">
+      <Project>{72BE741A-EB27-3E4D-AB7B-044D1631D00B}</Project>
+      <Name>fragmentlist</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\grass.vcxproj">
+      <Project>{D0540B62-B6D8-395A-ADF3-BC9885FF244E}</Project>
+      <Name>grass</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\gsculling.vcxproj">
+      <Project>{FE602F99-A470-3D5E-B398-03450C64EF7D}</Project>
+      <Name>gsculling</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\gslayered.vcxproj">
+      <Project>{CA4FB1BD-679A-333B-B127-101AAFA36341}</Project>
+      <Name>gslayered</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\gsquads.vcxproj">
+      <Project>{5CCA8F47-DEA3-3699-A200-284BEC3FFC37}</Project>
+      <Name>gsquads</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\gstessellate.vcxproj">
+      <Project>{15B9CF78-136A-3156-9414-BF0E7F0A8924}</Project>
+      <Name>gstessellate</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\hdrbloom.vcxproj">
+      <Project>{2F2D6218-FD43-36DE-8261-CCB5371AD782}</Project>
+      <Name>hdrbloom</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\hdrexposure.vcxproj">
+      <Project>{CE3B1077-9AA7-3103-B30D-80762BE83F6B}</Project>
+      <Name>hdrexposure</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\hdrtonemap.vcxproj">
+      <Project>{8AE4D13A-E8B1-37DF-B89F-D3A794A7D8E7}</Project>
+      <Name>hdrtonemap</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\hqfilter.vcxproj">
+      <Project>{1EC7E8E1-9265-373B-9FEB-2A70974E64D1}</Project>
+      <Name>hqfilter</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\indexedcube.vcxproj">
+      <Project>{DBF60036-11C3-3519-9F10-41200776828B}</Project>
+      <Name>indexedcube</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\indirectmaterial.vcxproj">
+      <Project>{1DBD898C-B586-30BD-8069-6C0598F36F81}</Project>
+      <Name>indirectmaterial</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\instancedattribs.vcxproj">
+      <Project>{8BDE3027-A60A-3C23-B759-2FE6E037C6B6}</Project>
+      <Name>instancedattribs</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\julia.vcxproj">
+      <Project>{320B670C-0233-3CF3-9E04-675BE876CD8D}</Project>
+      <Name>julia</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\ktxview.vcxproj">
+      <Project>{720AA519-7789-3154-88C3-0419EB3269D6}</Project>
+      <Name>ktxview</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\linesmooth.vcxproj">
+      <Project>{2451A693-697F-378A-9804-D6AFA9DD4A76}</Project>
+      <Name>linesmooth</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\mirrorclampedge.vcxproj">
+      <Project>{D87802F4-AA60-3ECE-8E93-9281FC8B4CE6}</Project>
+      <Name>mirrorclampedge</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\movingtri.vcxproj">
+      <Project>{F7CF5048-561D-311C-9356-DFDD24D48509}</Project>
+      <Name>movingtri</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\msaanative.vcxproj">
+      <Project>{AAFB2026-A8F6-3301-A810-9C0E1ED95FC5}</Project>
+      <Name>msaanative</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\multidrawindirect.vcxproj">
+      <Project>{1B50051D-638B-348B-B242-412B53BEA9B9}</Project>
+      <Name>multidrawindirect</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\multiscissor.vcxproj">
+      <Project>{3A71331C-2469-3F1C-821F-96DA33049887}</Project>
+      <Name>multiscissor</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\multiviewport.vcxproj">
+      <Project>{01F4BD91-C5C4-352A-BE4B-6B4522AB47C3}</Project>
+      <Name>multiviewport</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\noperspective.vcxproj">
+      <Project>{1839290D-B221-3A05-9597-8BF677883DA6}</Project>
+      <Name>noperspective</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\normalviewer.vcxproj">
+      <Project>{8A6AF707-5EE8-3BC3-88FC-D07C1F9ABCE4}</Project>
+      <Name>normalviewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\objectexploder.vcxproj">
+      <Project>{14D3E33B-C405-387D-B917-3343810F3DC2}</Project>
+      <Name>objectexploder</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\ompparticles.vcxproj">
+      <Project>{BC2A7FE5-4197-3ED2-8571-98D3B6985961}</Project>
+      <Name>ompparticles</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\packetbuffer.vcxproj">
+      <Project>{71E39BE8-178D-32EE-AF13-EAAA64C17DCE}</Project>
+      <Name>packetbuffer</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\perpixelgloss.vcxproj">
+      <Project>{78587DFE-E834-382A-98BD-3ED068476381}</Project>
+      <Name>perpixelgloss</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\phonglighting.vcxproj">
+      <Project>{88A820B2-7E25-39A7-9C33-25B3F9C576A7}</Project>
+      <Name>phonglighting</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\pmbfractal.vcxproj">
+      <Project>{42018D0B-C082-3249-A8ED-77B29B665578}</Project>
+      <Name>pmbfractal</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\pmbstreaming.vcxproj">
+      <Project>{41BB9334-8362-3AA2-B20F-06088846F668}</Project>
+      <Name>pmbstreaming</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\polygonsmooth.vcxproj">
+      <Project>{9565590D-A8E4-3E50-8156-5F77B5578A6B}</Project>
+      <Name>polygonsmooth</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\prefixsum.vcxproj">
+      <Project>{546B27B2-0F5E-3565-8D9D-C782C2D39D90}</Project>
+      <Name>prefixsum</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\prefixsum2d.vcxproj">
+      <Project>{DF16B5B4-F8D8-30AB-A178-648608AD44A2}</Project>
+      <Name>prefixsum2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\programinfo.vcxproj">
+      <Project>{D60D869A-88E1-3174-9C64-5382AB9AE2C1}</Project>
+      <Name>programinfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\raytracer.vcxproj">
+      <Project>{A0E40865-1CA3-3AB3-9A38-E1C7ED6268DA}</Project>
+      <Name>raytracer</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\rimlight.vcxproj">
+      <Project>{5BC5DF64-E482-3EAC-9606-255936819D81}</Project>
+      <Name>rimlight</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\sampleshading.vcxproj">
+      <Project>{FD1BEE2D-358D-3A7F-B7A4-A161454D93FF}</Project>
+      <Name>sampleshading</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\sb7.vcxproj">
+      <Project>{7A137112-C05E-3A1B-9E24-ADDC6EC4A8ED}</Project>
+      <Name>sb7</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\sdfdemo.vcxproj">
+      <Project>{CC102A8D-55CD-35AC-A35A-163B7E5B489E}</Project>
+      <Name>sdfdemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\shadowmapping.vcxproj">
+      <Project>{94ACB4D3-5C27-3548-8ED8-D14045E909C0}</Project>
+      <Name>shadowmapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\shapedpoints.vcxproj">
+      <Project>{17CA0829-CFAC-38B0-876A-33FD1B9E6BD0}</Project>
+      <Name>shapedpoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\simpleclear.vcxproj">
+      <Project>{72F85397-F017-30D1-8D9E-26B3E187D8B4}</Project>
+      <Name>simpleclear</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\simpletexcoords.vcxproj">
+      <Project>{8B2ED503-66C4-37FF-A7DD-81C262535005}</Project>
+      <Name>simpletexcoords</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\simpletexture.vcxproj">
+      <Project>{EC600F8B-2B4D-3231-B222-FF80BC69F33E}</Project>
+      <Name>simpletexture</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\singlepoint.vcxproj">
+      <Project>{DB52F590-6038-32A0-9087-5AAFC5D6366D}</Project>
+      <Name>singlepoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\singletri.vcxproj">
+      <Project>{180685CB-894A-3D4D-A514-FE0B404856E2}</Project>
+      <Name>singletri</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\sparsetexture.vcxproj">
+      <Project>{4C3E7B01-BB24-3E3B-8729-BCAF344896D3}</Project>
+      <Name>sparsetexture</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\spinnycube.vcxproj">
+      <Project>{5103087F-FE06-3DC6-AAA7-97B2553CC43F}</Project>
+      <Name>spinnycube</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\springmass.vcxproj">
+      <Project>{B546E056-C911-3C35-B741-99F4A5D69058}</Project>
+      <Name>springmass</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\ssao.vcxproj">
+      <Project>{2DE20162-9AC6-3E3E-AE81-BB491CBEAB6C}</Project>
+      <Name>ssao</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\starfield.vcxproj">
+      <Project>{4B362607-14BB-3C5A-8993-153A5E3A3547}</Project>
+      <Name>starfield</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\stereo.vcxproj">
+      <Project>{DB0AEE27-BD53-3821-A3B3-014413244D12}</Project>
+      <Name>stereo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\subroutines.vcxproj">
+      <Project>{8D0DFC4C-5035-31B1-84A5-CE83F91FD79E}</Project>
+      <Name>subroutines</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tessellatedcube.vcxproj">
+      <Project>{97D8805F-7F6C-302E-B2B9-24807177BE7A}</Project>
+      <Name>tessellatedcube</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tessellatedgstri.vcxproj">
+      <Project>{41CA6434-2D44-3575-B2AF-EECE4B206AA7}</Project>
+      <Name>tessellatedgstri</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tessellatedtri.vcxproj">
+      <Project>{9F1A0B9F-A9F4-3236-91BF-CDE14353A112}</Project>
+      <Name>tessellatedtri</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tessmodes.vcxproj">
+      <Project>{158FE74B-169B-33BC-A581-FED3376E65E7}</Project>
+      <Name>tessmodes</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tesssubdivmodes.vcxproj">
+      <Project>{F2652047-392F-33D3-BB04-DFE4BDCD8436}</Project>
+      <Name>tesssubdivmodes</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\toonshading.vcxproj">
+      <Project>{3831C222-4EC9-388E-A35F-F9E1CAA5B039}</Project>
+      <Name>toonshading</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\tunnel.vcxproj">
+      <Project>{2BE9FB9B-B7AB-31D1-9EBF-1F4C3BAE16D2}</Project>
+      <Name>tunnel</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Wamp64\www\GitHub\University\Garbage\Learning open GL\wrapmodes.vcxproj">
+      <Project>{0780AF46-7A4F-3743-8812-67D8A3FCB600}</Project>
+      <Name>wrapmodes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -4,8 +4,15 @@
  *
  */
 // Setup main canvas
-const canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
+const canvas = new Canvas(
+	0,
+	0,
+	window.innerWidth,
+	window.innerHeight,
+	"absolute"
+);
 canvas.setBackground("rgb(0, 0, 100)"); // Render is implicitly called
+//EnginGlobal.winCanvas.render(); // For some reason I need to call this here too
 
 // For game Loop see "index.js"
 function render() {
@@ -43,4 +50,11 @@ function render() {
 
 	testSplit[0].move(0, 0.1);
 	testSplit[1].move(0, -0.1);
+
+	// EnginGlobal.winCanvas.clear();
+	// const newX = EnginGlobal.winCanvas.getMousePosition().x;
+	// const newY = EnginGlobal.winCanvas.getMousePosition().y;
+	// EnginGlobal.circleTest.x = newX || EnginGlobal.circleTest.x;
+	// EnginGlobal.circleTest.y = newY || EnginGlobal.circleTest.y;
+	// EnginGlobal.circleTest.draw(EnginGlobal.winCanvas);
 }

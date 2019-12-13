@@ -31,7 +31,7 @@ async function compileFiles() {
 				console.log("All Files have been merged successfully");
 
 				// When finish, Read the same file to remove all white spaces from the file
-				fs.readFile(
+				/*fs.readFile(
 					path.join(__dirname, `/client/${OUTPUT}.js`),
 					{ encoding: "utf-8" },
 					async function(err, data) {
@@ -61,6 +61,7 @@ async function compileFiles() {
 						}
 					}
 				);
+				*/
 			} else {
 				console.log("Could not merge files! Error!");
 			}

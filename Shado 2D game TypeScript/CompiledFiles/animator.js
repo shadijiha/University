@@ -1,4 +1,4 @@
-var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight);
+var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight, "absolute");
 canvas.setBackground("rgb(0, 0, 100)");
 function render() {
     canvas.clear(0, 0, canvas.width, canvas.height);

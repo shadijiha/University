@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 var GameObject = (function () {
     function GameObject(name) {
         this.name = name;
-        this.id = "object_" + Math.floor(random(0, 1e8));
+        this.id = this.name + "_" + Math.floor(random(0, 1e8));
         this.buffer = {};
         this.collision = false;
         this.static = true;
@@ -119,64 +119,53 @@ var GameObject = (function () {
     GameObject.prototype.equals = function (other) {
         return this.id == other.id;
     };
-    GameObject.prototype.parseToWidth = function (percentage) {
-        if (isNaN(percentage)) {
-            percentage = percentage.split("");
-            percentage.pop();
-            percentage = percentage.join("");
-            percentage = Number(percentage / 100) * window.innerWidth;
-            return percentage;
+    GameObject.prototype.parseToWidth = function (input) {
+        if (typeof input === "string") {
+            var array = input.split("");
+            array.pop();
+            var percentage = array.join("");
+            var result = (Number(percentage) / 100) * window.innerWidth;
+            return result;
         }
         else {
-            return percentage;
+            return input;
         }
     };
-    GameObject.prototype.parseToHeight = function (percentage) {
-        if (isNaN(percentage)) {
-            percentage = percentage.split("");
-            percentage.pop();
-            percentage = percentage.join("");
-            percentage = Number(percentage / 100) * window.innerHeight;
-            return percentage;
+    GameObject.prototype.parseToHeight = function (input) {
+        if (typeof input === "string") {
+            var array = input.split("");
+            array.pop();
+            var percentage = array.join("");
+            var result = (Number(percentage) / 100) * window.innerHeight;
+            return result;
         }
         else {
-            return percentage;
+            return input;
         }
     };
     return GameObject;
 }());
 var Canvas = (function (_super) {
     __extends(Canvas, _super);
-    function Canvas(posX, posY, width, height, parent) {
+    function Canvas(posX, posY, width, height, positionStyle, parent) {
         var _this = _super.call(this, "canvas") || this;
-        _this.x = posX;
-        _this.y = posY;
-        _this.w = width;
-        _this.h = height;
-        _this.width = width;
-        _this.height = height;
+        _this.x = _this.parseToWidth(posX);
+        _this.y = _this.parseToHeight(posY);
+        _this.w = _this.parseToWidth(width);
+        _this.h = _this.parseToHeight(height);
+        _this.width = _this.w;
+        _this.height = _this.h;
+        _this.positionStyle = positionStyle || "absolute";
         _this.background = "transparent";
         _this.canvas = null;
         _this.ctx = null;
         _this.overwrite = false;
         _this.parent = parent || document.querySelector("body");
-        _this.static = false;
+        _this.static = true;
         return _this;
     }
     Canvas.prototype.render = function () {
-        if (isNaN(this.w)) {
-            this.w = this.w.split("");
-            this.w.pop();
-            this.w = this.w.join("");
-            this.w = Number(this.w / 100) * window.innerWidth;
-        }
-        if (isNaN(this.h)) {
-            this.h = this.h.split("");
-            this.h.pop();
-            this.h = this.h.join("");
-            this.h = Number(this.h / 100) * window.innerHeight;
-        }
-        var DOM = "<canvas id=\"" + this.id + "\" style=\"position: absolute; top: " + this.y + "; left: " + this.x + "; background: " + this.background + ";\" width=\"" + this.w + "\" height=\"" + this.h + "\">";
+        var DOM = "<canvas id=\"" + this.id + "\" style=\"position: " + this.positionStyle + "; top: " + this.y + "; left: " + this.x + "; background: " + this.background + ";\" width=\"" + this.w + "\" height=\"" + this.h + "\">";
         if (!document.getElementById(this.id)) {
             this.parent.innerHTML += DOM;
         }
@@ -200,23 +189,29 @@ var Canvas = (function (_super) {
         this.ctx.scale(x, y);
     };
     Canvas.prototype.setPosition = function (newX, newY) {
-        this.x = newX || this.x;
-        this.y = newY || this.y;
+        this.x = this.parseToWidth(newX);
+        this.y = this.parseToHeight(newY);
         this.render();
     };
     Canvas.prototype.setBackground = function (color) {
         this.background = color;
         this.render();
+        document.getElementById(this.id).style.background = this.background;
     };
     Canvas.prototype.setWidth = function (newWidth) {
-        this.w = newWidth;
-        this.width = newWidth;
+        this.w = this.parseToWidth(newWidth);
+        this.width = this.w;
         this.render();
     };
     Canvas.prototype.setHeight = function (newHeight) {
-        this.h = newHeight;
-        this.height = newHeight;
+        this.h = this.parseToHeight(newHeight);
+        this.height = this.h;
         this.render();
+    };
+    Canvas.prototype.getMousePosition = function () {
+        var x = mouse.x - getOffsetLeft(this.canvas);
+        var y = mouse.y - getOffsetTop(this.canvas);
+        return { x: x, y: y };
     };
     Canvas.prototype.toggleOverwrite = function (booleanValue) {
         if (booleanValue == undefined)
@@ -268,7 +263,11 @@ var Circle = (function (_super) {
         }
     };
     Circle.prototype.clicked = function () {
-        throw new Error("LastClick is not coded yet!");
+        var d = Math.sqrt(Math.pow(mouse.lastClicked.x - this.x, 2) +
+            Math.pow(mouse.lastClicked.y - this.y, 2));
+        if (d <= this.r) {
+            return true;
+        }
     };
     Circle.prototype.area = function () {
         return Math.PI * Math.pow(this.r, 2);
@@ -329,7 +328,12 @@ var Rectangle = (function (_super) {
         }
     };
     Rectangle.prototype.clicked = function () {
-        throw new Error("LastClick has not been coded yet! @ Rectangle");
+        if (mouse.lastClicked.x > this.x &&
+            mouse.lastClicked.x < this.x + this.w &&
+            mouse.lastClicked.y > this.y &&
+            mouse.lastClicked.y < this.y + this.h) {
+            return true;
+        }
     };
     Rectangle.prototype.area = function () {
         return this.w * this.h;
@@ -518,7 +522,7 @@ var Line = (function (_super) {
         return temp.mag();
     };
     Line.prototype.split = function (x, y) {
-        if (isNaN(x)) {
+        if (typeof x === "string") {
             var tempX = x.split("");
             tempX.pop();
             var str = tempX.join("");
@@ -559,14 +563,28 @@ var Shape = (function (_super) {
     function Shape(vertices, _a) {
         var fill = _a.fill, stroke = _a.stroke, lineWidth = _a.lineWidth;
         var _this = _super.call(this, "shape") || this;
+        _this.vertices = [];
+        _this.hitBox = [];
         _this.vertices = vertices;
         _this.fill = fill || "transparent";
         _this.stroke = stroke || "black";
         _this.lineWidth = lineWidth || 1;
         _this.static = false;
+        _this.window = new ShadoWindow(100, 100, 600, 800, "Set " + _this.id + " free-shape hitbox");
+        _this.window.CENTER_X();
+        _this.window.CENTER_Y();
+        _this.window.generate();
+        _this.window.setContent("<h1>Unregular shap hitBox setter:</h1>");
+        _this.window.close();
+        _this.editor = new Canvas(0, 0, (_this.window.getWidth() * 1.6) / 2, (_this.window.getWidth() * 0.9) / 2, "relative", _this.window.getBodyElement());
+        _this.editor.setBackground("rgb(100, 100, 100)");
+        _this.editor.render();
         return _this;
     }
     Shape.prototype.render = function (targetCanvas) {
+        if (this.hitBox.length <= 0) {
+            this.generateHitBox();
+        }
         targetCanvas.ctx.beginPath();
         targetCanvas.ctx.fillStyle = this.fill;
         targetCanvas.ctx.strokeStyle = this.stroke;
@@ -578,7 +596,207 @@ var Shape = (function (_super) {
         }
         targetCanvas.ctx.fill();
         targetCanvas.ctx.stroke();
+        for (var _b = 0, _c = this.hitBox; _b < _c.length; _b++) {
+            var temp = _c[_b];
+            temp.draw(targetCanvas);
+            if (temp.clicked()) {
+                if (!this.window.isOpen()) {
+                    this.window.open();
+                    console.log("clicked!");
+                }
+            }
+        }
+        if (this.window.isOpen()) {
+            this.editor.render();
+            this.editor.clear();
+            this.editor.ctx.beginPath();
+            this.editor.ctx.fillStyle = this.fill;
+            this.editor.ctx.strokeStyle = this.stroke;
+            this.editor.ctx.lineWidth = this.lineWidth;
+            var firstX = (this.vertices[0].x / targetCanvas.width) * this.editor.width;
+            var firstY = (this.vertices[0].y / targetCanvas.height) * this.editor.height;
+            this.editor.ctx.moveTo(firstX, firstY);
+            for (var _d = 0, _e = this.vertices; _d < _e.length; _d++) {
+                var vertex = _e[_d];
+                var tempX = (vertex.x / targetCanvas.width) * this.editor.width;
+                var tempY = (vertex.y / targetCanvas.height) * this.editor.height;
+                this.editor.ctx.lineTo(tempX, tempY);
+            }
+            this.editor.ctx.fill();
+            this.editor.ctx.stroke();
+        }
     };
-    Shape.prototype.generateHitBox = function () { };
+    Shape.prototype.generateHitBox = function () {
+        var x = this.vertices[0].x;
+        var y = this.vertices[0].y;
+        var w = this.vertices[1].x - x;
+        var h = this.vertices[1].y - y;
+        var temp = new Rectangle(x, y, w, h);
+        temp.setFill("rgba(255, 0, 100, 0.3)");
+        this.hitBox.push(temp);
+    };
     return Shape;
+}(GameObject));
+var ShadoWindow = (function (_super) {
+    __extends(ShadoWindow, _super);
+    function ShadoWindow(x, y, width, height, title) {
+        var _this = _super.call(this, "ShadoWindow") || this;
+        _this.openned = false;
+        _this.x = _this.parseToWidth(x);
+        _this.y = _this.parseToHeight(y);
+        _this.w = _this.parseToWidth(width);
+        _this.h = _this.parseToHeight(height);
+        _this.title = title;
+        _this.generated = false;
+        _this.static = false;
+        _this.DOM = createElement("div", $("body"));
+        _this.DOM.id = _this.id;
+        _this.DOM.style.position = "absolute";
+        return _this;
+    }
+    ShadoWindow.prototype.generate = function () {
+        var _this = this;
+        var COLOR = "rgb(50, 0, 190)";
+        this.DOM.draggable = false;
+        this.DOM.style.userSelect = "none";
+        this.DOM.style.left = this.x.toString();
+        this.DOM.style.top = this.y.toString();
+        this.DOM.style.width = this.w + "px";
+        this.DOM.style.height = this.h + "px";
+        this.DOM.style.zIndex = "+3";
+        this.DOM.style.backgroundColor = "white";
+        this.DOM.style.border = "solid 2px " + COLOR;
+        this.DOM.style.borderBottomRightRadius = "10px";
+        this.DOM.style.borderBottomLeftRadius = "10px";
+        this.DOM.style.overflow = "auto";
+        var TITLEBAR_PADDING = 10;
+        var TITLEBAR_HEIGHT = 35;
+        this.titleBar = createElement("div", this.DOM);
+        this.titleBar.id = this.id + "_titleBar";
+        this.titleBar.draggable = false;
+        this.titleBar.style.width = "calc(100% - " + TITLEBAR_PADDING * 2 + "px)";
+        this.titleBar.style.height = TITLEBAR_HEIGHT + "px";
+        this.titleBar.style.backgroundColor = COLOR;
+        this.titleBar.style.color = "white";
+        this.titleBar.style.padding = TITLEBAR_PADDING + "px";
+        this.titleBar.style.fontWeight = "bold";
+        this.titleBar.style.fontFamily = "'IBM Plex Serif', sans-serif";
+        this.titleBar.style.fontSize = "16pt";
+        this.titleBar.innerHTML = this.title;
+        var closeButton = createElement("div", this.DOM);
+        closeButton.id = this.id + "_closeButton";
+        closeButton.style.position = "absolute";
+        closeButton.style.left = "calc(100% - " + (TITLEBAR_HEIGHT +
+            TITLEBAR_PADDING * 2) + "px)";
+        closeButton.style.top = "0px";
+        closeButton.style.width = TITLEBAR_HEIGHT + TITLEBAR_PADDING * 2 + "px";
+        closeButton.style.height = TITLEBAR_HEIGHT + TITLEBAR_PADDING * 2 + "px";
+        closeButton.style.backgroundColor = "rgb(230, 50, 50)";
+        closeButton.style.textAlign = "center";
+        closeButton.style.verticalAlign = "middle";
+        closeButton.style.color = "white";
+        closeButton.style.fontFamily = "'IBM Plex Serif', sans-serif";
+        closeButton.style.fontSize = "20pt";
+        closeButton.style.cursor = "pointer";
+        closeButton.innerHTML = "X";
+        window.addEventListener("load", function () {
+            $("#" + _this.id + "_closeButton").addEventListener("click", function () {
+                $("#" + _this.id).style.display = "none";
+            });
+            $("#" + _this.id + "_titleBar").addEventListener("mousemove", function () {
+                if (mouse.isDown) {
+                    _this.setX(mouse.x - _this.w / 2);
+                    _this.setY(mouse.y - TITLEBAR_HEIGHT / 2);
+                }
+            });
+        });
+        var BODY_PADDING = 10;
+        this.body = createElement("div", this.DOM);
+        this.body.id = this.id + "_body";
+        this.body.style.width = "calc(100% - " + BODY_PADDING * 2 + "px)";
+        this.body.style.padding = BODY_PADDING + "px";
+        this.body.style.fontFamily = "'IBM Plex Serif', serif";
+        this.body.style.overflow = "auto";
+        this.body.innerHTML += "Placeholder...";
+        this.generated = true;
+    };
+    ShadoWindow.prototype.CENTER_X = function () {
+        var newPosX = window.innerWidth / 2 - this.w / 2;
+        this.setX(newPosX);
+    };
+    ShadoWindow.prototype.CENTER_Y = function () {
+        var newPosY = window.innerHeight / 2 - this.h / 2;
+        this.setY(newPosY);
+    };
+    ShadoWindow.prototype.show = function () {
+        if (!this.generated) {
+            this.generate();
+        }
+        $("#" + this.id).style.display = "block";
+        this.openned = true;
+    };
+    ShadoWindow.prototype.open = function () {
+        this.show();
+    };
+    ShadoWindow.prototype.hide = function () {
+        $("#" + this.id).style.display = "none";
+        this.openned = false;
+    };
+    ShadoWindow.prototype.close = function () {
+        this.hide();
+    };
+    ShadoWindow.prototype.move = function () { };
+    ShadoWindow.prototype.getX = function () {
+        return this.x;
+    };
+    ShadoWindow.prototype.getY = function () {
+        return this.y;
+    };
+    ShadoWindow.prototype.getWidth = function () {
+        return this.w;
+    };
+    ShadoWindow.prototype.getHeight = function () {
+        return this.h;
+    };
+    ShadoWindow.prototype.getTitle = function () {
+        return this.title;
+    };
+    ShadoWindow.prototype.getContent = function () {
+        return this.body.innerHTML;
+    };
+    ShadoWindow.prototype.getID = function () {
+        return this.id;
+    };
+    ShadoWindow.prototype.getBodyElement = function () {
+        return $("#" + this.id + "_body");
+    };
+    ShadoWindow.prototype.isOpen = function () {
+        return this.openned;
+    };
+    ShadoWindow.prototype.setX = function (newX) {
+        this.x = this.parseToWidth(newX);
+        $("#" + this.id).style.left = this.x.toString() + "px";
+    };
+    ShadoWindow.prototype.setY = function (newY) {
+        this.y = this.parseToHeight(newY);
+        $("#" + this.id).style.top = this.y.toString() + "px";
+    };
+    ShadoWindow.prototype.setWidth = function (newWidth) {
+        this.w = this.parseToWidth(newWidth);
+        $("#" + this.id).style.width = this.w + "px";
+    };
+    ShadoWindow.prototype.setHeight = function (newHeight) {
+        this.h = this.parseToHeight(newHeight);
+        $("#" + this.id).style.height = this.h + "px";
+    };
+    ShadoWindow.prototype.setTitle = function (newTitle) {
+        $("#" + this.id + "_titleBar").innerHTML = newTitle;
+    };
+    ShadoWindow.prototype.setContent = function (newContent) {
+        $("#" + this.id + "_body").innerHTML = newContent;
+    };
+    ShadoWindow.prototype.addContent = function (content) {
+        $("#" + this.id + "_body").innerHTML += content;
+    };
+    return ShadoWindow;
 }(GameObject));

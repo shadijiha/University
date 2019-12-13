@@ -16,4 +16,4 @@ const testShape = new Shape(
 	{ fill: "lightblue" }
 );
 
-const testSplit: Line[] = new Line(100, 100, 500, 500).split("50%");
+const testSplit: Line[] = new Line(100, 100, 500, 500).split("75%");
