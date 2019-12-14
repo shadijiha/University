@@ -3,6 +3,12 @@ canvas.setBackground("rgb(0, 0, 100)");
 function render() {
     canvas.clear(0, 0, canvas.width, canvas.height);
     testShape.render(canvas);
+    if (testShape.collides(new Vertex(mouse.x, mouse.y))) {
+        testShape.setFill("red");
+    }
+    else {
+        testShape.setFill("lightblue");
+    }
     for (var _i = 0, testSplit_1 = testSplit; _i < testSplit_1.length; _i++) {
         var l = testSplit_1[_i];
         l.render(canvas);

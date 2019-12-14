@@ -353,8 +353,10 @@ var Vertex = (function (_super) {
     __extends(Vertex, _super);
     function Vertex(x, y) {
         var _this = _super.call(this, "vertex") || this;
+        _this.collision = true;
         _this.x = x;
         _this.y = y;
+        _this.collision = true;
         return _this;
     }
     return Vertex;
@@ -565,20 +567,14 @@ var Shape = (function (_super) {
         var _this = _super.call(this, "shape") || this;
         _this.vertices = [];
         _this.hitBox = [];
+        _this.stringHitBox = [];
+        _this.showHitbox = true;
         _this.vertices = vertices;
         _this.fill = fill || "transparent";
         _this.stroke = stroke || "black";
         _this.lineWidth = lineWidth || 1;
         _this.static = false;
-        _this.window = new ShadoWindow(100, 100, 600, 800, "Set " + _this.id + " free-shape hitbox");
-        _this.window.CENTER_X();
-        _this.window.CENTER_Y();
-        _this.window.generate();
-        _this.window.setContent("<h1>Unregular shap hitBox setter:</h1>");
-        _this.window.close();
-        _this.editor = new Canvas(0, 0, (_this.window.getWidth() * 1.6) / 2, (_this.window.getWidth() * 0.9) / 2, "relative", _this.window.getBodyElement());
-        _this.editor.setBackground("rgb(100, 100, 100)");
-        _this.editor.render();
+        _this.collision = true;
         return _this;
     }
     Shape.prototype.render = function (targetCanvas) {
@@ -596,44 +592,37 @@ var Shape = (function (_super) {
         }
         targetCanvas.ctx.fill();
         targetCanvas.ctx.stroke();
-        for (var _b = 0, _c = this.hitBox; _b < _c.length; _b++) {
-            var temp = _c[_b];
-            temp.draw(targetCanvas);
-            if (temp.clicked()) {
-                if (!this.window.isOpen()) {
-                    this.window.open();
-                    console.log("clicked!");
-                }
+        if (this.showHitbox) {
+            for (var _b = 0, _c = this.hitBox; _b < _c.length; _b++) {
+                var temp = _c[_b];
+                temp.draw(targetCanvas);
             }
-        }
-        if (this.window.isOpen()) {
-            this.editor.render();
-            this.editor.clear();
-            this.editor.ctx.beginPath();
-            this.editor.ctx.fillStyle = this.fill;
-            this.editor.ctx.strokeStyle = this.stroke;
-            this.editor.ctx.lineWidth = this.lineWidth;
-            var firstX = (this.vertices[0].x / targetCanvas.width) * this.editor.width;
-            var firstY = (this.vertices[0].y / targetCanvas.height) * this.editor.height;
-            this.editor.ctx.moveTo(firstX, firstY);
-            for (var _d = 0, _e = this.vertices; _d < _e.length; _d++) {
-                var vertex = _e[_d];
-                var tempX = (vertex.x / targetCanvas.width) * this.editor.width;
-                var tempY = (vertex.y / targetCanvas.height) * this.editor.height;
-                this.editor.ctx.lineTo(tempX, tempY);
-            }
-            this.editor.ctx.fill();
-            this.editor.ctx.stroke();
         }
     };
+    Shape.prototype.collides = function (ver) {
+        for (var _i = 0, _a = this.hitBox; _i < _a.length; _i++) {
+            var temp = _a[_i];
+            if (temp.collides(ver))
+                return true;
+        }
+        return false;
+    };
     Shape.prototype.generateHitBox = function () {
-        var x = this.vertices[0].x;
-        var y = this.vertices[0].y;
-        var w = this.vertices[1].x - x;
-        var h = this.vertices[1].y - y;
-        var temp = new Rectangle(x, y, w, h);
-        temp.setFill("rgba(255, 0, 100, 0.3)");
-        this.hitBox.push(temp);
+    };
+    Shape.prototype.addHitBox = function (rect) {
+        rect.enableCollision();
+        this.hitBox.push(rect);
+    };
+    Shape.prototype.setHitBox = function (array) {
+        this.hitBox = [];
+        for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+            var rect = array_1[_i];
+            rect.enableCollision();
+            this.hitBox.push(rect);
+        }
+    };
+    Shape.prototype.setFill = function (color) {
+        this.fill = color;
     };
     return Shape;
 }(GameObject));
@@ -658,7 +647,6 @@ var ShadoWindow = (function (_super) {
         var _this = this;
         var COLOR = "rgb(50, 0, 190)";
         this.DOM.draggable = false;
-        this.DOM.style.userSelect = "none";
         this.DOM.style.left = this.x.toString();
         this.DOM.style.top = this.y.toString();
         this.DOM.style.width = this.w + "px";
@@ -674,6 +662,7 @@ var ShadoWindow = (function (_super) {
         this.titleBar = createElement("div", this.DOM);
         this.titleBar.id = this.id + "_titleBar";
         this.titleBar.draggable = false;
+        this.titleBar.style.userSelect = "none";
         this.titleBar.style.width = "calc(100% - " + TITLEBAR_PADDING * 2 + "px)";
         this.titleBar.style.height = TITLEBAR_HEIGHT + "px";
         this.titleBar.style.backgroundColor = COLOR;
@@ -686,6 +675,7 @@ var ShadoWindow = (function (_super) {
         var closeButton = createElement("div", this.DOM);
         closeButton.id = this.id + "_closeButton";
         closeButton.style.position = "absolute";
+        closeButton.style.userSelect = "none";
         closeButton.style.left = "calc(100% - " + (TITLEBAR_HEIGHT +
             TITLEBAR_PADDING * 2) + "px)";
         closeButton.style.top = "0px";
@@ -701,7 +691,7 @@ var ShadoWindow = (function (_super) {
         closeButton.innerHTML = "X";
         window.addEventListener("load", function () {
             $("#" + _this.id + "_closeButton").addEventListener("click", function () {
-                $("#" + _this.id).style.display = "none";
+                _this.close();
             });
             $("#" + _this.id + "_titleBar").addEventListener("mousemove", function () {
                 if (mouse.isDown) {
