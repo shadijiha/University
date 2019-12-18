@@ -6,22 +6,70 @@ using System.Threading.Tasks;
 
 namespace Learning_c_sharp
 {
-    public class Util
+    public abstract class Util
     {
-        public static double[] zeros(double a, double b, double c) {
+        public struct RetrunTemplate {
+            public double[] realRoot;
+            public Complex[] complexRoots;
+        }
+        public static RetrunTemplate zeros(double a, double b, double c) {
 
-            if (b * b - (4 * a * c) > 0)   {
-                Double[] result = new Double[2];
+            if (b * b - (4 * a * c) > 0) {
+                double[] result = new double[2];
 
                 result[0] = (-b + Math.Sqrt(b * b - (4 * a * c))) / (2 * a);
                 result[1] = (-b - Math.Sqrt(b * b - (4 * a * c))) / (2 * a);
 
-                return result;
+                RetrunTemplate template = new RetrunTemplate
+                {
+                    realRoot = result
+                };
+
+                return template;
             }
             else
             {
-                throw new Exception("Cannot compute square root if negative number");
+                double complexA = -b / (2 * a);
+                double complexB = Math.Sqrt(Math.Abs(b * b - (4 * a * c))) / (2 * a);
+
+                Complex result1 = new Complex(complexA, complexB);
+                Complex result2 = new Complex(complexA, -1 * complexB);
+
+                RetrunTemplate template = new RetrunTemplate
+                {
+                    complexRoots = new Complex[2]
+                };
+                template.complexRoots[0] = result1;
+                template.complexRoots[1] = result2;
+
+                return template;
             }
+        }
+
+        public static void printArray<T>(T[] array)    {
+            int index = 0;
+            Console.Write("{ ");
+            foreach (T element in array) {
+                Console.Write(index + ": " + element);
+                if (index != array.Length - 1) {
+                    Console.Write(", ");
+                }
+                index++;
+            }
+            Console.Write(" }");
+        }
+
+        public static void printArray<T>(T[][] array) {
+            int index = 0;
+            Console.Write("{ ");
+            foreach (T[] element in array)
+            {
+                Console.Write("\t" + index + ": ");
+                printArray<T>(element);
+                Console.WriteLine(", ");
+                index++;
+            }
+            Console.Write(" }");
         }
     }
 }

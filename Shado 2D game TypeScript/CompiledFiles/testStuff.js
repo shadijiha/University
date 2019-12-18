@@ -7,7 +7,7 @@ var testShape = new Shape([
 ], { fill: "lightblue" });
 testShape.setHitBox([
     new Rectangle(99, 200, 19, 191),
-    new Rectangle(118, 391, 75, -148),
+    new Rectangle(118, 391 - 148, 75, -148),
     new Rectangle(118, 212, 34, 29),
     new Rectangle(152, 228, 26, 13),
     new Rectangle(193, 247, 13, 38),

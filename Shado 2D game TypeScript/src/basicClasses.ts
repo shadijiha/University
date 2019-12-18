@@ -314,6 +314,11 @@ class Circle extends GameObject {
 		this.stroke = "black";
 		this.lineWidth = 1;
 		this.static = false;
+
+		if (this.r < 0)
+			throw new Error(
+				"Cannot initialize a " + this.name + " with a negative radius"
+			);
 	}
 
 	render(targetCanvas: Canvas): void {
@@ -405,6 +410,15 @@ class Rectangle extends GameObject {
 		this.stroke = "black";
 		this.lineWidth = 1;
 		this.static = false;
+
+		if (this.w < 0)
+			throw new Error(
+				"Cannot initialize a " + this.name + " with a negative width"
+			);
+		if (this.h < 0)
+			throw new Error(
+				"Cannot initialize a " + this.name + " with a negative height"
+			);
 	}
 
 	render(targetCanvas: Canvas): void {
@@ -470,16 +484,19 @@ class Rectangle extends GameObject {
 		return this.w * this.h;
 	}
 
-	setFill(newFill: string): void {
+	setFill(newFill: string): Rectangle {
 		this.fill = newFill;
+		return this;
 	}
 
-	setStroke(newStroke: string): void {
+	setStroke(newStroke: string): Rectangle {
 		this.stroke = newStroke;
+		return this;
 	}
 
-	setLineWidth(newLineWidth: number): void {
+	setLineWidth(newLineWidth: number): Rectangle {
 		this.lineWidth = newLineWidth;
+		return this;
 	}
 }
 
@@ -660,6 +677,16 @@ class ShadoImage extends GameObject {
 		this.hitBox = new Rectangle(this.x, this.y, this.w, this.h);
 		this.hitBox.setStroke("red");
 		this.hitBox.setFill("transparent");
+
+		// Detect errors
+		if (this.w < 0)
+			throw new Error(
+				"Cannot initialize a " + this.name + " with a negative width"
+			);
+		if (this.h < 0)
+			throw new Error(
+				"Cannot initialize a " + this.name + " with a negative height"
+			);
 	}
 
 	render(targetCanvas: Canvas): void {
@@ -833,7 +860,7 @@ class Shape extends GameObject {
 	public lineWidth: number;
 	public window: ShadoWindow;
 	private editor: Canvas;
-	private showHitbox: boolean = true;
+	private showHitbox: boolean = false;
 
 	public constructor(
 		vertices: Vertex[],
@@ -883,9 +910,9 @@ class Shape extends GameObject {
 		}
 	}
 
-	public collides(ver: Vertex): boolean {
+	public collides(ver: Vertex): any {
 		for (const temp of this.hitBox) {
-			if (temp.collides(ver)) return true;
+			if (temp.collides(ver)) return temp;
 		}
 		return false;
 	}

@@ -67,11 +67,21 @@ var Player = (function (_super) {
 }(GameObject));
 var Terrain = (function (_super) {
     __extends(Terrain, _super);
-    function Terrain() {
-        return _super.call(this, "terrain") || this;
+    function Terrain(shape) {
+        var _this = _super.call(this, "terrain") || this;
+        _this.shape = shape;
+        var exists = false;
+        for (var i = 0; i < Terrain.allTerrain.length; i++) {
+            if (Terrain.allTerrain[i] == _this)
+                exists = true;
+        }
+        if (!exists)
+            Terrain.allTerrain.push(_this);
+        return _this;
     }
-    Terrain.prototype.generateHitBox = function () {
-        this.hitBox;
+    Terrain.prototype.render = function (targetCanvas) {
+        this.shape.render(targetCanvas);
     };
+    Terrain.allTerrain = [];
     return Terrain;
 }(GameObject));

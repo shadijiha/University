@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Learning_c_sharp
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.Title = "OMEGALUL";
+            Console.Title = "Z OMEGALUL E";
 
-            double[] test = Util.zeros(2, 9, 5);
+            try
+            {
+                Vector x = new Vector();
+                x.random3D();
 
-            foreach(double element in test) {
-                Console.WriteLine(element);
+                Vertex ver = (Vertex)x;
+                ver.print();
             }
+            catch (Exception e) {
+                Console.WriteLine("Error! " + e.Message);            
+            }           
 
+            // ---- PAUSE ----
             Console.ReadLine();
         }
     }

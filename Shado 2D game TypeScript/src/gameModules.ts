@@ -70,14 +70,23 @@ class Player extends GameObject {
 }
 
 class Terrain extends GameObject {
-	private positions: Vertex[];
-	private hitBox: Rectangle[];
+	public shape: Shape;
+	public static allTerrain: Terrain[] = [];
 
-	public constructor() {
+	public constructor(shape: Shape) {
 		super("terrain");
+		this.shape = shape;
+
+		// Push to the array
+		let exists = false;
+		for (let i = 0; i < Terrain.allTerrain.length; i++) {
+			if (Terrain.allTerrain[i] == this) exists = true;
+		}
+
+		if (!exists) Terrain.allTerrain.push(this);
 	}
 
-	private generateHitBox(): void {
-		this.hitBox;
+	render(targetCanvas: Canvas): void {
+		this.shape.render(targetCanvas);
 	}
 }

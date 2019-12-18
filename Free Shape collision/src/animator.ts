@@ -13,25 +13,25 @@ const canvas = new Canvas(
 );
 canvas.setBackground("rgb(0, 0, 70)"); // Render is implicitly called
 
-const testShape = new Shape(
-	[
-		new Vertex(100, 200),
-		new Vertex(210, 250),
-		new Vertex(190, 400),
-		new Vertex(100, 390),
-		new Vertex(100, 200)
-	],
-	{ fill: "lightblue" }
-);
-let tempRect: Rectangle;
-
 const win = new ShadoWindow(500, 500, 600, 800, "HitBox data");
 win.generate();
 win.CENTER_X();
 win.CENTER_Y();
 win.setContent(
-	"<h2>Copy this hitBox collection and append it to youe free-shape</h2><br />["
+	"<h2>Copy this hitBox collection and append it to youe free-shape</h2><br />"
 );
+win.addContent("[");
+
+///////////////////////////////////
+///////////////////////////////////
+////// PUT YOUR SHAPE HERE ////////
+///////////////////////////////////
+///////////////////////////////////
+const MAIN_SHAPE = 	new Shape([new Vertex(0, 0), new Vertex(600, 0), new Vertex(0, 600)], {
+		fill: "brown"
+	});
+let tempRect: Rectangle;
+
 // For game Loop see "index.js"
 function render() {
 	// Clear canvas
@@ -46,15 +46,25 @@ function render() {
 	 ********* DRAW ALL ***********
 	 *****************************/
 	win.open();
-	testShape.draw(canvas);
+	MAIN_SHAPE.draw(canvas);
 
 	if (mouse.mode == "edit") {
-		tempRect = new Rectangle(
-			mouse.lastClicked.x,
-			mouse.lastClicked.y,
-			mouse.x - mouse.lastClicked.x,
-			mouse.y - mouse.lastClicked.y
-		);
+		let modX = mouse.lastClicked.x;
+		let modY = mouse.lastClicked.y;
+		let width = mouse.x - mouse.lastClicked.x;
+		let height = mouse.y - mouse.lastClicked.y;
+
+		if (width < 0) {
+			width = Math.abs(width);
+			modX = modX - width;
+		}
+
+		if (height < 0) {
+			height = Math.abs(height);
+			modY = modY - height;
+		}
+
+		tempRect = new Rectangle(modX, modY, width, height);
 		tempRect.setFill("rgba(255, 255, 255, 0.5)");
 		tempRect.draw(canvas);
 	}

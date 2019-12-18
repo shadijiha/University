@@ -27,9 +27,9 @@ window.addEventListener("click", function(event) {
 		mouse.mode = "edit";
 	} else if (tempRect != null) {
 		const str = `new Rectangle(${tempRect.x}, ${tempRect.y}, ${tempRect.w}, ${tempRect.h}),`;
-		testShape.stringHitBox.push(str);
+		MAIN_SHAPE.stringHitBox.push(str);
 		win.addContent(str + "<br />");
-		testShape.addHitBox(tempRect);
+		MAIN_SHAPE.addHitBox(tempRect);
 		mouse.mode = "view";
 		tempRect = null;
 	}

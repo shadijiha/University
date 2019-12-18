@@ -769,6 +769,8 @@ var Circle = (function (_super) {
         _this.stroke = "black";
         _this.lineWidth = 1;
         _this.static = false;
+        if (_this.r < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative radius");
         return _this;
     }
     Circle.prototype.render = function (targetCanvas) {
@@ -832,6 +834,10 @@ var Rectangle = (function (_super) {
         _this.stroke = "black";
         _this.lineWidth = 1;
         _this.static = false;
+        if (_this.w < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative width");
+        if (_this.h < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative height");
         return _this;
     }
     Rectangle.prototype.render = function (targetCanvas) {
@@ -877,12 +883,15 @@ var Rectangle = (function (_super) {
     };
     Rectangle.prototype.setFill = function (newFill) {
         this.fill = newFill;
+        return this;
     };
     Rectangle.prototype.setStroke = function (newStroke) {
         this.stroke = newStroke;
+        return this;
     };
     Rectangle.prototype.setLineWidth = function (newLineWidth) {
         this.lineWidth = newLineWidth;
+        return this;
     };
     return Rectangle;
 }(GameObject));
@@ -990,6 +999,10 @@ var ShadoImage = (function (_super) {
         _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h);
         _this.hitBox.setStroke("red");
         _this.hitBox.setFill("transparent");
+        if (_this.w < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative width");
+        if (_this.h < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative height");
         return _this;
     }
     ShadoImage.prototype.render = function (targetCanvas) {
@@ -1105,7 +1118,7 @@ var Shape = (function (_super) {
         _this.vertices = [];
         _this.hitBox = [];
         _this.stringHitBox = [];
-        _this.showHitbox = true;
+        _this.showHitbox = false;
         _this.vertices = vertices;
         _this.fill = fill || "transparent";
         _this.stroke = stroke || "black";
@@ -1140,7 +1153,7 @@ var Shape = (function (_super) {
         for (var _i = 0, _a = this.hitBox; _i < _a.length; _i++) {
             var temp = _a[_i];
             if (temp.collides(ver))
-                return true;
+                return temp;
         }
         return false;
     };
@@ -1396,12 +1409,22 @@ var Player = (function (_super) {
 }(GameObject));
 var Terrain = (function (_super) {
     __extends(Terrain, _super);
-    function Terrain() {
-        return _super.call(this, "terrain") || this;
+    function Terrain(shape) {
+        var _this = _super.call(this, "terrain") || this;
+        _this.shape = shape;
+        var exists = false;
+        for (var i = 0; i < Terrain.allTerrain.length; i++) {
+            if (Terrain.allTerrain[i] == _this)
+                exists = true;
+        }
+        if (!exists)
+            Terrain.allTerrain.push(_this);
+        return _this;
     }
-    Terrain.prototype.generateHitBox = function () {
-        this.hitBox;
+    Terrain.prototype.render = function (targetCanvas) {
+        this.shape.render(targetCanvas);
     };
+    Terrain.allTerrain = [];
     return Terrain;
 }(GameObject));
 function initHitBoxDrawer() {
@@ -1415,43 +1438,58 @@ function initHitBoxDrawer() {
     EnginGlobal.winCanvas.render();
     EnginGlobal.circleTest = new Circle(50, 50, 50);
 }
-var testShape = new Shape([
-    new Vertex(100, 200),
-    new Vertex(210, 250),
-    new Vertex(190, 400),
-    new Vertex(100, 390),
-    new Vertex(100, 200)
-], { fill: "lightblue" });
-testShape.setHitBox([
-    new Rectangle(99, 200, 19, 191),
-    new Rectangle(118, 391, 75, -148),
-    new Rectangle(118, 212, 34, 29),
-    new Rectangle(152, 228, 26, 13),
-    new Rectangle(193, 247, 13, 38),
-    new Rectangle(191, 282, 12, 29),
-    new Rectangle(192, 312, 8, 18),
-    new Rectangle(193, 330, 5, 10),
-    new Rectangle(149, 390, 41, 10),
-    new Rectangle(193, 242, -73, 148)
+var terrain1 = new Terrain(new Shape([new Vertex(0, 0), new Vertex(600, 0), new Vertex(0, 600)], {
+    fill: "brown"
+}));
+terrain1.shape.setHitBox([
+    new Rectangle(0, 0, 281, 319),
+    new Rectangle(280, 2, 180, 138),
+    new Rectangle(0, 320, 131, 147),
+    new Rectangle(131, 317, 75, 77),
+    new Rectangle(207, 319, 39, 37),
+    new Rectangle(133, 396, 35, 36),
+    new Rectangle(279, 140, 89, 94),
+    new Rectangle(367, 141, 47, 47),
+    new Rectangle(276, 230, 6, 11),
+    new Rectangle(284, 237, 39, 41),
+    new Rectangle(460, 2, 71, 66),
+    new Rectangle(530, 1, 33, 39),
+    new Rectangle(564, 3, 13, 20),
+    new Rectangle(579, 2, 8, 7),
+    new Rectangle(462, 67, 35, 39),
+    new Rectangle(493, 67, 20, 22),
+    new Rectangle(460, 108, 19, 17),
+    new Rectangle(416, 142, 22, 22),
+    new Rectangle(368, 190, 26, 20),
+    new Rectangle(325, 234, 24, 22),
+    new Rectangle(283, 277, 21, 20),
+    new Rectangle(250, 319, 13, 16),
+    new Rectangle(207, 353, 16, 20),
+    new Rectangle(166, 396, 22, 18),
+    new Rectangle(0, 467, 58, 74),
+    new Rectangle(58, 467, 38, 42),
+    new Rectangle(1, 540, 24, 37),
+    new Rectangle(129, 434, 23, 20),
+    new Rectangle(96, 466, 16, 22),
+    new Rectangle(59, 512, 13, 14),
+    new Rectangle(25, 540, 21, 17)
 ]);
-var testSplit = new Line(100, 100, 500, 500).split("75%");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight, "absolute");
 canvas.setBackground("rgb(0, 0, 100)");
 function render() {
     canvas.clear(0, 0, canvas.width, canvas.height);
-    testShape.render(canvas);
-    if (testShape.collides(new Vertex(mouse.x, mouse.y))) {
-        testShape.setFill("red");
+    for (var _i = 0, _a = Terrain.allTerrain; _i < _a.length; _i++) {
+        var terrain = _a[_i];
+        terrain.draw(canvas);
+        if (terrain.shape.collides(new Vertex(mouse.x, mouse.y))) {
+            terrain.shape.setFill("green");
+        }
+        else {
+            terrain.shape.setFill("brown");
+        }
     }
-    else {
-        testShape.setFill("lightblue");
-    }
-    for (var _i = 0, testSplit_1 = testSplit; _i < testSplit_1.length; _i++) {
-        var l = testSplit_1[_i];
-        l.render(canvas);
-    }
-    testSplit[0].move(0, 0.1);
-    testSplit[1].move(0, -0.1);
 }
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }

@@ -2,10 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41a924a9-710c-4e83-90b1-fefecd6551e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/DrawingComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/DrawingComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Shado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Shado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Free Shape collision/CompiledFiles/animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Free Shape collision/CompiledFiles/animator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Free Shape collision/CompiledFiles/eventsListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Free Shape collision/CompiledFiles/eventsListeners.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Free Shape collision/client/compiled_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Free Shape collision/client/compiled_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Free Shape collision/src/animator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Free Shape collision/src/animator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Free Shape collision/src/eventsListeners.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Free Shape collision/src/eventsListeners.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/.vs/Learning c sharp/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/.vs/Learning c sharp/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/.vs/Learning c sharp/v16/Server/sqlite3/storage.ide" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/.vs/Learning c sharp/v16/Server/sqlite3/storage.ide" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/Complex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/Complex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/bin/Debug/Learning c sharp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/bin/Debug/Learning c sharp.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/bin/Debug/Learning c sharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/bin/Debug/Learning c sharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/Learning c sharp/Learning c sharp/obj/Debug/Learning c sharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/ipch/AutoPCH/12829ef8402df10e/MAIN.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/.vs/OpenGL Superbible 7 learning/v16/ipch/AutoPCH/12829ef8402df10e/MAIN.ipch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/Debug/OpenGL Superbible 7 learning.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/Debug/OpenGL Superbible 7 learning.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL S.24EE4375.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL Superbible 7 learning.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/OpenGL Superbible 7 learning.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/main.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/main.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/vc142.idb" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/vc142.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/Debug/vc142.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Garbage/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning/OpenGL Superbible 7 learning.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/animator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/basicClasses.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/basicClasses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/gameModules.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/gameModules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/testStuff.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/CompiledFiles/testStuff.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/client/compiled_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/client/compiled_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/animator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/animator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/basicClasses.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/basicClasses.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/gameModules.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/gameModules.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/priority.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/priority.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shado 2D game TypeScript/src/testStuff.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +55,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -41,6 +73,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager">
@@ -80,6 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575636210698</updated>
+      <workItem from="1576583982245" duration="4000" />
     </task>
     <servers />
   </component>
@@ -146,10 +180,10 @@
     </state>
     <state x="1019" y="580" key="SettingsEditor/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575691637622" />
     <state x="3148" y="583" key="SettingsEditor/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575688112443" />
-    <state x="981" y="522" key="com.intellij.ide.util.TipDialog" timestamp="1575795302062">
+    <state x="981" y="522" key="com.intellij.ide.util.TipDialog" timestamp="1576583982348">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="981" y="522" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1575795302062" />
+    <state x="981" y="522" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1576583982348" />
     <state x="3541" y="453" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1575688200707" />
     <state x="984" y="592" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1575643273051">
       <screen x="0" y="0" width="2560" height="1400" />

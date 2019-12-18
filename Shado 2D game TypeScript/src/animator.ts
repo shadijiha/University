@@ -1,3 +1,5 @@
+import { TIMEOUT } from "dns";
+
 /***
  * This file contais the render function that will go
  * to the game loop
@@ -42,25 +44,13 @@ function render() {
 	 ********* DRAW ALL ***********
 	 *****************************/
 	// Draw grounds
-	testShape.render(canvas);
+	for (const terrain of Terrain.allTerrain) {
+		terrain.draw(canvas);
 
-	if (testShape.collides(new Vertex(mouse.x, mouse.y))) {
-		testShape.setFill("red");
-	} else {
-		testShape.setFill("lightblue");
+		if (terrain.shape.collides(new Vertex(mouse.x, mouse.y))) {
+			terrain.shape.setFill("green");
+		} else {
+			terrain.shape.setFill("brown");
+		}
 	}
-
-	for (const l of testSplit) {
-		l.render(canvas);
-	}
-
-	testSplit[0].move(0, 0.1);
-	testSplit[1].move(0, -0.1);
-
-	// EnginGlobal.winCanvas.clear();
-	// const newX = EnginGlobal.winCanvas.getMousePosition().x;
-	// const newY = EnginGlobal.winCanvas.getMousePosition().y;
-	// EnginGlobal.circleTest.x = newX || EnginGlobal.circleTest.x;
-	// EnginGlobal.circleTest.y = newY || EnginGlobal.circleTest.y;
-	// EnginGlobal.circleTest.draw(EnginGlobal.winCanvas);
 }

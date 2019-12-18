@@ -232,6 +232,8 @@ var Circle = (function (_super) {
         _this.stroke = "black";
         _this.lineWidth = 1;
         _this.static = false;
+        if (_this.r < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative radius");
         return _this;
     }
     Circle.prototype.render = function (targetCanvas) {
@@ -295,6 +297,10 @@ var Rectangle = (function (_super) {
         _this.stroke = "black";
         _this.lineWidth = 1;
         _this.static = false;
+        if (_this.w < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative width");
+        if (_this.h < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative height");
         return _this;
     }
     Rectangle.prototype.render = function (targetCanvas) {
@@ -340,12 +346,15 @@ var Rectangle = (function (_super) {
     };
     Rectangle.prototype.setFill = function (newFill) {
         this.fill = newFill;
+        return this;
     };
     Rectangle.prototype.setStroke = function (newStroke) {
         this.stroke = newStroke;
+        return this;
     };
     Rectangle.prototype.setLineWidth = function (newLineWidth) {
         this.lineWidth = newLineWidth;
+        return this;
     };
     return Rectangle;
 }(GameObject));
@@ -453,6 +462,10 @@ var ShadoImage = (function (_super) {
         _this.hitBox = new Rectangle(_this.x, _this.y, _this.w, _this.h);
         _this.hitBox.setStroke("red");
         _this.hitBox.setFill("transparent");
+        if (_this.w < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative width");
+        if (_this.h < 0)
+            throw new Error("Cannot initialize a " + _this.name + " with a negative height");
         return _this;
     }
     ShadoImage.prototype.render = function (targetCanvas) {
@@ -568,7 +581,7 @@ var Shape = (function (_super) {
         _this.vertices = [];
         _this.hitBox = [];
         _this.stringHitBox = [];
-        _this.showHitbox = true;
+        _this.showHitbox = false;
         _this.vertices = vertices;
         _this.fill = fill || "transparent";
         _this.stroke = stroke || "black";
@@ -603,7 +616,7 @@ var Shape = (function (_super) {
         for (var _i = 0, _a = this.hitBox; _i < _a.length; _i++) {
             var temp = _a[_i];
             if (temp.collides(ver))
-                return true;
+                return temp;
         }
         return false;
     };

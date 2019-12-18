@@ -6,6 +6,6 @@ globalVariables.js
 basicClasses.js
 gameModules.js
 GenerateShapeHitBox.js
-testStuff.js
+gameVariables.js
 animator.js
 index.js

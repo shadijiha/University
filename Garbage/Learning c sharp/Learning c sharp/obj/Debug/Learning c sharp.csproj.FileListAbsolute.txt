@@ -1,6 +1,6 @@
 D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\bin\Debug\Learning c sharp.exe.config
 D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\bin\Debug\Learning c sharp.exe
 D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\bin\Debug\Learning c sharp.pdb
-D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\obj\Debug\Learning c sharp.csprojAssemblyReference.cache
 D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\obj\Debug\Learning c sharp.exe
 D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\obj\Debug\Learning c sharp.pdb
+D:\Wamp64\www\GitHub\University\Garbage\Learning c sharp\Learning c sharp\obj\Debug\Learning c sharp.csprojAssemblyReference.cache

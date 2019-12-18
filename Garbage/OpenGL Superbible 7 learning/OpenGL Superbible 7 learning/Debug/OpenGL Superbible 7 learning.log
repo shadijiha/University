@@ -1,4 +1,5 @@
-﻿main.obj : error LNK2019: unresolved external symbol _gl3wInit referenced in function "public: virtual void __thiscall sb7::application::run(class sb7::application *)" (?run@application@sb7@@UAEXPAV12@@Z)
+﻿  main.cpp
+main.obj : error LNK2019: unresolved external symbol _gl3wInit referenced in function "public: virtual void __thiscall sb7::application::run(class sb7::application *)" (?run@application@sb7@@UAEXPAV12@@Z)
 main.obj : error LNK2019: unresolved external symbol _gl3wIsSupported referenced in function "public: virtual void __thiscall sb7::application::run(class sb7::application *)" (?run@application@sb7@@UAEXPAV12@@Z)
 main.obj : error LNK2019: unresolved external symbol _glfwInit referenced in function "public: virtual void __thiscall sb7::application::run(class sb7::application *)" (?run@application@sb7@@UAEXPAV12@@Z)
 main.obj : error LNK2019: unresolved external symbol _glfwTerminate referenced in function "public: virtual void __thiscall sb7::application::run(class sb7::application *)" (?run@application@sb7@@UAEXPAV12@@Z)
@@ -27,6 +28,8 @@ main.obj : error LNK2001: unresolved external symbol _gl3wDebugMessageCallback
 main.obj : error LNK2001: unresolved external symbol _gl3wDebugMessageCallbackARB
 main.obj : error LNK2001: unresolved external symbol "protected: static class sb7::application * sb7::application::app" (?app@application@sb7@@1PAV12@A)
 MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+sb7_d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
 sb7.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
 glfw3.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+glfw3_d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
 D:\Wamp64\www\GitHub\University\Garbage\OpenGL Superbible 7 learning\Debug\OpenGL Superbible 7 learning.exe : fatal error LNK1120: 29 unresolved externals
