@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -48,7 +47,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 function $(args) {
     return document.querySelector(args);
 }
@@ -70,9 +68,11 @@ function deleteElement(element) {
     try {
         var PARENT = element.parentElement;
         PARENT.removeChild(element);
+        return true;
     }
     catch (e) {
         console.error(e.message);
+        return false;
     }
 }
 function getOffsetLeft(elem) {
