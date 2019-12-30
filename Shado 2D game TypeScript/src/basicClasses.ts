@@ -296,6 +296,8 @@ class Canvas extends GameObject {
 	}
 }
 
+class Graphics2D extends Canvas {}
+
 class Circle extends GameObject {
 	public x: number;
 	public y: number;

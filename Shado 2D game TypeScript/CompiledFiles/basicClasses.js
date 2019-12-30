@@ -221,6 +221,13 @@ var Canvas = (function (_super) {
     };
     return Canvas;
 }(GameObject));
+var Graphics2D = (function (_super) {
+    __extends(Graphics2D, _super);
+    function Graphics2D() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Graphics2D;
+}(Canvas));
 var Circle = (function (_super) {
     __extends(Circle, _super);
     function Circle(x, y, r) {
