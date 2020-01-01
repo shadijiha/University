@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/ArrayList.h
+vector
+-
+string
+-
+functional
+-
+
+D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/main.cpp
+iostream
+-
+ArrayList.h
+D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/ArrayList.h
+
