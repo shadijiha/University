@@ -1,3 +1,0 @@
-C:/Users/shadi/Desktop/Test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/shadi/Desktop/Test/cmake-build-debug/CMakeFiles/Test.dir
-C:/Users/shadi/Desktop/Test/cmake-build-debug/CMakeFiles/edit_cache.dir
