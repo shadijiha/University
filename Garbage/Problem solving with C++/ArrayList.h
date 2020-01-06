@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <functional>
+#include <array>
 
 template<typename T>
 class ArrayList;
@@ -146,6 +147,7 @@ class ArrayList {
 private:
 	std::vector<T> data;
 	int length = 0;
+	static const int MAX_PARTIAL_ARRAY_SIZE = 1000;
 public:
 	ArrayList() = default;
 

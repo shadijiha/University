@@ -1,35 +1,33 @@
 #include <iostream>
 #include "ArrayList.h"
+#include <array>
 
 #define boolean bool
 #define var auto
 #define final const
-
-struct vec3 {
-	float x = 0.0f, y = 0.0f, z = 0.0f;
-
-	void randomize() {
-		x = rand() % 100;
-		y = rand() % 100;
-		z = rand() % 100;
-	}
-
-	void print() {
-		printf("{x: %f, y: %f, z: %f}\t", x, y, z);
-	}
-};
+#define extends :
+#define implements :
+#define foreach for
+#define in :
+#define of :
 
 int main() {
 
 	std::vector<double> vec{1, 2, 3, 4, 5};
-	auto* array = new ArrayList<vec3>();
 
-	for (int i = 0; i < 100; i++)
-		array->add(vec3());
+	/*foreach (var element in vec) {
+		std::cout << element << " ";
+	}*/
 
-	array->stream()
-			.modify([](vec3& e) { e.randomize(); })
-			.forEach([](vec3 e) { e.print(); });
+	ArrayList<double>(vec).stream()
+			.map([](auto e) { return e * e; })
+			.map([](auto e) { return e * e; })
+			.filter([](auto e) { return e > 50; })
+			.forEach([](auto e) { std::cout << e << " "; });
+
+	std::array<double, 5> array = {1, 5, 8, 9, 7};
+	//std::vector<double> test();
+
 
 	return 0;
 }
