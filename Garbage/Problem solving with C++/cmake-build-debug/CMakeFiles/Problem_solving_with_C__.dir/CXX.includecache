@@ -13,10 +13,22 @@ string
 -
 functional
 -
+array
+-
+
+D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/ShadoObjects.h
+string
+-
+iostream
+-
 
 D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/main.cpp
 iostream
 -
 ArrayList.h
 D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/ArrayList.h
+ShadoObjects.h
+D:/Wamp64/www/GitHub/University/Garbage/Problem solving with C++/ShadoObjects.h
+array
+-
 
