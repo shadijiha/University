@@ -1,0 +1,94 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Complex.h
+vector
+-
+string
+-
+Vector.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Vector.h
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Double.h
+Integer.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Integer.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Float.h
+Integer.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Integer.h
+Double.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Double.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Integer.h
+string
+-
+iostream
+-
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Matrix.h
+vector
+-
+string
+-
+iostream
+-
+cstdlib
+-
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Nullable.h
+string
+-
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+string
+-
+iostream
+-
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/ShadoMath.h
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+Nullable.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Nullable.h
+Integer.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Integer.h
+Double.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Double.h
+Float.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Float.h
+Matrix.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Matrix.h
+Vector.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Vector.h
+Complex.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Complex.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Vector.h
+Matrix.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Matrix.h
+Object.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/Object.h
+
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/main.cpp
+iostream
+-
+include/ShadoMath.h
+C:/wamp64/www/Github/University/Garbage/Shado Streams C++/include/ShadoMath.h
+functional
+-
+thread
+-
+

@@ -1,3 +1,0 @@
-shado_2d_engin.js
-game_functions.js
-animator.js
