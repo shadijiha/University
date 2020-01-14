@@ -3,7 +3,7 @@
  * COMP249
  * Assignment # 1
  * Due Date: January 31th 2020
- * */
+ */
 
 package com.main;
 
@@ -23,20 +23,14 @@ public class Appliance {
 	 * @param _type The type of the machine. MUST BE 1 of the allowed types
 	 * @param _brand The brand of the machine.
 	 * @param _price The price of the machine. Minimum 1.00$
-	 * @throws Exception throws an Exception if the type if not valid
 	 */
-	Appliance(String _type, String _brand, double _price) throws Exception {
+	Appliance(String _type, String _brand, double _price) {
 		this.brand = _brand;
 		this.price = Math.max(_price, 1.0);
 		this.serialNumber = currentSerial;
+		this.type = _type;
 		currentSerial++;
 		applianceCreated++;
-
-		// Check if the type is allows
-		if (isValide(_type))
-			throw new Exception("Error! The passed Appliance type is not valide!");
-		else
-			this.type = _type;
 	}
 
 	/***
@@ -44,41 +38,53 @@ public class Appliance {
 	 * Inits: TYPE to appliances[0], BRAND to "LG" and PRICE TO "1.0"
 	 * @throws Exception throws an Exception if the type if not valid
 	 */
-	Appliance() throws Exception {
+	Appliance() {
 		this(appliances[0], "LG", 1.0);
 	}
 
 	// Static functions
+
 	/***
 	 * This function checks if the passed machine is 1 of the allowed onces
 	 * from the appliances[] array
 	 * @param s The brand you want to check
 	 * @return Returns true if the machine passed is inside the array, false otherwise
 	 */
-	private static boolean isValide(String s)	{
-		for (var appliance : appliances)	{
+	public static boolean isValide(String s) {
+		for (var appliance : appliances) {
 			if (appliance.equals(s))
 				return true;
 		}
 		return false;
 	}
 
+	public static int findNumberOfCreatedAppliances() {
+		return applianceCreated;
+	}
+
 	// Essential methods
+
 	/***
 	 * This function checks if calling objects is equal to the passed object
 	 * @param other The object you want to compare with the calling Object
 	 * @return Returns if the calling object has the same brand, type and price as the passed object
 	 */
-	public boolean equals(final Appliance other)	{
-		if (other == null)	{
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null) {
 			return false;
+		} else if (this.getClass() != other.getClass()) {
+			return false;
+		} else {
+			Appliance otherApp = (Appliance) other;
+			return (brand.equals(otherApp.brand) && type.equals(otherApp.type) && price == otherApp.price);
 		}
-		return brand.equals(other.brand) && type.equals(other.type) && price == other.price;
+
 	}
 
 	@Override
-	public String toString()	{
-		return String.format("The appliance type is: %s, brand: %s, price: %1.2f. SN: %d", type, brand, price, serialNumber);
+	public String toString() {
+		return String.format("Appliance Serial # %d\nBrand: %s\nType: %s\nPrice: $%1.2f", serialNumber, brand, type, price);
 	}
 
 	// Setters
@@ -110,9 +116,4 @@ public class Appliance {
 	public double getPrice() {
 		return price;
 	}
-
-	public int findNumberOfCreatedAppliances()	{
-		return applianceCreated;
-	}
-
 }
