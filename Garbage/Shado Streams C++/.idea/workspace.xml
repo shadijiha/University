@@ -35,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration name="Test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Test" TARGET_NAME="Test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Test" RUN_TARGET_NAME="Test">
@@ -86,6 +86,7 @@
       <workItem from="1578523731832" duration="1806000" />
       <workItem from="1578531255661" duration="76000" />
       <workItem from="1578677856731" duration="2512000" />
+      <workItem from="1579117527180" duration="852000" />
     </task>
     <servers />
   </component>
@@ -101,17 +102,19 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1577" y="682" key="#com.intellij.fileTypes.FileTypeChooser/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577578879506" />
-    <state x="2968" y="634" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1577737186603">
-      <screen x="2560" y="-69" width="2560" height="1400" />
+    <state x="245" y="414" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1579117805531">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="245" y="414" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579117805531" />
     <state x="2968" y="634" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1577737186603" />
     <state x="1615" y="726" key="#com.intellij.tools.ToolEditorDialog" timestamp="1577576728105">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1615" y="726" key="#com.intellij.tools.ToolEditorDialog/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577576728105" />
-    <state x="3620" y="386" key="FileChooserDialogImpl" timestamp="1577737185604">
-      <screen x="2560" y="-69" width="2560" height="1400" />
+    <state x="636" y="268" key="FileChooserDialogImpl" timestamp="1579117804573">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="636" y="268" key="FileChooserDialogImpl/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579117804573" />
     <state x="1060" y="455" key="FileChooserDialogImpl/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577599749854" />
     <state x="3620" y="386" key="FileChooserDialogImpl/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1577737185604" />
     <state width="1493" height="209" key="GridCell.Tab.0.bottom" timestamp="1578681806129">
@@ -138,15 +141,15 @@
     <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1578681806129" />
     <state width="2517" height="322" key="GridCell.Tab.0.right/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577739620280" />
     <state width="1236" height="377" key="GridCell.Tab.0.right/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1577689329149" />
-    <state x="356" y="117" width="914" height="707" key="SettingsEditor" timestamp="1578679813917">
+    <state x="356" y="117" width="914" height="707" key="SettingsEditor" timestamp="1579117572429">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="356" y="117" width="914" height="707" key="SettingsEditor/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1578679813917" />
+    <state x="356" y="117" width="914" height="707" key="SettingsEditor/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579117572429" />
     <state x="593" y="283" width="1382" height="896" key="SettingsEditor/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577584040152" />
-    <state x="889" y="351" key="com.intellij.ide.util.TipDialog" timestamp="1578677858864">
+    <state x="889" y="351" key="com.intellij.ide.util.TipDialog" timestamp="1579117527524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="889" y="351" key="com.intellij.ide.util.TipDialog/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1578677858864" />
+    <state x="889" y="351" key="com.intellij.ide.util.TipDialog/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579117527524" />
     <state x="889" y="351" key="com.intellij.ide.util.TipDialog/0.0.1536.824/461.1080.1000.504@0.0.1536.824" timestamp="1578523734471" />
     <state x="1568" y="596" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1577739155532" />
     <state x="1737" y="551" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1577576728638">
