@@ -17,35 +17,45 @@ import java.util.Scanner;
 
 public final class Main {
 
-	private static final String PASSWORD = "c249";                 // The program password
-	private static final short MAX_ATTEMPTS = 3;                   // The max attempts to get the right password because program restart
+	private static final int MAX_APPLIANCES = 10;        // The max capacity of the inventory
+
+	private static final String PASSWORD = "c249";       // The program password
+	private static final short MAX_ATTEMPTS = 3;         // The max attempts to get the right password because program restart
 	private static final short ABSOLUTE_MAX_ATTEMPTS = MAX_ATTEMPTS * 4;    // The max attempts before program exits
 	private static int attempts;
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 
 		// TODO: do some buffer clearing for the Scanner scan
+		// TODO: There is a bug @ line 191 in the while loop
 
 		// Const variables
-		final int MAX_APPLIANCES = 10;        // The max capacity of the inventory
+
 
 		// Variable variables 😊
 		int option = 0;
 		attempts = 0;
 
-
 		Appliance[] inventory = new Appliance[MAX_APPLIANCES];    // The inventory
 		Scanner scan = new Scanner(System.in);                    // Scanner to get input
 
+		// GENERATE RANDOM JUST FOR DEBUGGING
+		for (int i = 0; i < inventory.length; i++) {
+			String randType = Appliance.appliances[(int) (Math.random() * Appliance.appliances.length)];
+			String[] brands = {"LG", "Samsung", "Ubunto", "Apple", "Shado"};
+			String randBrand = brands[(int) (Math.random() * brands.length)];
+			inventory[i] = new Appliance(randType, randBrand, Math.random() * 500);
+		}
+
 		// Welcome banner
-		println("Welcome to inventory Software!\n");
+		println("Welcome to inventory Software!");
 
 		//============ Main program Logic ========================
 		while (option != 5) {
 
 			// Display the options list
-			println("*************** MAIN MENU ***************\n");
-			println("\nWhat do you want to do?");
+			println("\n\n*************** MAIN MENU ***************\n");
+			println("What do you want to do?");
 			println("\t1. Enter new appliances (password required)");
 			println("\t2. Change information of an appliance (password required)");
 			println("\t3. Display all appliances by a specific brand");
@@ -110,7 +120,7 @@ public final class Main {
 
 						// Get brand
 						print("\t Enter Brand: ");
-						String tempBrand = scan.next();
+						String tempBrand = scan.nextLine();
 						clearBuffer(scan);
 
 						// Get price and validate
@@ -144,19 +154,99 @@ public final class Main {
 					// Ask the user for the serial number
 					// Keep asking until a valid SN or user wants to exit
 					int tempChoice = 1;
+					int validApplianceIndex = -1;
 					do {
 						print("Enter the serial number of the Appliance you wish to edit: ");
 						long desiredSN = (long) getNumberInput(scan);
-						if (isValidSN(inventory, desiredSN) == null) {
+						if (isValidSN(inventory, desiredSN) == -1) {
 							println("\nNo item possess the ", desiredSN, " serial number. Do you wish to enter another SN?");
 							print("\t1. Yes\n\t2. No\n > ");
 							tempChoice = (int) getNumberInput(scan);
 							if (tempChoice > 1) {
 								break SwitchLabel;
 							}
+						} else {
+							validApplianceIndex = isValidSN(inventory, desiredSN);
 						}
-					} while (tempChoice == 1);
+					} while (tempChoice == 1 && validApplianceIndex == -1);
 
+					// If the serial number is ok show options to the user
+					println("You have selected: ", inventory[validApplianceIndex].toString());
+					println("What information would like to change?");
+					println("\t1. brand\n\t2. type\n\t3. price\n\t4. Quit");
+					print("Enter your choice > ");
+
+					// Get the choice of the user
+					switch ((int) getNumberInput(scan)) {
+						case 1:
+							print("\nEnter the new Brand > ");
+							String _newBrand = scan.nextLine();
+							inventory[validApplianceIndex].setBrand(_newBrand);
+							println("New brand has been set!");
+							break;
+						case 2:
+
+							String _newType = "";
+
+							// Verify that is is a valid type
+							while (!Appliance.isValide(_newType)) {
+								print("\nEnter the new type > ");
+								_newType = scan.nextLine();
+
+								if (!Appliance.isValide(_newType)) {
+									println(_newType, " is not a valid appliance type!");
+								}
+							}
+
+							inventory[validApplianceIndex].setType(_newType);
+							println("New type has been set!");
+
+							break;
+						case 3:
+							print("\nEnter the new price > $");
+							double _newPrice = getNumberInput(scan);
+							inventory[validApplianceIndex].setPrice(_newPrice);
+							println("New price has been set!");
+
+							break;
+						default:
+							break;
+					}
+
+					break;
+				case 3:
+					print("Enter that brand you want to search for > ");
+
+					// Get user input
+					String targetBrand = scan.nextLine();
+
+					// Get the matching result
+					Appliance[] searchResults = findByBrand(targetBrand, inventory);
+					println("Found the following results:");
+					// Print all Appliances that aren't null
+					for (Appliance element : searchResults) {
+						if (element != null) {
+							println(element.toString());
+						}
+					}
+
+					break;
+				case 4:
+					print("Enter the maximum price to search for > ");
+
+					// Get user input
+					double targetPrice = getNumberInput(scan);
+					clearBuffer(scan);
+
+					// Get the matching results
+					Appliance[] priceSearchResults = findByPrice(targetPrice, inventory);
+					println("Found the following results:");
+					// Print all Appliances that aren't null
+					for (Appliance element : priceSearchResults) {
+						if (element != null) {
+							println(element.toString());
+						}
+					}
 
 					break;
 			}
@@ -167,6 +257,46 @@ public final class Main {
 
 		//============ RELEASE RESOURCES ============
 		scan.close();
+	}
+
+	/***
+	 * THis function searches for all the Appliance that match a specific brand in an Appliance array
+	 * @param _brand The brand you want to search for
+	 * @param array the array in which you want to seach
+	 * @return Returns a partially filled array with all the matched result
+	 */
+	public static Appliance[] findByBrand(String _brand, Appliance[] array) {
+		Appliance[] temp = new Appliance[MAX_APPLIANCES];
+
+		int i = 0;
+		for (Appliance element : array) {
+			if (_brand.equalsIgnoreCase(element.getBrand())) {
+				temp[i] = new Appliance(element);
+				i++;
+			}
+		}
+
+		return temp;
+	}
+
+	/***
+	 * THis function searches for all the Appliance that have a price less than the specified price
+	 * @param _price The max price you want to search for
+	 * @param array the array in which you want to search
+	 * @return Returns a partially filled array with all the matched result
+	 */
+	public static Appliance[] findByPrice(double _price, Appliance[] array) {
+		Appliance[] temp = new Appliance[MAX_APPLIANCES];
+
+		int i = 0;
+		for (Appliance element : array) {
+			if (element.getPrice() < _price) {
+				temp[i] = new Appliance(element);
+				i++;
+			}
+		}
+
+		return temp;
 	}
 
 	/***
@@ -206,15 +336,15 @@ public final class Main {
 	 * This function checks if a Appliance exists based on a given serial number
 	 * @param array The array of appliance you wish to loop through
 	 * @param serialNumber The serial number to match
-	 * @return Returns the matched object if any OR returns null if none found
+	 * @return Returns index of the matched object if any OR returns -1 if none found
 	 */
-	public static Appliance isValidSN(Appliance[] array, long serialNumber) {
-		for (Appliance temp : array) {
-			if (temp != null && temp.getSerialNumber() == serialNumber) {
-				return temp;
+	public static int isValidSN(Appliance[] array, long serialNumber) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] != null && array[i].getSerialNumber() == serialNumber) {
+				return i;
 			}
 		}
-		return null;
+		return -1;
 	}
 
 	/***
@@ -263,6 +393,7 @@ public final class Main {
 		temp = scanner.next();
 		clearBuffer(scanner);
 
+		// TODO: Tranform this to a while loop
 		if (!isNumeric(temp)) {
 			// If the input if not a number
 			println(temp + " is not a number!");
@@ -278,7 +409,7 @@ public final class Main {
 	 * @param s The input Scanner stream
 	 */
 	public static void clearBuffer(final Scanner s) {
-		s.nextLine();
+		//s.nextLine();
 	}
 
 	/***
