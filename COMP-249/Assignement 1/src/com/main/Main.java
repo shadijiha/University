@@ -40,7 +40,7 @@ public final class Main {
 		Scanner scan = new Scanner(System.in);                    // Scanner to get input
 
 		// GENERATE RANDOM JUST FOR DEBUGGING
-		for (int i = 0; i < inventory.length; i++) {
+		for (int i = 0; i < inventory.length / 2; i++) {
 			String randType = Appliance.appliances[(int) (Math.random() * Appliance.appliances.length)];
 			String[] brands = {"LG", "Samsung", "Ubunto", "Apple", "Shado"};
 			String randBrand = brands[(int) (Math.random() * brands.length)];
@@ -107,7 +107,7 @@ public final class Main {
 							// Stay here while input is not a valid type
 							print("\t Enter Type (!types for allowed types): ");
 							tempType = scan.next();
-							clearBuffer(scan);
+							scan = clearBuffer(scan);
 
 							if (tempType.equals("!types")) {
 								// Print all the valid types
@@ -121,7 +121,7 @@ public final class Main {
 						// Get brand
 						print("\t Enter Brand: ");
 						String tempBrand = scan.nextLine();
-						clearBuffer(scan);
+						scan = clearBuffer(scan);
 
 						// Get price and validate
 						double tempPrice;
@@ -129,7 +129,7 @@ public final class Main {
 							print("\t Enter Price: $");
 							tempPrice = getNumberInput(scan);
 						} while (tempPrice < 0.0);
-						clearBuffer(scan);
+						scan = clearBuffer(scan);
 
 						// Push that appliance to the inventory
 						Appliance tempObject = new Appliance(tempType, tempBrand, tempPrice);
@@ -177,7 +177,9 @@ public final class Main {
 					print("Enter your choice > ");
 
 					// Get the choice of the user
-					switch ((int) getNumberInput(scan)) {
+					int changeChoise = (int) getNumberInput(scan);
+					scan = clearBuffer(scan);
+					switch (changeChoise) {
 						case 1:
 							print("\nEnter the new Brand > ");
 							String _newBrand = scan.nextLine();
@@ -236,7 +238,7 @@ public final class Main {
 
 					// Get user input
 					double targetPrice = getNumberInput(scan);
-					clearBuffer(scan);
+					scan = clearBuffer(scan);
 
 					// Get the matching results
 					Appliance[] priceSearchResults = findByPrice(targetPrice, inventory);
@@ -270,7 +272,7 @@ public final class Main {
 
 		int i = 0;
 		for (Appliance element : array) {
-			if (_brand.equalsIgnoreCase(element.getBrand())) {
+			if (element != null && _brand.equalsIgnoreCase(element.getBrand())) {
 				temp[i] = new Appliance(element);
 				i++;
 			}
@@ -290,7 +292,7 @@ public final class Main {
 
 		int i = 0;
 		for (Appliance element : array) {
-			if (element.getPrice() < _price) {
+			if (element != null && element.getPrice() < _price) {
 				temp[i] = new Appliance(element);
 				i++;
 			}
@@ -305,14 +307,14 @@ public final class Main {
 	 * @return IMPORTANT: Returns 0 if the password is ok
 	 * 						Returns 1 if the password fail attempts has exceeded MAX_ATTEMPTS
 	 */
-	public static int isValidPassword(final Scanner s) {
+	public static int isValidPassword(Scanner s) {
 		// Get the password
 		String tempPass = "";
 		// Keep asking for password while it is incorrect
 		do {
 			print("Enter the password please: ");
 			tempPass = s.next();
-			clearBuffer(s);
+			s = clearBuffer(s);
 			attempts++;
 
 			// Display the attempts count
@@ -388,10 +390,10 @@ public final class Main {
 	 * @param scanner The input stream
 	 * @return Returns the number input
 	 */
-	public static double getNumberInput(final Scanner scanner) {
+	public static double getNumberInput(Scanner scanner) {
 		String temp = "";
 		temp = scanner.next();
-		clearBuffer(scanner);
+		scanner = clearBuffer(scanner);
 
 		// TODO: Tranform this to a while loop
 		if (!isNumeric(temp)) {
@@ -408,8 +410,9 @@ public final class Main {
 	 *  This function clears the Scanner object buffer
 	 * @param s The input Scanner stream
 	 */
-	public static void clearBuffer(final Scanner s) {
-		//s.nextLine();
+	public static Scanner clearBuffer(final Scanner s) {
+		//s.close();
+		return new Scanner(System.in);
 	}
 
 	/***
