@@ -33,7 +33,6 @@ public final class Main {
 		int option = 0;
 		attempts = 0;
 
-
 		Appliance[] inventory = new Appliance[MAX_APPLIANCES];    // The inventory
 		Scanner scan = new Scanner(System.in);                    // Scanner to get input
 
@@ -167,6 +166,7 @@ public final class Main {
 
 		//============ RELEASE RESOURCES ============
 		scan.close();
+
 	}
 
 	/***
