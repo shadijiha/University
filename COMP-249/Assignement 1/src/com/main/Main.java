@@ -259,6 +259,7 @@ public final class Main {
 
 		//============ RELEASE RESOURCES ============
 		scan.close();
+
 	}
 
 	/***

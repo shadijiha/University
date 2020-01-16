@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="556dc7be-0d9f-430a-8a0c-9f0527001859" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignement 1/com/main/Appliance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignement 1/com/main/Appliance.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignement 1/com/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignement 1/com/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/Appliance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/Appliance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/main/Main.java" afterDir="false" />

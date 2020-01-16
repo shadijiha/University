@@ -89,7 +89,6 @@ public class Appliance {
 			Appliance otherApp = (Appliance) other;
 			return (brand.equals(otherApp.brand) && type.equals(otherApp.type) && price == otherApp.price);
 		}
-
 	}
 
 	@Override
