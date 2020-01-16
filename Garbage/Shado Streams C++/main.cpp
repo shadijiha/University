@@ -190,7 +190,7 @@ public:
 };
 
 template<typename T>
-class ArrayList{
+class ArrayList {
 private:
 	std::vector<T> data;
 	int length = 0;

@@ -36,10 +36,20 @@ public class Appliance {
 	/***
 	 * Default constructor
 	 * Inits: TYPE to appliances[0], BRAND to "LG" and PRICE TO "1.0"
-	 * @throws Exception throws an Exception if the type if not valid
 	 */
 	Appliance() {
 		this(appliances[0], "LG", 1.0);
+	}
+
+	/***
+	 * Copy constructor
+	 * @param other The constructor you want to copy
+	 */
+	Appliance(final Appliance other) {
+		type = other.type;
+		brand = other.brand;
+		serialNumber = other.serialNumber;
+		price = other.price;
 	}
 
 	// Static functions
@@ -47,12 +57,12 @@ public class Appliance {
 	/***
 	 * This function checks if the passed machine is 1 of the allowed onces
 	 * from the appliances[] array
-	 * @param s The brand you want to check
+	 * @param s The type you want to check
 	 * @return Returns true if the machine passed is inside the array, false otherwise
 	 */
 	public static boolean isValide(String s) {
 		for (var appliance : appliances) {
-			if (appliance.equals(s))
+			if (appliance.equalsIgnoreCase(s))
 				return true;
 		}
 		return false;
@@ -83,7 +93,7 @@ public class Appliance {
 
 	@Override
 	public String toString() {
-		return String.format("Appliance Serial # %d\nBrand: %s\nType: %s\nPrice: $%1.2f", serialNumber, brand, type, price);
+		return String.format("\tAppliance Serial # %d,\tBrand: %s,\tType: %s,\tPrice: $%1.2f", serialNumber, brand, type, price);
 	}
 
 	// Setters
