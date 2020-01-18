@@ -46,10 +46,11 @@ public class Appliance {
 	 * @param other The constructor you want to copy
 	 */
 	Appliance(final Appliance other) {
-		type = other.type;
-		brand = other.brand;
+		this(other.type, other.brand, other.price);
 		serialNumber = other.serialNumber;
-		price = other.price;
+		/*type = other.type;
+		brand = other.brand;
+		price = other.price;*/
 	}
 
 	// Static functions

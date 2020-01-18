@@ -18,7 +18,7 @@ public class Dictionnary extends Book {
 	}
 
 	// Setters
-	public double computeRatio() {
-		return (double) this.definitions / (double) this.getPages();
-	}
+//	public double computeRatio() {
+//		return (double) this.definitions / (double) pages;
+//	}
 }
