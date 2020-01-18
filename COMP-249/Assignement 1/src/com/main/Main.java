@@ -315,7 +315,6 @@ public final class Main {
 		do {
 			print("Enter the password please: ");
 			tempPass = s.next();
-			s = clearBuffer(s);
 			attempts++;
 
 			// Display the attempts count
@@ -393,8 +392,7 @@ public final class Main {
 	 */
 	public static double getNumberInput(Scanner scanner) {
 		String temp = "";
-		temp = scanner.next();
-		scanner = clearBuffer(scanner);
+		temp = scanner.nextLine();
 
 		// TODO: Tranform this to a while loop
 		if (!isNumeric(temp)) {
@@ -405,15 +403,6 @@ public final class Main {
 		} else {
 			return Double.parseDouble(temp);
 		}
-	}
-
-	/***
-	 *  This function clears the Scanner object buffer
-	 * @param s The input Scanner stream
-	 */
-	public static Scanner clearBuffer(final Scanner s) {
-		//s.close();
-		return new Scanner(System.in);
 	}
 
 	/***
