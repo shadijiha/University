@@ -1,0 +1,9 @@
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\bin\Debug\Assignement 1 GUI.exe.config
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\bin\Debug\Assignement 1 GUI.exe
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\bin\Debug\Assignement 1 GUI.pdb
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement 1 GUI.csprojAssemblyReference.cache
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement_1_GUI.Form1.resources
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement_1_GUI.Properties.Resources.resources
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement 1 GUI.csproj.GenerateResource.cache
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement 1 GUI.exe
+C:\wamp64\www\Github\University\COMP-249\Assignement 1 GUI\Assignement 1 GUI\obj\Debug\Assignement 1 GUI.pdb

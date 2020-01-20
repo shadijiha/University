@@ -106,8 +106,7 @@ public final class Main {
 						do {
 							// Stay here while input is not a valid type
 							print("\t Enter Type (!types for allowed types): ");
-							tempType = scan.next();
-							scan = clearBuffer(scan);
+							tempType = scan.nextLine();
 
 							if (tempType.equals("!types")) {
 								// Print all the valid types
@@ -121,7 +120,6 @@ public final class Main {
 						// Get brand
 						print("\t Enter Brand: ");
 						String tempBrand = scan.nextLine();
-						scan = clearBuffer(scan);
 
 						// Get price and validate
 						double tempPrice;
@@ -129,11 +127,10 @@ public final class Main {
 							print("\t Enter Price: $");
 							tempPrice = getNumberInput(scan);
 						} while (tempPrice < 0.0);
-						scan = clearBuffer(scan);
 
 						// Push that appliance to the inventory
 						Appliance tempObject = new Appliance(tempType, tempBrand, tempPrice);
-						inventory[Appliance.findNumberOfCreatedAppliances() + i] = tempObject;
+						inventory[Appliance.findNumberOfCreatedAppliances() + i - 1] = tempObject;
 
 						// Display the end result
 						println("You added ", tempObject.toString(), " to the inventory.\n");
@@ -178,7 +175,6 @@ public final class Main {
 
 					// Get the choice of the user
 					int changeChoise = (int) getNumberInput(scan);
-					scan = clearBuffer(scan);
 					switch (changeChoise) {
 						case 1:
 							print("\nEnter the new Brand > ");
@@ -238,7 +234,6 @@ public final class Main {
 
 					// Get user input
 					double targetPrice = getNumberInput(scan);
-					scan = clearBuffer(scan);
 
 					// Get the matching results
 					Appliance[] priceSearchResults = findByPrice(targetPrice, inventory);
@@ -314,8 +309,7 @@ public final class Main {
 		// Keep asking for password while it is incorrect
 		do {
 			print("Enter the password please: ");
-			tempPass = s.next();
-			s = clearBuffer(s);
+			tempPass = s.nextLine();
 			attempts++;
 
 			// Display the attempts count
@@ -355,6 +349,7 @@ public final class Main {
 	 * @param args The stuff you want to print
 	 * @param <T> Any
 	 */
+	@SafeVarargs
 	public static <T> void println(T... args) {
 		for (var temp : args) {
 			System.out.print(temp);
@@ -367,6 +362,7 @@ public final class Main {
 	 * @param args The stuff you want to print
 	 * @param <T> Any
 	 */
+	@SafeVarargs
 	public static <T> void print(T... args) {
 		for (var temp : args) {
 			System.out.print(temp);
@@ -391,10 +387,9 @@ public final class Main {
 	 * @param scanner The input stream
 	 * @return Returns the number input
 	 */
-	public static double getNumberInput(Scanner scanner) {
+	public static double getNumberInput(final Scanner scanner) {
 		String temp = "";
-		temp = scanner.next();
-		scanner = clearBuffer(scanner);
+		temp = scanner.nextLine();
 
 		// TODO: Tranform this to a while loop
 		if (!isNumeric(temp)) {
@@ -405,15 +400,6 @@ public final class Main {
 		} else {
 			return Double.parseDouble(temp);
 		}
-	}
-
-	/***
-	 *  This function clears the Scanner object buffer
-	 * @param s The input Scanner stream
-	 */
-	public static Scanner clearBuffer(final Scanner s) {
-		//s.close();
-		return new Scanner(System.in);
 	}
 
 	/***
