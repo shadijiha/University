@@ -130,7 +130,7 @@ public final class Main {
 
 						// Push that appliance to the inventory
 						Appliance tempObject = new Appliance(tempType, tempBrand, tempPrice);
-						inventory[Appliance.findNumberOfCreatedAppliances() + i] = tempObject;
+						inventory[Appliance.findNumberOfCreatedAppliances() + i - 1] = tempObject;
 
 						// Display the end result
 						println("You added ", tempObject.toString(), " to the inventory.\n");
