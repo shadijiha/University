@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <string>
 
 class Person {
 private:
@@ -54,7 +55,6 @@ public:
 
 int main()
 {
-	
 	Person kave;
 	//kave.setAge(30);
 
