@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Learning_c_sharp {
 
-	class JsonFile {
+	class JSONFile {
 		// Just a data container for json element
 		public struct JsonElement {
 			public string name;
@@ -34,6 +34,19 @@ namespace Learning_c_sharp {
 			}
 			return new JsonElement(null, null);
 		}
+
+		public static JSONFile parseJSON(string rawJson) {
+
+			JSONFile result = new JSONFile();
+			string[] splited = rawJson.Split(',');
+
+			foreach (var line in splited) {
+				var elements = line.Split(':');
+				result.addElement(elements[0], elements[1]);
+			}
+
+			return result;
+		}
 	}
 	class Program {
 		public static void Main(string[] args) {
@@ -55,12 +68,12 @@ namespace Learning_c_sharp {
 				using (WebClient client = new WebClient()) {
 
 					string data;
-					JsonFile json;
+					JSONFile json;
 
 					try {
 						// Get data from server if it exists
 						data = client.DownloadString(url);
-						json = parseJSON(data);
+						json = JSONFile.parseJSON(data);
 					} catch (Exception e) {
 						// If no such data is found (e.g. city doesn't exist) display error then exit the program
 						// Display the proper error message
@@ -70,7 +83,7 @@ namespace Learning_c_sharp {
 					}
 
 					// Display data on console
-					Console.WriteLine("Display informations about {0}:", city);
+					Console.WriteLine("\nDisplay informations about {0}:", city);
 					Console.WriteLine("\tCountry: {0}", json.getElementByName("country").value);
 					Console.WriteLine("\tCity: {0}", json.getElementByName("name").value);
 					Console.WriteLine("\tTemprature: {0}°C", json.getElementByName("temp").value);
@@ -86,17 +99,5 @@ namespace Learning_c_sharp {
 
 		}
 
-		public static JsonFile parseJSON(string rawJson) {
-
-			JsonFile result = new JsonFile();
-			string[] splited = rawJson.Split(',');
-
-			foreach (var line in splited) {
-				var elements = line.Split(':');
-				result.addElement(elements[0], elements[1]);
-			}
-
-			return result;
-		}
 	}
 }
