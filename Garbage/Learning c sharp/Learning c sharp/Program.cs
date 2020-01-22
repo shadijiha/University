@@ -13,7 +13,6 @@ namespace Learning_c_sharp {
 				name = _name;
 				value = _val;
 			}
-
 		}
 
 		private List<JsonElement> data = new List<JsonElement>();
@@ -34,10 +33,6 @@ namespace Learning_c_sharp {
 				}
 			}
 			return new JsonElement(null, null);
-		}
-
-		public List<JsonElement> toList() {
-			return new List<JsonElement>(this.data);
 		}
 	}
 	class Program {
@@ -68,7 +63,8 @@ namespace Learning_c_sharp {
 						json = parseJSON(data);
 					} catch (Exception e) {
 						// If no such data is found (e.g. city doesn't exist) display error then exit the program
-						Console.WriteLine("Error! {0}", e.Message);
+						// Display the proper error message
+						Console.WriteLine("Error! {0}, {1}", e.GetType(), e.Message);
 						Console.ReadLine();
 						break;
 					}
