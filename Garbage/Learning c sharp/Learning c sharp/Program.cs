@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Learning_c_sharp {
 
-	class JSONFile {
+	class JSONFile_test {
 		// Just a data container for json element
 		public struct JsonElement {
 			public string name;
@@ -35,9 +35,9 @@ namespace Learning_c_sharp {
 			return new JsonElement(null, null);
 		}
 
-		public static JSONFile parseJSON(string rawJson) {
+		public static JSONFile_test parseJSON(string rawJson) {
 
-			JSONFile result = new JSONFile();
+			JSONFile_test result = new JSONFile_test();
 			string[] splited = rawJson.Split(',');
 
 			foreach (var line in splited) {
@@ -68,12 +68,12 @@ namespace Learning_c_sharp {
 				using (WebClient client = new WebClient()) {
 
 					string data;
-					JSONFile json;
+					JSONFile_test json;
 
 					try {
 						// Get data from server if it exists
 						data = client.DownloadString(url);
-						json = JSONFile.parseJSON(data);
+						json = JSONFile_test.parseJSON(data);
 					} catch (Exception e) {
 						// If no such data is found (e.g. city doesn't exist) display error then exit the program
 						// Display the proper error message
