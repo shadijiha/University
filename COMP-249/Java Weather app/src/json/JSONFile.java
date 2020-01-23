@@ -22,6 +22,7 @@ public class JSONFile {
 	 * @param element
 	 * @return Returns true if the element has been added successfully
 	 * @throws Exception thrown if the operation wasn't successful
+	 * @see JSONElement
 	 */
 	public boolean addElement(JSONElement element) throws Exception {
 		try {
@@ -32,6 +33,12 @@ public class JSONFile {
 		}
 	}
 
+	/**
+	 * Search for the JSON element whose attribute matches the passed one
+	 * 
+	 * @param att The attribute you want to match
+	 * @return Returns the found JSONElement
+	 */
 	public JSONElement firstMatch(String att) {
 
 		for (int i = 0; i < data.size(); i++) {
@@ -41,6 +48,12 @@ public class JSONFile {
 		return null;
 	}
 
+	/***
+	 * Removes the first JSON element whose attribute matches the passed one
+	 * 
+	 * @param att The attribute you want to match
+	 * @return Returns the removed JSONElement
+	 */
 	public JSONElement removeFirstMatch(String att) {
 
 		int index = 0;
@@ -54,6 +67,12 @@ public class JSONFile {
 		return removedElement;
 	}
 
+	/***
+	 * Removes all JSON elements whose attribute matches the passed one
+	 * 
+	 * @param att The attribute you want to match
+	 * @return Returns all the removed JSONElements
+	 */
 	public List<JSONElement> removeAllMatch(String att) {
 
 		List<JSONElement> temp = new ArrayList<JSONElement>();
@@ -67,6 +86,12 @@ public class JSONFile {
 		return temp;
 	}
 
+	/***
+	 * Converts a normal String to a JSON Element
+	 * 
+	 * @param jsObject The string to convert
+	 * @return Returns a JSON Element with the string content
+	 */
 	public static JSONElement parseObject(String jsObject) {
 
 		if (jsObject.charAt(0) != '{' || jsObject.charAt(jsObject.length() - 1) != '}') {
@@ -102,6 +127,9 @@ public class JSONFile {
 
 	}
 
+	/***
+	 * @return Returns all the data of the JSON file
+	 */
 	public List<JSONElement> getAllElements() {
 		return new ArrayList<JSONElement>(this.data);
 	}

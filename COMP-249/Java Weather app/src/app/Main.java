@@ -17,9 +17,6 @@ public final class Main {
 
 		try {
 			file.addElement(JSONFile.parseObject(test));
-			file.addElement(JSONFile.parseObject(test));
-			file.addElement(JSONFile.parseObject(test2));
-			file.addElement(JSONFile.parseObject(test2));
 			file.addElement(JSONFile.parseObject(test2));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
