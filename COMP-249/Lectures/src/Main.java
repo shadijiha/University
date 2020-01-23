@@ -1,22 +1,32 @@
-import javax.swing.*;
-import java.awt.*;
 
 /***
  * Driver class
  */
 
+import javax.swing.*;
+import java.awt.*;
+import ShadoMath.*;
+
+
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new FlowLayout());
+//		JFrame frame = new JFrame();
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setLayout(new FlowLayout());
+//
+//		JButton b = new JButton("Log In");
+//		formatJButton(b);
+//
+//		frame.add(b);
+//		frame.pack();
+//		frame.setVisible(true);
+		
+		var t = 2;
+		Vector v = new Vector(-1*(-8*t),17*t,-15*t);
+		
+		v.print();
 
-		JButton b = new JButton("Log In");
-		formatJButton(b);
 
-		frame.add(b);
-		frame.pack();
-		frame.setVisible(true);
 
 	}
 

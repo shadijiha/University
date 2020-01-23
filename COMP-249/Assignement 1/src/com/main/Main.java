@@ -39,14 +39,6 @@ public final class Main {
 		Appliance[] inventory = new Appliance[MAX_APPLIANCES];    // The inventory
 		Scanner scan = new Scanner(System.in);                    // Scanner to get input
 
-		// GENERATE RANDOM JUST FOR DEBUGGING
-		for (int i = 0; i < inventory.length / 2; i++) {
-			String randType = Appliance.appliances[(int) (Math.random() * Appliance.appliances.length)];
-			String[] brands = {"LG", "Samsung", "Ubunto", "Apple", "Shado"};
-			String randBrand = brands[(int) (Math.random() * brands.length)];
-			inventory[i] = new Appliance(randType, randBrand, Math.random() * 500);
-		}
-
 		// Welcome banner
 		println("Welcome to inventory Software!");
 
@@ -349,9 +341,8 @@ public final class Main {
 	 * @param args The stuff you want to print
 	 * @param <T> Any
 	 */
-	@SafeVarargs
 	public static <T> void println(T... args) {
-		for (var temp : args) {
+		for (T temp : args) {
 			System.out.print(temp);
 		}
 		System.out.println();
@@ -362,9 +353,8 @@ public final class Main {
 	 * @param args The stuff you want to print
 	 * @param <T> Any
 	 */
-	@SafeVarargs
 	public static <T> void print(T... args) {
-		for (var temp : args) {
+		for (T temp : args) {
 			System.out.print(temp);
 		}
 	}
