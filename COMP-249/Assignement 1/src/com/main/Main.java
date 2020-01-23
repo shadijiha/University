@@ -29,10 +29,10 @@ public final class Main {
 		// TODO: do some buffer clearing for the Scanner scan
 		// TODO: There is a bug @ line 191 in the while loop
 
-		// Const variables
+		// Constant variables
 
 
-		// Variable variables 😊
+		// Variable variables :)
 		int option = 0;
 		attempts = 0;
 

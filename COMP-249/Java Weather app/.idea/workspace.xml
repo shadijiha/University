@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="73491882-b89b-4743-aa50-2537ccc55292" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1WluO4S4viyN2agnb6Uvq7q8U3i" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
+      <module name="Java Weather app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="73491882-b89b-4743-aa50-2537ccc55292" name="Default Changelist" comment="" />
+      <created>1579736468619</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579736468619</updated>
+      <workItem from="1579736479990" duration="722000" />
+      <workItem from="1579737235046" duration="1312000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="71" key="#Project_Structure" timestamp="1579736602171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1579736602171" />
+    <state x="223" y="68" width="1089" height="710" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579736569705">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" width="1089" height="710" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1579736569705" />
+    <state x="498" y="205" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1579736555265">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="205" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1579736555265" />
+    <state width="1493" height="131" key="GridCell.Tab.0.bottom" timestamp="1579739058555">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="131" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579739058555" />
+    <state width="1493" height="131" key="GridCell.Tab.0.center" timestamp="1579739058554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="131" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579739058554" />
+    <state width="1493" height="131" key="GridCell.Tab.0.left" timestamp="1579739058554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="131" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579739058554" />
+    <state width="1493" height="131" key="GridCell.Tab.0.right" timestamp="1579739058554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="131" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579739058554" />
+    <state x="311" y="0" key="SettingsEditor" timestamp="1579737929027">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="311" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1579737929027" />
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1579737236579">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1579737236579" />
+  </component>
+</project>
