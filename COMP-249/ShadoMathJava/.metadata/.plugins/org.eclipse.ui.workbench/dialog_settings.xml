@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ImportExportAction">
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.wst.xml.ui.internal.wizards.ImportXMLCatalogWizard"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.wst.XMLCategory"/>
+		</list>
 	</section>
 	<section name="NewWizardAction">
 	</section>
@@ -17,7 +21,14 @@
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="979"/>
-		<item key="DIALOG_Y_ORIGIN" value="349"/>
+		<item key="DIALOG_X_ORIGIN" value="966"/>
+		<item key="DIALOG_Y_ORIGIN" value="303"/>
+	</section>
+	<section name="FileSystemImportWizard">
+		<item key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
+		<item key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID" value="false"/>
+		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="D:\Wamp64\www\GitHub\University\COMP-249\Java Weather app"/>
+		</list>
 	</section>
 </section>

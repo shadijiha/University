@@ -27,7 +27,6 @@ public class Main {
 		Vector v = new Vector(-1 * (-8 * t), 17 * t, -15 * t);
 
 		v.print();
-
 	}
 
 	public static void formatJButton(JButton b) {
