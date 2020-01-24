@@ -62,7 +62,7 @@ public class Appliance {
 	 * @return Returns true if the machine passed is inside the array, false otherwise
 	 */
 	public static boolean isValide(String s) {
-		for (var appliance : appliances) {
+		for (String appliance : appliances) {
 			if (appliance.equalsIgnoreCase(s))
 				return true;
 		}
