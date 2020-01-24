@@ -3,10 +3,12 @@
  * Driver class
  */
 
-import javax.swing.*;
-import java.awt.*;
-import ShadoMath.*;
+import java.awt.Color;
+import java.awt.Font;
 
+import javax.swing.JButton;
+
+import ShadoMath.Vector;
 
 public class Main {
 	public static void main(String[] args) {
@@ -20,13 +22,11 @@ public class Main {
 //		frame.add(b);
 //		frame.pack();
 //		frame.setVisible(true);
-		
+
 		var t = 2;
-		Vector v = new Vector(-1*(-8*t),17*t,-15*t);
-		
+		Vector v = new Vector(-1 * (-8 * t), 17 * t, -15 * t);
+
 		v.print();
-
-
 
 	}
 
