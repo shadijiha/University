@@ -6,9 +6,11 @@
 package json;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class JSONFile {
+public class JSONFile implements Iterable<JSONElement>, Cloneable {
 
 	private List<JSONElement> data;
 
@@ -24,13 +26,9 @@ public class JSONFile {
 	 * @throws Exception thrown if the operation wasn't successful
 	 * @see JSONElement
 	 */
-	public boolean addElement(JSONElement element) throws Exception {
-		try {
-			data.add(element);
-			return true;
-		} catch (Exception e) {
-			throw e;
-		}
+	public boolean addElement(JSONElement element) {
+		data.add(element);
+		return true;
 	}
 
 	/**
@@ -46,6 +44,16 @@ public class JSONFile {
 				return data.get(i);
 		}
 		return null;
+	}
+
+	/**
+	 * Search for all JSON elements whose attribute matches the passed one
+	 * 
+	 * @param att The attribute you want to match
+	 * @return Returns the all JSONElements that match the attribute
+	 */
+	public List<JSONElement> allMatches(String att) {
+		return data.parallelStream().filter(e -> e.getAttribute().equals(att)).collect(Collectors.toList());
 	}
 
 	/***
@@ -119,7 +127,8 @@ public class JSONFile {
 		// Otherwise, will return a normal JSON element
 		if (elements[1].contains("[")) {
 			String arrayElements[] = elements[1].split(",");
-			return new JSONElement(elements[0], arrayElements);
+			// return new JSONElement(elements[0], arrayElements);
+			return null;
 
 		} else {
 			return new JSONElement(elements[0], elements[1]);
@@ -132,5 +141,27 @@ public class JSONFile {
 	 */
 	public List<JSONElement> getAllElements() {
 		return new ArrayList<JSONElement>(this.data);
+	}
+
+	/***
+	 * @return Returns an Iterator to iterate through the data of the JSON file
+	 */
+	@Override
+	public Iterator<JSONElement> iterator() {
+		return data.iterator();
+	}
+
+	/***
+	 * @return Returns a clone of the calling object
+	 */
+	@Override
+	public JSONFile clone() {
+		try {
+			JSONFile clone = new JSONFile();
+			clone.data = new ArrayList<JSONElement>(this.data);
+			return clone;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

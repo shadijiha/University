@@ -4,6 +4,7 @@
  */
 package app;
 
+import json.JSONElement;
 import json.JSONFile;
 
 public final class Main {
@@ -15,15 +16,20 @@ public final class Main {
 		String test2 = "{\"country\": \"CA\"}";
 		JSONFile file = new JSONFile();
 
-		try {
-			file.addElement(JSONFile.parseObject(test));
-			file.addElement(JSONFile.parseObject(test2));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		var element = new JSONElement("tempratures", "15");
+
+		for (int i = 0; i < 10; i++)
+			element.addValue(Integer.toString(((int) (Math.random() * 100))));
+
+		file.addElement(JSONFile.parseObject(test));
+		file.addElement(JSONFile.parseObject(test2));
+		file.addElement(element);
+
+		var it = file.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
 		}
 
-		file.getAllElements().stream().forEach(e -> System.out.println(e.getAttribute() + ", " + e.getValue()));
-
+		return;
 	}
 }
