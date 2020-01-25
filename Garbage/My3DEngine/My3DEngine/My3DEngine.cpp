@@ -143,7 +143,7 @@ private:
 public:
 	bool OnUserCreate() override
 	{		
-		/*meshCube.tris = {
+		meshCube.tris = {
 
 			// SOUTH
 			{ 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f },
@@ -169,10 +169,10 @@ public:
 			{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f },
 			{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f },
 
-		};*/
+		};
 	
 		// Load model
-		meshCube.LoadFromObjectFile("VideoShip.obj");
+		//meshCube.LoadFromObjectFile("VideoShip.obj");
 
 		// Projection Matrix
 		float fNear = 0.1f;
