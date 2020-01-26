@@ -5,32 +5,33 @@
 
 package Lecture1;
 
-public class Account	{
+public class Account {
 	private String name;
 	private int id;
 	private int balance;
 	private static int totalAccounts = 0;
 
-	public Account(String _name, int _id, int _balance)	{
+	public Account(String _name, int _id, int _balance) {
 		name = _name;
 		id = _id;
 		balance = _balance;
 		Account.totalAccounts++;
 	}
 
-	public Account(String _name)	{
+	public Account(String _name) {
 		this(_name, 0, 0);
 	}
 
-	public Account(Account other)	{
+	public Account(Account other) {
 		this(other.name, other.id, other.balance);
 	}
 
-	public Account()	{
+	public Account() {
 		this(null, 0, 0);
 	}
 
-	public String toString()	{
+	@Override
+	public String toString() {
 		return this.name + " " + this.id + " " + this.balance;
 	}
 
@@ -60,7 +61,7 @@ public class Account	{
 		return balance;
 	}
 
-	public static int getTotalAccounts()	{
+	public static int getTotalAccounts() {
 		return Account.totalAccounts;
 	}
 }
