@@ -2,7 +2,6 @@
 /***
  * Driver class
  */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -15,16 +14,16 @@ import ShadoMath.Vertex;
 
 public class Main {
 	public static void main(String[] args) {
-//		JFrame frame = new JFrame();
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setLayout(new FlowLayout());
-//
-//		JButton b = new JButton("Log In");
-//		formatJButton(b);
-//
-//		frame.add(b);
-//		frame.pack();
-//		frame.setVisible(true);
+		// JFrame frame = new JFrame();
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setLayout(new FlowLayout());
+		//
+		// JButton b = new JButton("Log In");
+		// formatJButton(b);
+		//
+		// frame.add(b);
+		// frame.pack();
+		// frame.setVisible(true);
 
 		List<Vertex> S = new ArrayList<Vertex>();
 		List<Vertex> E = new ArrayList<Vertex>();
@@ -63,12 +62,5 @@ public class Main {
 				System.out.print("\n");
 			}
 		}
-	}
-
-	public static void formatJButton(JButton b) {
-		b.setBackground(new Color(59, 89, 182));
-		b.setForeground(Color.WHITE);
-		b.setFocusPainted(false);
-		b.setFont(new Font("Tahoma", Font.BOLD, 12));
 	}
 }
