@@ -3,6 +3,10 @@
  */
 
 public class Main {
+	/***
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// JFrame frame = new JFrame();
 		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,5 +18,12 @@ public class Main {
 		// frame.add(b);
 		// frame.pack();
 		// frame.setVisible(true);
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				
+			}
+		}).run();
 	}
 }
