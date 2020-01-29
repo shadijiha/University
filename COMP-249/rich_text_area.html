@@ -1,0 +1,154 @@
+<html>
+	<head>
+		<title>^_^</title>
+		<style type="text/css">
+			#input {
+				border: solid black 1px;
+				width: 50%;
+				height: 50%;
+				padding: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="underline"><u>U</u></button>
+		<button id="bold"><b>B</b></button>
+		<button id="italic"><i>I</i></button>
+		<br />
+		<br />
+		<div id="input" contenteditable="true">Place holder</div>
+		<button OnClick="callParser();">Parse</button>
+		<script>
+			Array.prototype.insert = function(index, item) {
+				this.splice(index, 0, item);
+			};
+
+			class TextareaElement {
+				constructor(str, index) {
+					this.text = str;
+					this.isBold = false;
+					this.isItalic = false;
+					this.isUnderline = false;
+					this.index = index;
+				}
+
+				getText() {
+					return this.text;
+				}
+
+				getIndex() {
+					return this.index;
+				}
+
+				setText(newText) {
+					this.text = newText;
+				}
+
+				isBold() {
+					return this.bold;
+				}
+
+				isItalic() {
+					return this.isItalic;
+				}
+
+				isUnderline() {
+					return this.isUnderline;
+				}
+
+				toggleBold() {
+					this.bold = !this.bold;
+				}
+
+				toggleItalic() {
+					this.bold = !this.bold;
+				}
+
+				toggleUnderline() {
+					this.bold = !this.bold;
+				}
+			}
+
+			class Textarea {
+				constructor(HTMLelement) {
+					this.buffer = [];
+					this.HTMLelement = HTMLelement || null;
+				}
+
+				static createElement(
+					str,
+					index,
+					bold = false,
+					italic = false,
+					underline = false
+				) {
+					let temp = new TextareaElement(str, index);
+					bold ? temp.toggleBold() : false;
+					italic ? temp.toggleItalic() : false;
+					underline ? temp.toggleUnderline() : false;
+
+					return temp;
+				}
+
+				addToBuffer(textareaElement, index) {
+					index = index || this.buffer.length;
+					this.buffer.insert(textareaElement, index);
+				}
+
+				removeFromBuffer(textareaElement) {
+					return this.buffer.splice(this.buffer.indexOf(textareaElement), 1);
+				}
+
+				replaceInBuffer(oldTextAreaElement, newTextAreaElement) {
+					for (const [i, temp] of this.buffer.entries()) {
+						if (temp == oldTextAreaElement) {
+							this.buffer[i] = newTextAreaElement;
+						}
+					}
+				}
+
+				searchInBuffer(dataToSearch) {
+					for (const [i, temp] of this.buffer.entries()) {
+						let condition = false;
+						if (dataToSearch instanceof TextareaElement) {
+							if (temp == dataToSearch) {
+								return { result: temp, index: i };
+							}
+						} else {
+							if (temp.getText() == dataToSearch)
+								return { result: temp, index: i };
+						}
+					}
+					return null;
+				}
+
+				clearBuffer() {
+					this.buffer = [];
+				}
+
+				swapElements(textareaElement1, textareaElement2) {
+					this.buffer[i] = textareaElement2;
+					this.buffer[textareaElement2.index] = textareaElement1;
+				}
+
+				parseContent() {
+					let text = this.HTMLelement.textContent;
+					text = text.split(" ");
+
+					for (const [i, string] of text.entries()) {
+						if (this.searchInBuffer(string) == null) {
+							this.addToBuffer(Textarea.createElement(string, i), i);
+						}
+					}
+				}
+			}
+
+			const myRichTextarea = new Textarea(document.getElementById("input"));
+
+			function callParser() {
+				myRichTextarea.parseContent();
+				console.log(myRichTextarea.buffer);
+			}
+		</script>
+	</body>
+</html>
