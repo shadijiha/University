@@ -5,7 +5,7 @@
 public class Main {
 	/***
 	 *
-	 * @param args
+	 * @param args CMD arguments
 	 */
 	public static void main(String[] args) {
 		// JFrame frame = new JFrame();
@@ -19,11 +19,12 @@ public class Main {
 		// frame.pack();
 		// frame.setVisible(true);
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				
-			}
-		}).run();
+		Person[] array = new Person[2];
+		array[0] = new Student("Jean", "Leblanc", "Electrical engineering");
+		array[1] = new Employee("Albert", "Belval", "Part-time");
+
+		for (Person temp : array)
+			System.out.println(temp.toString());
+
 	}
 }

@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<button id="underline"><u>U</u></button>
-		<button id="bold"><b>B</b></button>
+		<button id="bold" OnClick="bolder()"><b>B</b></button>
 		<button id="italic"><i>I</i></button>
 		<br />
 		<br />
@@ -26,9 +26,9 @@
 			class TextareaElement {
 				constructor(str, index) {
 					this.text = str;
-					this.isBold = false;
-					this.isItalic = false;
-					this.isUnderline = false;
+					this.bold = false;
+					this.italic = false;
+					this.underline = false;
 					this.index = index;
 				}
 
@@ -49,11 +49,23 @@
 				}
 
 				isItalic() {
-					return this.isItalic;
+					return this.italic;
 				}
 
 				isUnderline() {
-					return this.isUnderline;
+					return this.underline;
+				}
+
+				setBold() {
+					this.bold = true;
+				}
+
+				setItalic() {
+					this.italic = true;
+				}
+
+				setUnderline() {
+					this.underline = true;
 				}
 
 				toggleBold() {
@@ -73,6 +85,7 @@
 				constructor(HTMLelement) {
 					this.buffer = [];
 					this.HTMLelement = HTMLelement || null;
+					this.splitter = " ";
 				}
 
 				static createElement(
@@ -91,8 +104,11 @@
 				}
 
 				addToBuffer(textareaElement, index) {
-					index = index || this.buffer.length;
-					this.buffer.insert(textareaElement, index);
+					if (index == null || index == undefined) {
+						this.buffer.push(textareaElement);
+					} else {
+						this.buffer.insert(index, textareaElement);
+					}
 				}
 
 				removeFromBuffer(textareaElement) {
@@ -131,23 +147,104 @@
 					this.buffer[textareaElement2.index] = textareaElement1;
 				}
 
+				/**
+				 * This function gets the location of the text that you passe pass
+				 * as an argument
+				 * @param dataOfText The text you want to find the start and ending * index inside the textarea buffer
+				 * @return {firstIndex: NUMBER, lastIndex: NUMBER}
+				 */
+				getTextLocation(dataOfText) {
+					let { text, length } = dataOfText;
+					length = text.split(this.splitter).length - 1;
+
+					// Get the first index of the text
+					let string = this.HTMLelement.textContent;
+					string = string.split(text);
+
+					const firstIndex = string[0].split(this.splitter).length;
+
+					return { firstIndex: firstIndex, lastIndex: length };
+				}
+
+				/**
+				 * This function toggles BOLD on all the elements in the buffer that * are contained between 2 indeces
+				 * @param indecesData The starting index and last index of the range
+				 * to set to bold
+				 * Has to be like that: {firstIndex: NUMBER, lastIndex: NUMBER}
+				 */
+				toggleTextRangeBold(indecesData) {
+					const { firstIndex, lastIndex } = indecesData;
+					// Modify all text that passes throw the offset
+					for (let i = firstIndex; i < firstIndex + lastIndex; i++) {
+						this.buffer[i].toggleBold();
+					}
+				}
+
 				parseContent() {
 					let text = this.HTMLelement.textContent;
-					text = text.split(" ");
+					text = text.split(this.splitter);
 
 					for (const [i, string] of text.entries()) {
 						if (this.searchInBuffer(string) == null) {
-							this.addToBuffer(Textarea.createElement(string, i), i);
+							this.addToBuffer(Textarea.createElement(string, i));
 						}
+					}
+				}
+
+				render() {
+					this.HTMLelement.innerHTML = "";
+
+					for (const [i, temp] of this.buffer.entries()) {
+						let strBefore = "";
+						let strEnd = "";
+
+						if (temp.isBold()) {
+							strBefore += "<b>";
+							strEnd += "</b>";
+						}
+						if (temp.isItalic()) {
+							strBefore += "<i>";
+							strEnd += "</i>";
+						}
+						if (temp.isUnderline()) {
+							strBefore += "<u>";
+							strEnd += "</u>";
+						}
+
+						// Add splitter only if it is not the last element
+						if (i < this.buffer.length - 1) strEnd += this.splitter;
+
+						this.HTMLelement.innerHTML += strBefore + temp.getText() + strEnd;
 					}
 				}
 			}
 
-			const myRichTextarea = new Textarea(document.getElementById("input"));
+			/**
+			 * This function gets the selected text in window and it length
+			 * @return {text: THE SELECTED TEXT, length: THE LENGTH OF THE TEXT}
+			 */
+			function getSelectedText() {
+				let text = window.getSelection().focusNode.data;
+				let length = window.getSelection().focusNode.length;
+				return { text, length };
+			}
 
+			/**
+			 * This is the main function that calls everything
+			 */
+			const myRichTextarea = new Textarea(document.getElementById("input"));
 			function callParser() {
 				myRichTextarea.parseContent();
-				console.log(myRichTextarea.buffer);
+				myRichTextarea.buffer[0].setBold();
+				myRichTextarea.render();
+			}
+
+			function bolder() {
+				myRichTextarea.parseContent();
+				myRichTextarea.toggleTextRangeBold(
+					myRichTextarea.getTextLocation(getSelectedText())
+				);
+				myRichTextarea.render();
 			}
 		</script>
 	</body>
