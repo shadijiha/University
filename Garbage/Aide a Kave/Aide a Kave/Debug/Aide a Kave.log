@@ -1,2 +1,26 @@
 ﻿  Aide a Kave.cpp
-  Aide a Kave.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\Aide a Kave\Debug\Aide a Kave.exe
+D:\Wamp64\www\GitHub\University\Garbage\Aide a Kave\Aide a Kave\Aide a Kave.cpp(198,23): error C2228: left of '.print' must have class/struct/union
+D:\Wamp64\www\GitHub\University\Garbage\Aide a Kave\Aide a Kave\Aide a Kave.cpp(198,23): message : type is '_Ty'
+          with
+          [
+              _Ty=Form **
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\type_traits(1579): message : see reference to function template instantiation 'auto main::<lambda_81db435ed4c3fe784f6f746f2f788814>::operator ()<_Ty>(_Ty) const' being compiled
+          with
+          [
+              _Ty=Form **
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\type_traits(1700): message : see reference to alias template instantiation 'std::_Is_invocable_r_<void,main::<lambda_81db435ed4c3fe784f6f746f2f788814>&,Form**>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\functional(979): message : see reference to class template instantiation 'std::_Is_invocable_r<_Ret,main::<lambda_81db435ed4c3fe784f6f746f2f788814> &,T>' being compiled
+          with
+          [
+              _Ret=void,
+              T=Form **
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\functional(979): message : see reference to variable template 'const bool conjunction_v<std::negation<std::is_same<<lambda_81db435ed4c3fe784f6f746f2f788814>,std::function<void __cdecl(Form * *)> > >,std::_Is_invocable_r<void,<lambda_81db435ed4c3fe784f6f746f2f788814> &,Form * *> >' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include\functional(1128): message : see reference to alias template instantiation 'std::_Func_class<_Ret,T>::_Enable_if_callable_t<main::<lambda_81db435ed4c3fe784f6f746f2f788814>&,std::function<void (T)>>' being compiled
+          with
+          [
+              _Ret=void,
+              T=Form **
+          ]

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <functional>
+#include "ArrayList.h"
 
 class Form {
 private:
@@ -163,6 +164,10 @@ namespace Shado	{
 			return data + length;
 		}
 
+		/*Stream<T**> stream() {
+			return Stream<T**>(data);
+		}*/
+
 		// Operators overloading
 		T* operator[] (int index) const {
 			return this->get(index);
@@ -188,7 +193,6 @@ int main()
 	for (auto temp : vec) {
 		temp->print();
 	}
-
 
 	return 0;
 }
