@@ -18,13 +18,5 @@ public class Main {
 		// frame.add(b);
 		// frame.pack();
 		// frame.setVisible(true);
-
-		Person[] array = new Person[2];
-		array[0] = new Student("Jean", "Leblanc", "Electrical engineering");
-		array[1] = new Employee("Albert", "Belval", "Part-time");
-
-		for (Person temp : array)
-			System.out.println(temp.toString());
-
 	}
 }
