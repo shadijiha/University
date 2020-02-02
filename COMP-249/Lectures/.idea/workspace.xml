@@ -86,6 +86,7 @@
       <workItem from="1580484701956" duration="452000" />
       <workItem from="1580486126550" duration="449000" />
       <workItem from="1580491150398" duration="882000" />
+      <workItem from="1580510675360" duration="981000" />
     </task>
     <servers />
   </component>
@@ -151,11 +152,15 @@
     </state>
     <state x="248" y="0" key="SettingsEditor/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579547690208" />
     <state x="248" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580251441652" />
-    <state x="444" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1580491152700">
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1580510685623">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579546836907" />
-    <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580491152700" />
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580510685623" />
+    <state x="209" y="0" key="new project wizard" timestamp="1580511607175">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1580511607175" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1579548048011">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
