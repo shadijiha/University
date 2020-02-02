@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <functional>
+#include "ArrayList.h"
 
 class Form {
 private:
@@ -19,160 +20,178 @@ public:
 	}
 };
 
-template<typename T>
-class ShadoVector {
-private:
-	T** data;
-	int length;
-	int max_capacity;
-	const int CAPACITY_DELTA = 10;
-public:
-	ShadoVector(int capacity) {
-		data = new T * [capacity];
-		length = 0;
-		max_capacity = capacity;
-	}
+namespace Shado	{
 
-	ShadoVector() :ShadoVector(CAPACITY_DELTA) {}
-
-	ShadoVector(const ShadoVector& other) {
-		data = other.data;
-		length = other.length;
-		max_capacity = other.max_capacity;
-	}
-
-	~ShadoVector() {
-		delete[] data;
-		length = 0;
-		max_capacity = CAPACITY_DELTA;
-	}
-
-	void incrementCapacity() {
-		// Create new Array that holdes the data
-		Form** newArray = new Form * [max_capacity + CAPACITY_DELTA];
-
-		// Transfer all data
-		for (int i = 0; i < max_capacity; i++) {
-			newArray[i] = data[i];
+	template<typename T>
+	class Vector {
+	private:
+		T** data;
+		int length;
+		int max_capacity;
+		const int CAPACITY_DELTA = 10;
+	public:
+		Vector(int capacity) {
+			data = new T * [capacity];
+			length = 0;
+			max_capacity = capacity;
 		}
 
-		delete[] data;
-		data = newArray;
-		max_capacity = max_capacity + CAPACITY_DELTA;
-	}
+		Vector() :Vector(CAPACITY_DELTA) {}
 
-	void addAt(int index, T* form) {
-		// Cannot have more forms vector is full.
-		if (length - 1 >= max_capacity) {
-			// Add capacity
-			incrementCapacity();
+		Vector(const Vector& other) {
+			data = other.data;
+			length = other.length;
+			max_capacity = other.max_capacity;
+		}
 
-			// Recall this function
-			this->addAt(index, form);
-		} else
-		{
-			// Increment length
-			length++;
+		~Vector() {
+			delete[] data;
+			length = 0;
+			max_capacity = CAPACITY_DELTA;
+		}
 
-			// Shift all data by +1
-			for (int i = size() - 1; i >= index; i--) {
-				data[i] = data[i - 1];
+		void incrementCapacity() {
+			// Create new Array that holdes the data
+			Form** newArray = new Form * [max_capacity + CAPACITY_DELTA];
+
+			// Transfer all data
+			for (int i = 0; i < max_capacity; i++) {
+				newArray[i] = data[i];
 			}
 
-			// Add the data
-			data[index] = form;
+			delete[] data;
+			data = newArray;
+			max_capacity = max_capacity + CAPACITY_DELTA;
 		}
-	}
 
-	void add(T* form) {
-		// Cannot have more forms vector is full.
-		if (length >= max_capacity) {
-			// Add capacity
-			incrementCapacity();
+		void addAt(int index, T* form) {
+			// Cannot have more forms vector is full.
+			if (length - 1 >= max_capacity) {
+				// Add capacity
+				incrementCapacity();
 
-			// Add the data
-			data[length] = form;
-			length++;
-		} else
-		{
-			data[length] = form;
-			length++;
+				// Recall this function
+				this->addAt(index, form);
+			} else
+			{
+				// Increment length
+				length++;
+
+				// Shift all data by +1
+				for (int i = size() - 1; i >= index; i--) {
+					data[i] = data[i - 1];
+				}
+
+				// Add the data
+				data[index] = form;
+			}
 		}
-	}
 
-	T* remove(int index) {
-		try
-		{
-			// Delete the data @ the index
-			T* temp = data[index];
-			data[index] = nullptr;
+		void add(T* form) {
+			// Cannot have more forms vector is full.
+			if (length >= max_capacity) {
+				// Add capacity
+				incrementCapacity();
 
-			// Update length
-			length--;
+				// Add the data
+				data[length] = form;
+				length++;
+			} else
+			{
+				data[length] = form;
+				length++;
+			}
+		}
 
-			// Shift everything back 1 step
-			for (int i = index; i < length; i++) {
-				data[i] = data[i + 1];
+		T* remove(int index) {
+			try
+			{
+				// Delete the data @ the index
+				T* temp = data[index];
+				data[index] = nullptr;
+
+				// Update length
+				length--;
+
+				// Shift everything back 1 step
+				for (int i = index; i < length; i++) {
+					data[i] = data[i + 1];
+				}
+
+				return temp;
+
+			} catch (const std::exception & e)
+			{
+				std::cout << e.what() << std::endl;
 			}
 
-			return temp;
-
-		} catch (const std::exception & e)
-		{
-			std::cout << e.what() << std::endl;
 		}
 
-	}
-
-	T* pop() {
-		return remove(size() - 1);
-	}
-
-	// Consumers
-	void forEach(std::function<void(T*)> func) {
-		for (int i = 0; i < this->size(); i++) {
-			func(data[i]);
+		T* pop() {
+			return remove(size() - 1);
 		}
-	}
 
-	// Getters
-	T* get(int index) const {
-		try {
-			return data[index];
-		} catch (const std::exception & e) {
-			std::cout << e.what() << std::endl;
+		// Consumers
+		void forEach(std::function<void(T*)> func) {
+			for (int i = 0; i < this->size(); i++) {
+				func(data[i]);
+			}
 		}
-	}
 
-	int size() const {
-		return length;
-	}
+		// Getters
+		T* get(int index) const {
+			try {
+				return data[index];
+			} catch (const std::exception & e) {
+				std::cout << e.what() << std::endl;
+			}
+		}
 
-	int maxCapacity() const {
-		return max_capacity;
-	}
+		int size() const {
+			return length;
+		}
 
-	// Operators overloading
-	T* operator[] (int index) const {
-		return this->get(index);
-	}
-};
+		int maxCapacity() const {
+			return max_capacity;
+		}
+
+		// For iterators
+		T** begin() const {
+			return data;
+		}
+
+		T** end() const {
+			return data + length;
+		}
+
+		/*Stream<T**> stream() {
+			return Stream<T**>(data);
+		}*/
+
+		// Operators overloading
+		T* operator[] (int index) const {
+			return this->get(index);
+		}
+	};
+}
+
 
 int main()
 {
-	// Testing
-	ShadoVector<Form> vec;
-	ShadoVector<int> vec2;
+	using Shado::Vector;
 
-	for (int i = 0; i < 5; i++) {
+	// Testing
+	Vector<Form> vec;
+	Vector<int> vec2;
+
+	for (int i = 0; i < 10; i++) {
 		vec.add(new Form(i, i));
 	}
 
 	vec.add(new Form(200, 300));
 
-	for (int i = 0; i < vec.size(); i++) {
-		std::cout << "i: " << i << " --> ";
-		vec[i]->print();
+	for (auto temp : vec) {
+		temp->print();
 	}
 
 	return 0;
