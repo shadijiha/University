@@ -3,10 +3,6 @@
  */
 package ShadoMath;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author shadi
  *
@@ -50,7 +46,6 @@ public class Vector {
 	public Vector(int scale) {
 		this(0, 0);
 		this.random2D(scale);
-		List<Integer> test = new ArrayList<Integer>();
 	}
 
 	/**
@@ -166,7 +161,7 @@ public class Vector {
 	 * @return Returns the vector diffrence of the calling vector - other
 	 */
 	public Vector substract(final Vector other) {
-		//other.inverse();
+		// other.inverse();
 		return new Vector(x - other.x, y - other.y, z - other.z);
 	}
 
@@ -257,19 +252,17 @@ public class Vector {
 
 	/***
 	 * Converts the calling vector a matrix and returns it
+	 * 
 	 * @return Returns the resulting Matrix
 	 */
 	public Matrix toMatrix() {
-		Double[][] temp = {
-				{this.x},
-				{this.y},
-				{this.z}
-		};
+		Double[][] temp = { { this.x }, { this.y }, { this.z } };
 		return new Matrix(temp);
 	}
 
 	/***
 	 * Converts the calling Vector to a Complex number
+	 * 
 	 * @return Returns the resulting Complex number
 	 */
 	public Complex toComplex() {
@@ -283,6 +276,7 @@ public class Vector {
 	 * @return Returns a string with the following format (x: <i>x</i>, y: <i>y</i>,
 	 *         z: <i>z</i>)
 	 */
+	@Override
 	public String toString() {
 		return String.format("(x: %f, y: %f, z: %f)", this.x, this.y, this.z);
 	}
