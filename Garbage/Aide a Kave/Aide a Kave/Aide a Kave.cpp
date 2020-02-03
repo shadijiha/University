@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <functional>
+#include <memory>
 #include "ArrayList.h"
 
 class Form {
@@ -18,9 +19,17 @@ public:
 	void print() {
 		std::cout << "(x: " << x << ", y: " << y << ")\n";
 	}
+
+	void setX(int x) {
+		this->x = x;
+	}
+
+	void setY(int y) {
+		this->y = y;
+	}
 };
 
-namespace Shado	{
+namespace Shado {
 
 	template<typename T>
 	class Vector {
@@ -185,10 +194,10 @@ int main()
 	Vector<int> vec2;
 
 	for (int i = 0; i < 10; i++) {
-		vec.add(new Form(i, i));
+		vec.add(&Form(i, i));
 	}
 
-	vec.add(new Form(200, 300));
+	vec.add(&Form(200, 300));
 
 	for (auto temp : vec) {
 		temp->print();
