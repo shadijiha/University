@@ -19,5 +19,7 @@ public class Main {
 		// frame.add(b);
 		// frame.pack();
 		// frame.setVisible(true);
+		String x = "Dear me,\nThis is a test hehexd";
+		x.lines().forEach(e -> System.out.println(e));
 	}
 }
