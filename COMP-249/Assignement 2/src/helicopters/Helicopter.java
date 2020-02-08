@@ -3,7 +3,9 @@
 // Written by: Shadi Jiha #40131284
 // ----------------------------------------------------
 
-package app;
+package helicopters;
+
+import airplane.Airplane;
 
 public class Helicopter extends Airplane {
 	protected int nbCylinders;
@@ -29,22 +31,10 @@ public class Helicopter extends Airplane {
 	}
 
 	/**
-	 * @param nbCylinders       The number of cylinders the plane has
-	 * @param maxSpeed          The max moving speed
-	 * @param passengerCapacity The max passenger that airplane can hold
-	 */
-	public Helicopter(int nbCylinders, int creationYear, int passengerCapacity) {
-		super();
-		this.nbCylinders = nbCylinders;
-		this.creationYear = creationYear;
-		this.passengerCapacity = passengerCapacity;
-	}
-
-	/**
 	 * Default constructor
 	 */
 	public Helicopter() {
-		this(0, 0, 0);
+		this("", 0.0, 0, 0, 0, 0);
 	}
 
 	/**
@@ -52,7 +42,7 @@ public class Helicopter extends Airplane {
 	 * 
 	 * @param other The object to copy
 	 */
-	public Helicopter(Helicopter other) {
+	public Helicopter(final Helicopter other) {
 		super(other);
 		this.nbCylinders = other.nbCylinders;
 		this.creationYear = other.creationYear;
@@ -67,7 +57,7 @@ public class Helicopter extends Airplane {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o == null)
+		if (o == null || o.getClass() != this.getClass())
 			return false;
 		else {
 			Helicopter temp = (Helicopter) o;
@@ -83,8 +73,8 @@ public class Helicopter extends Airplane {
 	@Override
 	public String toString() {
 		return String.format(
-				"Helicopter: (Brand: %s, price: %.2f, Horse power: %d, Nb of cylinder: %d, Year: %d, Capacity: )",
-				brand, price, horsePower, nbCylinders, creationYear, passengerCapacity);
+				"This helicopter was manufactured in %d. %s. It has %d cylinders and %d maximum passenger capacity",
+				creationYear, super.toString(), nbCylinders, passengerCapacity);
 	}
 
 	// Getters and Setters

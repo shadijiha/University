@@ -2,7 +2,7 @@
 // Part: I
 // Written by: Shadi Jiha #40131284
 // ----------------------------------------------------
-package app;
+package airplane;
 
 public class Airplane {
 	protected String brand;
@@ -35,9 +35,7 @@ public class Airplane {
 	 * @param other The object to copy
 	 */
 	public Airplane(final Airplane other) {
-		this.brand = other.brand;
-		this.price = other.price;
-		this.horsePower = other.horsePower;
+		this(other.brand, other.price, other.horsePower);
 	}
 
 	/**
@@ -59,12 +57,12 @@ public class Airplane {
 	}
 
 	/**
-	 * @return Return a string --> "Airplane: (Brand: BRAND, price: PRICE, Horse
-	 *         power: HORSEPOWER)"
+	 * @return Return a string that represents the calling airplane
 	 */
 	@Override
 	public String toString() {
-		return String.format("Airplane: (Brand: %s, price: %.2f, Horse power: %d)", brand, price, horsePower);
+		return String.format("This airplane is manufactured by %s, costs %.2f$ and has a power of %d HP.", brand, price,
+				horsePower);
 	}
 
 	// Getters and Setters
