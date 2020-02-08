@@ -23,8 +23,11 @@ public abstract class Main {
 		Object[] array = new Object[20];
 
 		for (int i = 0; i < array.length; i++) {
-			switch (i % 0) {
-			case i % 0 == 0:
+			switch (i % 7) {
+			case 0:
+				array[i] = new Airplane("Boeing", i, i);
+			case 1:
+				array[i] = new Helicopter();
 			}
 		}
 
@@ -35,10 +38,9 @@ public abstract class Main {
 		array[4] = new UAV();
 		array[5] = new AgriculturalDrone();
 		array[6] = new MAV();
-
-		for (Object o : array) {
-			System.out.println(o);
-		}
-
+//
+//		for (Object o : array) {
+//			System.out.println(o);
+//		}
 	}
 }
