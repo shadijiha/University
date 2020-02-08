@@ -152,7 +152,7 @@ namespace Shado {
 			try {
 				return data[index];
 			} catch (const std::exception & e) {
-				std::cout << e.what() << std::endl;
+				std::cout << "Error: Vector index out of bound" << std::endl;
 			}
 		}
 
