@@ -184,53 +184,8 @@ namespace Shado {
 	};
 }
 
-class Date {
-private:
-	int day;
-	int month;
-	int year;
-
-public:
-	Date() {
-		this->day = 1, this->month = 1, this->year = 1999;
-	}
-
-	Date(int day, int month, int year) {
-		this->day = day, this->month = month, this->year = year;
-	}
-
-	Date(const Date& other) {
-		this->day = other.day, this->month = other.month, this->year = other.year;
-	}
-
-};
-
-class Person {
-private:
-	Date birth;
-	std::string nom;
-
-public:
-	Person(std::string nom) {
-		this->nom = nom;
-	}
-
-	Person() {
-		this->nom = nom;
-	}
-
-	Person(const Person& other) {
-		this->birth = Date(other.birth);
-		this->nom = other.nom;
-	}
-
-};
-
 int main()
 {
-	Person peron1;
-	Person peron2;
 
-	Person person3 = peron1;
 	return 0;
 }
