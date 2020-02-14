@@ -93,6 +93,12 @@ public abstract class Main {
 
 		System.out.print("\n==========================\n");
 		System.out.print("All elements are equal because I override the Flyable.copy() function in each class." +
-				"\nSo the returned Copy invokes the copy constructor which returns an exact copy of the calling object.");
+				"\nSo the returned Copy invokes the copy constructor which returns an exact copy of the calling object.\n\n");
+
+		ShadoList<Integer> test = new ShadoList<Integer>();
+		test.add(5);
+		test.add(3);
+		test.add(15);
+		test.add(3153);
 	}
 }
