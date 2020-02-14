@@ -1,19 +1,21 @@
 /**
- * 
+ *
  */
 package uavs;
+
+import airplane.Flyable;
 
 /**
  * @author shadi
  *
  */
-public class UAV {
+public class UAV implements Flyable {
 
 	protected double weight;
 	protected double price;
 
 	/**
-	 * 
+	 *
 	 */
 	public UAV(double weight, double price) {
 		// TODO Auto-generated constructor stub
@@ -72,5 +74,15 @@ public class UAV {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	/**
+	 * This function copies the calling object
+	 *
+	 * @return Returns a copy of the calling object
+	 */
+	@Override
+	public Flyable copy() {
+		return new UAV(this);
 	}
 }

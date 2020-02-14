@@ -4,14 +4,14 @@
 // ----------------------------------------------------
 package airplane;
 
-public class Airplane {
+public class Airplane implements Flyable {
 	protected String brand;
 	protected double price;
 	protected int horsePower;
 
 	/***
 	 * Full constructor
-	 * 
+	 *
 	 * @param brand      The brand of the function
 	 * @param price      The price of the airplane
 	 * @param horsePower The power of the airplane
@@ -31,7 +31,7 @@ public class Airplane {
 
 	/**
 	 * Copies all the fields of the passed object
-	 * 
+	 *
 	 * @param other The object to copy
 	 */
 	public Airplane(final Airplane other) {
@@ -40,7 +40,7 @@ public class Airplane {
 
 	/**
 	 * Compares 2 Airplane if they have equal brand, price and horse power
-	 * 
+	 *
 	 * @param o The other object to compare
 	 * @return Return true if the object are identical, false otherwise.
 	 */
@@ -63,6 +63,13 @@ public class Airplane {
 	public String toString() {
 		return String.format("This airplane is manufactured by %s, costs %.2f$ and has a power of %d HP.", brand, price,
 				horsePower);
+	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Flyable copy() {
+		return new Airplane(this);
 	}
 
 	// Getters and Setters
