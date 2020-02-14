@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package helicopters;
 
@@ -12,10 +12,10 @@ public class Quadcopter extends Helicopter {
 	private int maxFlyingSpeed;
 
 	/**
-	 * 
+	 *
 	 */
 	public Quadcopter(String brand, double price, int horsePower, int nbCylinders, int creationYear,
-			int passengerCapacity, int maxSpeed) {
+					  int passengerCapacity, int maxSpeed) {
 		super(brand, price, horsePower, nbCylinders, creationYear, passengerCapacity);
 		maxFlyingSpeed = maxSpeed;
 	}
@@ -31,7 +31,7 @@ public class Quadcopter extends Helicopter {
 
 	/**
 	 * Compares 2 objects
-	 * 
+	 *
 	 * @param o The other object to compare
 	 * @return Return true if the object are identical, false otherwise.
 	 */
@@ -59,6 +59,14 @@ public class Quadcopter extends Helicopter {
 				"This Multirotor was manufactured in %d. %s. It has %d cylinders, %d rotors and a maximum speed of %d km/h",
 				creationYear, super.toString(), nbCylinders, passengerCapacity, maxFlyingSpeed);
 	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Quadcopter copy() {
+		return new Quadcopter(this);
+	}
+
 
 	/**
 	 * @return the maxFlyingSpeed

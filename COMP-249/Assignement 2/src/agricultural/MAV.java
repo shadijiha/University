@@ -1,8 +1,9 @@
 /**
- * 
+ *
  */
 package agricultural;
 
+import airplane.Flyable;
 import uavs.UAV;
 
 /**
@@ -15,7 +16,7 @@ public class MAV extends UAV {
 	private String model;
 
 	/**
-	 * 
+	 *
 	 */
 	public MAV(double weight, double price, String model, double size) {
 		super(weight, price);
@@ -48,6 +49,13 @@ public class MAV extends UAV {
 			MAV u = (MAV) o;
 			return u.weight == weight && u.price == price && model.equals(u.model) && size == u.size;
 		}
+	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Flyable copy() {
+		return new MAV(this);
 	}
 
 	/**

@@ -1,23 +1,31 @@
 /**
- * 
+ *
  */
 package multirotors;
 
+import airplane.Flyable;
 import helicopters.Helicopter;
 
 /**
  * @author shadi
  *
  */
-public class Multirotor extends Helicopter {
+public class Multirotor extends Helicopter implements Flyable {
 
 	private int nbRotors;
 
 	/**
-	 * 
+	 * Full constructor
+	 * @param brand The brand of multirotor
+	 * @param price The price
+	 * @param horsePower The power
+	 * @param nbCylinders The number of cylinder
+	 * @param creationYear The creation year
+	 * @param passengerCapacity The maximum passenger capacity
+	 * @param nbRotors The number of rotors
 	 */
 	public Multirotor(String brand, double price, int horsePower, int nbCylinders, int creationYear,
-			int passengerCapacity, int nbRotors) {
+					  int passengerCapacity, int nbRotors) {
 		super(brand, price, horsePower, nbCylinders, creationYear, passengerCapacity);
 		this.nbRotors = nbRotors;
 	}
@@ -33,7 +41,7 @@ public class Multirotor extends Helicopter {
 
 	/**
 	 * Compares 2 Helicopters if they have equal attributes
-	 * 
+	 *
 	 * @param o The other object to compare
 	 * @return Return true if the object are identical, false otherwise.
 	 */
@@ -45,8 +53,7 @@ public class Multirotor extends Helicopter {
 			Multirotor temp = (Multirotor) o;
 			return brand.equals(temp.brand) && price == temp.price && horsePower == temp.horsePower
 					&& nbCylinders == temp.nbCylinders && creationYear == temp.creationYear
-					&& passengerCapacity == temp.passengerCapacity && nbCylinders == temp.nbCylinders
-					&& nbCylinders == temp.nbRotors;
+					&& passengerCapacity == temp.passengerCapacity && nbRotors == temp.nbRotors;
 		}
 	}
 
@@ -58,6 +65,13 @@ public class Multirotor extends Helicopter {
 		return String.format(
 				"This Multirotor was manufactured in %d. %s. It has %d cylinders, %d rotors and %d maximum passenger capacity",
 				creationYear, super.toString(), nbCylinders, passengerCapacity, nbRotors);
+	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Flyable copy() {
+		return new Multirotor(this);
 	}
 
 	/**

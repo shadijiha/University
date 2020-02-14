@@ -1,21 +1,19 @@
 /**
- * 
+ * @author shadi
  */
 package agricultural;
 
+import airplane.Flyable;
 import uavs.UAV;
 
-/**
- * @author shadi
- *
- */
-public class AgriculturalDrone extends UAV {
+
+public class AgriculturalDrone extends UAV implements Flyable {
 
 	private String brand;
 	private int carryCapacity;
 
 	/**
-	 * 
+	 *
 	 */
 	public AgriculturalDrone(double weight, double price, String brand, int carryCapacity) {
 		super(weight, price);
@@ -49,6 +47,13 @@ public class AgriculturalDrone extends UAV {
 			AgriculturalDrone u = (AgriculturalDrone) o;
 			return u.weight == weight && u.price == price && u.brand.equals(brand) && u.carryCapacity == carryCapacity;
 		}
+	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Flyable copy() {
+		return new AgriculturalDrone(this);
 	}
 
 	/**

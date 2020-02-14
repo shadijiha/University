@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>uavs.UAV</OriginalElement>
+  <nodes>
+    <node x="79.75" y="560.0">helicopters.Helicopter</node>
+    <node x="169.0" y="106.0">airplane.Airplane</node>
+    <node x="535.75" y="593.0">agricultural.MAV</node>
+    <node x="313.0" y="1014.0">multirotors.Multirotor</node>
+    <node x="801.75" y="593.0">agricultural.AgriculturalDrone</node>
+    <node x="615.25" y="139.0">uavs.UAV</node>
+    <node x="0.0" y="1014.0">helicopters.Quadcopter</node>
+    <node x="1137.75" y="0.0">driver.Main</node>
+    <node x="464.25" y="0.0">airplane.Flyable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="helicopters.Helicopter" target="airplane.Airplane">
+      <point x="66.75" y="-202.0" />
+      <point x="280.0" y="535.0" />
+      <point x="268.0" y="535.0" />
+      <point x="0.0" y="202.0" />
+    </edge>
+    <edge source="agricultural.MAV" target="uavs.UAV">
+      <point x="0.0" y="-169.0" />
+      <point x="-43.5" y="169.0" />
+    </edge>
+    <edge source="agricultural.AgriculturalDrone" target="uavs.UAV">
+      <point x="-72.75000000000006" y="-169.0" />
+      <point x="874.5" y="535.0" />
+      <point x="745.75" y="535.0" />
+      <point x="43.5" y="169.0" />
+    </edge>
+    <edge source="agricultural.AgriculturalDrone" target="airplane.Flyable">
+      <point x="72.74999999999994" y="-169.0" />
+      <point x="1020.0" y="76.0" />
+      <point x="574.05" y="76.0" />
+      <point x="48.799999999999955" y="28.0" />
+    </edge>
+    <edge source="helicopters.Quadcopter" target="helicopters.Helicopter">
+      <point x="0.0" y="-136.0" />
+      <point x="-66.75" y="202.0" />
+    </edge>
+    <edge source="helicopters.Helicopter" target="airplane.Flyable">
+      <point x="-66.75" y="-202.0" />
+      <point x="146.5" y="535.0" />
+      <point x="158.5" y="535.0" />
+      <point x="158.5" y="76.0" />
+      <point x="476.45000000000005" y="76.0" />
+      <point x="-48.799999999999955" y="28.0" />
+    </edge>
+    <edge source="multirotors.Multirotor" target="airplane.Flyable">
+      <point x="70.75" y="-136.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="airplane.Airplane" target="airplane.Flyable">
+      <point x="0.0" y="-202.0" />
+      <point x="268.0" y="86.0" />
+      <point x="500.85" y="86.0" />
+      <point x="-24.399999999999977" y="28.0" />
+    </edge>
+    <edge source="multirotors.Multirotor" target="helicopters.Helicopter">
+      <point x="-70.75" y="-136.0" />
+      <point x="383.75" y="989.0" />
+      <point x="280.0" y="989.0" />
+      <point x="66.75" y="202.0" />
+    </edge>
+    <edge source="uavs.UAV" target="airplane.Flyable">
+      <point x="0.0" y="-169.0" />
+      <point x="702.25" y="86.0" />
+      <point x="549.65" y="86.0" />
+      <point x="24.399999999999977" y="28.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="280.0" y="238.0" />
+  <SelectedNodes>
+    <node>uavs.UAV</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

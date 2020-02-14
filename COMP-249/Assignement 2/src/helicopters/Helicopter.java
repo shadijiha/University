@@ -6,24 +6,24 @@
 package helicopters;
 
 import airplane.Airplane;
+import airplane.Flyable;
 
-public class Helicopter extends Airplane {
+public class Helicopter extends Airplane implements Flyable {
 	protected int nbCylinders;
 	protected int creationYear; // Maximum moving speed
 	protected int passengerCapacity;
 
 	/***
 	 * Full constructor
-	 * 
+	 *
 	 * @param brand             The brand of the function
 	 * @param price             The price of the airplane
 	 * @param horsePower        The power of the airplane
 	 * @param nbCylinders       The number of cylinders the plane has
-	 * @param maxSpeed          The max moving speed
 	 * @param passengerCapacity The max passenger that airplane can hold
 	 */
 	public Helicopter(String brand, double price, int horsePower, int nbCylinders, int creationYear,
-			int passengerCapacity) {
+					  int passengerCapacity) {
 		super(brand, price, horsePower);
 		this.nbCylinders = nbCylinders;
 		this.creationYear = creationYear;
@@ -39,7 +39,7 @@ public class Helicopter extends Airplane {
 
 	/**
 	 * Copies all the fields of the passed object
-	 * 
+	 *
 	 * @param other The object to copy
 	 */
 	public Helicopter(final Helicopter other) {
@@ -51,7 +51,7 @@ public class Helicopter extends Airplane {
 
 	/**
 	 * Compares 2 Helicopters if they have equal attributes
-	 * 
+	 *
 	 * @param o The other object to compare
 	 * @return Return true if the object are identical, false otherwise.
 	 */
@@ -75,6 +75,13 @@ public class Helicopter extends Airplane {
 		return String.format(
 				"This helicopter was manufactured in %d. %s. It has %d cylinders and %d maximum passenger capacity",
 				creationYear, super.toString(), nbCylinders, passengerCapacity);
+	}
+
+	/**
+	 * @return Returns a copy of the calling object
+	 */
+	public Flyable copy() {
+		return new Helicopter(this);
 	}
 
 	// Getters and Setters
