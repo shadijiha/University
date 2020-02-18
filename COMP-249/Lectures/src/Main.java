@@ -1,4 +1,3 @@
-
 /***
  * Driver class
  */
@@ -19,7 +18,12 @@ public class Main {
 		// frame.add(b);
 		// frame.pack();
 		// frame.setVisible(true);
-		String x = "Dear me,\nThis is a test hehexd";
-		x.lines().forEach(e -> System.out.println(e));
+	}
+
+	public static void sleep(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (Exception ignored) {
+		}
 	}
 }

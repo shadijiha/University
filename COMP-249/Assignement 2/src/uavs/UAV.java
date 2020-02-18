@@ -9,7 +9,7 @@ import airplane.Flyable;
  * @author shadi
  *
  */
-public class UAV implements Flyable {
+public class UAV extends Flyable {
 
 	protected double weight;
 	protected double price;

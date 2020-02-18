@@ -1,7 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2d2a055b-c0e1-4bec-b6bf-cfdef527e3a1" name="Default Changelist" comment="" />
+    <list default="true" id="2d2a055b-c0e1-4bec-b6bf-cfdef527e3a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../COMP-228/Shadi Jiha - A2 solution.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../COMP-228/Shadi Jiha - A2 solution.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/AgriculturalDrone.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/AgriculturalDrone.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/MAV.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/MAV.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/agricultural/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/Airplane.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/Airplane.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/Flyable.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/Flyable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/airplane/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/driver/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/Helicopter.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/Helicopter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/Quadcopter.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/Quadcopter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/helicopters/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/Multirotor.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/Multirotor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/multirotors/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/UAV.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/UAV.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/JavaDocs/uavs/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/agricultural/AgriculturalDrone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/agricultural/AgriculturalDrone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/airplane/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/airplane/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/airplane/Flyable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/airplane/Flyable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/driver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/driver/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/driver/ShadoList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/helicopters/Helicopter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/helicopters/Helicopter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/multirotors/Multirotor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/multirotors/Multirotor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignement 2/src/uavs/UAV.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignement 2/src/uavs/UAV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/ipch/AutoPCH/60b1b624727091d0/AIDE A KAVE.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/.vs/Aide a Kave/v16/ipch/AutoPCH/60b1b624727091d0/AIDE A KAVE.ipch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Aide a Kave.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Aide a Kave.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/Aide a Kave.lastbuildstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/Aide a Kave.lastbuildstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/Aide a Kave.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/vc142.idb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/vc142.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Aide a Kave/Debug/vc142.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Garbage/Aide a Kave/Debug/Aide a Kave.pdb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +104,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jxbrowser-win64-7.5.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -87,6 +165,7 @@
       <workItem from="1580486126550" duration="449000" />
       <workItem from="1580491150398" duration="882000" />
       <workItem from="1580510675360" duration="981000" />
+      <workItem from="1581720176785" duration="3888000" />
     </task>
     <servers />
   </component>
@@ -103,34 +182,35 @@
     </state>
     <state x="574" y="110" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579317075120" />
     <state x="574" y="110" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1580491982654" />
-    <state x="603" y="279" key="FileChooserDialogImpl" timestamp="1579547436653">
+    <state x="603" y="271" key="FileChooserDialogImpl" timestamp="1581724306330">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="603" y="279" key="FileChooserDialogImpl/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579547436653" />
-    <state width="1493" height="162" key="GridCell.Tab.0.bottom" timestamp="1580492039710">
+    <state x="603" y="271" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581724306330" />
+    <state width="1493" height="162" key="GridCell.Tab.0.bottom" timestamp="1581725160933">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.bottom/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579548383244" />
     <state width="1493" height="190" key="GridCell.Tab.0.bottom/0.0.1536.824/461.1080.1000.504@0.0.1536.824" timestamp="1578701459238" />
-    <state width="1493" height="162" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580492039710" />
-    <state width="1493" height="162" key="GridCell.Tab.0.center" timestamp="1580492039710">
+    <state width="1493" height="162" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581725160933" />
+    <state width="1493" height="162" key="GridCell.Tab.0.center" timestamp="1581725160933">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.center/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579548383244" />
     <state width="1493" height="190" key="GridCell.Tab.0.center/0.0.1536.824/461.1080.1000.504@0.0.1536.824" timestamp="1578701459238" />
-    <state width="1493" height="162" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580492039710" />
-    <state width="1493" height="162" key="GridCell.Tab.0.left" timestamp="1580492039710">
+    <state width="1493" height="162" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581725160933" />
+    <state width="1493" height="162" key="GridCell.Tab.0.left" timestamp="1581725160933">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.left/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579548383244" />
     <state width="1493" height="190" key="GridCell.Tab.0.left/0.0.1536.824/461.1080.1000.504@0.0.1536.824" timestamp="1578701459238" />
-    <state width="1493" height="162" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580492039710" />
-    <state width="1493" height="162" key="GridCell.Tab.0.right" timestamp="1580492039710">
+    <state width="1493" height="162" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581725160933" />
+    <state width="1493" height="162" key="GridCell.Tab.0.right" timestamp="1581725160933">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="162" key="GridCell.Tab.0.right/0.0.1536.824/460.1080.1000.504@0.0.1536.824" timestamp="1579548383244" />
     <state width="1493" height="190" key="GridCell.Tab.0.right/0.0.1536.824/461.1080.1000.504@0.0.1536.824" timestamp="1578701459238" />
-    <state width="1493" height="162" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580492039710" />
+    <state width="1493" height="162" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581725160933" />
     <state width="1493" height="282" key="GridCell.Tab.1.bottom" timestamp="1580251754016">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

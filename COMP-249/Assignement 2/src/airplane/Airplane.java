@@ -4,7 +4,7 @@
 // ----------------------------------------------------
 package airplane;
 
-public class Airplane implements Flyable {
+public class Airplane extends Flyable {
 	protected String brand;
 	protected double price;
 	protected int horsePower;

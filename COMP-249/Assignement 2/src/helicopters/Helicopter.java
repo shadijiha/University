@@ -8,7 +8,7 @@ package helicopters;
 import airplane.Airplane;
 import airplane.Flyable;
 
-public class Helicopter extends Airplane implements Flyable {
+public class Helicopter extends Airplane {
 	protected int nbCylinders;
 	protected int creationYear; // Maximum moving speed
 	protected int passengerCapacity;

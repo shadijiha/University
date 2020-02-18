@@ -187,5 +187,9 @@ namespace Shado {
 int main()
 {
 
+	std::wstring test = L"ههههه ألو";
+
+	std::wcout << test << std::endl;
+
 	return 0;
 }

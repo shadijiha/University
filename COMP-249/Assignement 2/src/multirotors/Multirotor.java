@@ -10,7 +10,7 @@ import helicopters.Helicopter;
  * @author shadi
  *
  */
-public class Multirotor extends Helicopter implements Flyable {
+public class Multirotor extends Helicopter {
 
 	private int nbRotors;
 

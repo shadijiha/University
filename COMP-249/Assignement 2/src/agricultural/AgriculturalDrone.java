@@ -7,7 +7,7 @@ import airplane.Flyable;
 import uavs.UAV;
 
 
-public class AgriculturalDrone extends UAV implements Flyable {
+public class AgriculturalDrone extends UAV {
 
 	private String brand;
 	private int carryCapacity;

@@ -4,12 +4,12 @@
 
 package airplane;
 
-public interface Flyable {
+public abstract class Flyable {
 
 	/**
 	 * This function copies the calling object
 	 *
 	 * @return Returns a copy of the calling object
 	 */
-	public Flyable copy();
+	public abstract Flyable copy();
 }
