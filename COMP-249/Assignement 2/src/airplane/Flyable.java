@@ -12,4 +12,12 @@ public abstract class Flyable {
 	 * @return Returns a copy of the calling object
 	 */
 	public abstract Flyable copy();
+
+	/**
+	 * This function returns the price of the object
+	 *
+	 * @return Returns the price of the calling object
+	 */
+	public abstract double getPrice();
+
 }

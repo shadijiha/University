@@ -43,7 +43,7 @@ public abstract class Main {
 			int t = i % 7;
 			switch (t) {
 				case 0:
-					array[i] = new Airplane("Boeing", i * 10000, i * 10);
+					array[i] = new Airplane("Boeing", i * 10000 + 100, i * 10);
 					break;
 				case 1:
 					array[i] = new Helicopter("Airbus", i * 1000, i * 5, i, 2010 + i, i + 5);
@@ -86,14 +86,38 @@ public abstract class Main {
 		}
 
 		// Display whenever they are equal or not
-		System.out.println("\n\nEquality test: \n");
+		System.out.println("\n\nEquality test:");
 		for (int i = 0; i < array.length; i++) {
-			System.out.printf("Element #%d of Original is%s equal to element #%d of copy.\n", i, array[i].equals(copy[i]) ? "" : " not", i);
+			System.out.printf("\tElement #%d\tof Original is%s equal to element #%d of copy.\n", i, array[i].equals(copy[i]) ? "" : " not", i);
 		}
 
 		System.out.print("\n==========================\n");
 		System.out.print("All elements are equal because I override the Flyable.copy() function in each class." +
 				"\nSo the returned Copy invokes the copy constructor which returns an exact copy of the calling object.\n\n");
+
+		// Find the least price
+		Flyable least = array[0];
+		int least_index = 0;
+		for (int i = 0; i < array.length; i++) {
+			if (array[i].getPrice() < least.getPrice()) {
+				least = array[i];
+				least_index = i;
+			}
+		}
+
+		// Find the second least price
+		Flyable second_Least = array[1];
+		int second_least_index = 1;
+		for (int i = 0; i < array.length; i++) {
+			if (i != least_index && array[i].getPrice() < second_Least.getPrice()) {
+				second_Least = array[i];
+				second_least_index = i;
+			}
+		}
+
+		// Display their information
+		System.out.println("The least priced item at index " + least_index + ": " + least.toString());
+		System.out.println("The second least priced item at index " + second_least_index + ": " + second_Least.toString());
 
 		System.out.println("Thank you for using my application!");
 	}
