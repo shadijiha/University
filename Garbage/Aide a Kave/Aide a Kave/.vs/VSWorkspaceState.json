@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Debug"
   ],
-  "SelectedNode": "\\Aide a Kave.vcxproj.user",
+  "SelectedNode": "\\ShadoObjects.h",
   "PreviewInSolutionExplorer": false
 }

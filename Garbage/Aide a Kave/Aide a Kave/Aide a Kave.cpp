@@ -8,6 +8,8 @@
 #include <memory>
 #include "ArrayList.h"
 
+#include "ShadoObjects.h";
+
 class Form {
 private:
 	int x, y;
@@ -186,10 +188,11 @@ namespace Shado {
 
 int main()
 {
+	using namespace Shado;
 
-	std::wstring test = L"ههههه ألو";
+	Object* o = new Object();
+	std::cout << o->getClass();
 
-	std::wcout << test << std::endl;
 
 	return 0;
 }
