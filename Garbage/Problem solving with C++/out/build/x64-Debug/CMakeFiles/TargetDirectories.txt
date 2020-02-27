@@ -1,3 +1,0 @@
-C:/wamp64/www/Github/University/Garbage/Problem solving with C++/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/wamp64/www/Github/University/Garbage/Problem solving with C++/out/build/x64-Debug/CMakeFiles/Problem_solving_with_C__.dir
-C:/wamp64/www/Github/University/Garbage/Problem solving with C++/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
