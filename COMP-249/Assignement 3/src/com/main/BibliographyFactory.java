@@ -1,14 +1,14 @@
 /**
- * 
+ *
  */
 package com.main;
+
+import com.exceptions.FileInvalidException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-
-import com.exceptions.FileInvalidException;
 
 /**
  * @author shadi
@@ -21,6 +21,8 @@ public class BibliographyFactory {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		// TODO: XD
 
 		try {
 
