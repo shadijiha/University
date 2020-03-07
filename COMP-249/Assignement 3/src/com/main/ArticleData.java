@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.main;
 
@@ -26,10 +26,10 @@ public class ArticleData {
 	private String month;
 
 	/**
-	 * 
+	 *
 	 */
 	private ArticleData(String id, String author, String journal, String title, int year, String volume, int number,
-			String pages, List<String> keywords, String doi, String ISSN, String month) {
+						String pages, List<String> keywords, String doi, String ISSN, String month) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -43,6 +43,10 @@ public class ArticleData {
 		this.doi = doi;
 		this.ISSN = ISSN;
 		this.month = month;
+	}
+
+	public boolean isNull() {
+		return id == null && author == null && journal == null && title == null;
 	}
 
 	public static class ArticleDataBuilder {

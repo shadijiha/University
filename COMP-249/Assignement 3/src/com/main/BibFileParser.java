@@ -1,16 +1,14 @@
 /**
- * 
+ *
  */
 package com.main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import com.exceptions.FileInvalidException;
+import com.main.ArticleData.ArticleDataBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import com.exceptions.FileInvalidException;
-import com.main.ArticleData.ArticleDataBuilder;
 
 /**
  * @author shadi
@@ -19,26 +17,19 @@ import com.main.ArticleData.ArticleDataBuilder;
 
 public class BibFileParser {
 
-	private File file;
-	private String filename;
-	private String data;
-	private int number_of_articles;
+	private String data = "";
+	private Scanner input = null;
 
 	/**
-	 * @throws FileNotFoundException
-	 * 
+	 *
 	 */
-	public BibFileParser(String path) throws FileNotFoundException {
+	public BibFileParser(Scanner file_to_parse) {
 		// TODO Auto-generated constructor stub
+		//filename = path;
+		//file = new File(path);
+		this.input = file_to_parse;
 
-		filename = path;
-		file = new File(path);
-
-		// If the file doesn't exist
-		if (!file.exists())
-			throw new FileNotFoundException("The file " + file.getAbsolutePath() + " does not exist!");
-		else
-			readBibFile();
+		readBibFile();
 	}
 
 	/**
@@ -46,23 +37,16 @@ public class BibFileParser {
 	 */
 	private void readBibFile() {
 
-		try {
-			Scanner scan = new Scanner(file);
+		StringBuilder builder = new StringBuilder();
 
-			StringBuilder builder = new StringBuilder();
+		// Read the file
+		if (input == null)
+			return;
 
-			// Read the file
-			while (scan.hasNextLine())
-				builder.append(scan.nextLine() + '\n');
+		while (input.hasNextLine())
+			builder.append(input.nextLine()).append('\n');
 
-			data = builder.toString();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("ERROR! Cannot open file: " + file.getAbsolutePath());
-		}
-
+		data = builder.toString();
 	}
 
 	public ArticleData[] parse() throws FileInvalidException {
@@ -71,7 +55,7 @@ public class BibFileParser {
 		String[] all_Articles = data.split("@ARTICLE");
 		all_Articles = removeWhiteSpace(all_Articles);
 
-		number_of_articles = all_Articles.length;
+		int number_of_articles = all_Articles.length;
 
 		// Store all ArticleData
 		ArticleData[] parsed_result = new ArticleData[number_of_articles];
@@ -152,12 +136,11 @@ public class BibFileParser {
 			article_number++;
 		}
 		return parsed_result;// (ArticleData[]) allArticles.toArray();
-
 	}
 
 	/**
 	 * This function removes all empty space --> "" from a String array
-	 * 
+	 *
 	 * @param array The array to go through
 	 * @return Returns a String[] without white spaces
 	 */
@@ -175,7 +158,7 @@ public class BibFileParser {
 
 	/**
 	 * Converts a java.util.List to a regular String[]
-	 * 
+	 *
 	 * @param list The list to convert
 	 * @return Returns the array
 	 */
