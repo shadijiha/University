@@ -9,6 +9,7 @@ package com.main;
 import com.exceptions.FileInvalidException;
 
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * @author shadi
@@ -17,11 +18,22 @@ import java.io.*;
 public class BibliographyFactory {
 
 	public static final int NUMBER_OF_FILES = 10;
+	public static final int MAX_CHANCES = 2;
+	public static int chance = 0;
+
+	public static int CORRUPTED_FILES = 0;
+	public static final int TOTAL_FILES = 10;
+
+	public static final String OUT_PATH = "output/";
+	public static final String IN_PATH = "Source Bib files/";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		// Variables
+		Scanner scan = new Scanner(System.in);
 
 		// TODO: XD
 		System.out.println("\nWelcome to BibliographyFactory!\n");
@@ -33,8 +45,40 @@ public class BibliographyFactory {
 		// Generate the bibliography files
 		processFilesForValidation();
 
-		// Close all input files
+		// Display how many files created
+		System.out.printf("\nA total of %d files were invalid, and could not be processed. All other %d \"Valid\" files have been created.\n", CORRUPTED_FILES, TOTAL_FILES - CORRUPTED_FILES);
+		System.out.println("================================\n\n");
 
+		// Detect if file exists
+		BufferedReader reader = null;
+		while (chance < MAX_CHANCES) {
+			try {
+				System.out.print("\nPlease enter the name of one of the files that you need to review: > ");
+				String file_to_review = scan.next();
+				reader = openFile(file_to_review);
+
+				// File has been open
+				System.out.println("\nHere are the contents of the successfully created File: " + file_to_review);
+				System.out.println(readFile(reader));
+
+			} catch (FileNotFoundException e) {
+				chance++;
+				System.out.println("Could not open input file. File does not exist. possible it could not be created!\n");
+
+				if (chance < MAX_CHANCES) {
+					System.out.println("However, you will be allowed another change to enter another file name.");
+				} else {
+					System.out.println("Sorry! I am unable to display your desired files! Program will exit!");
+					closeFile(reader);
+					System.exit(0);
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				closeFile(reader);
+			}
+		}
 	}
 
 	/**
@@ -50,7 +94,7 @@ public class BibliographyFactory {
 		for (int i = 0; i < NUMBER_OF_FILES; i++) {
 
 			// ALL THE PRSING ENGIN IS INSIDE THE BibFileParser CLASS
-			BibFileParser parser = new BibFileParser("Source Bib files/Latex" + (i + 1) + ".bib");
+			BibFileParser parser = new BibFileParser(IN_PATH + "Latex" + (i + 1) + ".bib");
 
 			// All the data will be stored here
 			ArticleData[] data;
@@ -86,13 +130,14 @@ public class BibliographyFactory {
 
 				// Export the file
 				// Only export file if no issues were found
-				writeToFile("output/IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
-				writeToFile("output/ACM" + (i + 1) + ".json", whole_ACM_file.toString());
-				writeToFile("output/NJ" + (i + 1) + ".json", whole_NJ_file.toString());
+				writeToFile(OUT_PATH + "/IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
+				writeToFile(OUT_PATH + "/ACM" + (i + 1) + ".json", whole_ACM_file.toString());
+				writeToFile(OUT_PATH + "/NJ" + (i + 1) + ".json", whole_NJ_file.toString());
 
 
 			} catch (FileInvalidException e) {
 				System.out.println(e.getMessage());
+				CORRUPTED_FILES++;
 			}
 		}
 	}
@@ -132,6 +177,21 @@ public class BibliographyFactory {
 		return new BufferedReader(new FileReader(file));
 	}
 
+	public static String readFile(BufferedReader reader) throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder builder = new StringBuilder();
+
+		String str = "";
+		// TODO: Put the number counter: E.g.
+		//  [1] blah blah blah
+		//  [2] blah blah blah
+		while ((str = reader.readLine()) != null && str.length() != 0) {
+			builder.append(str);
+		}
+
+		return builder.toString();
+	}
+
 	/**
 	 * This function closes the open BufferedReader stream
 	 *
@@ -152,7 +212,7 @@ public class BibliographyFactory {
 	 */
 	public static void clearDirectory() {
 
-		String dir = "output/";
+		String dir = OUT_PATH;
 
 		for (int i = 1; i <= NUMBER_OF_FILES; i++) {
 
