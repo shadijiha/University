@@ -44,7 +44,7 @@ public class BibliographyFactory {
 
 		// IMPORTANT:
 		// All the parsing is happening in "BibFileParser" class.
-		// It is better that way than putting everything in 1 method (not good software design)
+		// It is better that way than putting everything in 1 method (better software design)
 
 		// Initialize the parser
 		for (int i = 0; i < NUMBER_OF_FILES; i++) {
@@ -64,7 +64,7 @@ public class BibliographyFactory {
 				data = parser.parse();
 
 				for (var article : data) {
-					
+
 					if (article.isNull())
 						continue;
 
