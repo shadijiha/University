@@ -1,6 +1,8 @@
-/**
- *
- */
+// -----------------------------------------------------
+// Assignment #3
+// Question:
+// Written by: Shadi Jiha #40131284
+// -----------------------------------------------------
 package com.main;
 
 import java.util.Arrays;
@@ -8,7 +10,6 @@ import java.util.List;
 
 /**
  * @author shadi
- *
  */
 public class ArticleData {
 
@@ -45,10 +46,16 @@ public class ArticleData {
 		this.month = month;
 	}
 
+	/**
+	 * @return Returns if the ArticleData is empty
+	 */
 	public boolean isNull() {
 		return id == null && author == null && journal == null && title == null;
 	}
 
+	/**
+	 * Use this class to build an ArticleData Object
+	 */
 	public static class ArticleDataBuilder {
 
 		private String b_id;
@@ -202,8 +209,8 @@ public class ArticleData {
 	/**
 	 * @return the keywords
 	 */
-	public List<String> getKeywords() {
-		return keywords;
+	public String[] getKeywords() {
+		return keywords.toArray(new String[]{});
 	}
 
 	/**

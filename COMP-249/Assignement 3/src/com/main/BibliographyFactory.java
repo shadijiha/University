@@ -1,22 +1,22 @@
-/**
- *
- */
+// -----------------------------------------------------
+// Assignment #3
+// Question:
+// Written by: Shadi Jiha #40131284
+// -----------------------------------------------------
+
 package com.main;
 
 import com.exceptions.FileInvalidException;
 
 import java.io.*;
-import java.util.Scanner;
 
 /**
  * @author shadi
- *
  */
 
 public class BibliographyFactory {
 
 	public static final int NUMBER_OF_FILES = 10;
-	public static Scanner[] openned_files;
 
 	/**
 	 * @param args
@@ -29,35 +29,30 @@ public class BibliographyFactory {
 		// Clear the output directory
 		clearDirectory();
 
-		// Opening all the bib files FROM "./Source Bib files/"
-		openned_files = new Scanner[NUMBER_OF_FILES];
-		for (int i = 0; i < openned_files.length; i++) {
-			try {
-				openned_files[i] = new Scanner(new File("Source Bib files/Latex" + (i + 1) + ".bib"));
-			} catch (FileNotFoundException e) {
-				System.out.println("Could not open input file Latex" + i + ".bib for reading.\n\nPlease check if file exists! Program will terminate after closing any opened files.");
-				closeAllFiles(openned_files);
-				System.exit(0);
-			}
-		}
-
 		// Create/open all IEEE1.json to IEEE10.json, ACM1.json to ACM10.json, and NJ1.json to NJ10.js
 		// Generate the bibliography files
-		processFilesForValidation(openned_files);
+		processFilesForValidation();
 
 		// Close all input files
-		closeAllFiles(openned_files);
+
 	}
 
-	public static void processFilesForValidation(Scanner[] files) {
+	/**
+	 * This methods creates the parser and builds the files
+	 */
+	public static void processFilesForValidation() {
+
+		// IMPORTANT:
+		// All the parsing is happening in "BibFileParser" class.
+		// It is better that way than putting everything in 1 method (not good software design)
 
 		// Initialize the parser
 		for (int i = 0; i < NUMBER_OF_FILES; i++) {
 
 			// ALL THE PRSING ENGIN IS INSIDE THE BibFileParser CLASS
-			BibFileParser parser = new BibFileParser(files[i]);
+			BibFileParser parser = new BibFileParser("Source Bib files/Latex" + (i + 1) + ".bib");
 
-			// Get the passed data
+			// All the data will be stored here
 			ArticleData[] data;
 
 			// Build bibliography
@@ -69,7 +64,7 @@ public class BibliographyFactory {
 				data = parser.parse();
 
 				for (var article : data) {
-
+					
 					if (article.isNull())
 						continue;
 
@@ -104,26 +99,28 @@ public class BibliographyFactory {
 
 	/**
 	 * This function writes a string to a file using <code>java.util.Scanner</code>
+	 *
 	 * @param filename The filename
-	 * @param str The string to write
+	 * @param str      The string to write
 	 */
 	public static void writeToFile(String filename, String str) {
 
+		PrintWriter writer = null;
 		try {
-			PrintWriter writer = new PrintWriter(new File(filename));
-
+			writer = new PrintWriter(new File(filename));
 			writer.print(str);
-			writer.close();
-
 		} catch (IOException e) {
 			System.out.println("Could not open/creat file " + filename + "!");
-			closeAllFiles(openned_files);
+			writer.close();
 			System.exit(0);
+		} finally {
+			writer.close();
 		}
 	}
 
 	/**
 	 * This function opens a Buffered reader stream
+	 *
 	 * @param path The path to the file
 	 * @return Returns the open stream
 	 * @throws FileNotFoundException Throws if the file doesn't exist
@@ -137,6 +134,7 @@ public class BibliographyFactory {
 
 	/**
 	 * This function closes the open BufferedReader stream
+	 *
 	 * @param buffer the BufferedReader to close
 	 */
 	public static void closeFile(BufferedReader buffer) {
@@ -145,17 +143,6 @@ public class BibliographyFactory {
 		} catch (IOException e) {
 			System.out.println("Couldnot close buffer");
 			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Closes all Scanner in a Scanner array
-	 * @param array The scanner array
-	 */
-	public static void closeAllFiles(Scanner[] array) {
-		for (Scanner s : array) {
-			if (s != null)
-				s.close();
 		}
 	}
 
@@ -181,6 +168,6 @@ public class BibliographyFactory {
 				NJ.delete();
 		}
 
-		System.out.println("Successfully cleared " + dir + " folder.");
+		System.out.println("Successfully cleared \"" + dir + "\" folder.");
 	}
 }

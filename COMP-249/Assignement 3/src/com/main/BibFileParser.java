@@ -1,33 +1,44 @@
-/**
- *
- */
+// -----------------------------------------------------
+// Assignment #3
+// Question:
+// Written by: Shadi Jiha #40131284
+// -----------------------------------------------------
+
 package com.main;
 
 import com.exceptions.FileInvalidException;
 import com.main.ArticleData.ArticleDataBuilder;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * @author shadi
- *
  */
 
 public class BibFileParser {
 
+	private String path;
 	private String data = "";
-	private Scanner input = null;
+	private File file;
 
 	/**
 	 *
 	 */
-	public BibFileParser(Scanner file_to_parse) {
+	public BibFileParser(String path) {
 		// TODO Auto-generated constructor stub
 		//filename = path;
-		//file = new File(path);
-		this.input = file_to_parse;
+		file = new File(path);
+		this.path = path;
+
+		// If file doesn't exist exit the program
+		if (!file.exists()) {
+			System.out.println("Could not open input file Latex" + path + ".bib for reading.\n\nPlease check if file exists! Program will terminate after closing any opened files.");
+			System.exit(0);
+		}
 
 		readBibFile();
 	}
@@ -40,11 +51,19 @@ public class BibFileParser {
 		StringBuilder builder = new StringBuilder();
 
 		// Read the file
-		if (input == null)
-			return;
-
-		while (input.hasNextLine())
-			builder.append(input.nextLine()).append('\n');
+		Scanner input = null;
+		try {
+			input = new Scanner(file);
+			while (input.hasNextLine())
+				builder.append(input.nextLine()).append('\n');
+		} catch (FileNotFoundException e) {
+			// If cannot read file, display message then exist
+			System.out.println("Could not open input file Latex" + path + ".bib for reading.\n\nPlease check if file exists! Program will terminate after closing any opened files.");
+			input.close();
+			System.exit(0);
+		} finally {
+			input.close();
+		}
 
 		data = builder.toString();
 	}
@@ -94,8 +113,8 @@ public class BibFileParser {
 					// Detect invalid stuff
 					if (sperate_attributes[1].replaceAll(bad_characters, "").equalsIgnoreCase("")) {
 						throw new FileInvalidException(String.format(
-								"File is invalid: Field \"%s\" is Empty. Processing stopped at this point. Other empty fields may be present as well!",
-								sperate_attributes[1].replaceAll(bad_characters, "")));
+								"\"%s\" File is invalid: Field \"%s\" is Empty. Processing stopped at this point. Other empty fields may be present as well!",
+								path, sperate_attributes[0].replaceAll(bad_characters, "")));
 					}
 
 					// Get the data depending on the attribute
