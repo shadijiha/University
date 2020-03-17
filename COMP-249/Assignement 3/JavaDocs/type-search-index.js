@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.main","l":"ArticleData"},{"p":"com.main","l":"ArticleData.ArticleDataBuilder"},{"p":"com.main","l":"BibFileParser"},{"p":"com.main","l":"BibliographyFactory"},{"p":"com.exceptions","l":"FileInvalidException"}]

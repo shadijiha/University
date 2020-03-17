@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Learning_c_sharp {
 
-	public class JSONElement {
+	public abstract class JSONElement {
 		private readonly string attribute;
 		private readonly string value;
 
@@ -21,6 +21,15 @@ namespace Learning_c_sharp {
 		}
 
 	}
+
+	public class JSONArray {
+
+	}
+
+	public class JSONObject {
+
+	}
+
 	public class JSONFile {
 		private List<JSONElement> data;
 

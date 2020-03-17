@@ -24,8 +24,8 @@ public class BibliographyFactory {
 	public static int CORRUPTED_FILES = 0;
 	public static final int TOTAL_FILES = 10;
 
-	public static final String OUT_PATH = "output/";
-	public static final String IN_PATH = "Source Bib files/";
+	public static final String OUT_PATH = "";
+	public static final String IN_PATH = "";
 
 	/**
 	 * @param args
@@ -47,21 +47,21 @@ public class BibliographyFactory {
 
 		// Display how many files created
 		System.out.printf("\nA total of %d files were invalid, and could not be processed. All other %d \"Valid\" files have been created.\n", CORRUPTED_FILES, TOTAL_FILES - CORRUPTED_FILES);
-		System.out.println("================================\n\n");
+		System.out.println("================================");
 
 		// Detect if file exists
 		BufferedReader reader = null;
 		while (chance < MAX_CHANCES) {
 			try {
-				System.out.print("\nPlease enter the name of one of the files that you need to review: > ");
+				System.out.print("Please enter the name of one of the files that you need to review: > ");
 				String file_to_review = scan.next();
 				reader = openFile(file_to_review);
 
 				// File has been open
-				System.out.println("\nHere are the contents of the successfully created File: " + file_to_review);
+				System.out.println("\nHere are the contents of the successfully created File: \n" + file_to_review);
 				System.out.println(readFile(reader));
 
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				chance++;
 				System.out.println("Could not open input file. File does not exist. possible it could not be created!\n");
 
@@ -73,8 +73,6 @@ public class BibliographyFactory {
 					System.exit(0);
 				}
 
-			} catch (IOException e) {
-				e.printStackTrace();
 			} finally {
 				closeFile(reader);
 			}
@@ -112,27 +110,43 @@ public class BibliographyFactory {
 					if (article.isNull())
 						continue;
 
+					// Format the authors
+					String authorNJ = "";
+					String authorIEEE = "";
+					int index = 0;
+					for (String temp : article.getAuthors()) {
+						authorNJ += temp;
+						authorIEEE += temp;
+
+						if (index != article.getAuthors().length - 1) {
+							authorNJ += " & ";
+							authorIEEE += ", ";
+						}
+
+						index++;
+					}
+
 					// Build the IEEE format
-					String temp = String.format("%s \"%s\", %s, vol. %s, no. %d, p. %s, %s %d\n\n", article.getAuthor(),
+					String temp = String.format("%s. \"%s\", %s, vol. %s, no. %d, p. %s, %s %d\n\n", authorIEEE,
 							article.getTitle(), article.getJournal(), article.getVolume(), article.getNumber(),
 							article.getPages(), article.getMonth(), article.getYear());
 					whole_IEEE_file.append(temp);
 
 					// Build the ACM format
-					String ACM = String.format("%s. %d. %s. %s. %s, %d (%d), %s. DOI:https://doi.org/%s\n\n", article.getAuthor(), article.getYear(), article.getTitle(), article.getJournal(), article.getVolume(),
+					String ACM = String.format("%s et al. %d. %s. %s. %s, %d (%d), %s. DOI:https://doi.org/%s\n\n", article.getAuthors()[0], article.getYear(), article.getTitle(), article.getJournal(), article.getVolume(),
 							article.getNumber(), article.getYear(), article.getPages(), article.getDoi());
 					whole_ACM_file.append(ACM);
 
 					// Build the NJ format
-					String NJ = String.format("%s. %s. %s. %s, %s(%d)\n\n", article.getAuthor(), article.getTitle(), article.getJournal(), article.getVolume(), article.getPages(), article.getYear());
+					String NJ = String.format("%s. %s. %s. %s, %s(%d)\n\n", authorNJ, article.getTitle(), article.getJournal(), article.getVolume(), article.getPages(), article.getYear());
 					whole_NJ_file.append(NJ);
 				}
 
 				// Export the file
 				// Only export file if no issues were found
-				writeToFile(OUT_PATH + "/IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
-				writeToFile(OUT_PATH + "/ACM" + (i + 1) + ".json", whole_ACM_file.toString());
-				writeToFile(OUT_PATH + "/NJ" + (i + 1) + ".json", whole_NJ_file.toString());
+				writeToFile(OUT_PATH + "IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
+				writeToFile(OUT_PATH + "ACM" + (i + 1) + ".json", whole_ACM_file.toString());
+				writeToFile(OUT_PATH + "NJ" + (i + 1) + ".json", whole_NJ_file.toString());
 
 
 			} catch (FileInvalidException e) {
@@ -156,10 +170,14 @@ public class BibliographyFactory {
 			writer.print(str);
 		} catch (IOException e) {
 			System.out.println("Could not open/creat file " + filename + "!");
-			writer.close();
+
+			if (writer != null)
+				writer.close();
+
 			System.exit(0);
 		} finally {
-			writer.close();
+			if (writer != null)
+				writer.close();
 		}
 	}
 
@@ -178,15 +196,21 @@ public class BibliographyFactory {
 	}
 
 	public static String readFile(BufferedReader reader) throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder builder = new StringBuilder();
 
 		String str = "";
 		// TODO: Put the number counter: E.g.
 		//  [1] blah blah blah
 		//  [2] blah blah blah
-		while ((str = reader.readLine()) != null && str.length() != 0) {
-			builder.append(str);
+		int counter = 1;
+		while (str != null) {
+			str = reader.readLine();
+
+			if (str != null && !str.replaceAll("\\s", "").equalsIgnoreCase("")) {
+				builder.append("[").append(counter).append("]\t");
+				counter++;
+				builder.append(str).append("\n\n");
+			}
 		}
 
 		return builder.toString();
@@ -199,7 +223,8 @@ public class BibliographyFactory {
 	 */
 	public static void closeFile(BufferedReader buffer) {
 		try {
-			buffer.close();
+			if (buffer != null)
+				buffer.close();
 		} catch (IOException e) {
 			System.out.println("Couldnot close buffer");
 			e.printStackTrace();

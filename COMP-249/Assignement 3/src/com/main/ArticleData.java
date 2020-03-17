@@ -14,7 +14,7 @@ import java.util.List;
 public class ArticleData {
 
 	private String id;
-	private String author;
+	private String[] authors;
 	private String journal;
 	private String title;
 	private int year;
@@ -29,11 +29,11 @@ public class ArticleData {
 	/**
 	 *
 	 */
-	private ArticleData(String id, String author, String journal, String title, int year, String volume, int number,
+	private ArticleData(String id, String[] author, String journal, String title, int year, String volume, int number,
 						String pages, List<String> keywords, String doi, String ISSN, String month) {
 		super();
 		this.id = id;
-		this.author = author;
+		this.authors = author;
 		this.journal = journal;
 		this.title = title;
 		this.year = year;
@@ -50,7 +50,7 @@ public class ArticleData {
 	 * @return Returns if the ArticleData is empty
 	 */
 	public boolean isNull() {
-		return id == null && author == null && journal == null && title == null;
+		return id == null && journal == null && title == null;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class ArticleData {
 	public static class ArticleDataBuilder {
 
 		private String b_id;
-		private String b_author;
+		private String[] b_authors;
 		private String b_journal;
 		private String b_title;
 		private int b_year;
@@ -79,8 +79,8 @@ public class ArticleData {
 			return this;
 		}
 
-		public ArticleDataBuilder author(String author) {
-			b_author = author;
+		public ArticleDataBuilder authors(String author) {
+			b_authors = author.split(" and ");
 			return this;
 		}
 
@@ -145,7 +145,7 @@ public class ArticleData {
 		}
 
 		public ArticleData build() {
-			return new ArticleData(b_id, b_author, b_journal, b_title, b_year, b_volume, b_number, b_pages, b_keywords,
+			return new ArticleData(b_id, b_authors, b_journal, b_title, b_year, b_volume, b_number, b_pages, b_keywords,
 					b_doi, b_ISSN, b_month);
 		}
 	}
@@ -160,8 +160,8 @@ public class ArticleData {
 	/**
 	 * @return the author
 	 */
-	public String getAuthor() {
-		return author;
+	public String[] getAuthors() {
+		return authors;
 	}
 
 	/**

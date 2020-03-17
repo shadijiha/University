@@ -68,6 +68,12 @@ public class BibFileParser {
 		data = builder.toString();
 	}
 
+	/**
+	 * This is where the whole parsing stuff happens
+	 *
+	 * @return Returns an array of the parsed articles inside the given file
+	 * @throws FileInvalidException Thorwn if a file has an invalid attribute
+	 */
 	public ArticleData[] parse() throws FileInvalidException {
 
 		// Find how many articles are in the file
@@ -122,7 +128,7 @@ public class BibFileParser {
 					String value = sperate_attributes[1].replaceAll("\\{|\\}", "");
 
 					if (attribute.equalsIgnoreCase("author")) {
-						builder.author(value);
+						builder.authors(value);
 					} else if (attribute.equalsIgnoreCase("journal")) {
 						builder.journal(value);
 					} else if (attribute.equalsIgnoreCase("title")) {
