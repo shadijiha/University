@@ -1,6 +1,9 @@
-/**
- *
- */
+// -----------------------------------------------------
+// Assignment #3
+// Question:
+// Written by: Shadi Jiha #40131284
+// -----------------------------------------------------
+
 package com.main;
 
 import com.exceptions.FileInvalidException;
@@ -10,18 +13,27 @@ import java.util.Scanner;
 
 /**
  * @author shadi
- *
  */
 
 public class BibliographyFactory {
 
 	public static final int NUMBER_OF_FILES = 10;
-	public static Scanner[] openned_files;
+	public static final int MAX_CHANCES = 2;
+	public static int chance = 0;
+
+	public static int CORRUPTED_FILES = 0;
+	public static final int TOTAL_FILES = 10;
+
+	public static final String OUT_PATH = "output/";
+	public static final String IN_PATH = "Source Bib files/";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		// Variables
+		Scanner scan = new Scanner(System.in);
 
 		// TODO: XD
 		System.out.println("\nWelcome to BibliographyFactory!\n");
@@ -29,35 +41,62 @@ public class BibliographyFactory {
 		// Clear the output directory
 		clearDirectory();
 
-		// Opening all the bib files FROM "./Source Bib files/"
-		openned_files = new Scanner[NUMBER_OF_FILES];
-		for (int i = 0; i < openned_files.length; i++) {
-			try {
-				openned_files[i] = new Scanner(new File("Source Bib files/Latex" + (i + 1) + ".bib"));
-			} catch (FileNotFoundException e) {
-				System.out.println("Could not open input file Latex" + i + ".bib for reading.\n\nPlease check if file exists! Program will terminate after closing any opened files.");
-				closeAllFiles(openned_files);
-				System.exit(0);
-			}
-		}
-
 		// Create/open all IEEE1.json to IEEE10.json, ACM1.json to ACM10.json, and NJ1.json to NJ10.js
 		// Generate the bibliography files
-		processFilesForValidation(openned_files);
+		processFilesForValidation();
 
-		// Close all input files
-		closeAllFiles(openned_files);
+		// Display how many files created
+		System.out.printf("\nA total of %d files were invalid, and could not be processed. All other %d \"Valid\" files have been created.\n", CORRUPTED_FILES, TOTAL_FILES - CORRUPTED_FILES);
+		System.out.println("================================\n\n");
+
+		// Detect if file exists
+		BufferedReader reader = null;
+		while (chance < MAX_CHANCES) {
+			try {
+				System.out.print("\nPlease enter the name of one of the files that you need to review: > ");
+				String file_to_review = scan.next();
+				reader = openFile(file_to_review);
+
+				// File has been open
+				System.out.println("\nHere are the contents of the successfully created File: " + file_to_review);
+				System.out.println(readFile(reader));
+
+			} catch (FileNotFoundException e) {
+				chance++;
+				System.out.println("Could not open input file. File does not exist. possible it could not be created!\n");
+
+				if (chance < MAX_CHANCES) {
+					System.out.println("However, you will be allowed another change to enter another file name.");
+				} else {
+					System.out.println("Sorry! I am unable to display your desired files! Program will exit!");
+					closeFile(reader);
+					System.exit(0);
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				closeFile(reader);
+			}
+		}
 	}
 
-	public static void processFilesForValidation(Scanner[] files) {
+	/**
+	 * This methods creates the parser and builds the files
+	 */
+	public static void processFilesForValidation() {
+
+		// IMPORTANT:
+		// All the parsing is happening in "BibFileParser" class.
+		// It is better that way than putting everything in 1 method (better software design)
 
 		// Initialize the parser
 		for (int i = 0; i < NUMBER_OF_FILES; i++) {
 
 			// ALL THE PRSING ENGIN IS INSIDE THE BibFileParser CLASS
-			BibFileParser parser = new BibFileParser(files[i]);
+			BibFileParser parser = new BibFileParser(IN_PATH + "Latex" + (i + 1) + ".bib");
 
-			// Get the passed data
+			// All the data will be stored here
 			ArticleData[] data;
 
 			// Build bibliography
@@ -91,39 +130,42 @@ public class BibliographyFactory {
 
 				// Export the file
 				// Only export file if no issues were found
-				writeToFile("output/IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
-				writeToFile("output/ACM" + (i + 1) + ".json", whole_ACM_file.toString());
-				writeToFile("output/NJ" + (i + 1) + ".json", whole_NJ_file.toString());
+				writeToFile(OUT_PATH + "/IEEE" + (i + 1) + ".json", whole_IEEE_file.toString());
+				writeToFile(OUT_PATH + "/ACM" + (i + 1) + ".json", whole_ACM_file.toString());
+				writeToFile(OUT_PATH + "/NJ" + (i + 1) + ".json", whole_NJ_file.toString());
 
 
 			} catch (FileInvalidException e) {
 				System.out.println(e.getMessage());
+				CORRUPTED_FILES++;
 			}
 		}
 	}
 
 	/**
 	 * This function writes a string to a file using <code>java.util.Scanner</code>
+	 *
 	 * @param filename The filename
-	 * @param str The string to write
+	 * @param str      The string to write
 	 */
 	public static void writeToFile(String filename, String str) {
 
+		PrintWriter writer = null;
 		try {
-			PrintWriter writer = new PrintWriter(new File(filename));
-
+			writer = new PrintWriter(new File(filename));
 			writer.print(str);
-			writer.close();
-
 		} catch (IOException e) {
 			System.out.println("Could not open/creat file " + filename + "!");
-			closeAllFiles(openned_files);
+			writer.close();
 			System.exit(0);
+		} finally {
+			writer.close();
 		}
 	}
 
 	/**
 	 * This function opens a Buffered reader stream
+	 *
 	 * @param path The path to the file
 	 * @return Returns the open stream
 	 * @throws FileNotFoundException Throws if the file doesn't exist
@@ -135,8 +177,24 @@ public class BibliographyFactory {
 		return new BufferedReader(new FileReader(file));
 	}
 
+	public static String readFile(BufferedReader reader) throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder builder = new StringBuilder();
+
+		String str = "";
+		// TODO: Put the number counter: E.g.
+		//  [1] blah blah blah
+		//  [2] blah blah blah
+		while ((str = reader.readLine()) != null && str.length() != 0) {
+			builder.append(str);
+		}
+
+		return builder.toString();
+	}
+
 	/**
 	 * This function closes the open BufferedReader stream
+	 *
 	 * @param buffer the BufferedReader to close
 	 */
 	public static void closeFile(BufferedReader buffer) {
@@ -149,23 +207,12 @@ public class BibliographyFactory {
 	}
 
 	/**
-	 * Closes all Scanner in a Scanner array
-	 * @param array The scanner array
-	 */
-	public static void closeAllFiles(Scanner[] array) {
-		for (Scanner s : array) {
-			if (s != null)
-				s.close();
-		}
-	}
-
-	/**
 	 * This function clears all "IEEE1.json to IEEE10.json, ACM1.json to ACM10.json, and NJ1.json to
 	 * NJ10.json" in the "output/" folder
 	 */
 	public static void clearDirectory() {
 
-		String dir = "output/";
+		String dir = OUT_PATH;
 
 		for (int i = 1; i <= NUMBER_OF_FILES; i++) {
 
@@ -181,6 +228,6 @@ public class BibliographyFactory {
 				NJ.delete();
 		}
 
-		System.out.println("Successfully cleared " + dir + " folder.");
+		System.out.println("Successfully cleared \"" + dir + "\" folder.");
 	}
 }
