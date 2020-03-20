@@ -19,9 +19,6 @@ import shado.core.util.Vec3;
 
 public class Main extends Application {
 
-	private final long[] frameTimes = new long[100];
-	private int frameTimeIndex = 0;
-
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -31,11 +28,12 @@ public class Main extends Application {
 
 		primaryStage.setTitle("Shado Shapes Percentage");
 		Group root = new Group();
-		Canvas canvas = new Canvas(1920, 1080);
+		Canvas canvas = new Canvas(1280, 720);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
 		// clear the canvas and Draw shapes
-		Camera camera = new Camera(-1.6f, 1.6f, -0.9f, 0.9f);
+		//Camera camera = new Camera(-1.6f, 1.6f, -0.9f, 0.9f);
+		Camera camera = Camera.DEFAULT;
 		camera.setPosition(new Vec3(0.5, 0.5, 0.0f));
 
 		Renderer2D render = new Renderer2D(canvas, camera);
@@ -68,18 +66,24 @@ public class Main extends Application {
 			float angle = 0.0f;
 
 			var key = event.getCode();
-			if (key == KeyCode.D)
+			if (key == KeyCode.D) {
 				offsetX += 0.01;
-			if (key == KeyCode.A)
+			}
+			if (key == KeyCode.A) {
 				offsetX -= 0.01;
-			if (key == KeyCode.W)
+			}
+			if (key == KeyCode.W) {
 				offsetY -= 0.01f;
-			if (key == KeyCode.S)
+			}
+			if (key == KeyCode.S) {
 				offsetY += 0.01f;
-			if (key == KeyCode.LEFT)
+			}
+			if (key == KeyCode.LEFT) {
 				angle -= 0.01f;
-			if (key == KeyCode.RIGHT)
+			}
+			if (key == KeyCode.RIGHT) {
 				angle += 0.01f;
+			}
 
 			camera.move(offsetX, offsetY);
 			camera.setRotation(camera.getRotation() + angle);

@@ -15,6 +15,8 @@ import static shado.core.util.Util.square;
 
 public class Camera {
 
+	public static final Camera DEFAULT = new Camera(-1.6f, 1.6f, -0.9f, 0.9f);
+
 	private Vec3 position = new Vec3(0.0f, 0.0f, 0.0f);
 	private float rotation = 0.0f;
 

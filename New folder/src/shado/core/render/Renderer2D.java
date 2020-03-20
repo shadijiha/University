@@ -85,10 +85,9 @@ public class Renderer2D {
 				Matrix transform = Matrix.generateIdentity(4, 4);
 				Vec4 newPos = (matrix.multiply(transform).multiply(new Vec4(shape.getPosition(), 1.0f))).toVector4D();
 
-				shape.setPosition(newPos.to3D());
+				//shape.setPosition(newPos.to3D());
 				shape.setPosition((float) matrix.getData(0, 3), (float) matrix.getData(1, 3));
 				//shape.setPosition(transform.getData(), newPos.y);
-				//shape.setDimensions((float) newDimension3D.x, (float) newDimension3D.y);
 				shape.draw(canvas);
 			}
 		}
