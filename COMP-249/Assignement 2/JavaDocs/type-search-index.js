@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"agricultural","l":"AgriculturalDrone"},{"p":"airplane","l":"Airplane"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"airplane","l":"Flyable"},{"p":"helicopters","l":"Helicopter"},{"p":"driver","l":"Main"},{"p":"agricultural","l":"MAV"},{"p":"multirotors","l":"Multirotor"},{"p":"helicopters","l":"Quadcopter"},{"p":"uavs","l":"UAV"}]
