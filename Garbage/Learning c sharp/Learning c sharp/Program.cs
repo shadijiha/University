@@ -63,7 +63,7 @@ namespace Learning_c_sharp {
 				Console.Write("Enter the desired city to get weather > ");
 				string city = Console.ReadLine();
 
-				string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", city.Trim(), apiKey);
+				string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", city.Trim().Replace(" ", ""), apiKey);
 
 				using (WebClient client = new WebClient()) {
 

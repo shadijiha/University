@@ -7,29 +7,23 @@ package json;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class JSONElement {
-	private String attribute;
-	private List<String> value;
-	private JSONElement parent;
+public abstract class JSONElement {
+	protected String attribute;
+	protected JSONElement parent;
 
-	public JSONElement(String attribute, String value, JSONElement parent) {
-		this.value = new ArrayList<String>();
+	public JSONElement(String attribute, JSONElement parent) {
 		this.attribute = attribute;
-		this.value.add(value);
+		this.parent = parent;
 	}
 
-	public JSONElement(String attribute, String value) {
-		this(attribute, value, null);
+	public JSONElement(final JSONElement element) {
+		this(element.attribute, element.parent);
 	}
 
 	/**
-	 * Adds another value to the attribute
-	 * 
-	 * @param value The value to add
+	 * Returns the value of the JSONElement
 	 */
-	public void addValue(String value) {
-		this.value.add(value);
-	}
+	public abstract Object getValue();
 
 	/**
 	 * @return the attribute
@@ -39,18 +33,16 @@ public final class JSONElement {
 	}
 
 	/**
-	 * @return the value
+	 * @return Returns if the element has an attribute
 	 */
-	public String[] getValue() {
-		return (String[]) value.toArray();
+	public boolean hasAttribute()	{
+		return this.attribute != null;
 	}
 
 	/**
 	 * @return Returns true if this object has a value
 	 */
-	public boolean hasValue() {
-		return value.size() > 0;
-	}
+	public abstract boolean hasValue();
 
 	/***
 	 * @return Return true if this object has a parent
@@ -62,18 +54,18 @@ public final class JSONElement {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-
-		str.append(attribute + "\t:\t");
-
-		if (value.size() <= 1) {
-			str.append(value.get(0));
-		} else {
-			str.append("[");
-			for (var temp : value) {
-				str.append(temp + ", ");
-			}
-			str.append("]");
-		}
+//
+//		str.append(attribute + "\t:\t");
+//
+//		if (value.size() <= 1) {
+//			str.append(value.get(0));
+//		} else {
+//			str.append("[");
+//			for (var temp : value) {
+//				str.append(temp + ", ");
+//			}
+//			str.append("]");
+//		}
 
 		return str.toString();
 	}
