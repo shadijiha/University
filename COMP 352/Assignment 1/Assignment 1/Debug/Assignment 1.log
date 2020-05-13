@@ -1,0 +1,5 @@
+﻿  Assignment 1.cpp
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(57,20): warning C4018: '<': signed/unsigned mismatch
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(59,36): warning C4018: '<': signed/unsigned mismatch
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(66,36): warning C4018: '>': signed/unsigned mismatch
+  Assignment 1.vcxproj -> D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Debug\Assignment 1.exe
