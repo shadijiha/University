@@ -6,12 +6,13 @@ package driver;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class Main {
 
 	// This class is here to collect statistics
 	public static class StatCollector {
-		private static List<StatCollector> stats = new ArrayList<>();
+		private volatile static List<StatCollector> stats = Collections.synchronizedList(new ArrayList<>());
 
 		private long time;
 		private int chars;
@@ -37,20 +38,30 @@ public class Main {
 		}
 	}
 
+	static int fn(int[] a, int n) {
+
+		if (n == 0) return n;
+
+		else return fn(a, n - 1) + a[n - 1];
+
+	}
+
 	public static void main(String[] args) throws Exception {
 
 		// Redirect Output
+		System.out.println(fn(new int[]{1, 3, 2, 4, 5}, 3));
 		System.setOut(new PrintStream(new FileOutputStream("out.txt")));
 
 		// Generate a random short string from 5 to 200 chars
 		PrintWriter writer = new PrintWriter(new FileOutputStream("time_evaluation.txt"));
 		writer.println("# letters\tTime (ns)");
 
-		String longStr = randomString(new uint32_t(200));
+		final String longStr = randomString(new uint32_t(200));
 
-		for (uint32_t i = new uint32_t(0); i.lessThan(20); i.increment(5)) {
+		IntStream.range(0, 100).parallel().forEach(i -> {
 
-			String shortStr = generateShortString(longStr, i);
+			uint_t chars = new uint32_t(i * 2);
+			String shortStr = generateShortString(longStr, chars);
 
 			var startTime = System.nanoTime();
 
@@ -63,9 +74,11 @@ public class Main {
 			var endTime = System.nanoTime();
 
 			// Write the stats to a file
-			writer.println(new StatCollector(i, endTime - startTime));
+			writer.println(new StatCollector(chars, endTime - startTime));
 			writer.flush();
-		}
+		});
+
+
 		writer.close();
 	}
 
@@ -88,6 +101,7 @@ public class Main {
 	 */
 	private static void permutation(String longStr, String prefix, String str) throws RecusiveMethodFinished {
 		int n = str.length();
+
 		if (n == 0) {
 
 			int location = longStr.indexOf(prefix);
@@ -134,9 +148,9 @@ public class Main {
 	public static String generateShortString(String LongString, uint_t chars) {
 
 		double branch = Math.random();
-		if (branch > 0.25) {
-			return LongString.substring(0, chars.intValue());
-		}
+//		if (branch > 0.25) {
+//			return LongString.substring(0, chars.intValue());
+//		}
 
 		// Otherwise Generate random string
 		return randomString(chars);
