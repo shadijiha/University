@@ -1,174 +1,121 @@
-package calculator;
+/**
+ *
+ */
 
-import java.io.*;
-import java.util.*;
+package calculator;
 
 public class Calculator {
 
-	private Stack<String> op_stack;
-	private Stack<Variant<Double, Boolean>> value_stack;
-	private String expression;
+	private ExpressionStack operatorStack;
+	private ExpressionStack valueStack;
+	private boolean error;
 
-	public Calculator(String expression) {
-		op_stack = new Stack<>();
-		value_stack = new Stack<>();
-		this.expression = expression;
+	public Calculator() {
+		operatorStack = new ExpressionStack();
+		valueStack = new ExpressionStack();
+		error = false;
 	}
 
-	public Object eval() {
-		return evalExp();
-	}
+	private void evaluateExpression(Expression t) {
+		Expression A = null, B = null;
 
-	private void doOp() {
-
-		Variant y = value_stack.pop();
-		Variant x = value_stack.pop();
-
-		Double result_double = null;
-		Boolean result_bool = null;
-
-		String op = op_stack.pop();
-
-		switch (op) {
-			case "+":
-				result_double = (double) x.get() + (double) y.get();
-				break;
-			case "-":
-				result_double = (double) x.get() - (double) y.get();
-				break;
-			case "*":
-				result_double = (double) x.get() * (double) y.get();
-				break;
-			case "/":
-				result_double = (double) x.get() / (double) y.get();
-				break;
-			case ">":
-				result_bool = (double) x.get() > (double) y.get();
-				break;
-			case "<":
-				result_bool = (double) x.get() < (double) y.get();
-				break;
-			case ">=":
-				result_bool = (double) x.get() >= (double) y.get();
-				break;
-			case "<=":
-				result_bool = (double) x.get() <= (double) y.get();
-				break;
-			case "==":
-				result_bool = (double) x.get() == (double) y.get();
-				break;
-			case "!=":
-				result_bool = (double) x.get() != (double) y.get();
-				break;
-			case "^":
-				result_double = power((double) x.get(), (int) (double) y.get());
-				break;
+		if (valueStack.isEmpty()) {
+			System.out.println("Error! Missing first argument");
+			error = true;
+			return;
+		} else {
+			B = valueStack.top();
+			valueStack.pop();
 		}
 
-		Variant<Double, Boolean> temp = new Variant<>(result_double, result_bool);
-
-		value_stack.push(temp);
-	}
-
-	private void repeatOps(String refOp) {
-		while (value_stack.size() > 1 && prec(refOp) <= prec(op_stack.firstElement())) {
-			doOp();
+		// This will produce an error if we have something like this:
+		// 3 *
+		if (valueStack.isEmpty()) {
+			System.out.println("Error! Missing second argument");
+			error = true;
+			return;
+		} else {
+			A = valueStack.top();
+			valueStack.pop();
 		}
+
+		Expression R = t.evaluate(A.getValue(), B.getValue());
+		valueStack.push(R);
 	}
 
-	private Object evalExp() {
+	public double calculate(final String input) {
 
-		String[] input = this.expression.split(" ");
+		String[] parts = input.split(" ");
+		Expression[] expressions = new Expression[parts.length];
 
-		for (String s : input) {
+		for (int i = 0; i < parts.length; i++)
+			expressions[i] = new Expression(parts[i]);
 
-			if (isNumeric(s)) {
-				double x = Double.parseDouble(s);
-				value_stack.push(new Variant<>(x, null));
-			} else {
-				repeatOps(s);
-				op_stack.push(s);
+		// All magic happens here
+		for (int i = 0; i < expressions.length; i++) {
+
+			Expression next = expressions[i];
+
+			// If the expression is a number add it to the value stack
+			if (next.getType() == Expression.NUMBER)
+				valueStack.push(next);
+			else if (next.getType() == Expression.OPERATOR) {
+
+				// If the current expression has a higher Precedence than the one before than add it to the top (evaluate it first)
+				if (operatorStack.isEmpty() || next.getPrecedence() > operatorStack.top().getPrecedence())
+					operatorStack.push(next);
+				else {
+
+					// While the stack is not empty and the other ones are more important than the current one
+					while (!operatorStack.isEmpty() && next.getPrecedence() <= operatorStack.top().getPrecedence()) {
+						Expression toProcess = operatorStack.top();
+						operatorStack.pop();
+						evaluateExpression(toProcess);
+					}
+					// After evaluating the more important ones, add the current expression
+					operatorStack.push(next);
+				}
+			} else if (next.getType() == Expression.LEFT_PARENTHESIS)
+				operatorStack.push(next);
+			else if (next.getType() == Expression.RIGHT_PARENTHESIS) {
+
+				// While stack no empty, evaluate everything inside the parenthesis
+				while (!operatorStack.isEmpty() && operatorStack.top().getType() == Expression.OPERATOR) {
+					Expression toProcess = operatorStack.top();
+					operatorStack.pop();
+					evaluateExpression(toProcess);
+				}
+
+				if (!operatorStack.isEmpty() && operatorStack.top().getType() == Expression.LEFT_PARENTHESIS)
+					operatorStack.pop();
+				else {
+					System.out.println("Parenthesis don't match!");
+					error = true;
+				}
 			}
-
 		}
 
-		repeatOps("$");
-
-		return value_stack.firstElement().get();
-	}
-
-	private int prec(String op) {
-
-		switch (op) {
-			case "$":
-				return 0;
-			case "<":
-			case "<=":
-			case ">":
-			case ">=":
-				return 1;
-			case "+":
-			case "-":
-				return 2;
-			case "*":
-			case "/":
-				return 3;
-			case "^":
-			case "!":
-				return 4;
-			case "(":
-			case ")":
-				return 5;
-			default:
-				return -1;
-		}
-	}
-
-	private static boolean isNumeric(String strNum) {
-		if (strNum == null) {
-			return false;
-		}
-		try {
-			double d = Double.parseDouble(strNum);
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-		return true;
-	}
-
-	public static int factorial(int n) {
-		return n <= 1 ? 1 : n * factorial(n - 1);
-	}
-
-	public static double power(double x, int y) {
-		double sum = 1.0D;
-		for (int i = 0; i < y; i++) {
-			sum *= x;
+		// Evaluate everything at the end
+		while (!operatorStack.isEmpty() && operatorStack.top().getType() == Expression.OPERATOR) {
+			Expression toProcess = operatorStack.top();
+			operatorStack.pop();
+			evaluateExpression(toProcess);
 		}
 
-		return sum;
-	}
+		// Return the result if no error
+		if (!error) {
+			Expression result = valueStack.top();
+			valueStack.pop();
 
-
-	public static String loadFromFile(String path) {
-
-		Scanner scan = null;
-		try {
-			scan = new Scanner(new FileInputStream(path));
-
-			StringBuilder data = new StringBuilder();
-			while (scan.hasNextLine()) {
-				data.append(scan.nextLine());
-			}
-
-			return data.toString();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Failed to open file " + path);
-			return null;
-		} finally {
-			scan.close();
+			// No result found
+			if (!operatorStack.isEmpty() || !valueStack.isEmpty())
+				System.out.println("Error!");
+			else
+				return result.getValue();
+		} else {
+			throw new RuntimeException("Expression error! Cannot compute result");
 		}
+
+		return Double.MIN_VALUE;
 	}
 }
