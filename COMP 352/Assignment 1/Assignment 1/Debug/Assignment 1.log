@@ -1,5 +1,3 @@
 ﻿  Assignment 1.cpp
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(57,20): warning C4018: '<': signed/unsigned mismatch
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(59,36): warning C4018: '<': signed/unsigned mismatch
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(66,36): warning C4018: '>': signed/unsigned mismatch
-  Assignment 1.vcxproj -> D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Debug\Assignment 1.exe
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(46,58): error C2864: 'DoubleStack::s_array': a static data member with an in-class initializer must have non-volatile const integral type or be specified as 'inline'
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(46,58): message : type is 'DoubleStackNode *'

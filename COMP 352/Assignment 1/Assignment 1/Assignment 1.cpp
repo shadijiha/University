@@ -2,89 +2,53 @@
 //
 
 #include <iostream>
-#include <string>
-#include <vector>
 
-std::string question1(const std::string& str) {
+#define N 10
 
-	std::string result = "";
-	std::string copy = str + "0";	// Add garbage char at the end
+class DoubleStackNode {
+public:
+
+	DoubleStackNode(int value, DoubleStackNode* next)
+		: m_value(value), m_next(next)
+	{}
+
+	DoubleStackNode()
+		: DoubleStackNode(NULL, nullptr)
+	{}
+
+	bool hasNext() const				{ return m_next != nullptr; }
+	DoubleStackNode* const  next() const { return m_next; };
+
+	int value() const { return m_value; }
+
+	void setNext(DoubleStackNode* next) {
+		m_next = next;
+	}
+
+	void setValue(int newValue) {
+		m_value = newValue;
+	}	
 	
-	const char* array = copy.c_str();
-
-	char current = array[0];
-	int count = 1;
-
-	for (int i = 0; array[i] != '\0'; i++) {
-		if (array[i] == current) {
-			count++;
-			continue;
-		}
-		
-		std::string num = count > 1 ? std::to_string(count) : "";
-		result += current + num;
-		current = array[i];
-		count = 1;
-	}
-
-	return result;
-}
-
-struct Question2_Return_Values {
-	// Consecetive with the smallest value
-	// Index
-	int first_smallest_number;
-	int second_smallest_number;
-
-	// Consecetive with the largest value
-	int first_largest_number;
-	int second_largest_number;
-
-	friend std::ostream& operator << (std::ostream& os, const Question2_Return_Values& t) {
-		os << "The two conductive indices with smallest difference between their values are: index " << t.first_smallest_number << " and index " << t.second_smallest_number << std::endl;
-		os << "The two conductive indices with largest difference between their values are: index " << t.first_largest_number << " and index " << t.second_largest_number << std::endl;
-		return os;
-	}
+private:
+	int m_value;
+	DoubleStackNode* m_next;
 };
 
-Question2_Return_Values question2(std::vector<int> array) {
+class DoubleStack {
 
-	Question2_Return_Values result;
-	
-	unsigned int smallestDiff = INT_MAX;
-	unsigned int largestDiff = 0;
-
-	for (int i = 0; i < array.size() - 1; i++) {
-
-		if (abs(array[i] - array[i + 1]) < smallestDiff) {
-			smallestDiff = abs(array[i] - array[i + 1]);
-
-			result.first_smallest_number = array[i];
-			result.second_smallest_number = array[i + 1];
-		}
-
-		if (abs(array[i] - array[i + 1]) > largestDiff) {
-			largestDiff = abs(array[i] - array[i + 1]);
-
-			result.first_largest_number = array[i];
-			result.second_largest_number = array[i + 1];
-		}
-		
+public:
+	DoubleStack() {
+		DoubleStack::s_array = new DoubleStackNode[N];
 	}
+	
 
-	return result;
-}
+private:
+	static DoubleStackNode* s_array;
+};
 
-int main()
+int main(int argc, const char** argv)
 {
-	using namespace std;
 
-	cout << "Question 1:" << endl;
-    cout << "gggN@@@@@KKeeeejjdsmmu ---> " << question1("gggN@@@@@KKeeeejjdsmmu");
-	cout << "\n============================\n" << endl;
-
-	cout << "Question 2:" << endl;
-	cout << question2({ 20, 52,400, 3, 30, 70, 72, 47, 28, 38, 41, 53, 20 }) << endl;
 	
 }
 
