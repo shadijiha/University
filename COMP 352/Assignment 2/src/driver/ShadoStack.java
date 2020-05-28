@@ -1,6 +1,7 @@
 package driver;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ShadoStack<T extends Number & Comparable> implements Iterable<T> {
 
@@ -11,7 +12,7 @@ public class ShadoStack<T extends Number & Comparable> implements Iterable<T> {
 		data = (T[]) new Number[initialCapacity];
 		pointer = 0;
 	}
-
+ 
 	public ShadoStack() {
 		this(10);
 	}
@@ -31,6 +32,10 @@ public class ShadoStack<T extends Number & Comparable> implements Iterable<T> {
 	}
 
 	public void push(T element) {
+
+		if (pointer == size() - 2)
+			resize();
+
 		data[pointer++] = element;
 	}
 
@@ -76,6 +81,15 @@ public class ShadoStack<T extends Number & Comparable> implements Iterable<T> {
 		builder.append("]");
 
 		return builder.toString();
+	}
+
+	private void resize() {
+		T[] copy = (T[]) new Object[data.length * 2];
+
+		for (int i = 0; i < data.length; i++)
+			copy[i] = data[i];
+
+		data = copy;
 	}
 
 	/**

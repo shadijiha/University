@@ -4,20 +4,32 @@
 
 package driver;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class SharedArrayStack {
 
 	private static final int N = 10;
 	private static final SharedArrayStackNode[] array = new SharedArrayStackNode[N];
 
+
+	public static final int NO_MAX = -1;
+	public static final int HALF_SHARED_ARRAY = array.length / 2;
+
+	public static final int MAX_ALLOCATION_PER_STACK = NO_MAX;
+
+	// Member variables
 	private SharedArrayStackNode last;
 
 	public SharedArrayStack() {
 		last = null;
 	}
 
-	public void push(int number) {
+	public void push(int number) throws RuntimeException {
+
+		// If the stack is full abort
+		if (isFull())
+			throw new RuntimeException("Cannot push an element to a full stack!");
 
 		// First element in the stack
 		if (last == null) {
@@ -79,6 +91,34 @@ public class SharedArrayStack {
 			throw new EmptyStackException();
 
 		return array[last.index()].value();
+	}
+
+	public boolean isEmpty() {
+		return size() == 0;
+	}
+
+	public boolean isFull() {
+
+		// If we don't have FAIRNESS (Case II)
+		if (MAX_ALLOCATION_PER_STACK == NO_MAX) {
+
+			// Loop through the array and see if there are any null elements
+			// If there's a single null element that means that the stack is not full
+			for (var e : array)
+				if (e == null)
+					return false;
+
+			return true;
+		}
+
+		// If we want FAIRNESS (Case I)
+		else if (MAX_ALLOCATION_PER_STACK == HALF_SHARED_ARRAY) {
+			if (size() == MAX_ALLOCATION_PER_STACK)
+				return true;
+			return false;
+		} else {
+			return false;
+		}
 	}
 
 	public String toString() {
