@@ -1,5 +1,5 @@
 ﻿  Assignment 1.cpp
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(57,20): warning C4018: '<': signed/unsigned mismatch
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(59,36): warning C4018: '<': signed/unsigned mismatch
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(66,36): warning C4018: '>': signed/unsigned mismatch
-  Assignment 1.vcxproj -> D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Debug\Assignment 1.exe
+  SharedArrayStack.cpp
+  Generating Code...
+Assignment 1.obj : error LNK2001: unresolved external symbol "private: static class SharedArrayStack<int>::SharedArrayStackNode * * SharedArrayStack<int>::s_array" (?s_array@?$SharedArrayStack@H@@0PAPAVSharedArrayStackNode@1@A)
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Debug\Assignment 1.exe : fatal error LNK1120: 1 unresolved externals
