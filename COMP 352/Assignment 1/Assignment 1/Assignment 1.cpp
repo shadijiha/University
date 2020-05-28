@@ -3,53 +3,19 @@
 
 #include <iostream>
 
-#define N 10
-
-class DoubleStackNode {
-public:
-
-	DoubleStackNode(int value, DoubleStackNode* next)
-		: m_value(value), m_next(next)
-	{}
-
-	DoubleStackNode()
-		: DoubleStackNode(NULL, nullptr)
-	{}
-
-	bool hasNext() const				{ return m_next != nullptr; }
-	DoubleStackNode* const  next() const { return m_next; };
-
-	int value() const { return m_value; }
-
-	void setNext(DoubleStackNode* next) {
-		m_next = next;
-	}
-
-	void setValue(int newValue) {
-		m_value = newValue;
-	}	
-	
-private:
-	int m_value;
-	DoubleStackNode* m_next;
-};
-
-class DoubleStack {
-
-public:
-	DoubleStack() {
-		DoubleStack::s_array = new DoubleStackNode[N];
-	}
-	
-
-private:
-	static DoubleStackNode* s_array;
-};
+#include "SharedArrayStack.h"
 
 int main(int argc, const char** argv)
 {
 
-	
+	SharedArrayStack<int> stack1;
+	SharedArrayStack<int> stack2;
+
+	stack1.push(15);
+	stack1.push(90);
+	stack2.push(-98);
+
+	SharedArrayStack<int>::print_shared_array();	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

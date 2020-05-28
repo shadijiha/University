@@ -1,3 +1,5 @@
 ﻿  Assignment 1.cpp
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(46,58): error C2864: 'DoubleStack::s_array': a static data member with an in-class initializer must have non-volatile const integral type or be specified as 'inline'
-D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Assignment 1\Assignment 1.cpp(46,58): message : type is 'DoubleStackNode *'
+  SharedArrayStack.cpp
+  Generating Code...
+Assignment 1.obj : error LNK2001: unresolved external symbol "private: static class SharedArrayStack<int>::SharedArrayStackNode * * SharedArrayStack<int>::s_array" (?s_array@?$SharedArrayStack@H@@0PAPAVSharedArrayStackNode@1@A)
+D:\Wamp64\www\GitHub\University\COMP 352\Assignment 1\Debug\Assignment 1.exe : fatal error LNK1120: 1 unresolved externals
