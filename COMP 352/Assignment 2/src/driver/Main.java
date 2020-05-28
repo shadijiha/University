@@ -1,5 +1,7 @@
 package driver;
 
+import java.util.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -10,19 +12,33 @@ public class Main {
 		//var result = new Calculator().calculate("3 * ( 2 + 1 )");
 		//System.out.println(result);
 
-		SharedArrayStack stack1 = new SharedArrayStack();
-		SharedArrayStack stack2 = new SharedArrayStack();
-		SharedArrayStack stack3 = new SharedArrayStack();
+		var t = remove_duplicates(22, 61, -10, 61, 10, 9, 9, 21, 35, 22, -10, 19, 5, 77, 5, 92, 85, 21, 35, 12, 9, 61);
 
-		stack1.push(5);
-		stack1.push(6);
+		System.out.println(Arrays.toString(t));
+	}
 
-		stack2.push(9);
+	public static int[] remove_duplicates(int... input) {
 
+		ShadoStack<Integer> stack = new ShadoStack<>();
 
-		stack3.push(90);
+		for (int e : input)
+			add_to_stack(stack, e);
 
+		// Turn the stack back to array
+		int[] result = new int[stack.size()];
 
-		SharedArrayStack.printArray();
+		for (int i = stack.size() - 1; i >= 0; i--)
+			result[i] = stack.pop();
+
+		return result;
+	}
+
+	public static <T extends Number & Comparable> void add_to_stack(ShadoStack<T> stack, T e) {
+
+		for (T temp : stack)
+			if (temp.equals(e))
+				return;
+
+		stack.push(e);
 	}
 }
