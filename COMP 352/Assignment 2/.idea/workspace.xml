@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="84aa84d1-b789-404d-9dfb-5aab88bd4c42" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment 2/driver/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 2/driver/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment 2/driver/ShadoStack$ShadoStackIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 2/driver/ShadoStack$ShadoStackIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment 2/driver/ShadoStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 2/driver/ShadoStack.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment 2/driver/SharedArrayStack$SharedArrayStackNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 2/driver/SharedArrayStack$SharedArrayStackNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment 2/driver/SharedArrayStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 2/driver/SharedArrayStack.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/driver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/driver/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/driver/ShadoStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/driver/ShadoStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/driver/SharedArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/driver/SharedArrayStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../COMP 352 A2 mod.docx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../COMP 352 A2.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../COMP 352 A2.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
