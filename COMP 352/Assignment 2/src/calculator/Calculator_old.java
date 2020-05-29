@@ -1,9 +1,7 @@
 package calculator;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
 
 public class Calculator_old {
 
@@ -11,13 +9,16 @@ public class Calculator_old {
 	private Stack<Variant<Double, Boolean>> value_stack;
 	private String expression;
 
-	public Calculator_old(String expression) {
+	public Calculator_old() {
+		op_stack = new Stack<>();
+		value_stack = new Stack<>();
+		this.expression = "";
+	}
+
+	public Object calculate(String expression) {
 		op_stack = new Stack<>();
 		value_stack = new Stack<>();
 		this.expression = expression;
-	}
-
-	public Object eval() {
 		return evalExp();
 	}
 

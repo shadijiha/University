@@ -1,5 +1,7 @@
 package driver;
 
+import calculator.*;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -7,15 +9,8 @@ public class Main {
 
 
 		// Calculator
-		//var result = new Calculator().calculate("3 * ( 2 + 1 )");
-		//System.out.println(result);
-
-		boolean a = false;
-		boolean b = false;
-		boolean c = false;
-
-		System.out.println((a && b) || c);
-		System.out.println();
+		var result = new Calculator_old().calculate("3 * ( 2 + 1 )");
+		System.out.println(result);
 
 
 	}
