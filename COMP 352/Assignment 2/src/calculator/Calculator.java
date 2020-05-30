@@ -4,10 +4,8 @@
 
 package calculator;
 
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Calculator {
 
@@ -121,25 +119,37 @@ public class Calculator {
 			throw new RuntimeException("Expression error! Cannot compute result");
 		}
 
-		return Double.MIN_VALUE;
+		return 0.0D;
 	}
 
-	public static final Double[] fromFile(String path) {
+	public static Double[] fromFile(String path) {
 
 		try {
 
 			Scanner scan = new Scanner(new FileInputStream(path));
+
+			List<String> lines = new ArrayList<>();
 			List<Double> results = new ArrayList<>();
 
 			while (scan.hasNextLine()) {
-				double x = new Calculator().calculate(scan.nextLine());
+				String line = scan.nextLine();
+
+				double x = new Calculator().calculate(line);
+				lines.add(line);
 				results.add(x);
 			}
 
 			scan.close();
 
-			return results.toArray(new Double[0]);
+			// Write result to a new file
+			PrintWriter writer = new PrintWriter(new FileOutputStream("results.txt"));
 
+			for (int i = 0; i < lines.size(); i++)
+				writer.printf("%s = %.3f\n", lines.get(i), results.get(i));
+
+			writer.close();
+
+			return results.toArray(new Double[0]);
 
 		} catch (Exception e) {
 			e.printStackTrace();

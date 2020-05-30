@@ -3,19 +3,20 @@
 
 #include <iostream>
 
-#include "SharedArrayStack.h"
+int fibonacci(int n) {
+
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+
+	return fibonacci(n - 1) + fibonacci(n - 2);	
+}
 
 int main(int argc, const char** argv)
 {
 
-	SharedArrayStack<int> stack1;
-	SharedArrayStack<int> stack2;
-
-	stack1.push(15);
-	stack1.push(90);
-	stack2.push(-98);
-
-	SharedArrayStack<int>::print_shared_array();	
+	std::cout << fibonacci(6) << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
