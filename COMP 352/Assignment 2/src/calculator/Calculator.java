@@ -4,6 +4,11 @@
 
 package calculator;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Calculator {
 
 	private ExpressionStack operatorStack;
@@ -117,5 +122,29 @@ public class Calculator {
 		}
 
 		return Double.MIN_VALUE;
+	}
+
+	public static final Double[] fromFile(String path) {
+
+		try {
+
+			Scanner scan = new Scanner(new FileInputStream(path));
+			List<Double> results = new ArrayList<>();
+
+			while (scan.hasNextLine()) {
+				double x = new Calculator().calculate(scan.nextLine());
+				results.add(x);
+			}
+
+			scan.close();
+
+			return results.toArray(new Double[0]);
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }
