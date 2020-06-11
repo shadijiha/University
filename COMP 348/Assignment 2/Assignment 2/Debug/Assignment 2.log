@@ -1,0 +1,5 @@
+﻿  main.c
+D:\Wamp64\www\GitHub\University\COMP 348\Assignment 2\Assignment 2\main.c(90,20): warning C4018: '<': signed/unsigned mismatch
+D:\Wamp64\www\GitHub\University\COMP 348\Assignment 2\Assignment 2\main.c(135,8): warning C4477: 'scanf' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'const int *'
+D:\Wamp64\www\GitHub\University\COMP 348\Assignment 2\Assignment 2\main.c(158,21): warning C4018: '<': signed/unsigned mismatch
+  Assignment 2.vcxproj -> D:\Wamp64\www\GitHub\University\COMP 348\Assignment 2\Debug\Assignment 2.exe

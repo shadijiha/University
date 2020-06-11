@@ -8,9 +8,16 @@ class Board {
 	private positionX: number = 0;
 	private positionY: number = 0;
 
-	public constructor(init: number[][]) {
-		this.data = init;
-		this.original = this.data;
+	public constructor(init: number[][] | Board) {
+		if (init instanceof Board) {
+			this.data = [...init.data];
+			this.original = [...init.original];
+			this.positionX = init.positionX;
+			this.positionY = init.positionY;
+		} else {
+			this.data = init;
+			this.original = this.data;
+		}
 	}
 
 	render(target: Canvas) {
@@ -35,7 +42,7 @@ class Board {
 						tempRect.y + tempRect.h * 0.57,
 						{
 							font: "Arial",
-							size: 30
+							size: 30,
 						}
 					);
 
@@ -168,5 +175,9 @@ class Board {
 			}
 		}
 		return false;
+	}
+
+	public getOriginal(): number[][] {
+		return [...this.original];
 	}
 }
