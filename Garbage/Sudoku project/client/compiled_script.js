@@ -1407,14 +1407,27 @@ function gameLoop() {
     });
 }
 gameLoop();
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 var Board = (function () {
     function Board(init) {
-        this.data = [];
-        this.original = [];
         this.positionX = 0;
         this.positionY = 0;
-        this.data = init;
-        this.original = this.data;
+        if (init instanceof Board) {
+            this.data = __spreadArrays(init.data);
+            this.original = __spreadArrays(init.original);
+            this.positionX = init.positionX;
+            this.positionY = init.positionY;
+        }
+        else {
+            this.data = init;
+            this.original = this.data;
+        }
     }
     Board.prototype.render = function (target) {
         var tileSize = 70;
@@ -1426,7 +1439,7 @@ var Board = (function () {
                 if (this.data[y][x] != 0) {
                     var txt = new ShadoText(this.data[y][x].toString(), tempRect.x + tempRect.w * 0.36, tempRect.y + tempRect.h * 0.57, {
                         font: "Arial",
-                        size: 30
+                        size: 30,
                     });
                     if (this.original[y][x] == 0) {
                         txt.color = "red";
@@ -1528,6 +1541,9 @@ var Board = (function () {
         }
         return false;
     };
+    Board.prototype.getOriginal = function () {
+        return __spreadArrays(this.original);
+    };
     return Board;
 }());
 var canvas = new Canvas(0, 0, window.innerWidth, window.innerHeight, "absolute", $("body"));
@@ -1541,9 +1557,9 @@ var game = new Board([
     [9, 0, 4, 0, 6, 0, 0, 0, 5],
     [0, 7, 0, 3, 0, 0, 0, 1, 2],
     [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
+    [0, 4, 9, 2, 0, 6, 0, 0, 7],
 ]);
-var solved = new Board([
+var notSolved = new Board([
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
     [0, 0, 0, 6, 0, 1, 0, 7, 8],
@@ -1552,12 +1568,12 @@ var solved = new Board([
     [9, 0, 4, 0, 6, 0, 0, 0, 5],
     [0, 7, 0, 3, 0, 0, 0, 1, 2],
     [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
+    [0, 4, 9, 2, 0, 6, 0, 0, 7],
 ]);
 game.solve();
 render = function () {
     canvas.clear(0, 0, canvas.width, canvas.height);
     game.render(canvas);
-    solved.setPosition(new Vertex(800, 0));
-    solved.render(canvas);
+    notSolved.setPosition(new Vertex(800, 0));
+    notSolved.render(canvas);
 };
