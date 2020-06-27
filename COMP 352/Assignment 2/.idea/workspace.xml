@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84aa84d1-b789-404d-9dfb-5aab88bd4c42" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/driver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/driver/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../COMP 352 A2.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../COMP 352 A2.docx" afterDir="false" />
-    </list>
+    <list default="true" id="84aa84d1-b789-404d-9dfb-5aab88bd4c42" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +88,7 @@
       <workItem from="1590796991738" duration="3292000" />
       <workItem from="1590863098312" duration="1209000" />
       <workItem from="1591135715748" duration="3249000" />
+      <workItem from="1592669545434" duration="80000" />
     </task>
     <servers />
   </component>
@@ -165,12 +161,16 @@
     </state>
     <state width="1493" height="238" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1590708119264" />
     <state width="2517" height="470" key="GridCell.Tab.1.right/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1590800972621" />
-    <state x="3300" y="334" key="com.intellij.ide.util.TipDialog" timestamp="1591135715762">
-      <screen x="2560" y="-69" width="2560" height="1400" />
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1592669572017">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1590703928861" />
+    <state x="444" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592669572017" />
     <state x="3300" y="334" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1591135715762" />
     <state x="3300" y="334" key="com.intellij.ide.util.TipDialog/2560.-69.2560.1400/0.0.2560.1400@2560.-69.2560.1400" timestamp="1590781643525" />
+    <state x="279" y="0" key="new project wizard" timestamp="1592669623420">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="279" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1592669623420" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590704085325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
