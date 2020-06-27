@@ -6,7 +6,7 @@ package driver;
 
 import java.util.*;
 
-public class HashTable<K, V> implements Map<K, V> {
+public class HashTable<K, V> implements IExperimentalMap<K, V> {
 
 	private LinkedList<Entry<K, V>>[] entries;
 	private boolean resizeable;

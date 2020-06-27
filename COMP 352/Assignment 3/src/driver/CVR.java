@@ -8,6 +8,40 @@ import java.util.*;
 
 public class CVR {
 
+	public static class Accident {
+		private Date date;
+		private String details;
+
+		public Accident(Date date, String details) {
+			this.date = date;
+			this.details = details;
+		}
+
+		public Accident() {
+			GregorianCalendar gc = new GregorianCalendar();
+
+			int year = randBetween(1900, 2010);
+			gc.set(gc.YEAR, year);
+			int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
+			gc.set(gc.DAY_OF_YEAR, dayOfYear);
+
+			this.date = gc.getGregorianChange();
+			this.details = "Details test";
+		}
+
+		private static int randBetween(int start, int end) {
+			return start + (int) Math.round(Math.random() * (end - start));
+		}
+
+		public static Accident random() {
+			return new Accident();
+		}
+
+		public String toString() {
+			return date.toString() + " " + details;
+		}
+	}
+
 	private int threshold;
 	private int key_length;
 
@@ -68,12 +102,12 @@ public class CVR {
 			list[index] = new LinkedList<>();
 
 		// Add element
-		list[index].addLast(new Entry(key, value));
+		list[index].addLast(new Entry(key, Accident.random()));
 		size++;
 
 	}
 
-	public String remove(String key) {
+	public Accident remove(String key) {
 
 		Entry removed = null;
 
@@ -99,7 +133,7 @@ public class CVR {
 		if (removed == null)
 			return null;
 
-		return removed.value;
+		return removed.value.get(0);
 	}
 
 	/**
@@ -108,7 +142,7 @@ public class CVR {
 	 * @param key Key to search
 	 * @return Returns an array of values of the given key
 	 */
-	public String[] getValues(String key) {
+	public Accident[] getValues(String key) {
 
 		// Find the values by key
 		LinkedList<Entry> query = new LinkedList<>();
@@ -130,11 +164,11 @@ public class CVR {
 		}
 
 		// Convert the values to an array
-		String[] values = new String[query.size()];
+		Accident[] values = new Accident[query.size()];
 
 		int index = 0;
 		for (Entry e : query) {
-			values[index] = e.value;
+			values[index] = e.value.get(0);
 			index++;
 		}
 
@@ -185,15 +219,34 @@ public class CVR {
 			// Using TimSort
 			// Best: O(n), Worst: O(n log n), Space: O(n)
 
-			final int RUN = 32;    // Devide array into blocks
+			// Sort individual subarrays of size RUN
+			final int RUN = 32;
 			int n = result.length;
 			for (int i = 0; i < n; i += RUN) {
-				//https://www.geeksforgeeks.org/timsort/
+				insertionSort(result, i, Math.min((i + 31), (n - 1)));
 			}
 
+			// start merging from size RUN (or 32). It will merge
+			// to form size 64, then 128, 256 and so on ....
+			for (int size = RUN; size < n; size = 2 * size) {
+
+				// pick starting point of left sub array. We
+				// are going to merge arr[left..left+size-1]
+				// and arr[left+size, left+2*size-1]
+				// After every merge, we increase left by 2*size
+				for (int left = 0; left < n; left += 2 * size) {
+
+					// find ending point of left sub array
+					// mid+1 is starting point of right sub array
+					int mid = left + size - 1;
+					int right = Math.min((left + 2 * size - 1), (n - 1));
+
+					// merge sub array arr[left.....mid] &
+					// arr[mid+1....right]
+					mergeSort(result);
+				}
+			}
 		}
-
-
 		return result;
 	}
 
@@ -248,6 +301,22 @@ public class CVR {
 		}
 
 		return null;
+	}
+
+	public Accident[] prevAccids(String key) {
+
+		// Get the list of that key
+		List<Accident> accidents = new ArrayList<>();
+		for (LinkedList<Entry> l : list) {
+			if (l == null)
+				continue;
+			for (Entry e : l) {
+				if (e.key.equals(key))
+					accidents.addAll(e.value);
+			}
+		}
+
+		return accidents.toArray(new Accident[0]);
 	}
 
 	public void test() {
@@ -333,59 +402,65 @@ public class CVR {
 		}
 	}
 
-	private static void mergeSort(String arr[], int l, int m, int r) {
+	private static void mergeSort(String arr[]) {
 
-		// Break array into left and right
-		int len1 = m - l + 1, len2 = r - m;
-		String[] left = new String[len1];
-		String[] right = new String[len2];
+		if (arr.length < 2)
+			return;
 
-		for (int x = 0; x < len1; x++)
-			left[x] = arr[l + x];
+		// original array is broken in two parts
+		// left and right array
+		var middle = arr.length / 2;
+		String[] left = new String[middle];
+		for (int i = 0; i < middle; i++)
+			left[i] = arr[i];
 
-		for (int x = 0; x < len2; x++)
-			right[x] = arr[m + 1 + x];
+		String[] right = new String[arr.length - middle];
+		for (int i = middle; i < arr.length; i++)
+			right[i - middle] = arr[i];
 
-		int i = 0, j = 0, k = l;
+		// Sort each half
+		mergeSort(left);
+		mergeSort(right);
 
-		// Compare and merge sub arrays into a large sub array
-		while (i < len1 && j < len2) {
-			if (left[i].compareTo(right[j]) <= 0) {
-				arr[k] = left[i];
-				i++;
-			} else {
-				arr[k] = right[j];
-				j++;
-			}
-			k++;
+		// Merge the result
+		merge_helper(left, right, arr);
+	}
+
+	private static void merge_helper(String[] left, String[] right, String[] result) {
+		int i = 0, j = 0, k = 0;
+
+		while (i < left.length && j < right.length) {
+			if (left[i].compareTo(right[j]) <= 0)
+				result[k++] = left[i++];
+			else
+				result[k++] = right[j++];
 		}
 
-		// Copy remaining elements from left
-		while (i < len1) {
-			arr[k] = left[i];
-			k++;
-			i++;
-		}
+		// Copy the remaining items
+		while (i < left.length)
+			result[k++] = left[i++];
 
-		// Copy remaining elements from right
-		while (j < len2) {
-			arr[k] = right[j];
-			k++;
-			j++;
-		}
+		while (j < right.length)
+			result[k++] = right[j++];
 	}
 
 	private class Entry {
 		private String key;
-		private String value;
+		private List<Accident> value;
 
-		public Entry(String key, String value) {
+		public Entry(String key, Accident accident) {
 			this.key = key;
-			this.value = value;
+			this.value = new ArrayList<>();
+			this.value.add(accident);
 		}
 
 		public Entry(final Entry other) {
-			this(new String(other.key), new String(other.value));
+			this.key = new String(other.key);
+			this.value = new ArrayList<>(other.value);
+		}
+
+		public void add(Accident a) {
+			value.add(a);
 		}
 	}
 

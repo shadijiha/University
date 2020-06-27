@@ -115,7 +115,7 @@ int main(int carg, const char** vargs) {
 	/* Code for question 2 */
 	printf("\n************ QUESTION 2 ************\n");
 
-	int arr[] = {1, 13, 5, 17, 11};
+	int arr[] = {2, 5, 1, 13, 10};
 	DisplayArray(arr, 5);
 	SelectionSort(arr, 5);
 	DisplayArray(arr, 5);
