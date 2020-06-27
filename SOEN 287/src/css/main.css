@@ -1,0 +1,50 @@
+/**
+*	Main CSS file
+*/
+
+@font-face {
+	font-family: "Roboto";
+	src: url(../../assets/Fonts/Roboto/Roboto-Regular.ttf);
+}
+
+body {
+	margin: 0;
+	font-family: "Roboto";
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:visited {
+	color: inherit;
+}
+
+.white {
+	color: white;
+}
+
+#top_banner {
+	background-color: #161616;
+	height: 30px;
+	padding: 20px;
+	color: white;
+}
+
+#cart_button {
+	margin-left: 90%;
+	background-color: #e53134;
+	padding: 10px;
+	border-radius: 5px;
+	border-color: transparent;
+	color: white;
+	margin-top: -70px;
+	cursor: pointer;
+
+	/* Cart Image */
+	display: inline-block;
+}
