@@ -20,7 +20,7 @@ public class Main {
 		tree.insert(10);
 
 		List<Integer> depth_of_nodes = new ArrayList<>();
-		tree.traverseInOrder(e -> depth_of_nodes.add(tree.depth(e)));
+		tree.traverseInOrder(node -> depth_of_nodes.add(tree.depth(node)));
 
 		//System.out.println(depth_of_nodes);
 
@@ -28,7 +28,7 @@ public class Main {
 		//System.out.println(tree.min());
 
 		/* Question 3 */
-		HashTable<Integer, Integer> map = new HashTable<>(15, false);
+		IExperimentalMap<Integer, Integer> map = new HashTable<>(15, false);
 
 		map.put(32, 0);
 		map.put(147, 0);
@@ -54,15 +54,24 @@ public class Main {
 
 		/************* PART 2 ******************/
 		try {
-			PrintStream writer = new PrintStream(new FileOutputStream("Unit_test.txt"));
-			System.setOut(writer);
 
-			CVR cvr = new CVR().setKeyLength(15).setThreshold(100);
+			PrintStream writer = new PrintStream(new FileOutputStream("Timed_test.csv"));
+
+			//for (int i = 100; i < 100_000; i += 1_000) {
+
+			long before_time = System.nanoTime();
+
+			CVR cvr = new CVR(1100, 15);
 			cvr.test();
 
 			var keys = cvr.allKeys();
-			for (var key : keys)
-				System.out.println(key);
+
+			System.out.println(Arrays.toString(cvr.prevAccids(keys[0])));
+
+			long time_taken = System.nanoTime() - before_time;
+
+			writer.printf("%d, %d\n", 1000, time_taken);
+			//}
 
 			writer.close();
 
@@ -71,12 +80,12 @@ public class Main {
 		}
 	}
 
-	/* QUESTION 2 */
+	/* QUESTION 1 b) */
 	public static int Count_Full_Nodes(BinarySearchTree<?> tree) {
 
 		AtomicInteger count = new AtomicInteger();
-		tree.traverseInOrder(e -> {
-			if (e.hasLeft() && e.hasRight())
+		tree.traverseInOrder(node -> {
+			if (node.hasLeft() && node.hasRight())
 				count.getAndIncrement();
 		});
 
