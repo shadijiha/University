@@ -6,24 +6,30 @@
  */
 
 class Item {
-	private $id = -1;
-	public $name = "";
-	public $category = "";
-	public $image = "";
-	public $cost = 0.0;
-	public $quantity = 0;
+	public $id;
+	public $name;
+	public $category;
+	public $image;
+	public $cost;
+	public $quantity;
+	public $onsale;
     
-	function __construct($int_id, $string_name, $string_category, $string_image, $double_cost, $int_quantity) {
-		$id = $int_id;
-		$name = $string_name;
-		$category = $string_category;
-		$image = $string_image;
-		$cost = $double_cost;
-		$quantity = $int_quantity;
+	function __construct($int_id, $string_name, $string_category, $string_image, $double_cost, $int_quantity, $byte_onSale) {
+		$this->id = $int_id;
+		$this->name = $string_name;
+		$this->category = $string_category;
+		$this->image = $string_image;
+		$this->cost = $double_cost;
+		$this->quantity = $int_quantity;
+		$this->onsale = $byte_onSale;
 	 }
 
 	 function getID()	{
 		 return $id;
+	 }
+
+	 function toString()	{
+		 return "$this->id, '$this->name', '$this->category', '$this->image', $this->cost, $this->quantity, $this->onsale";
 	 }
 }
 

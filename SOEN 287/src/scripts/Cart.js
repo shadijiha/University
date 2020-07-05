@@ -4,7 +4,7 @@
  */
 
 import { IAbstractComponent } from "./AbstractComponent";
-import { Item } from "./Item";
+//import { Item } from "./Item";
 
 export class Cart extends IAbstractComponent {
 	constructor() {
@@ -30,7 +30,7 @@ export class Cart extends IAbstractComponent {
 	private_void_updateValue() {
 		let sum = 0;
 		for (const item of this.items) {
-			sum += item.getCost();
+			sum += Number(item.getCost());
 		}
 
 		this.HTMLSpamElement_valueContainer.innerHTML = `(${
