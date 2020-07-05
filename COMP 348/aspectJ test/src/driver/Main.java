@@ -11,7 +11,6 @@ public class Main {
 	// Driver method
 	public static void main(String args[]) {
 
-
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -30,5 +29,13 @@ public class Main {
 			}
 		});
 
+	}
+
+	static Exception print(int i) {
+		if (i > 0) {
+			return new Exception();
+		} else {
+			throw new RuntimeException();
+		}
 	}
 }
