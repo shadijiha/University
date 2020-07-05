@@ -10,18 +10,22 @@ public class Network implements Runnable {
 	private Transaction[] inComingPacket;
 	private Transaction[] outGoingPacket;
 
+	private volatile boolean running;
+
 	public Network() {
 		thread = new Thread(this);
 		thread.start();
 
 		inComingPacket = new Transaction[10];
 		outGoingPacket = new Transaction[10];
+
+		running = true;
 	}
 
 	@Override
 	public void run() {
 
-		while (true) {
+		while (running) {
 
 		}
 
@@ -55,5 +59,19 @@ public class Network implements Runnable {
 			if (t != null)
 				return false;
 		return true;
+	}
+
+	private void pushToOutput(Transaction t) {
+
+		int pointer = 0;
+		for (int i = 0; i < outGoingPacket.length; i++)
+			if (outGoingPacket[i] == null)
+				pointer = i;
+
+		outGoingPacket[pointer] = t;
+	}
+
+	public void shutdown() {
+		running = false;
 	}
 }
