@@ -16,14 +16,15 @@ import java.util.*;
  * @author Kerly Titus
  */
 
-public class Server {
+public class Server implements Runnable {
 
-	int numberOfTransactions;         /* Number of transactions handled by the server */
+	volatile int numberOfTransactions;         /* Number of transactions handled by the server */
 	int numberOfAccounts;             /* Number of accounts stored in the server */
 	int maxNbAccounts;                /* maximum number of transactions */
 	Transactions transaction;         /* Transaction being processed */
 	Network objNetwork;               /* Server object to handle network operations */
 	Accounts[] account;              /* Accounts to be accessed or updated */
+	Thread thread;
 
 	/**
 	 * Constructor method of Client class
@@ -46,6 +47,8 @@ public class Server {
 			System.out.println("\n Terminating server application, network unavailable");
 			System.exit(0);
 		}
+
+		thread = new Thread(this);
 	}
 
 	/**
@@ -55,7 +58,7 @@ public class Server {
 	 * @return numberOfTransactions
 	 */
 	public int getNumberOfTransactions() {
-		return numberOfTransactions;
+		return numberOfTransactions > 71 ? 71 : numberOfTransactions;
 	}
 
 	/**
@@ -156,8 +159,14 @@ public class Server {
 		int i = 0;
 
 		/* Find account */
-		while (!(account[i].getAccountNumber().equals(accNumber)))
-			i++;
+		// I modified this part
+		try {
+			while (account[i] == null || !account[i].getAccountNumber().equals(accNumber))
+				i++;
+		} catch (ArrayIndexOutOfBoundsException e) {
+
+		}
+
 		if (i == getNumberOfAccounts())
 			return -1;
 		else
@@ -176,7 +185,10 @@ public class Server {
 
 		/* Process the accounts until the client disconnects */
 		while ((!objNetwork.getClientConnectionStatus().equals("disconnected"))) {
-			/* while( (objNetwork.getInBufferStatus().equals("empty"))); */  /* Alternatively, busy-wait until the network input buffer is available */
+
+			/* Alternatively, busy-wait until the network input buffer is available */
+			while ((objNetwork.getInBufferStatus().equals("empty")) && (!objNetwork.getClientConnectionStatus().equals("disconnected")))
+				Thread.yield();
 
 			if (!objNetwork.getInBufferStatus().equals("empty")) {
 				System.out.println("\n DEBUG : Server.processTransactions() - transferring in account " + trans.getAccountNumber());
@@ -209,7 +221,9 @@ public class Server {
 							System.out.println("\n DEBUG : Server.processTransactions() - Obtaining balance from account" + trans.getAccountNumber());
 						}
 
-				// while( (objNetwork.getOutBufferStatus().equals("full"))); /* Alternatively,  busy-wait until the network output buffer is available */
+				/* Alternatively,  busy-wait until the network output buffer is available */
+				while ((objNetwork.getOutBufferStatus().equals("full")))
+					Thread.yield();
 
 				System.out.println("\n DEBUG : Server.processTransactions() - transferring out account " + trans.getAccountNumber());
 
@@ -273,6 +287,10 @@ public class Server {
 		return ("\n server IP " + objNetwork.getServerIP() + "connection status " + objNetwork.getServerConnectionStatus() + "Number of accounts " + getNumberOfAccounts());
 	}
 
+	public void start() {
+		thread.start();
+	}
+
 	/* *********************************************************************************************************************************************
 	 * TODO : implement the method Run() to execute the server thread				 																*
 	 * *********************************************************************************************************************************************/
@@ -290,9 +308,16 @@ public class Server {
 		System.out.println("\n DEBUG : Server.run() - starting server thread " + objNetwork.getServerConnectionStatus());
 
 		/* Implement the code for the run method */
+		serverStartTime = System.currentTimeMillis();
+
+		// Perform operations
+		objNetwork.transferIn(trans);
+		processTransactions(trans);
+		objNetwork.disconnect(objNetwork.getServerIP());
+
+		serverEndTime = System.currentTimeMillis();
 
 		System.out.println("\n Terminating server thread - " + " Running time " + (serverEndTime - serverStartTime) + " milliseconds");
-
 	}
 }
 

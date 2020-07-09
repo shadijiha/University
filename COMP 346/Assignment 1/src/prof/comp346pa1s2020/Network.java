@@ -11,7 +11,7 @@ package prof.comp346pa1s2020;
  *
  * @author Kerly Titus
  */
-public class Network {
+public class Network implements Runnable {
 
 	private static int maxNbPackets;                           /* Maximum number of simultaneous transactions handled by the network buffer */
 	private static int inputIndexClient, inputIndexServer, outputIndexServer, outputIndexClient;                   /* Network buffer indices for accessing the input buffer (inputIndexClient, outputIndexServer) and output buffer (inputIndexServer, outputIndexClient) */
@@ -24,6 +24,8 @@ public class Network {
 	private static Transactions outGoingPacket[];              /* Outgoing network buffer */
 	private static String inBufferStatus, outBufferStatus;     /* Current status of the network buffers - normal, full, empty */
 	private static String networkStatus;                       /* Network status - active, inactive */
+
+	private Thread thread;
 
 	/**
 	 * Constructor of the Network class
@@ -58,6 +60,8 @@ public class Network {
 			networkStatus = "active";
 		} else /* Activate network components for client or server */
 			System.out.println("\n Activating network components for " + context + "...");
+
+		thread = new Thread(this);
 	}
 
 	/**
@@ -484,6 +488,10 @@ public class Network {
 		return ("\n Network status " + getNetworkStatus() + "Input buffer " + getInBufferStatus() + "Output buffer " + getOutBufferStatus());
 	}
 
+	public void start() {
+		thread.start();
+	}
+
 	/***********************************************************************************************************************************************
 	 * TODO : implement the method Run() to execute the server thread				 																*
 	 * *********************************************************************************************************************************************/
@@ -499,6 +507,16 @@ public class Network {
 
 		while (true) {
 			/* Implement the code for the run method */
+
+
+			if (getClientConnectionStatus().equals("disconnected") && getServerConnectionStatus().equals("disconnected"))
+				// Both client and server has disconnected, terminate the thread
+				break;
+			else
+				// Yield the cpu in case they are still connected
+				Thread.yield();
 		}
+
+		System.out.println("Terminating network thread - Client disconnected Server disconnected");
 	}
 }
