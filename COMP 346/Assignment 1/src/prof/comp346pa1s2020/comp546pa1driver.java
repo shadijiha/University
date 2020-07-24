@@ -20,7 +20,10 @@ public class comp546pa1driver {
 	 *
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws FileNotFoundException {
+
+		var out = System.out;
+		//System.setOut(new PrintStream(new File("Garbage.txt")));
 
 		/*******************************************************************************************************************************************
 		 * TODO : implement all the operations of main class   																					*
@@ -34,6 +37,9 @@ public class comp546pa1driver {
 		Client objClient2 = new Client("receiving");            /* Start the receiving client */
 		objClient2.start();
 
+		// Restore out
+		System.setOut(out);
+
 		// Make the output without the debug
 		List<String> file_with_debug_lines = fileAsString("output_with_debug.txt");
 
@@ -45,7 +51,8 @@ public class comp546pa1driver {
 
 		var str = listToString(file_no_debug_lines);
 
-		writeToFile("output_without_debug.txt", str, false);
+		//writeToFile("output_without_debug.txt", str, false);
+		//System.out.println(str);
 	}
 
 	public static List<String> fileAsString(String filename) {
