@@ -3,12 +3,9 @@
  */
 package com.main.algorithms;
 
-import com.main.CPU;
-import com.main.ShadoProcess;
+import com.main.*;
 
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class FCFS extends DispatcherAlgorithm {
 
@@ -31,6 +28,10 @@ public class FCFS extends DispatcherAlgorithm {
 		while (queue.size() != 0) {
 
 			for (CPU cpu : cpus) {
+
+				// Update the cycle for the cpu
+				cpu.clockCycle++;
+
 				// IF the cpu is available
 				// Give it a task
 				if (cpu.isAvailable()) {
@@ -44,8 +45,11 @@ public class FCFS extends DispatcherAlgorithm {
 					// Excute the process
 					cpu.submit(process);
 
-					System.out.println("Running: \t" + process.toString());
+					System.out.println(cpu.toString() + " Running: \t" + process.toString());
 				}
+
+				// Check for IO requests
+				cpu.checkIORequests();
 			}
 		}
 	}

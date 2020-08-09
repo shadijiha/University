@@ -1,11 +1,9 @@
 package com.main;
 
-import com.main.algorithms.SJF;
+import com.main.algorithms.*;
 
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -17,11 +15,12 @@ public class Main {
 
 		var cpus = new CPU[numberOfCpusToUse];
 		for (int i = 0; i < cpus.length; i++)
-			cpus[i] = new CPU();
+			cpus[i] = new CPU(i);
 
 		var dispatcher = new Dispatcher(cpus, new SJF(cpus));
 		dispatcher.submit(processes);
 		dispatcher.start();
+
 	}
 
 	public static ShadoProcess[] readInput(String path) {
