@@ -5,3 +5,12 @@
 /Free Shape collision/node_modules/electron/dist/electron.exe
 /TypeScript project sample/node_modules/electron/dist/electron.exe
 /**/electron.exe
+*.exe
+*.ipch
+*.tlog
+*.log
+*.ipdb
+*.obj
+*.iobj
+*.ilk
+*.pdb
