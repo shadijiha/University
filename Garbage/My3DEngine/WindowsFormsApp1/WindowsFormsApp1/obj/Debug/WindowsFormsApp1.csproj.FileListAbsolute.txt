@@ -1,9 +1,0 @@
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

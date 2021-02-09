@@ -1,8 +1,0 @@
-﻿  My3DEngine.cpp
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(187,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(187,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(186,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(186,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(185,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\My3DEngine\My3DEngine.cpp(185,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  My3DEngine.vcxproj -> D:\Wamp64\www\GitHub\University\Garbage\My3DEngine\Debug\My3DEngine.exe

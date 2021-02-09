@@ -10,6 +10,16 @@
 #include <vector>
 #include <filesystem>
 
+#if _DEBUG
+#define DEBUG_LOG(x)    std::cout << x << std::endl
+#define DEBUG_LOG_NO_BREAK(x) std::cout << x
+#define DEBUG_WLOG(x)   std::wcout << x << std::endl
+#else
+#define DEBUG_LOG(x)
+#define DEBUG_LOG_NO_BREAK(x)
+#define DEBUG_WLOG(x)
+#endif
+
 std::vector<std::wstring> getAllWallpapers() {
 
     namespace fs = std::filesystem;
@@ -19,7 +29,9 @@ std::vector<std::wstring> getAllWallpapers() {
     std::string path = "C:\\Users\\shadi\\Desktop\\Wallpapers";
     for (const auto& entry : fs::directory_iterator(path)) {
         const auto temp = entry.path();
-        result.push_back(temp.generic_wstring());
+    	if (!entry.is_directory()) {
+            result.push_back(temp.generic_wstring());
+    	}			
     }       
 
     return result;
@@ -37,12 +49,12 @@ void setWallpaper(int& index)
 
     if (result)
     {
-        std::cout << "Wallpaper set from: ";
-        std::wcout << currentWP << std::endl;
+        DEBUG_LOG_NO_BREAK("Wallpaper set from: ");
+        DEBUG_WLOG(currentWP);
     } else
     {
-        std::cout << "Wallpaper not set";
-        std::cout << "SPI returned" << result << std::endl;
+        DEBUG_LOG_NO_BREAK("Wallpaper not set");
+        DEBUG_LOG("SPI returned" << result);
     }
 }
 
@@ -52,22 +64,49 @@ int main()
 
     std::srand(std::time(nullptr));
 	
-    int input = 5;
+    unsigned int input = 60 * 5;      // In seconds
     int index = std::rand() % getAllWallpapers().size();
 	
-    std::chrono::minutes sleeptime(input);
+    std::chrono::seconds sleeptime(input);
 
-    std::cout << "********************************************\n";
-    std::cout << "*** Welcome TO 2 monitors same Wallpaper ***\n";
-    std::cout << "********************************************\n\n";
+    DEBUG_LOG("*******************************************************");
+    DEBUG_LOG("*** Welcome TO 2 monitors same Wallpaper Slideshow! ***");
+    DEBUG_LOG("*******************************************************\n");
 
-    std::cout << "Wallpaper changes every " << input << " minutes\n";
+    DEBUG_LOG("Wallpaper changes every " << (input / 60.0f) << " minutes");
 
+	// Hide the console
+#if _DEBUG
+    DEBUG_LOG("[DEBUG MODE ACTIVE]");
+    ::ShowWindow(::GetConsoleWindow(), SW_SHOW);
+#else
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+#endif
+
+
+	/**
+	 * Put all windows title Where you don't want the wallpaper to change
+	 * 
+	 */
+	
+    std::vector<std::wstring> black_list_windows {L"League of Legends (TM) Client"};
 	
 	while (true) {
+
+        // Only Change wallpaper if league if not open. This is to avoid the black/white split second screen flicker.
+		// In the future must add all games (because I haven't test yet if other games are affected)
+        bool canChange = true;
+		for (const auto& win : black_list_windows) {
+            if (FindWindow(NULL, win.c_str())) {
+                canChange = false;
+                DEBUG_LOG("Prevented from changing wallpaper because a game window is open!");
+            }         
+		}
+
+		if (canChange)
+			setWallpaper(index);
+        
 		
-        setWallpaper(index);
         std::this_thread::sleep_for(sleeptime);
 	}
 
