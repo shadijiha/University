@@ -3,13 +3,8 @@
  */
 package com;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Zipper {
 
@@ -25,7 +20,15 @@ public class Zipper {
 		file = new File(path);
 	}
 
-	public void zip() {
+	/**
+	 * Compress the file
+	 *
+	 * @return Returns a zipper with the ziped file data
+	 */
+	public Zipper zip() {
+
+		if (extension.equalsIgnoreCase("szip"))
+			throw new IllegalStateException("Cannot zip an already zipped file");
 
 		// Read the file
 		Scanner scanner = null;
@@ -62,15 +65,71 @@ public class Zipper {
 			writer.close();
 		}
 
+
+		return new Zipper(name + ".szip");
 	}
 
-	public void unzip() {
+	/**
+	 * @return Returns a zipper with the unzipped file data
+	 */
+	public Zipper unzip() {
 
-		if (!extension.equalsIgnoreCase(".szip"))
+		if (!extension.equalsIgnoreCase("szip"))
 			throw new IllegalArgumentException("Cannot unzip a non Shado Zip file (*.szip)");
 
-		// Read the zipped fil
+		// Read the zipped file
+		List<struct> map = new ArrayList<>();
 
+		try {
+
+			Scanner scanner = new Scanner(file);
+
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				String[] tokens = line.split("\t");
+
+				// Identafiy the number
+				String numberStr = tokens[0].replaceAll("[()]", "");
+				int number = Integer.parseInt(numberStr);
+
+				tokens[0] = "";
+				String data = String.join("", tokens);
+
+				map.add(new struct(data, number));
+			}
+
+			scanner.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+		// Write data to unzipped file
+		try {
+
+			PrintWriter writer = new PrintWriter(new FileOutputStream(name + ".txt"));
+
+			for (struct temp : map) {
+				for (int i = 0; i < temp.count; i++)
+					writer.println(temp.data);
+			}
+
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new Zipper(name + ".txt");
 	}
 
+	private final class struct {
+		public String data;
+		public int count;
+
+		public struct(String data, int count) {
+			this.data = data;
+			this.count = count;
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package com;
 
+import java.io.PrintWriter;
+
 public class Main {
 
 	public static final double Q = 0.5;
@@ -42,7 +44,16 @@ public class Main {
 //
 //		System.out.close();
 
-		var zipper = new Zipper("out.txt");
+		PrintWriter writer = new PrintWriter("num.txt");
+
+		for (int i = 0; i < 1_000_000; i++) {
+			int number = (int) (Math.random() * 100);
+			writer.println(number);
+		}
+
+		writer.close();
+
+		var zipper = new Zipper("num.txt");
 		zipper.zip();
 
 	}
