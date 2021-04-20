@@ -5,7 +5,7 @@ STUDENT ID : 40131284
 MyConcordia
 
 Netname: S_JIH
-Password: same pass I use
+Password: same pass I use --> $Hadi1999
 
 ======================
 eConcordia
