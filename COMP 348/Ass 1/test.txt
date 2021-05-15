@@ -1,0 +1,5 @@
+Circle,100
+Rectangle,2,3.5
+Circle,1
+Rectangle,1,1
+Circle,43
