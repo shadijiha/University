@@ -162,13 +162,57 @@
 
                 // Replace math operations
                 // (Old pattern /(\w|\d)+(\s?)\*(\s?)(\d|\w)+/g )
-                const regex = new RegExp("(\\w|\\d)+(\\s?)\\"+ search +"(\\s?)(.*)", "g");  
-                console.log(regex);             
+                const regex = new RegExp("(\\w|\\d)+(\\s?)\\"+ search +"(\\s?)(.*)", "g");            
                 output = processBasedOnMatch(regex, output, (match) => {
                     const tokens = trimAll(match.split(search.replaceAll("\\", "")));
                     return `(${replacement} ${tokens.join(" ")})`;
                 });
             }
+
+            // Process lambdas 
+            output = processBasedOnMatch(/\(.*\)(\s+?)=>(\s+?){[\s\S]*}(;?)/g, output, (match) => {
+                console.log(match);         
+                const tokens = match.split("=>");
+                const params = trimAll(tokens[0].split(","));
+                tokens[1] = tokens[1].trim();
+                const body = tokens[1].substr(1, tokens[1].length - 2);
+
+               
+                return `(lambda ${params.join(" ")} (${body}) )`;
+            });
+
+            // Process variables
+            output = processBasedOnMatch(/(const|let|var).*(;|\n)/g, output, (match) => {
+
+                match = match.replaceAll(/\blet|const|var\b/g, "").trim();
+                match = match.replaceAll(";", "");
+
+                let tokens = match.split("=");
+                const varName = tokens[0];
+                tokens.splice(0, 1);
+                trimAll(tokens);
+                
+                return `(let (${varName.trim()} ${tokens.join("=")}) )\n`;
+            });
+  
+            // Process functions
+            output = processBasedOnMatch(/function\s+\w+\(.*\)(\s+?){(.|\n)*}/g, output, () => {});
+                
+            // Proceess  function calls
+            output = processBasedOnMatch(/\b\w+\(.*\)/g, output, (match) => {
+
+                let raw = match.split("(");     // Parse the name of function
+                const funcName = raw[0];
+                raw.splice(0, 1);
+                
+                match = raw.join("(");
+
+                // Get rid of the last paranthese
+                match = match.substr(0, match.length - 1);                
+
+                const tokens = trimAll(match.split(","));
+                return `(${funcName.trim()} ${tokens.join(" ")})`;
+            });
 
             replaceMathOperation("+");
             replaceMathOperation("-");
@@ -186,9 +230,11 @@
 
             output = output.replaceAll(/\btrue\b/g, "T");
             output = output.replaceAll(/\bfalse\b/g, "NIL");
-            
-            output = processBasedOnMatch(/".*"/g, output, (match) => {
 
+
+
+            output = processBasedOnMatch(/".*"/g, output, (match) => {
+                return "'" + match.replaceAll("\"", "");
             });
             
             OUTPUT_DOM.innerHTML = "<pre>" + output + "</pre>";
@@ -244,9 +290,9 @@
 
         window.onload = function() {
 
-            document.getElementById("in_text").value = `[1, 2, 4, 5 + 4]
-[1, 2, 4,
-]`;
+            document.getElementById("in_text").value = `
+() => {}
+(x, y) => {x + y}`;
 
             document
                 .getElementById("in_text")
