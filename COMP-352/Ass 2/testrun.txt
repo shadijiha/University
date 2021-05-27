@@ -1,0 +1,7 @@
+operation		time(ns)
+MyArrayList add		300
+ArrayList add		400
+LinkedList add		500
+MyLinkedList add		900
+LinkedList addAt		7200
+MyLinkedList addAt		9900

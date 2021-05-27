@@ -113,10 +113,9 @@
 
         function trimAll(array) {
             let copy = [...array];
-            for(let i = 0; i < copy.length; i++)
-                copy[i] = copy[i].trim();
+            for (let i = 0; i < copy.length; i++) copy[i] = copy[i].trim();
 
-            return copy;                
+            return copy;
         }
 
         function processBasedOnMatch(regex, string, callback) {
@@ -145,74 +144,101 @@
 
             let output = INPUT;
 
-            
             // Replace list with lisp lists
-            output = processBasedOnMatch(/\[[\s\S]*\]/g, output, (match)=>{
+            output = processBasedOnMatch(/\[[\s\S]*\]/g, output, (match) => {
                 match = match.replaceAll("[", "(");
                 match = match.replaceAll("]", ")");
                 match = match.replaceAll(",", " ");
                 return match;
             });
 
-            function replaceMathOperation(search, replacement)    {
-
-                if (replacement == undefined || replacement == null)    {
-                     replacement = search;
+            function replaceMathOperation(search, replacement) {
+                if (replacement == undefined || replacement == null) {
+                    replacement = search;
                 }
 
                 // Replace math operations
                 // (Old pattern /(\w|\d)+(\s?)\*(\s?)(\d|\w)+/g )
-                const regex = new RegExp("(\\w|\\d)+(\\s?)\\"+ search +"(\\s?)(.*)", "g");            
+                const regex = new RegExp(
+                    "(\\w|\\d)+(\\s?)\\" + search + "(\\s?)(.*)",
+                    "g"
+                );
                 output = processBasedOnMatch(regex, output, (match) => {
                     const tokens = trimAll(match.split(search.replaceAll("\\", "")));
                     return `(${replacement} ${tokens.join(" ")})`;
                 });
             }
 
-            // Process lambdas 
-            output = processBasedOnMatch(/\(.*\)(\s+?)=>(\s+?){[\s\S]*}(;?)/g, output, (match) => {
-                console.log(match);         
-                const tokens = match.split("=>");
-                const params = trimAll(tokens[0].split(","));
-                tokens[1] = tokens[1].trim();
-                const body = tokens[1].substr(1, tokens[1].length - 2);
+            // Process lambdas
+            output = processBasedOnMatch(
+                /\(.*\)(\s+?)=>(\s+?){[\s\S]*}(;?)/g,
+                output,
+                (match) => {
+                    const tokens = match.split("=>");
+                    const params = trimAll(tokens[0].split(","));
+                    tokens[1] = tokens[1].trim();
+                    const body = tokens[1].substr(1, tokens[1].length - 2);
 
-               
-                return `(lambda ${params.join(" ")} (${body}) )`;
-            });
+                    return `(lambda ${params.join(" ")} (${body}) )`;
+                }
+            );
+
+            // Process if else
+
+            // Process functions
+            output = processBasedOnMatch(
+                /function\s+\w+\(.*\)(\s+?){(.|\n)*}/g,
+                output,
+                (match) => {
+                    match = match.replaceAll("function", "(defun");
+                    match = match.replaceAll("{", "");
+                    match = match.trim().replaceAll("}", ")");
+                    return match.trim();
+                }
+            );
 
             // Process variables
-            output = processBasedOnMatch(/(const|let|var).*(;|\n)/g, output, (match) => {
+            output = processBasedOnMatch(
+                /(const|let|var).*(;|\n)/g,
+                output,
+                (match) => {
+                    match = match.replaceAll(/\blet|const|var\b/g, "").trim();
+                    match = match.replaceAll(";", "");
 
-                match = match.replaceAll(/\blet|const|var\b/g, "").trim();
-                match = match.replaceAll(";", "");
+                    let tokens = match.split("=");
+                    const varName = tokens[0];
+                    tokens.splice(0, 1);
+                    trimAll(tokens);
 
-                let tokens = match.split("=");
-                const varName = tokens[0];
-                tokens.splice(0, 1);
-                trimAll(tokens);
-                
-                return `(let (${varName.trim()} ${tokens.join("=")}) )\n`;
-            });
-  
-            // Process functions
-            output = processBasedOnMatch(/function\s+\w+\(.*\)(\s+?){(.|\n)*}/g, output, () => {});
-                
-            // Proceess  function calls
-            output = processBasedOnMatch(/\b\w+\(.*\)/g, output, (match) => {
+                    return `(let (${varName.trim()} ${tokens.join("=")}) )\n`;
+                }
+            );
 
-                let raw = match.split("(");     // Parse the name of function
-                const funcName = raw[0];
-                raw.splice(0, 1);
-                
-                match = raw.join("(");
+            // Proceess  function calls \w+
+            for (let i = 0; i < 10; i++) {
+                output = processBasedOnMatch(
+                    /(function|defun\s?)?\w+\(.*\)/g,
+                    output,
+                    (match) => {
+                        // If it is not the function call
+                        if (match.includes("function") || match.includes("defun")) {
+                            return match;
+                        }
 
-                // Get rid of the last paranthese
-                match = match.substr(0, match.length - 1);                
+                        let raw = match.split("("); // Parse the name of function
+                        const funcName = raw[0];
+                        raw.splice(0, 1);
 
-                const tokens = trimAll(match.split(","));
-                return `(${funcName.trim()} ${tokens.join(" ")})`;
-            });
+                        match = raw.join("(");
+
+                        // Get rid of the last paranthese
+                        match = match.substr(0, match.length - 1);
+
+                        const tokens = trimAll(match.split(","));
+                        return `(${funcName.trim()} ${tokens.join(" ")})`;
+                    }
+                );
+            }
 
             replaceMathOperation("+");
             replaceMathOperation("-");
@@ -221,6 +247,7 @@
             replaceMathOperation("%");
             replaceMathOperation("<");
             replaceMathOperation(">");
+            replaceMathOperation("==", "equal");
 
             replaceMathOperation("or");
             replaceMathOperation("\|\\|", "or");
@@ -230,13 +257,13 @@
 
             output = output.replaceAll(/\btrue\b/g, "T");
             output = output.replaceAll(/\bfalse\b/g, "NIL");
-
-
+            output = output.replaceAll(/\breturn\b/g, "");
+            output = output.replaceAll(";", "");
 
             output = processBasedOnMatch(/".*"/g, output, (match) => {
-                return "'" + match.replaceAll("\"", "");
+                return "'" + match.replaceAll('"', "");
             });
-            
+
             OUTPUT_DOM.innerHTML = "<pre>" + output + "</pre>";
         }
 
@@ -289,10 +316,13 @@
         }
 
         window.onload = function() {
-
             document.getElementById("in_text").value = `
-() => {}
-(x, y) => {x + y}`;
+function ispalindrome(list)	{
+	return list == reverse(list)
+}
+
+print(ispalindrome('[a, b, b, a]));
+`;
 
             document
                 .getElementById("in_text")
