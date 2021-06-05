@@ -1,7 +1,17 @@
-operation		time(ns)
-MyArrayList add		300
-ArrayList add		400
-LinkedList add		500
-MyLinkedList add		900
-LinkedList addAt		7200
-MyLinkedList addAt		9900
+A) ************** Insertions **************
+
+
+  N = 10	Insert@start (ns)	Insert@end (ns)	Insert@random (ns)
+MyArrayList		216000		6800		10000
+ArrayList		10800		21200		11900
+MyLinkedList		7600		5900		20800
+LinkedList		33300		9600		7800
+
+
+B) ************** Deletions **************
+
+
+  N = 10	Remove@start (ns)	Remove@end (ns)	Remove@random (ns)	Remove byvalue (ns)
+MyArrayList		18400		3700		4700		20900
+ArrayList		6700		3500		347400		9300
+MyLinkedList		18800		7100		6500		

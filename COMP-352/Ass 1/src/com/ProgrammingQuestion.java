@@ -15,58 +15,58 @@ public class ProgrammingQuestion {
 
 		Factory factory = new Factory();
 
-		for (int n = 10; n < 10_000; n *= 2) {
+		//for (int n = 10; n < 10_000; n *= 2) {
 
-			factory.generateToFile(n);
+		factory.generateToFile(100, false);
 
-			String[] names = factory.getLastGeneratedNames();
-			String[] pDOB = factory.getLastGeneratedDates();
-			int totalNumberOfMembers = names.length;
+		String[] names = factory.getLastGeneratedNames();
+		String[] pDOB = factory.getLastGeneratedDates();
+		int totalNumberOfMembers = names.length;
 
-			System.out.println("=========== Testing rearrangeParticipants(args...) ===========");
+		System.out.println("=========== Testing rearrangeParticipants(args...) ===========");
 
-			System.out.println("******** Before ********");
-			for (int i = 0; i < names.length; i++)
-				System.out.printf("%s, %d\n", names[i], age(pDOB[i]));
+		System.out.println("******** Before ********");
+		for (int i = 0; i < names.length; i++)
+			System.out.printf("%s, %d\n", names[i], age(pDOB[i]));
 
-			long rearrangeParticipantsStart = System.currentTimeMillis();
+		long rearrangeParticipantsStart = System.currentTimeMillis();
 
-			int numberOfSeniors = rearrangeParticipants(names, pDOB, names.length);            // <------- Calling rearrangeParticipants
+		int numberOfSeniors = rearrangeParticipants(names, pDOB, names.length);            // <------- Calling rearrangeParticipants
 
-			long rearrangeParticipantsEnd = System.currentTimeMillis();
-			StatsCollector.record("rearrangeParticipants", totalNumberOfMembers, rearrangeParticipantsEnd - rearrangeParticipantsStart);
+		long rearrangeParticipantsEnd = System.currentTimeMillis();
+		StatsCollector.record("rearrangeParticipants", totalNumberOfMembers, rearrangeParticipantsEnd - rearrangeParticipantsStart);
 
-			System.out.println("******** After ********");
-			for (int i = 0; i < names.length; i++)
-				System.out.printf("%s, %d\n", names[i], age(pDOB[i]));
+		System.out.println("******** After ********");
+		for (int i = 0; i < names.length; i++)
+			System.out.printf("%s, %d\n", names[i], age(pDOB[i]));
 
-			System.out.println("There are " + numberOfSeniors + " seniors\n");
+		System.out.println("There are " + numberOfSeniors + " seniors\n");
 
-			System.out.println("=========== Testing displaySeniorsIncreasingOrder(args...) ===========");
-			long displaySeniorsStart = System.currentTimeMillis();
+		System.out.println("=========== Testing displaySeniorsIncreasingOrder(args...) ===========");
+		long displaySeniorsStart = System.currentTimeMillis();
 
-			displaySeniorsIncreasingOrder(names, pDOB, numberOfSeniors);
+		displaySeniorsIncreasingOrder(names, pDOB, numberOfSeniors);
 
-			long displaySeniorsEnd = System.currentTimeMillis();
-			StatsCollector.record("displaySeniorsIncreasingOrder", totalNumberOfMembers, displaySeniorsEnd - displaySeniorsStart);
+		long displaySeniorsEnd = System.currentTimeMillis();
+		StatsCollector.record("displaySeniorsIncreasingOrder", totalNumberOfMembers, displaySeniorsEnd - displaySeniorsStart);
 
-			System.out.println("=========== Testing displayNonSeniorsInreasingOrder(args...) ===========");
-			long displayNonSeniorsStart = System.currentTimeMillis();
+		System.out.println("=========== Testing displayNonSeniorsInreasingOrder(args...) ===========");
+		long displayNonSeniorsStart = System.currentTimeMillis();
 
-			displayNonSeniorsInreasingOrder(names, pDOB, totalNumberOfMembers - numberOfSeniors, totalNumberOfMembers);
+		displayNonSeniorsInreasingOrder(names, pDOB, totalNumberOfMembers - numberOfSeniors, totalNumberOfMembers);
 
-			long displayNonSeniorsEnd = System.currentTimeMillis();
-			StatsCollector.record("displayNonSeniorsInreasingOrder", totalNumberOfMembers, displayNonSeniorsEnd - displayNonSeniorsStart);
+		long displayNonSeniorsEnd = System.currentTimeMillis();
+		StatsCollector.record("displayNonSeniorsInreasingOrder", totalNumberOfMembers, displayNonSeniorsEnd - displayNonSeniorsStart);
 
 
-			System.out.println("=========== Testing displayIncreasingOrder(args...) ===========");
-			long displayStart = System.currentTimeMillis();
+		System.out.println("=========== Testing displayIncreasingOrder(args...) ===========");
+		long displayStart = System.currentTimeMillis();
 
-			displayIncreasingOrder(names, pDOB, numberOfSeniors, totalNumberOfMembers);
+		displayIncreasingOrder(names, pDOB, numberOfSeniors, totalNumberOfMembers);
 
-			long displayEnd = System.currentTimeMillis();
-			StatsCollector.record("displayIncreasingOrder", totalNumberOfMembers, displayEnd - displayStart);
-		}
+		long displayEnd = System.currentTimeMillis();
+		StatsCollector.record("displayIncreasingOrder", totalNumberOfMembers, displayEnd - displayStart);
+		//}
 
 	}
 
@@ -170,8 +170,6 @@ public class ProgrammingQuestion {
 					swap(pDOBCopy, b, b + 1);
 				}
 			}
-
-
 		}
 
 		for (int i = 0; i < nameCopy.length; i++) {
