@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.*;
 
 /**
  *
@@ -30,8 +31,8 @@ public class TestManager {
 		return sessions.get(session);
 	}
 
-	public static void store(String session, long ns) {
-		sessions.put(session, ns);
+	public static void store(String session, long ms) {
+		sessions.put(session, ms);
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class TestManager {
 
 		ArrayList<Long> runs = new ArrayList<>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1; i++) {
 			long start = System.nanoTime();
 			function.run();
 			long end = System.nanoTime();
@@ -63,7 +64,8 @@ public class TestManager {
 
 			writer.println("operation\t\ttime(ns)");
 
-			for (var e : sessions.entrySet()) {
+			var set = sessions.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toList());
+			for (var e : set) {
 				writer.printf("%s\t\t%s\n", e.getKey(), e.getValue());
 			}
 
@@ -74,16 +76,20 @@ public class TestManager {
 
 	}
 
-	public static int[] generateArray(int elements) {
+	public static int[] generateArray(int elements, int min, int max) {
 		int[] array = new int[elements];
 
 		for (int i = 0; i < elements; i++)
-			array[i] = (int) random(0, 1000);
+			array[i] = (int) random(min, max);
 
 		return array;
 	}
 
-	private static double random(double min, double max) {
+	public static int[] generateArray(int elements) {
+		return generateArray(elements, 0, elements);
+	}
+
+	public static double random(double min, double max) {
 		return Math.random() * (max - min) + min;
 	}
 }

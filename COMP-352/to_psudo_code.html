@@ -157,7 +157,7 @@
             });
 
             // Process if statments
-            const if_regex = /(?<=if)(\(?).*\)/g;
+            const if_regex = /(?<=\bif\b)(\(?).*\)/g;
             output = processBasedOnMatch(if_regex, output, (match) => {
                 const tokens = match
                     .replaceAll(/\(|\)/g, "")
@@ -188,7 +188,7 @@
 
             output = output.replaceAll(/function/g, "Algorithm");
             output = output.replaceAll(
-                /for|if|while|return|and|or|do|to|then|Algorithm/g,
+                /\b(for|if|while|return|and|or|do|to|then|Algorithm)\b/g,
                 "<b>$&</b>"
             );
             OUTPUT_DOM.innerHTML = "<pre>" + output + "</pre>";

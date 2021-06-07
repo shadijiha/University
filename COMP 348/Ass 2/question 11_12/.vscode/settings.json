@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "selectionsort.h": "c",
+        "stdlib.h": "c"
+    }
+}
