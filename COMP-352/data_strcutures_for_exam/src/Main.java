@@ -1,6 +1,5 @@
 import my.BinaryTree;
 import my.Tree;
-import my.TreePrinter;
 
 /**
  *
@@ -14,7 +13,6 @@ public class Main {
 				1, 2, 3, 4, 5, 6
 		});
 
-		TreePrinter<Integer> printer = new TreePrinter<>(tree);
-		printer.print();
+		System.out.println(tree);
 	}
 }
