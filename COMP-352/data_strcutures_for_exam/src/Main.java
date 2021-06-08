@@ -1,5 +1,6 @@
-import my.BinarySearchTree;
+import my.BinaryTree;
 import my.Tree;
+import my.TreePrinter;
 
 /**
  *
@@ -9,13 +10,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
-		for (int i = 0; i < 5; i++) {
-			tree.add(i);
-		}
+		Tree<Integer> tree = new BinaryTree<>(new Integer[]{
+				1, 2, 3, 4, 5, 6
+		});
 
-		var children = tree.children(tree.root().right);
-		for (var child : children)
-			System.out.println(child);
+		TreePrinter<Integer> printer = new TreePrinter<>(tree);
+		printer.print();
 	}
 }

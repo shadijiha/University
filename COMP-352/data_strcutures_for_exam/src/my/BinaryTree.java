@@ -12,6 +12,14 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 
 	protected TreeNode<T> root;
 
+	public BinaryTree(T array[]) {
+		for (T e : array)
+			add(e);
+	}
+
+	public BinaryTree() {
+	}
+
 	@Override
 	public void add(T element) {
 		add(element, root);
@@ -217,5 +225,10 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 	@Override
 	public boolean isEmpty() {
 		return size() == 0;
+	}
+
+	@Override
+	public String toString() {
+		return new TreePrinter<T>(this).toString();
 	}
 }
