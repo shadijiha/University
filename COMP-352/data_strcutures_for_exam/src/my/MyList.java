@@ -11,6 +11,8 @@ public interface MyList<T> {
 
 	public T get(int index);
 
+	public void set(int index, T val);
+
 	public T removeAt(int index);
 
 	public void remove(T object);
@@ -18,6 +20,8 @@ public interface MyList<T> {
 	public int indexOf(Object object);
 
 	public int size();
+
+	public boolean isEmpty();
 
 	public String toString();
 }

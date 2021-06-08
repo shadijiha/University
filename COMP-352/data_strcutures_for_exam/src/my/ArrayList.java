@@ -39,6 +39,12 @@ public class ArrayList<T> implements MyList<T> {
 		return data[index];
 	}
 
+	@Override
+	public void set(int index, T val) {
+		verifyIndex(index);
+		data[index] = val;
+	}
+
 	public T removeAt(int index) {
 		verifyIndex(index);
 		T temp = data[index];
@@ -65,6 +71,11 @@ public class ArrayList<T> implements MyList<T> {
 
 	public int size() {
 		return pointer;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size() == 0;
 	}
 
 	public T[] rawArray() {

@@ -1,6 +1,4 @@
-import my.ArrayList;
-
-import java.util.Arrays;
+import my.*;
 
 /**
  *
@@ -9,21 +7,15 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList<Integer> list = new ArrayList<>();
+		Tree<Integer> tree = new BinatyTree<>();
 
-		for (int i = 0; i < 10; i++)
-			list.add(i);
+		for (int i = 0; i < 10; i++) {
+			tree.add(i);
+		}
 
-		System.out.println(list);
-		list.addAt(1, 13);
-		System.out.println(list);
-
-		list.remove(13);
-		System.out.println(list);
-
-		list.removeAt(1);
-		System.out.println(list);
-
-		System.out.println(Arrays.toString(list.rawArray()));
+		System.out.println(tree.remove(9));
+		tree.inOrder((e) -> {
+			System.out.print(e + " ");
+		});
 	}
 }

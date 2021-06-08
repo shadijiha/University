@@ -70,6 +70,22 @@ public class LinkedList<T> implements MyList<T> {
 	}
 
 	@Override
+	public void set(int index, T val) {
+		verifyIndex(index);
+
+		Node current = head;
+		int count = 0;
+		while (count < index) {
+			count++;
+			current = current.next;
+		}
+
+		if (current != null) {
+			current.data = val;
+		}
+	}
+
+	@Override
 	public T removeAt(int index) {
 		int count = 0;
 		Node current = head;
@@ -120,6 +136,11 @@ public class LinkedList<T> implements MyList<T> {
 			current = current.next;
 		}
 		return count;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size() == 0;
 	}
 
 	@Override
