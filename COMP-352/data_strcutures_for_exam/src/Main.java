@@ -1,4 +1,5 @@
-import my.*;
+import my.BinarySearchTree;
+import my.Tree;
 
 /**
  *
@@ -7,15 +8,14 @@ import my.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Tree<Integer> tree = new BinatyTree<>();
 
-		for (int i = 0; i < 10; i++) {
+		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		for (int i = 0; i < 5; i++) {
 			tree.add(i);
 		}
 
-		System.out.println(tree.remove(9));
-		tree.inOrder((e) -> {
-			System.out.print(e + " ");
-		});
+		var children = tree.children(tree.root().right);
+		for (var child : children)
+			System.out.println(child);
 	}
 }

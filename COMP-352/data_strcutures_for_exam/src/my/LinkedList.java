@@ -3,6 +3,8 @@
  */
 package my;
 
+import java.util.Iterator;
+
 public class LinkedList<T> implements MyList<T> {
 
 	private Node head;
@@ -143,6 +145,16 @@ public class LinkedList<T> implements MyList<T> {
 		return size() == 0;
 	}
 
+	/**
+	 * Returns an iterator over elements of type {@code T}.
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<T> iterator() {
+		return new LinkedListIterator(this);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -163,6 +175,27 @@ public class LinkedList<T> implements MyList<T> {
 	private void verifyIndex(int index) {
 		if (index < 0 || index >= size()) {
 			throw new RuntimeException("Invalid index " + index + " for an " + getClass().getSimpleName() + " of size " + size());
+		}
+	}
+
+	public class LinkedListIterator implements Iterator<T> {
+		private LinkedList<T> list;
+		private Node current;
+
+		public LinkedListIterator(LinkedList<T> list) {
+			this.list = list;
+			this.current = list.head;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return current != null && current.next != null;
+		}
+
+		@Override
+		public T next() {
+			current = current.next;
+			return current.data;
 		}
 	}
 }

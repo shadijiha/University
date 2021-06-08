@@ -4,12 +4,13 @@
 
 package my;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.function.Consumer;
 
-public class BinatyTree<T extends Comparable<T>> implements Tree<T> {
+public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 
-	private TreeNode<T> root;
+	protected TreeNode<T> root;
 
 	@Override
 	public void add(T element) {
@@ -79,13 +80,23 @@ public class BinatyTree<T extends Comparable<T>> implements Tree<T> {
 	}
 
 	@Override
-	public TreeNode<T>[] children(TreeNode<T> node) {
-		return new TreeNode[0];
+	public MyList<TreeNode<T>> children(TreeNode<T> node) {
+		return children(node, new ArrayList<TreeNode<T>>());
+	}
+
+	private ArrayList<TreeNode<T>> children(TreeNode<T> node, ArrayList<TreeNode<T>> previous) {
+		if (node == null)
+			return previous;
+		previous.add(node);
+		children(node.left, previous);
+		children(node.right, previous);
+
+		return previous;
 	}
 
 	@Override
 	public void preOrder(Consumer<T> func) {
-
+		preOrder(func, root);
 	}
 
 	private void preOrder(Consumer<T> func, TreeNode<T> node) {
@@ -143,6 +154,56 @@ public class BinatyTree<T extends Comparable<T>> implements Tree<T> {
 	@Override
 	public int size() {
 		return sizeOfSubtree(root);
+	}
+
+	public int height() {
+		return height(root);
+	}
+
+	private int height(TreeNode<T> node) {
+		if (node == null)
+			return 0;
+		else {
+			/* compute the depth of each subtree */
+			int lDepth = height(node.left);
+			int rDepth = height(node.right);
+
+			/* use the larger one */
+			if (lDepth > rDepth)
+				return (lDepth + 1);
+			else
+				return (rDepth + 1);
+		}
+	}
+
+	public int depth(TreeNode<T> node) {
+		return depth(root, node.data);
+	}
+
+	private int depth(TreeNode<T> root, T x) {
+
+		// Base case
+		if (root == null)
+			return -1;
+
+		// Initialize distance as -1
+		int dist = -1;
+
+		// Check if x is current node=
+		if ((root.data.equals(x)) ||
+
+				// Otherwise, check if x is
+				// present in the left subtree
+				(dist = depth(root.left, x)) >= 0 ||
+
+				// Otherwise, check if x is
+				// present in the right subtree
+				(dist = depth(root.right, x)) >= 0)
+
+			// Return depth of the node
+			return dist + 1;
+
+		return dist;
 	}
 
 	/* computes number of nodes in tree */

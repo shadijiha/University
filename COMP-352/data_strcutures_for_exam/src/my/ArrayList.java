@@ -4,6 +4,8 @@
 
 package my;
 
+import java.util.Iterator;
+
 public class ArrayList<T> implements MyList<T> {
 
 	private transient T[] data;
@@ -69,6 +71,12 @@ public class ArrayList<T> implements MyList<T> {
 		return -1;
 	}
 
+	public T[] toArray() {
+		T[] temp = (T[]) new Object[size()];
+		System.arraycopy(data, 0, temp, 0, size());
+		return temp;
+	}
+
 	public int size() {
 		return pointer;
 	}
@@ -118,4 +126,38 @@ public class ArrayList<T> implements MyList<T> {
 		data = newData;
 	}
 
+	/**
+	 * Returns an iterator over elements of type {@code T}.
+	 *
+	 * @return an Iterator.
+	 */
+	@Override
+	public Iterator<T> iterator() {
+		return new ArrayListIterator(this);
+	}
+
+	public class ArrayListIterator implements Iterator<T> {
+
+		private ArrayList<T> list;
+		private int current;
+
+		public ArrayListIterator(ArrayList<T> list) {
+			this.list = list;
+		}
+
+		@Override
+		public boolean hasNext() {
+			try {
+				list.get(current);
+				return true;
+			} catch (RuntimeException e) {
+				return false;
+			}
+		}
+
+		@Override
+		public T next() {
+			return list.get(current++);
+		}
+	}
 }
