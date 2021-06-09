@@ -4,9 +4,9 @@
 
 package my;
 
-import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.function.*;
 
 public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 
