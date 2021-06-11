@@ -1,4 +1,6 @@
-import java.util.*;
+import my.*;
+
+import java.util.stream.*;
 
 /**
  *
@@ -13,5 +15,8 @@ public class Main {
 		Tree<Integer> tree = new BinaryTree<>(new Integer[]{
 				1, 2, 3, 4, 5, 6
 		});
+
+		Stream.of(1, 2, 3, 4).reduce(0, () ->);
+
 	}
 }
