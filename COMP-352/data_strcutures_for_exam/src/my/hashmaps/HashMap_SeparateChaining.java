@@ -1,13 +1,13 @@
 /**
  *
  */
-package my;
+package my.hashmaps;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.function.Function;
 
-public class HashMap {
+public class HashMap_SeparateChaining {
 	private LinkedList<Integer>[] data;
 	private int numOfBuckets;
 	private int size;
@@ -15,7 +15,7 @@ public class HashMap {
 
 	private Function<Integer, Integer> hashFunction;
 
-	public HashMap(int size) {
+	public HashMap_SeparateChaining(int size) {
 		data = new LinkedList[size];
 		numOfBuckets = 13;
 		size = 0;
@@ -24,7 +24,7 @@ public class HashMap {
 		};
 	}
 
-	public HashMap() {
+	public HashMap_SeparateChaining() {
 		this(13);
 	}
 
