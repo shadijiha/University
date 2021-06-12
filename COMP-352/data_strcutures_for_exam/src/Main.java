@@ -1,6 +1,4 @@
-import my.*;
-
-import java.util.stream.*;
+import my.HashMap;
 
 /**
  *
@@ -9,14 +7,15 @@ import java.util.stream.*;
 public class Main {
 
 	public static void main(String[] args) {
-		int[] A = {-19, 84, 46, -13, 39, 65};
-		int[] B = new int[A.length];
 
-		Tree<Integer> tree = new BinaryTree<>(new Integer[]{
-				1, 2, 3, 4, 5, 6
-		});
 
-		Stream.of(1, 2, 3, 4).reduce(0, () ->);
+		HashMap map = new HashMap();
 
+		int[] insert = {245, 28, 10, 49, 70, 225, 122, 12, 180, 140, 177, 65, 223, 85, 111, 256, 18, 69, 59, 185, 105, 120, 44};
+		for (int e : insert)
+			map.put(e, e);
+
+		System.out.println(map.getRawArrayAsString());
+		System.out.println(map.getNumberOfCollisions());
 	}
 }
