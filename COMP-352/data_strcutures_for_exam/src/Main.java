@@ -1,4 +1,4 @@
-import my.hashmaps.HashMap_OpenAdressing;
+import my.*;
 
 /**
  *
@@ -7,28 +7,32 @@ import my.hashmaps.HashMap_OpenAdressing;
 public class Main {
 
 	public static void main(String[] args) {
+		WUGraph graph = new WUGraph();
 
-		HashMap_OpenAdressing map = new HashMap_OpenAdressing();
+		var a = new WUGraph.Vertex("A");
+		var b = new WUGraph.Vertex("B");
+		var c = new WUGraph.Vertex("C");
+		var d = new WUGraph.Vertex("D");
+		var e = new WUGraph.Vertex("E");
+		var f = new WUGraph.Vertex("F");
+		var g = new WUGraph.Vertex("G");
+		var h = new WUGraph.Vertex("H");
+		var i = new WUGraph.Vertex("I");
+		var j = new WUGraph.Vertex("J");
 
-		int[] test = {37, 17, 24, 36, 62, 28, 58, 47, 19};
-
-//		for (int e : test)
-		//map.put(e, e);
-
-		map.put(37);
-		map.put(17);
-		map.put(24);
-		map.put(36);
-		map.remove(62);
-		map.remove(28);
-		map.put(58);
-		map.put(47);
-		map.remove(19);
-
-		System.out.println(map);
-		System.out.println("CLuster " + map.getHighestCluster());
-
-		System.out.println(map.getNumberOfCollisions());
-
+		a.addUndirectedEdge(f, 4);
+		a.addUndirectedEdge(h, 2);
+		a.addUndirectedEdge(b, 6);
+		b.addUndirectedEdge(d, 7);
+		b.addUndirectedEdge(c, 4);
+		c.addUndirectedEdge(d, 5);
+		d.addUndirectedEdge(j, 3);
+		d.addUndirectedEdge(e, 9);
+		e.addUndirectedEdge(f, 3);
+		f.addUndirectedEdge(g, 1);
+		g.addUndirectedEdge(h, 2);
+		h.addUndirectedEdge(i, 1);
+		i.addUndirectedEdge(j, 2);
 	}
+
 }

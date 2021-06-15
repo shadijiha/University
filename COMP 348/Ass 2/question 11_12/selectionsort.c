@@ -1,5 +1,6 @@
 #include "selectionsort.h"
 #include <stddef.h>
+#include "selectionsort.h"
 
 int* findmin(int* arr, int size) {
     int min = arr[0];
