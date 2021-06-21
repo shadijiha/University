@@ -98,12 +98,12 @@ list cddr(element e) {
     return cdr(lasel(cdr(e)));
 }
 
-void freeList(list l) {
+void lfree(list l) {
     list it = l;
 
     while (it != NULL) {
         if (it->el.type == LIST) {
-            freeList(it->el.l);
+            lfree(it->el.l);
         }
 
         list temp = it->next;
@@ -186,7 +186,7 @@ int main() {
     printf("\nCar of car: ");
     print(car(car_fulllist));
 
-    freeList(fullList);
+    lfree(fullList);
 
     printf("\n\n");
 
