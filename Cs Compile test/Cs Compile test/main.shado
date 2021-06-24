@@ -1,0 +1,26 @@
+
+class MyClass   {
+    
+    void print()    {
+        print("From My class")
+    } 
+
+}
+
+int main()  {
+
+    int x = 10;
+    double temp = 4.42542323;
+    x = 30;
+    string r = "This is a string";
+    int* ptr = &x;
+
+    getArray.hashCode();
+
+    //print("x: ", x, " temp: ", temp, " ", r);
+    //typeof(r);
+    print("ptr ", ptr);
+    //add(5, 2);
+
+    return 0;
+}
