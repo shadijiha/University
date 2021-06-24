@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e777f612-90db-406d-84d0-6a23b7b42a72" name="Default Changelist" comment="" />
+    <list default="true" id="e777f612-90db-406d-84d0-6a23b7b42a72" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Ass 2/question 10/question10.c" beforeDir="false" afterPath="$PROJECT_DIR$/../Ass 2/question 10/question10.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ass 2/question 9/question9.c" beforeDir="false" afterPath="$PROJECT_DIR$/../Ass 2/question 9/question9.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1uBa1E1ayJHqhYxPSNNT8zncuMW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -36,7 +46,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624141219398</updated>
+      <workItem from="1624330923053" duration="7000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1611" y="695" key="com.intellij.ide.util.TipDialog" timestamp="1624330924099">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1611" y="695" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1624330924099" />
   </component>
 </project>
