@@ -31,6 +31,11 @@ namespace Cs_Compile_test.com {
 			return validator.validator(value);
 		}
 
+		public ShadoClass GetUnitType() {
+			string t = name.Replace("[", "").Replace("]", "").Replace("*", "").Trim();
+			return VM.instance.GetClass(t);
+		}
+
 		public ShadoMethod GetMethod(string name) {
 
 			ShadoMethod method = methods.FirstOrDefault(e => e.name == name);
@@ -43,11 +48,15 @@ namespace Cs_Compile_test.com {
 
 			// If it is still null then throw exception
 			if (method == null)
-				throw new CompilationError("Method %s does not exist on type %s", name, this.name);
+				throw new CompilationError("Method {0} does not exist on type {1}", name, this.name);
 			return method;
 		}
 
 		public void AddMethod(ShadoMethod method) {
+			// If method already exists we override it
+			if (methods.Contains(method)) {
+				methods.Remove(method);
+			}
 			methods.Add(method);
 		}
 
@@ -58,16 +67,13 @@ namespace Cs_Compile_test.com {
 		protected virtual void initializeMethods() {
 			var toString = new ShadoMethod("toString", 0, "string");
 			toString.SetCode((ctx, objects) => {
-				String temp = ctx.value.ToString() + "@" + ctx.GetHashCode();
-				Console.WriteLine(temp);
-				return temp;
+				return ctx.value;
 			});
 			AddMethod(toString);
 
 			var hashcode = new ShadoMethod("hashCode", 0, "int");
 			hashcode.SetCode((ctx, objects)=> {
 				int temp = ctx.GetHashCode();
-				Console.WriteLine(temp);
 				return temp;
 			});
 			AddMethod(hashcode);

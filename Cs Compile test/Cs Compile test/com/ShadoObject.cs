@@ -4,8 +4,9 @@ using System.Text;
 using Cs_Compile_test.com.exceptions;
 
 namespace Cs_Compile_test.com {
-	public class ShadoObject { 
+	public class ShadoObject {
 		static readonly Random random = new Random();
+		public static readonly ShadoObject Global = new ShadoObject("object", "GLOBAL", null);
 
 		public ShadoClass type { get; set; }
 		public string name { get; set; }
@@ -18,7 +19,13 @@ namespace Cs_Compile_test.com {
 			this.value = value;
 			// Keep the string literal without the quotes ("")
 			if (type != null && type.name == "string") {
-				this.value = value.ToString().Substring(1, value.ToString().Length - 1);
+				char[] arr = value.ToString().ToCharArray();
+				if (arr[0] == '"')
+					arr[0] = ' ';
+				if (arr[^1] == '"')
+					arr[^1] = ' ';
+
+				this.value = new string(arr).Trim();
 			}
 
 			this.id = random.Next(int.MaxValue);
@@ -39,7 +46,7 @@ namespace Cs_Compile_test.com {
 			get => _value;
 			set {
 				if (value != null && !(type?.IsValid(value) ?? true))
-					throw new RuntimeError("Cannot assign {0} to an object of type {1}", value, type.name);
+					throw new RuntimeError("Cannot assign {0} to an object of type {1}", value.ToString(), type.name);
 				_value = value;
 			}
 		}
@@ -62,6 +69,10 @@ namespace Cs_Compile_test.com {
 
 		public override int GetHashCode() {
 			return id;
+		}
+
+		public override string ToString() {
+			return type.GetMethod("toString").Call(this, null).ToString();
 		}
 	}
 }

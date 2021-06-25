@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using Cs_Compile_test.com.exceptions;
 using Cs_Compile_test.com.nativeTypes;
@@ -31,32 +32,27 @@ namespace Cs_Compile_test.com {
 			AddType(new ShadoVoid());
 
 
-			ShadoMethod method_print = new ShadoMethod("print", 1, "void", true, new String[] { "object" });
+			ShadoMethod method_print = new ShadoMethod("print", 1, "void", true, new string[] { "object" });
 			method_print.SetCode((context, obj) => {
 				foreach (object e in obj) {
-					string o = e.ToString();
-					if (o.StartsWith("\"") && o.EndsWith("\"")) {
-						o = o.Substring(1, o.Length - 1);            // Keep the string literal without the quotes ("")
-					} else if (!o.Contains("\"")) {
-						o = VM.instance.Get(o).value.ToString();        // Get the value of the variable if it is not a raw string
-					} else {
-						throw new SyntaxError("invalid syntax");
+						string o = e.ToString().Trim();
+						if (o.StartsWith("\"") && o.EndsWith("\"")) {
+							o = o.Substring(1, o.Length - 2);            // Keep the string literal without the quotes ("")
+						} else if (!o.Contains("\"")) {
+							o = VM.instance.GetOrThrow(o).ToString(); // Get the value of the variable if it is not a raw string
+						} else {
+							throw new SyntaxError("invalid syntax");
+						}
+						Console.Write(o + " ");
 					}
-					Console.Write(o);
-				}
 
-				Console.WriteLine();
-				return null;
+					Console.WriteLine();
+					return null;
 			});
 			PushVariable(method_print);
 
-			ShadoMethod method_typeof = new ShadoMethod("typeof", 1, "string", new String[] { "object" });
-			method_typeof.SetCode((ShadoObject ctx, object[] obj)=> {
-				var var = this.Get(obj[0].ToString());
-				if (var != null)
-					Console.WriteLine(var.type);
-				return null;
-			});
+			ShadoMethod method_typeof = new ShadoMethod("typeof", 1, "string", new string[] { "object" });
+			method_typeof.SetCode((ctx, obj) => this.Get(obj[0].ToString()).type.name);
 			PushVariable(method_typeof);
 		}
 
@@ -107,7 +103,7 @@ namespace Cs_Compile_test.com {
 
 
 			// Add array type
-			classes.Add(new ShadoClass(clazz.name + "[]", new TypeValidator(clazz.name + "[]", o => true)));
+			classes.Add(new ShadoArray(clazz.name + "[]"));;
 		}
 
 		public void AddType(string type, Predicate<Object> validator) {
@@ -116,15 +112,15 @@ namespace Cs_Compile_test.com {
 
 		public void PushVariable(ShadoObject obj) {
 			if (Get(obj.name) != null)
-				throw new CompilationError("variable %s already exists", obj.name);
+				throw new CompilationError("variable {0} already exists", obj.name);
 
 			if (!HasType(obj.type))
-				throw new CompilationError("type %s does not exist", obj.type);
+				throw new CompilationError("type {0} does not exist", obj.type);
 
 			// Verify type compatibility
 			bool valid = IsValidType(obj.type, obj.value);
 			if (!valid)
-				throw new CompilationError("Cannot assign %s to a variable of type %s", obj.value, obj.type);
+				throw new CompilationError("Cannot assign {0} to a variable of type {1}", obj.ToString(), obj.type);
 
 			// Verify if it is a pointer
 			/*if (obj.IsPointer()) {
@@ -138,12 +134,12 @@ namespace Cs_Compile_test.com {
 			return variables.Where(e => e.name == varName).FirstOrDefault();
 		}
 
-		public ShadoObject GetOrThrow(String varName, int line) {
+		public ShadoObject GetOrThrow(string varName) {
 
 			ShadoObject obj = Get(varName);
 			if (obj != null)
 				return obj;
-			throw new CompilationError("an error has occurred at line {0}", line);
+			throw new CompilationError("an error has occurred");
 		}
 
 		public ShadoClass GetClass(string name) {
@@ -151,6 +147,14 @@ namespace Cs_Compile_test.com {
 				if (klass.name == name)
 					return klass;
 			return null;
+		}
+
+		public ShadoObject GetByAddress(int hashCode) {
+			var it = from obj in variables
+				where obj.GetHashCode() == hashCode
+				select obj;
+
+			return it.First();
 		}
 
 		public List<ShadoObject> AllVariables() {

@@ -12,8 +12,11 @@ namespace Cs_Compile_test
 {
 	public class Compiler
 	{
+		private static Compiler current = null;
+
 		private string filecontent;
 		private string filename;
+		private uint lineNumber;
 
 		public Compiler(string filename) {
 			if (filename == null)
@@ -31,14 +34,23 @@ namespace Cs_Compile_test
 		}
 
 		public void compile() {
+			current = this;
 			VM.instance.Initialize();
 
+			lineNumber = 1;
 			string[] lines = filecontent.Split("\n");
 			foreach (var l in lines) {
-				string line = l.Trim();
+				string line = l.Trim().Split("//")[0]; // Without comments
 
 				new Expression(line).Execute();
+				lineNumber++;
 			}
+		}
+
+		public static string GetCurrentInfo() {
+			string line = current.filecontent.Split("\n")[current.lineNumber - 1];
+			return $"{current.filename} @ line: {current.lineNumber}\n" +
+			       $"--->\t{line}";
 		}
 
 		public static void compile(string code) {

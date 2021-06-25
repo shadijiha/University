@@ -46,17 +46,25 @@ namespace Cs_Compile_test.com {
 		{
 		}
 
-		public void Call(ShadoObject context, Object[] args) {
-			if (context == null)
-				throw new RuntimeError("Null pointer exception: Cannot call a method on null");
-			if (!optionalArgs && args.Length != argCount)
-				throw new RuntimeError("method arguments mismatch (call for %s)", this.name);
-
-			code(context, args);
+		public ShadoMethod(ShadoMethod o)
+			: this(o.name, o.argCount, o.returnType, o.optionalArgs, o.argTypes) {
+			code = o.code;
 		}
 
-		public void SetCode(MethodCall code) {
+		public object Call(ShadoObject context, Object[] args) {
+			if (context == null)
+				throw new RuntimeError("Null pointer exception: Cannot call a method on null");
+
+			int c = args?.Length ?? 0;
+			if (!optionalArgs && c != argCount)
+				throw new RuntimeError("method arguments mismatch (call for {0})", this.name);
+
+			return code(context, args);
+		}
+
+		public ShadoMethod SetCode(MethodCall code) {
 			this.code = code;
+			return this;
 		}
 
 		public String GetFullType() {
@@ -77,6 +85,17 @@ namespace Cs_Compile_test.com {
 
 		public string[] GetArgTypes() {
 			return argTypes;
+		}
+
+		public override bool Equals(object obj) {
+			if (obj == null || obj.GetType() != GetType())
+				return false;
+			else if (obj == this)
+				return true;
+			else {
+				var o = (ShadoMethod) obj;
+				return name == o.name && argCount == o.argCount;
+			}
 		}
 	}
 }
