@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shadi\\Desktop\\Cs Compile test\\Cs Compile test\\Cs Compile test.csproj",
+      "projectUniqueName": "D:\\Wamp64\\www\\GitHub\\University\\Cs Compile test\\Cs Compile test\\Cs Compile test.csproj",
       "projectName": "Cs Compile test",
-      "projectPath": "C:\\Users\\shadi\\Desktop\\Cs Compile test\\Cs Compile test\\Cs Compile test.csproj",
+      "projectPath": "D:\\Wamp64\\www\\GitHub\\University\\Cs Compile test\\Cs Compile test\\Cs Compile test.csproj",
       "packagesPath": "C:\\Users\\shadi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shadi\\Desktop\\Cs Compile test\\Cs Compile test\\obj\\",
+      "outputPath": "D:\\Wamp64\\www\\GitHub\\University\\Cs Compile test\\Cs Compile test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
