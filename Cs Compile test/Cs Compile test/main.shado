@@ -1,11 +1,11 @@
 
-class MyClass   {
+// class MyClass   {
     
-    void print()    {
-        print("From My class")
-    } 
+//     void print()    {
+//         print("From My class")
+//     } 
 
-}
+// }
 
 int main()  {
 
@@ -15,12 +15,9 @@ int main()  {
     string r = "This is a string";
     int* ptr = &x;
 
-    getArray.hashCode();
-
     //print("x: ", x, " temp: ", temp, " ", r);
     //typeof(r);
     print("ptr ", ptr);
     //add(5, 2);
 
-    return 0;
 }

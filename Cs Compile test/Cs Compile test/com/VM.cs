@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using Cs_Compile_test.com.exceptions;
 using Cs_Compile_test.com.nativeTypes;
 
@@ -21,8 +22,8 @@ namespace Cs_Compile_test.com {
 
 		public void Initialize() {
 
-			AddType("object", o=> true);
-			AddType("function", o=> true);
+			//AddType("object", o=> true);
+			AddType("function", o=> o == null || o.GetType() == typeof(ShadoMethod));
 			AddType(new ShadoInt());
 			AddType(new ShadoFloat());
 			AddType(new ShadoDouble());
@@ -35,25 +36,66 @@ namespace Cs_Compile_test.com {
 			ShadoMethod method_print = new ShadoMethod("print", 1, "void", true, new string[] { "object" });
 			method_print.SetCode((context, obj) => {
 				foreach (object e in obj) {
-						string o = e.ToString().Trim();
-						if (o.StartsWith("\"") && o.EndsWith("\"")) {
-							o = o.Substring(1, o.Length - 2);            // Keep the string literal without the quotes ("")
-						} else if (!o.Contains("\"")) {
-							o = VM.instance.GetOrThrow(o).ToString(); // Get the value of the variable if it is not a raw string
-						} else {
-							throw new SyntaxError("invalid syntax");
-						}
-						Console.Write(o + " ");
+					string o = e?.ToString().Trim() ?? "\"null\"";
+					if (o.StartsWith("\"") && o.EndsWith("\"")) {
+						o = Regex.Unescape(o.Substring(1,
+							o.Length - 2)); // Keep the string literal without the quotes ("")
+					}
+					else if (context.HasVariable(o) || Get(o) != null) {
+						o = context.GetVariable(o)?.ToString() ??
+						    VM.instance.Get(o)?.ToString(); // Get the value of the variable if it is not a raw string
+					}
+					// Otherwise try to find the type of the variable or just print the C# type (Mainly the variable is an R-value)
+					else {
+						ShadoObject temp = new ShadoObject(GetTypeOf(e), e);
+						o = temp.ToString() ?? o;
 					}
 
-					Console.WriteLine();
-					return null;
+					Console.Write(o + " ");
+				}
+				Console.WriteLine();
+				return null;
 			});
 			PushVariable(method_print);
 
 			ShadoMethod method_typeof = new ShadoMethod("typeof", 1, "string", new string[] { "object" });
-			method_typeof.SetCode((ctx, obj) => this.Get(obj[0].ToString()).type.name);
+			method_typeof.SetCode((ctx, obj) => 
+				ctx.GetVariable(obj[0].ToString())?.type.name ?? this.Get(obj[0].ToString())?.type.name ?? this.GetTypeOf(obj[0])?.name ?? "object");
 			PushVariable(method_typeof);
+
+			ShadoMethod method_print_types = new ShadoMethod("print_all_types", 0, "void");
+			method_print_types.SetCode((ctx, obj) => {
+				foreach (var shadoClass in VM.instance.GetAllTypes()) {
+					Console.WriteLine("Type:\t{0}", shadoClass);
+					foreach (var shadoMethod in shadoClass.GetMethods()) {
+						Console.WriteLine("\t\t{0}\t{1}", shadoMethod.name, shadoMethod.GetFullType());
+					}
+				}
+				return null;
+			});
+			PushVariable(method_print_types);
+
+			ShadoMethod print_user_defined_types = new ShadoMethod("print_user_defined_types", 0, "void");
+			print_user_defined_types.SetCode((ctx, obj) => {
+				foreach (var shadoClass in VM.instance.GetAllTypes()) {
+					if (shadoClass.GetType().Namespace.Contains("native"))
+						continue;
+
+					Console.WriteLine("Type:\t{0}", shadoClass);
+					foreach (var shadoMethod in shadoClass.GetMethods()) {
+						Console.WriteLine("\t\t{0}\t{1}", shadoMethod.name, shadoMethod.GetFullType());
+					}
+				}
+				return null;
+			});
+			PushVariable(print_user_defined_types);
+		}
+
+		public void InvokeMain() {
+			ShadoMethod main = Get("main") as ShadoMethod;
+			if (main == null)
+				throw new RuntimeError("Method main not found!");
+			main.Call(ShadoObject.Global, null);
 		}
 
 		public bool IsValidType(ShadoClass clazz, Object value) {
@@ -72,6 +114,14 @@ namespace Cs_Compile_test.com {
 		}
 
 		public void AddType(ShadoClass clazz) {
+
+			// If type already exists
+			if (classes.Contains(clazz)) {
+				classes.Remove(clazz);
+				classes.Remove(new ShadoClass(clazz.name + "*"));
+				classes.Remove(classes.Single(e => e.name == clazz.name + "[]"));
+			}
+
 			classes.Add(clazz);
 
 			// Add pointer and reference type
@@ -149,12 +199,17 @@ namespace Cs_Compile_test.com {
 			return null;
 		}
 
-		public ShadoObject GetByAddress(int hashCode) {
-			var it = from obj in variables
-				where obj.GetHashCode() == hashCode
-				select obj;
+		public ShadoClass? GetTypeOf(object o) {
+			foreach (ShadoClass clazz in GetAllTypes()) {
+				if (clazz.IsValid(o) && clazz.name != "object" && clazz.name != "object*" && clazz.name != "object[]")
+					return clazz;
+			}
 
-			return it.First();
+			return GetClass("object");
+		}
+
+		public static ShadoClass GetSuperType() {
+			return instance.GetClass("object");
 		}
 
 		public List<ShadoObject> AllVariables() {

@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Cs_Compile_test.com;
 
 namespace Cs_Compile_test
@@ -15,8 +17,8 @@ namespace Cs_Compile_test
 		private static Compiler current = null;
 
 		private string filecontent;
-		private string filename;
-		private uint lineNumber;
+		public string filename { get; private set; }
+		public uint lineNumber { get; set; }
 
 		public Compiler(string filename) {
 			if (filename == null)
@@ -37,20 +39,71 @@ namespace Cs_Compile_test
 			current = this;
 			VM.instance.Initialize();
 
-			lineNumber = 1;
-			string[] lines = filecontent.Split("\n");
-			foreach (var l in lines) {
-				string line = l.Trim().Split("//")[0]; // Without comments
+			// Run the preprocessor
+			preprocessor();
 
-				new Expression(line).Execute();
-				lineNumber++;
+			// Remove multiline comments
+			while (Regex.IsMatch(filecontent, @"\/\*[^*]*\*+([^/][^*]*\*+)*\/"))
+				filecontent = Regex.Replace(filecontent, @"\/\*[^*]*\*+([^/][^*]*\*+)*\/", "");
+			
+			// Run the class definer
+			Parser.ExtractClasses(filecontent);
+
+			// Run the method definer
+			Parser.ExtractMethods(filecontent);
+
+		}
+
+		public void preprocessor() {
+			string[] lines = filecontent.Split("\n");
+			for (uint i = 0; i < lines.Length; i++) {
+				lineNumber = i + 1;
+				string line = lines[i].Trim();
+
+				// Replace prepressor constant
+				foreach (var constant in PreprocessorCommand.constants) {
+					line = line.Replace(constant.Key, constant.Value().ToString());
+					lines[i] = line;
+				}
+
+				if (line.StartsWith("#"))	{
+					// Extract command name
+					string[] tokens = Expression.SplitByExceptQuotes(line.Substring(1), " |	").ToArray();
+					PreprocessorCommand command = PreprocessorCommand.Get(tokens[0]);
+
+					lines[i] = command.Execute<string>(tokens.Skip(1).ToArray());
+					
+					// Go back to preprocess the file that just got included
+					lines = string.Join('\n', lines).Split('\n');
+					i = 0;
+				}
+
 			}
+
+			filecontent = string.Join('\n', lines);
 		}
 
 		public static string GetCurrentInfo() {
-			string line = current.filecontent.Split("\n")[current.lineNumber - 1];
-			return $"{current.filename} @ line: {current.lineNumber}\n" +
-			       $"--->\t{line}";
+			try {
+				string line = current.filecontent.Split("\n")[current.lineNumber];
+				return $"{current.filename} @ line: {current.lineNumber + 1}\n" +
+				       $"--->\t{line}";
+			}
+			catch (Exception) {
+				return "(Unable to get line info)";
+			}
+		}
+
+		public static Compiler GetCurrent() {
+			return current;
+		}
+
+		public static void ResetLineCount() {
+			current.lineNumber = 0;
+		}
+
+		public static void IncrementLineCount(int i = 1) {
+			current.lineNumber += 1;
 		}
 
 		public static void compile(string code) {

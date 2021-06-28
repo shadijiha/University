@@ -8,7 +8,6 @@ namespace Cs_Compile_test.com {
 	public class ShadoClass
 	{
 		protected IList<ShadoClass> parents;
-		protected IList<ShadoObject> instanceVariables;
 		protected TypeValidator validator;
 		protected IList<ShadoMethod> methods;
 		public string name { get; }
@@ -17,7 +16,6 @@ namespace Cs_Compile_test.com {
 			this.name = name;
 			parents = new List<ShadoClass>();
 			methods = new List<ShadoMethod>();
-			instanceVariables = new List<ShadoObject>();
 			this.validator = validator;
 			initializeMethods();
 		}
@@ -29,6 +27,10 @@ namespace Cs_Compile_test.com {
 
 		public bool IsValid(object value) {
 			return validator.validator(value);
+		}
+
+		public bool IsValidType(string name) {
+			return name == this.name || parents.Where(e => e.IsValidType(name)).FirstOrDefault() != null;
 		}
 
 		public ShadoClass GetUnitType() {
@@ -52,6 +54,18 @@ namespace Cs_Compile_test.com {
 			return method;
 		}
 
+		public ShadoMethod[] GetMethods() {
+			return methods.ToArray();
+		}
+
+		public ShadoMethod GetConstructor() {
+			return GetMethod(name);
+		}
+
+		public ShadoClass[] GetParentClasses() {
+			return parents.ToArray();
+		}
+
 		public void AddMethod(ShadoMethod method) {
 			// If method already exists we override it
 			if (methods.Contains(method)) {
@@ -61,6 +75,9 @@ namespace Cs_Compile_test.com {
 		}
 
 		public void AddParentClass(ShadoClass clzz) {
+			if (this.Equals(VM.GetSuperType()) || clzz == null)
+				return;
+
 			parents.Add(clzz);
 		}
 

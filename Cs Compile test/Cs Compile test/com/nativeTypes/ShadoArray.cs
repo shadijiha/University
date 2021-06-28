@@ -11,7 +11,7 @@ namespace Cs_Compile_test.com.nativeTypes {
 			var type = VM.instance.GetClass(name).GetUnitType();
 			var list = o as List<object>;
 			if (list == null)
-				throw new RuntimeError("Cannot assign {0} to a variable of type {1}", o.ToString(), name);
+				return false;
 
 			foreach (var obj in list) {
 				if (!type.IsValid(obj))
@@ -30,6 +30,9 @@ namespace Cs_Compile_test.com.nativeTypes {
 				builder.Append("[");
 
 				var list = ctx.value as List<object>;
+				if (list == null)
+					throw new RuntimeError("Cannot call {0}.toString() on a variable of type {1}", this.name, ctx.type.name);
+
 				int i = 0;
 				foreach (var o in list) {
 					builder.Append(o);

@@ -1,0 +1,101 @@
+// This is the core library of shado script
+/**
+ * This function prints the arg to the console
+ * @param arg The argument to print
+ * @returns void
+ * @example: print("Hello", "this", name)
+ */
+native void print(object arg);
+
+/**
+ * This function returns the type of object arg
+ * @param arg The argument to get the type of
+ * @returns string
+ * @example: typeof(aString) --> string
+ */
+native string typeof(object obj);
+
+/** 
+ * All objects extend this class
+ */
+class object {
+
+    public native object();
+
+    public native object(object o);
+
+    public native object(void* ptr);
+
+    public native string toString();
+
+    public native int hashCode();
+}
+
+class function  {
+    
+}
+
+/**
+ * All arrays have this class as super class
+ */ 
+native class Array {
+
+    public native int length();
+
+    public native dynamic at(int index);
+
+    public native void add(dynamic element);
+
+    public native void addAt(dynamic element);
+
+    public native dynamic pop();
+
+    public native bool contains(dynamic element); 
+};
+
+/**
+ * This is the shado string class
+ */
+native class string {
+
+    public native string(char[] array);
+
+    public native string(string s);
+
+    public native string(string* ptr);
+
+    public native int length();
+
+    public native char charAt(int index);
+
+    public native char[] toCharArray();
+
+    public native string concat(string other);
+
+    public native bool contains(string other);
+
+    public native bool startWith(string s);
+
+    public native bool endsWith(string s);
+
+    public native bool equals(string s);
+
+    public native bool equalsIgnoreCase(string s);
+
+    public native string toLowerCase();
+
+    public native string toUpperCase();
+
+    public native int indexOf(string s);
+
+    public native bool isEmpty();
+
+    public native string trim();
+
+    public native string replace(string old, string newVal);
+
+    public native string[] split(string splitter);
+}
+
+
+

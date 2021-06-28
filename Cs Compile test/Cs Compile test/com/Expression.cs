@@ -83,7 +83,7 @@ namespace Cs_Compile_test.com {
 	{
 		public enum Type
 		{
-			DECLARATION, ASSIGNMENT, FUNC_CALL, OBJECT_FUNC_CALL
+			DECLARATION, ASSIGNMENT, FUNC_CALL, OBJECT_FUNC_CALL, RETURN, POINTER_ASSIGNMENT, OBJECT_INSTATIATION
 		}
 
 		private string raw;
@@ -91,8 +91,10 @@ namespace Cs_Compile_test.com {
 		private string name;
 		private string rhs;
 		private Type expressionType;
+		private ShadoObject scope;
 
-		public Expression(string raw) {
+		public Expression(string raw, ShadoObject scope) {
+			this.scope = scope;
 			this.raw = raw.Trim();
 			var parts = SplitByExceptQuotes(raw, " ");
 
@@ -108,24 +110,49 @@ namespace Cs_Compile_test.com {
 					return executeFuncCall();
 				case Type.OBJECT_FUNC_CALL:
 					return executeFuncCallOnObject();
+				case Type.RETURN:
+					return executeReturn();
+				case Type.POINTER_ASSIGNMENT:
+					return executePointerAssignment();
+				case Type.OBJECT_INSTATIATION:
+					return executeObjectInstantiation();
 				default: return rhs;
 			}
 		}
 
 		private void parseExpression(List<string> tokens) {
-			
+
+			if (new ExpressionSyntax("return ANY").Matches(raw)) {
+				this.name = "";
+				this.rhs = raw.Replace("return", "").Trim();
+				this.expressionType = Type.RETURN;
+			}
+			// It is a object initialization
+			else if (new ExpressionSyntax("TYPE IDENTIFIER = new TYPE(ANY)").Matches(raw)) {
+				this.type = VM.instance.GetClass(tokens[0]);
+				this.name = tokens[1];
+				this.rhs = string.Join(' ', tokens.GetRange(3, tokens.Count - 3));
+				this.expressionType = Type.OBJECT_INSTATIATION;
+			}
+			// If it is a pointer modification
+			else if (new ExpressionSyntax("*IDENTIFIER = ANY").Matches(raw)) {
+				this.name = raw.Trim().Substring(1).Split("=")[0].Trim();
+				this.rhs = raw.Split("=")[1].Trim();
+				this.expressionType = Type.POINTER_ASSIGNMENT;
+			}
 			// If it is a full declaration
-			if (ExpressionSyntax.FULL_DECLARATION.Matches(raw)) {
+			else if (ExpressionSyntax.FULL_DECLARATION.Matches(raw)) {
 				this.type = VM.instance.GetClass(tokens[0]);
 				this.name = tokens[1];
 				this.rhs = string.Join(' ', tokens.GetRange(3, tokens.Count - 3));
 				this.expressionType = Type.ASSIGNMENT;
-			} 
+			}
 			// If it is a declaration
 			else if (ExpressionSyntax.DECLARATION.Matches(raw)) {
 				this.type = VM.instance.GetClass(tokens[0]);
 				this.name = tokens[1].Replace(";", "").Replace("\n", "");
 				this.expressionType = Type.DECLARATION;
+				this.rhs = "";
 			}
 			// If it is a function call on object
 			else if (new ExpressionSyntax("IDENTIFIER.IDENTIFIER(ANY)").Matches(raw) && !raw.Contains("{")) {
@@ -146,7 +173,7 @@ namespace Cs_Compile_test.com {
 				// TODO: The varaibles my be in scope in the future
 				this.name = tokens[0];
 				this.rhs = string.Join(' ', tokens.GetRange(2, tokens.Count - 2));
-				this.type = VM.instance.Get(name).type;
+				this.type = scope.GetVariable(name)?.type ?? VM.instance.Get(name)?.type;
 				this.expressionType = Type.ASSIGNMENT;
 			} else {
 				this.rhs = raw;
@@ -160,9 +187,6 @@ namespace Cs_Compile_test.com {
 
 		private object executeVariableAssignemt() {
 			// TODO: this shit should not be here
-			if (name == null)
-				return null;
-
 			rhs = rhs.Trim();
 
 			// Check for pointer
@@ -170,22 +194,24 @@ namespace Cs_Compile_test.com {
 			ShadoObject pointer = null;	// If the current expression is an assignment to clone a method (change its name by variable assignment)
 
 			if (rhs.StartsWith("&")) {
-				var ptr = VM.instance.Get(rhs.Substring(1));
+				var vname = rhs.Substring(1);
+				var ptr = scope.GetVariable(vname) ?? VM.instance.Get(vname);
 				checkVariable(ptr);
 
 				value = ptr.GetHashCode();
 			}
-			 // Check for derefrence
-			 else if (rhs.StartsWith("*")) {
+			// Check for derefrence
+			else if (rhs.StartsWith("*")) {
 
 				var ptr = rhs.Substring(1);
 				ShadoObject obj;
 
 				// If it is a int
 				if (int.TryParse(ptr, out _))
-					obj = VM.instance.GetByAddress(int.Parse(ptr));
+					obj = scope.GetByAddress(int.Parse(ptr)) ?? MemoryManager.GetByAddress(int.Parse(ptr));
 				else
-					obj = VM.instance.GetByAddress(int.Parse(VM.instance.Get(ptr).value.ToString()));
+					obj = scope.GetByAddress(int.Parse(scope.GetVariable(ptr).value.ToString()))
+					      ?? MemoryManager.GetByAddress(int.Parse(VM.instance.Get(ptr).value.ToString()));
 
 				checkVariable(obj);
 
@@ -204,7 +230,7 @@ namespace Cs_Compile_test.com {
 				string[] args = SplitByExceptQuotes(rhs.Substring(1, rhs.Length - 2), " |,").ToArray();
 
 				// Insert all args to array
-				var t = type.GetUnitType();
+				var t = type?.GetUnitType() ?? VM.GetSuperType();
 				foreach (string s in args) {
 					if (t.IsValid(s.Trim()))
 						(value as List<object>).Add(s);
@@ -213,45 +239,53 @@ namespace Cs_Compile_test.com {
 				}
 			}
 			// Variable to variable assignment
-			else if (VM.instance.Get(rhs) != null) {
-				var obj = VM.instance.Get(rhs);
+			else if (scope.GetVariable(rhs) != null) {
+				var obj = scope.GetVariable(rhs);
 				value = obj.value;
 				pointer = obj;
 			}
 			else if (isFunctionCall(rhs)) {
-				value = new Expression(rhs).Execute();
+				value = new Expression(rhs, scope).Execute();
 			}
 
 			// Push new variable or modify the old one
-			try {
-				if (pointer?.IsMethod() ?? false) {
-					var method = new ShadoMethod(pointer as ShadoMethod);
-					method.name = name;
-					VM.instance.PushVariable(method);
-				} else
-					VM.instance.PushVariable(new ShadoObject(type, name, value));
+			if (pointer?.IsMethod() ?? false) {
+				var method = new ShadoMethod(pointer as ShadoMethod);
+				method.name = name;
+				VM.instance.PushVariable(method);
 			}
-			catch (CompilationError) {
-				if (pointer.IsMethod())
-					throw new RuntimeError("function pointers are final (cannot be reassigned)");
-				VM.instance.Get(name).value = value;
+			else {
+				// Push The variable to the scope context
+				name = name == null ? rhs : name;
+				scope.AddOrUpdateVariable(type?.name ?? "object", name, value);
 			}
 
-			return null;
+			return value;
 		}
 
 		private object executeFuncCall() {
 
+			// See if it is a native function declaration 
+			if (new ExpressionSyntax("native ANY;").Matches(raw.Trim()))
+				return null;
+			
+
 			// Parse function name
 			string functionName = rhs.Split("(")[0].Trim();
-			string[] args = SplitByExceptQuotes(rhs.Substring(functionName.Length + 1, rhs.Length - functionName.Length - 2), "+| |,").ToArray();
+			string[] rawargs = SplitByExceptQuotes(rhs.Substring(functionName.Length + 1, rhs.Length - functionName.Length - 2), "+| |,").ToArray();
+			object[] args = new object[rawargs.Length];
+
+			// Parse the args
+			for (int i = 0; i < rawargs.Length; i++) {
+				args[i] = new Expression(rawargs[i], scope).Execute();
+			}
 
 			// Get the function
 			ShadoObject method = VM.instance.Get(functionName);
 			if (method == null || !method.IsMethod())
-				throw new RuntimeError("%s is not a function", functionName);
+				throw new RuntimeError("{0} is not a function", functionName);
 
-			return (method as ShadoMethod).Call(ShadoObject.Global, args);
+			return (method as ShadoMethod).Call(scope, args);
 		}
 
 		private object executeFuncCallOnObject() {
@@ -266,8 +300,49 @@ namespace Cs_Compile_test.com {
 			string[] args = SplitByExceptQuotes(new string(argsNoParantheses).Trim(), "+| |,").ToArray();
 
 			// Get the function
-			ShadoObject ctx = VM.instance.GetOrThrow(objectName);
+			ShadoObject ctx = scope.GetVariable(objectName) ?? VM.instance.GetOrThrow(objectName);
 			return ctx.type.GetMethod(functionName).Call(ctx, args);
+		}
+
+		private object executeReturn() {
+			return new Expression(rhs, scope).Execute();
+		}
+
+		private object executePointerAssignment() {
+			this.type = scope.GetVariable(name).type;
+			
+			// See if the rhs is ok
+			object val = new Expression(rhs, scope).Execute();
+			if (!type.IsValid(val))
+				throw new CompilationError("cannot assign {0} to a variable of type {1}", rhs, type.name);
+
+			string expr = new Expression(name, scope).Execute().ToString();
+			int address;
+			if (!int.TryParse(expr, out address))
+				throw new RuntimeError("Invalid memory address", expr);
+
+			MemoryManager.GetByAddress(address).value = val;
+			
+			return null;
+		}
+
+		private object executeObjectInstantiation() {
+
+			string[] expr = Regex.Split(rhs.Trim(), "\\s+");
+			expr[0] = "";
+
+			string noNew = string.Join(' ', expr.RemoveBlanks());
+			string constructor = noNew.Split("(", 2)[0];
+			string rawargs = noNew.Split("(", 2)[1];
+			rawargs = rawargs.Substring(0, rawargs.Length - 1);
+
+			var args = rawargs.Split(",").RemoveBlanks();
+
+			// Verify that the construct is ok
+			if (!type.IsValidType(constructor))
+				throw new CompilationError("Cannot assign {0} to a variable of type {1}", constructor, type.name);
+
+			return type.GetConstructor().Call(scope, args);
 		}
 
 		private static bool isMathExpression(string expression, ref object output) {
@@ -289,9 +364,8 @@ namespace Cs_Compile_test.com {
 				throw new CompilationError("null pointer exception");
 		}
 
-		private static List<string> SplitByExceptQuotes(string raw, string splitter) {
+		public static List<string> SplitByExceptQuotes(string raw, string splitter) {
 			return Regex.Matches(raw, @"[\""].+?[\""]|[^" + splitter + @"]+")
-				.Cast<Match>()
 				.Select(m => m.Value)
 				.ToList();
 		}

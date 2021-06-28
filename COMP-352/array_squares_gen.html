@@ -1,0 +1,129 @@
+<html>
+
+<head>
+
+    <style>
+        body {
+            padding: 50px;
+        }
+        
+        #squares_count {
+            font-size: 30px;
+        }
+        
+        #generated_area {
+            width: 100%;
+            height: auto;
+        }
+        
+        #generated_area div {
+            width: 100px;
+            height: 100px;
+            border: solid black 5px;
+            display: inline-block;
+        }
+        
+        #generated_area div input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 60px;
+        }
+        
+        #console {
+            border: solid black 1px;
+            width: 100%;
+            font-size: 72;
+            height: auto;
+            min-height: 400px;
+        }
+        
+        input[type="button"] {
+            font-size: 30px!important;
+        }
+    </style>
+    <script>
+        let buffer = [];
+        let lastN = 10;
+
+        function GenerateSquares(n) {
+            const ELEMENT = document.getElementById("generated_area");
+            ELEMENT.innerHTML = "";
+            lastN = n;
+
+            for (let i = 0; i < n; i++) {
+                ELEMENT.innerHTML += `<div><input value="${buffer[i] || ''}" type="text" onkeyup="FillBuffer(${i}, this.value)"/></div>`;
+            }
+        }
+
+        function FillBuffer(i, val) {
+            buffer[i] = val;
+        }
+
+        function Clear() {
+            buffer = [];
+            GenerateSquares(lastN);
+        }
+
+        function Popfirst() {
+            let index = 0;
+            for (let i = 0; i < buffer.length; i++) {
+                if (buffer[i] != undefined) {
+                    index = i;
+                    break;
+                }
+            }
+
+            const val = buffer[index];
+            buffer[index] = undefined;
+
+            // Add to console
+            document.getElementById("console").innerHTML += " &nbsp;" + val;
+
+            // Refresh array
+            GenerateSquares(lastN);
+        }
+
+        function Poplast() {
+            let index = 0;
+            for (let i = buffer.length - 1; i >= 0; i--) {
+                if (buffer[i] != undefined) {
+                    index = i;
+                    break;
+                }
+            }
+
+            const val = buffer[index];
+            buffer[index] = undefined;
+
+            // Add to console
+            document.getElementById("console").innerHTML += " &nbsp;" + val;
+
+            // Refresh array
+            GenerateSquares(lastN);
+        }
+
+        window.onload = function() {
+            GenerateSquares(lastN);
+        }
+    </script>
+</head>
+
+<body>
+    <input type="number" placeholder="Squares..." id="squares_count" onchange="GenerateSquares(this.value)" />
+    <input type="button" onclick="Clear()" value="Clear" />
+    <br />
+    <br />
+    <div id="generated_area">
+    </div>
+    <br />
+    <input type="button" onclick="Popfirst()" value="Pop first" />
+    <input type="button" onclick="Poplast()" value="Pop last" />
+    <br />
+    <br />
+    <h1>Console Output: </h1>
+    <div id="console" contenteditable="true">
+    </div>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Cs_Compile_test.com.exceptions;
 
@@ -12,6 +13,7 @@ namespace Cs_Compile_test.com {
 		public string name { get; set; }
 		private object _value;
 		private int id;
+		protected IList<ShadoObject> instanceVariables;
 
 		public ShadoObject(ShadoClass clazz, string name, object value) {
 			this.type = clazz;
@@ -29,6 +31,9 @@ namespace Cs_Compile_test.com {
 			}
 
 			this.id = random.Next(int.MaxValue);
+			this.instanceVariables = new List<ShadoObject>();
+
+			MemoryManager.AddVariable(this);
 		}
 
 		public ShadoObject(string type, string name, object value)
@@ -42,6 +47,11 @@ namespace Cs_Compile_test.com {
 			name = "temp_" + GetHashCode();
 		}
 
+		public ShadoObject(ShadoClass clazz, object value)
+			: this(clazz, "", value) {
+			name = "temp_" + GetHashCode();
+		}
+
 		public object value {
 			get => _value;
 			set {
@@ -49,6 +59,40 @@ namespace Cs_Compile_test.com {
 					throw new RuntimeError("Cannot assign {0} to an object of type {1}", value.ToString(), type.name);
 				_value = value;
 			}
+		}
+
+		public ShadoObject AddVariable(ShadoObject obj) {
+			instanceVariables.Add(obj);
+			return obj;
+		}
+
+		public ShadoObject AddVariable(string type, string name, object value = null) {
+			return AddVariable(new ShadoObject(VM.instance.GetClass(type), name, value));
+		}
+
+		public ShadoObject AddOrUpdateVariable(string type, string name, object value = null) {
+			var o = GetVariable(name);
+			if (o == null)
+				AddVariable(type, name, value);
+			else
+				o.value = value;
+			return o;
+		}
+
+		public ShadoObject GetVariable(string name) {
+			return instanceVariables.Where(e => e.name == name).FirstOrDefault();
+		}
+
+		public ShadoObject GetByAddress(int hashCode) {
+			var it = from obj in instanceVariables
+				where obj.GetHashCode() == hashCode
+				select obj;
+
+			return it.First();
+		}
+
+		public bool HasVariable(string name) {
+			return GetVariable(name) != null;
 		}
 
 		public virtual bool IsMethod() {

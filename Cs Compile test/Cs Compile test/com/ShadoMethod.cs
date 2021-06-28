@@ -42,8 +42,9 @@ namespace Cs_Compile_test.com {
 		}
 
 		public ShadoMethod(String name, int argCount, String returnType)
-			: this(name, argCount, returnType, new string[0])
-		{
+			: this(name, argCount, returnType, new string[argCount]) {
+			for (int i = 0; i < argCount; i++)
+				argTypes[i] = "object";
 		}
 
 		public ShadoMethod(ShadoMethod o)
@@ -58,6 +59,14 @@ namespace Cs_Compile_test.com {
 			int c = args?.Length ?? 0;
 			if (!optionalArgs && c != argCount)
 				throw new RuntimeError("method arguments mismatch (call for {0})", this.name);
+
+			// Bind args value to names
+			for (int i = 0; i < c; i++) {
+				string argType = i >= argTypes.Length ? "object" : argTypes[i];
+				string name = i >= instanceVariables.Count ? "temp_" + GetHashCode() : instanceVariables[i].name;
+				AddOrUpdateVariable(argType, name, args[i]);
+			}
+
 
 			return code(context, args);
 		}
