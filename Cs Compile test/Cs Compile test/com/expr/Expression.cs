@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Cs_Compile_test.com.exceptions;
+using Cs_Compile_test.com.interfaces;
 
 namespace Cs_Compile_test.com {
 
@@ -79,7 +80,7 @@ namespace Cs_Compile_test.com {
 		}
 	}
 
-	public class Expression
+	public class Expression : AbstractExpression
 	{
 		public enum Type
 		{

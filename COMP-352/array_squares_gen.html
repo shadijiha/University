@@ -1,7 +1,6 @@
 <html>
 
 <head>
-
     <style>
         body {
             padding: 50px;
@@ -35,16 +34,24 @@
             width: 100%;
             font-size: 72;
             height: auto;
-            min-height: 400px;
+            min-height: 300px;
+        }
+        
+        table td,
+        th {
+            font-family: "Arial";
+            font-size: 30px;
+            min-width: 200px;
         }
         
         input[type="button"] {
-            font-size: 30px!important;
+            font-size: 30px !important;
         }
     </style>
     <script>
-        let buffer = [];
         let lastN = 10;
+        let buffer = new Array(lastN);
+        let history = [];
 
         function GenerateSquares(n) {
             const ELEMENT = document.getElementById("generated_area");
@@ -52,7 +59,9 @@
             lastN = n;
 
             for (let i = 0; i < n; i++) {
-                ELEMENT.innerHTML += `<div><input value="${buffer[i] || ''}" type="text" onkeyup="FillBuffer(${i}, this.value)"/></div>`;
+                ELEMENT.innerHTML += `<div><input value="${
+						buffer[i] || ""
+					}" type="text" onkeyup="FillBuffer(${i}, this.value)"/></div>`;
             }
         }
 
@@ -82,6 +91,9 @@
 
             // Refresh array
             GenerateSquares(lastN);
+
+            // Refresh History
+            RecordHistory();
         }
 
         function Poplast() {
@@ -101,11 +113,45 @@
 
             // Refresh array
             GenerateSquares(lastN);
+
+            // Refresh History
+            RecordHistory();
+        }
+
+        function RecordHistory() {
+            history.push({
+                array: [...buffer],
+                output: document.getElementById("console").innerHTML,
+            });
+
+            HistoryDisplay();
+        }
+
+        function HistoryDisplay() {
+            const TABLE = document.getElementById("history_display");
+            TABLE.innerHTML = "";
+            TABLE.innerHTML += `<tr>
+			               <th contenteditable="true">Array</th>
+			               <th>Output</th>
+			           </tr>`;
+
+            for (const e of history) {
+                let arrayString = e.array
+                    .map((v) => (v === undefined ? " - " : v))
+                    .toString()
+                    .replace(",", ", ");
+                TABLE.innerHTML += `
+			               <tr>
+			                   <td>[${arrayString}]</td>
+			                   <td style="padding-left: 50px">${e.output}</td>
+			               </tr>
+			           `;
+            }
         }
 
         window.onload = function() {
             GenerateSquares(lastN);
-        }
+        };
     </script>
 </head>
 
@@ -114,15 +160,20 @@
     <input type="button" onclick="Clear()" value="Clear" />
     <br />
     <br />
-    <div id="generated_area">
-    </div>
+    <div id="generated_area"></div>
     <br />
     <input type="button" onclick="Popfirst()" value="Pop first" />
     <input type="button" onclick="Poplast()" value="Pop last" />
     <br />
     <br />
-    <h1>Console Output: </h1>
-    <div id="console" contenteditable="true">
+    <h1>Console Output:</h1>
+    <div id="console" contenteditable="true"></div>
+    <br />
+    <h1>History</h1>
+    <div>
+        <table>
+            <tbody id="history_display"></tbody>
+        </table>
     </div>
 </body>
 

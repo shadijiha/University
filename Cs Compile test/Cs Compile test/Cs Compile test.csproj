@@ -6,8 +6,4 @@
     <RootNamespace>Cs_Compile_test</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="com\interfaces\" />
-  </ItemGroup>
-
 </Project>

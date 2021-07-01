@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -38,7 +39,16 @@ namespace Cs_Compile_test.com {
 				}
 
 				// Parse method lines
+				Stack<char> scopeCalculator = new Stack<char>();	// This is used to know where if or for statement end
 				for (int i = 1; i < lines.Length - 1; i++) {
+					// Check if the statement is an if statement
+					bool booleanResult;
+					if (IsIfStatement(lines[i], method, out booleanResult)) {
+						// TODO: Create a classs Called abstract expression and a class called CompiledExpression
+						// That receives a lambda (for if and for loops)
+					}
+
+					// Otherwise just push an Expression
 					methodCodeLines.Add(new Expression(lines[i], method));
 				}
 
@@ -131,5 +141,20 @@ namespace Cs_Compile_test.com {
 		private static bool IsClassDefinition(string line) {
 			return new ExpressionSyntax("ANYclassANY{").Matches(line);
 		}
+
+		private static bool IsIfStatement(string line, ShadoObject scope, out bool result) {
+
+			line = line.Trim();
+
+			if (line.StartsWith("if")) {
+
+
+				return true;
+			}
+
+			result = false;
+			return false;
+		}
+		
 	}
 }

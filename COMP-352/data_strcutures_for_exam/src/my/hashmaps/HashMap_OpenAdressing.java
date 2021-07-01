@@ -1,6 +1,6 @@
 package my.hashmaps;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class HashMap_OpenAdressing {
 	private Integer[] data;
@@ -9,6 +9,9 @@ public class HashMap_OpenAdressing {
 	private int collisions;
 
 	private int cluster = 0;
+
+	private FirstHashFunction firstHashFunc = (k, size) -> k % size;
+	private SecondHashFunction secondHashFunc = (i, k, size) -> i + 1;
 
 	public HashMap_OpenAdressing(int size) {
 		data = new Integer[size];
@@ -25,12 +28,12 @@ public class HashMap_OpenAdressing {
 	}
 
 	public void put(int key, int value) {
-		int firstHash = key % numOfBuckets;
+		int firstHash = firstHashFunc.hash(key, numOfBuckets);
 		int secondHash = 0;//int secondHash = 11 - key % numOfBuckets;
 
 		int cluster = 0;
 		while (data[firstHash] != null) {
-			secondHash++;
+			secondHash = secondHashFunc.hash(secondHash, key, numOfBuckets);
 			firstHash += secondHash;
 			firstHash %= numOfBuckets;
 			collisions++;
@@ -42,11 +45,14 @@ public class HashMap_OpenAdressing {
 		size++;
 	}
 
-	public void remove(int key) {
+	public void remove(Integer key) {
 
-		int index = key % numOfBuckets;
-		System.out.println("Removed " + data[index]);
-		data[index] = null;
+		for (int i = 0; i < numOfBuckets; i++) {
+			if (data[i] != null && data[i].equals(key)) {
+				data[i] = null;
+				break;
+			}
+		}
 	}
 
 	private void resgisterCluster(int cluster) {
@@ -77,5 +83,21 @@ public class HashMap_OpenAdressing {
 	public String getRawArrayAsString() {
 		return Arrays.toString(data);
 
+	}
+
+	public void setFirstHashFunc(FirstHashFunction func) {
+		firstHashFunc = func;
+	}
+
+	public void setSecondHashFunc(SecondHashFunction func) {
+		secondHashFunc = func;
+	}
+
+	public interface FirstHashFunction {
+		public Integer hash(int key, int mapSize);
+	}
+
+	public interface SecondHashFunction {
+		public Integer hash(int index, int key, int mapsize);
 	}
 }

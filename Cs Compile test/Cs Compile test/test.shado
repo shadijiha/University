@@ -2,7 +2,11 @@
 //#include "__PATH__/main.shado"
 
 int min(int a, int b)   {
-    return a > b ? b : a;
+    if (a < b)  {
+        return a;
+    } else  {
+        return b;
+    }
 }
 
 int main()	{

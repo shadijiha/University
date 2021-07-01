@@ -91,6 +91,10 @@ namespace Cs_Compile_test.com {
 			return it.First();
 		}
 
+		public IList<ShadoObject> GetAllVariables() {
+			return new List<ShadoObject>(instanceVariables);
+		}
+
 		public bool HasVariable(string name) {
 			return GetVariable(name) != null;
 		}
