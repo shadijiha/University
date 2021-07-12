@@ -17,10 +17,10 @@ D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\bin\Debug\netcor
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.runtimeconfig.dev.json
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.dll
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.pdb
-D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.csprojAssemblyReference.cache
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.AssemblyInfoInputs.cache
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.AssemblyInfo.cs
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.csproj.CoreCompileInputs.cache
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.dll
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.pdb
 D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.genruntimeconfig.cache
+D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.csprojAssemblyReference.cache

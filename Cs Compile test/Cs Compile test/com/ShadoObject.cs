@@ -20,15 +20,8 @@ namespace Cs_Compile_test.com {
 			this.name = name;
 			this.value = value;
 			// Keep the string literal without the quotes ("")
-			if (type != null && type.name == "string") {
-				char[] arr = value.ToString().ToCharArray();
-				if (arr[0] == '"')
-					arr[0] = ' ';
-				if (arr[^1] == '"')
-					arr[^1] = ' ';
-
-				this.value = new string(arr).Trim();
-			}
+			if (type != null && type.name == "string")
+				this.value = value?.ToString().ReplaceFirstOccurrence("\"", "").ReplaceLastOccurrence("\"", "").Trim() ?? "";
 
 			this.id = random.Next(int.MaxValue);
 			this.instanceVariables = new List<ShadoObject>();
@@ -63,7 +56,7 @@ namespace Cs_Compile_test.com {
 
 		public ShadoObject AddVariable(ShadoObject obj) {
 			instanceVariables.Add(obj);
-			return obj;
+			return this;
 		}
 
 		public ShadoObject AddVariable(string type, string name, object value = null) {
@@ -76,7 +69,7 @@ namespace Cs_Compile_test.com {
 				AddVariable(type, name, value);
 			else
 				o.value = value;
-			return o;
+			return this;
 		}
 
 		public ShadoObject GetVariable(string name) {
@@ -92,7 +85,7 @@ namespace Cs_Compile_test.com {
 		}
 
 		public IList<ShadoObject> GetAllVariables() {
-			return new List<ShadoObject>(instanceVariables);
+			return instanceVariables.Where(e => !string.IsNullOrEmpty(e.name)).ToList();
 		}
 
 		public bool HasVariable(string name) {
@@ -120,7 +113,7 @@ namespace Cs_Compile_test.com {
 		}
 
 		public override string ToString() {
-			return type.GetMethod("toString").Call(this, null).ToString();
+			return type.GetMethod("toString").Call(this, null)?.ToString() ?? "null";
 		}
 	}
 }

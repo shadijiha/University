@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Cs_Compile_test.com.exceptions;
 using Cs_Compile_test.com.nativeTypes;
 
@@ -14,13 +16,20 @@ namespace Cs_Compile_test.com {
 
 		private IList<ShadoClass> classes;
 		private IList<ShadoObject> variables;
+		private Random random;
+		private bool hasInitialized = false;
 
 		private VM() {
 			classes = new List<ShadoClass>();
 			variables = new List<ShadoObject>();
+			random = new Random();
 		}
 
 		public void Initialize() {
+
+			if (hasInitialized)
+				return;
+			hasInitialized = true;
 
 			//AddType("object", o=> true);
 			AddType("function", o=> o == null || o.GetType() == typeof(ShadoMethod));
@@ -31,6 +40,8 @@ namespace Cs_Compile_test.com {
 			AddType(new ShadoString());
 			AddType(new ShadoChar());
 			AddType(new ShadoVoid());
+			AddType(new ShadoFileReader());
+			AddType(new ShadoFileWriter());
 
 
 			ShadoMethod method_print = new ShadoMethod("print", 1, "void", true, new string[] { "object" });
@@ -60,8 +71,28 @@ namespace Cs_Compile_test.com {
 
 			ShadoMethod method_typeof = new ShadoMethod("typeof", 1, "string", new string[] { "object" });
 			method_typeof.SetCode((ctx, obj) => 
-				ctx.GetVariable(obj[0].ToString())?.type.name ?? this.Get(obj[0].ToString())?.type.name ?? this.GetTypeOf(obj[0])?.name ?? "object");
+				ctx.GetVariable(obj[0].ToString())?.type.name ?? Get(obj[0].ToString())?.type.name ?? GetTypeOf(obj[0])?.name ?? "object");
 			PushVariable(method_typeof);
+
+			ShadoMethod method_random = new ShadoMethod("random", 0, "double");
+			method_random.SetCode((ctx, obj) => random.NextDouble());
+			PushVariable(method_random);
+
+			ShadoMethod method_clear = new ShadoMethod("clear", 0, "void");
+			method_clear.SetCode((ctx, obj) => { Console.Clear(); return null; });
+			PushVariable(method_clear);
+
+			ShadoMethod method_sleep = new ShadoMethod("sleep", 1, "void");
+			method_sleep.SetCode((ctx, obj) => { Thread.Sleep(int.Parse(obj[0].ToString())); return null; });
+			PushVariable(method_sleep);
+
+			ShadoMethod method_sqrt = new ShadoMethod("sqrt", 1, "double");
+			method_sqrt.SetCode((ctx, obj) => Math.Sqrt(double.Parse(obj[0].ToString())));
+			PushVariable(method_sqrt);
+
+			ShadoMethod method_pow = new ShadoMethod("pow", 2, "double");
+			method_pow.SetCode((ctx, obj) => Math.Pow(double.Parse(obj[0].ToString()), double.Parse(obj[1].ToString())));
+			PushVariable(method_pow);
 
 			ShadoMethod method_print_types = new ShadoMethod("print_all_types", 0, "void");
 			method_print_types.SetCode((ctx, obj) => {
@@ -91,11 +122,32 @@ namespace Cs_Compile_test.com {
 			PushVariable(print_user_defined_types);
 		}
 
-		public void InvokeMain() {
+		public void Shutdown() {
+			foreach (var variable in variables) {
+				// See if it is a method, then get all its inner variable
+				if (variable is ShadoMethod method) {
+					foreach (var methodVar in method.GetAllVariables()) {
+						// If the method is auto closable
+						if (methodVar.type is ICloseBeforeExit closable) {
+							closable.Close(methodVar);
+						}
+					}
+				}
+				else {
+					// Otherwise see if the variable is auto closable
+					if (variable.type is ICloseBeforeExit closable) {
+						closable.Close(variable);
+					}
+				}
+			}
+		}
+
+		public void InvokeMain(int argc = 0, string[] argv = null) {
 			ShadoMethod main = Get("main") as ShadoMethod;
+			main.optionalArgs = true;
 			if (main == null)
 				throw new RuntimeError("Method main not found!");
-			main.Call(ShadoObject.Global, null);
+			main.Call(ShadoObject.Global, new object[]{argc, argv.Cast<object>().ToList()});
 		}
 
 		public bool IsValidType(ShadoClass clazz, Object value) {

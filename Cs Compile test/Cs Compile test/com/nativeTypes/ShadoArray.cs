@@ -54,7 +54,17 @@ namespace Cs_Compile_test.com.nativeTypes {
 
 			AddMethod(new ShadoMethod("add", 1, "void")
 				.SetCode((ctx, args) => {
-					(ctx.value as List<object>).Add(args[0]);
+
+					// If the arg is a ShadoObject then add its value
+					var list = ctx.value as List<object>;
+					if (list == null)
+						throw new RuntimeError(name + " is not a list");
+
+					if (args[0] is ShadoObject shadoobj)
+						list.Add(shadoobj.value);
+					else
+						list.Add(args[0]); // Otherwise
+
 					return null;
 				}));
 

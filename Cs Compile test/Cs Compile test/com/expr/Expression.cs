@@ -17,9 +17,9 @@ namespace Cs_Compile_test.com {
 		public readonly static string symbol = "SYMBOL";
 		public readonly static string any = "ANY";
 
-		public static readonly ExpressionSyntax ASSIGNEMENT = new ExpressionSyntax($"{identifier} {op} {any};");
+		public static readonly ExpressionSyntax ASSIGNEMENT = new ExpressionSyntax($"{identifier} {op} {any}");
 		public static readonly ExpressionSyntax DECLARATION = new ExpressionSyntax($"{type} {identifier};");
-		public static readonly ExpressionSyntax FULL_DECLARATION = new ExpressionSyntax($"{type} {identifier} = {any};");
+		public static readonly ExpressionSyntax FULL_DECLARATION = new ExpressionSyntax($"{type} {identifier} = {any}");
 
 		private readonly string pattern;
 
@@ -60,7 +60,8 @@ namespace Cs_Compile_test.com {
 		}
 
 		public static string compileOperators() {
-			string[] ops = {"=", "==", "!=", "!", "<", ">", "<=", ">=", "+", "*", "-", "/", "(", ")", "[", "]", "{", "}", "|", "%", "@", "$", "#", "^", "&", ".", "->", ",", ";" };
+			//string[] ops = {"=", "==", "!=", "!", "<", ">", "<=", ">=", "+", "*", "-", "/", "(", ")", "[", "]", "{", "}", "|", "%", "@", "$", "#", "^", "&", ".", "->", ",", ";" };
+			string[] ops = {"=", "%=", "+=", "-=", "*=", "/="};
 			StringBuilder builder = new StringBuilder();
 
 			uint count = 0;
@@ -84,7 +85,7 @@ namespace Cs_Compile_test.com {
 	{
 		public enum Type
 		{
-			DECLARATION, ASSIGNMENT, FUNC_CALL, OBJECT_FUNC_CALL, RETURN, POINTER_ASSIGNMENT, OBJECT_INSTATIATION
+			DECLARATION, ASSIGNMENT, FUNC_CALL, OBJECT_FUNC_CALL, RETURN, POINTER_ASSIGNMENT, OBJECT_INSTATIATION, GET_VALUE
 		}
 
 		private string raw;
@@ -102,21 +103,23 @@ namespace Cs_Compile_test.com {
 			parseExpression(parts);
 		}
 
-		public object Execute() {
+		public object Execute(ref ExecutionStatus status) {
 			switch (expressionType) {
 				case Type.ASSIGNMENT:
 				case Type.DECLARATION:
-					return executeVariableAssignemt();
+					return executeVariableAssignemt(ref status);
 				case Type.FUNC_CALL:
-					return executeFuncCall();
+					return executeFuncCall(ref status);
 				case Type.OBJECT_FUNC_CALL:
-					return executeFuncCallOnObject();
+					return executeFuncCallOnObject(ref status);
 				case Type.RETURN:
-					return executeReturn();
+					return executeReturn(ref status);
 				case Type.POINTER_ASSIGNMENT:
-					return executePointerAssignment();
+					return executePointerAssignment(ref status);
 				case Type.OBJECT_INSTATIATION:
 					return executeObjectInstantiation();
+				case Type.GET_VALUE:
+					return executeGetValueOf();
 				default: return rhs;
 			}
 		}
@@ -148,13 +151,6 @@ namespace Cs_Compile_test.com {
 				this.rhs = string.Join(' ', tokens.GetRange(3, tokens.Count - 3));
 				this.expressionType = Type.ASSIGNMENT;
 			}
-			// If it is a declaration
-			else if (ExpressionSyntax.DECLARATION.Matches(raw)) {
-				this.type = VM.instance.GetClass(tokens[0]);
-				this.name = tokens[1].Replace(";", "").Replace("\n", "");
-				this.expressionType = Type.DECLARATION;
-				this.rhs = "";
-			}
 			// If it is a function call on object
 			else if (new ExpressionSyntax("IDENTIFIER.IDENTIFIER(ANY)").Matches(raw) && !raw.Contains("{")) {
 				this.type = null;
@@ -169,6 +165,13 @@ namespace Cs_Compile_test.com {
 				this.rhs = raw;
 				this.expressionType = Type.FUNC_CALL;
 			}
+			// If it is a declaration
+			else if (ExpressionSyntax.DECLARATION.Matches(raw)) {
+				this.type = VM.instance.GetClass(tokens[0]);
+				this.name = tokens[1].Replace(";", "").Replace("\n", "");
+				this.expressionType = Type.DECLARATION;
+				this.rhs = "";
+			}
 			// If it is a reassignment
 			else if (ExpressionSyntax.ASSIGNEMENT.Matches(raw)) {
 				// TODO: The varaibles my be in scope in the future
@@ -176,7 +179,14 @@ namespace Cs_Compile_test.com {
 				this.rhs = string.Join(' ', tokens.GetRange(2, tokens.Count - 2));
 				this.type = scope.GetVariable(name)?.type ?? VM.instance.Get(name)?.type;
 				this.expressionType = Type.ASSIGNMENT;
-			} else {
+			} 
+			// Get value of the variable
+			else if (new ExpressionSyntax("IDENTIFIER").Matches(raw)) {
+				name = raw.Trim();
+				rhs = raw.Trim();
+				expressionType = Type.GET_VALUE;
+			} 
+			else {
 				this.rhs = raw;
 			} 
 
@@ -186,7 +196,7 @@ namespace Cs_Compile_test.com {
 				rhs = rhs.Substring(0, rhs.Length - 1);
 		}
 
-		private object executeVariableAssignemt() {
+		private object executeVariableAssignemt(ref ExecutionStatus status) {
 			// TODO: this shit should not be here
 			rhs = rhs.Trim();
 
@@ -246,7 +256,7 @@ namespace Cs_Compile_test.com {
 				pointer = obj;
 			}
 			else if (isFunctionCall(rhs)) {
-				value = new Expression(rhs, scope).Execute();
+				value = new Expression(rhs, scope).Execute(ref status);
 			}
 
 			// Push new variable or modify the old one
@@ -264,7 +274,7 @@ namespace Cs_Compile_test.com {
 			return value;
 		}
 
-		private object executeFuncCall() {
+		private object executeFuncCall(ref  ExecutionStatus status) {
 
 			// See if it is a native function declaration 
 			if (new ExpressionSyntax("native ANY;").Matches(raw.Trim()))
@@ -278,7 +288,7 @@ namespace Cs_Compile_test.com {
 
 			// Parse the args
 			for (int i = 0; i < rawargs.Length; i++) {
-				args[i] = new Expression(rawargs[i], scope).Execute();
+				args[i] = new Expression(rawargs[i], scope).Execute(ref status);
 			}
 
 			// Get the function
@@ -289,7 +299,7 @@ namespace Cs_Compile_test.com {
 			return (method as ShadoMethod).Call(scope, args);
 		}
 
-		private object executeFuncCallOnObject() {
+		private object executeFuncCallOnObject(ref ExecutionStatus status) {
 			// Parse function name
 			string[] tokens = rhs.Split(".", 2);
 			string objectName = tokens[0].Trim();
@@ -298,26 +308,33 @@ namespace Cs_Compile_test.com {
 			char[] argsNoParantheses = tokens[1].Split("(", 2)[1].ToCharArray();
 			argsNoParantheses[^1] = ' ';
 
-			string[] args = SplitByExceptQuotes(new string(argsNoParantheses).Trim(), "+| |,").ToArray();
+			string[] rawArgs = SplitByExceptQuotes(new string(argsNoParantheses).Trim(), ",").ToArray();
+			object[] args = new object[rawArgs.Length];
+			for (int i = 0; i < rawArgs.Length; i++) {
+				args[i] = new Expression(rawArgs[i], scope).Execute(ref status);
+			}
 
 			// Get the function
 			ShadoObject ctx = scope.GetVariable(objectName) ?? VM.instance.GetOrThrow(objectName);
 			return ctx.type.GetMethod(functionName).Call(ctx, args);
 		}
 
-		private object executeReturn() {
-			return new Expression(rhs, scope).Execute();
+		private object executeReturn(ref ExecutionStatus status) {
+			object o = new Expression(rhs, scope).Execute(ref status);
+			status.value = o;
+			status.status = ExecutionStatus.Type.RETURN;
+			return o;
 		}
 
-		private object executePointerAssignment() {
+		private object executePointerAssignment(ref ExecutionStatus status) {
 			this.type = scope.GetVariable(name).type;
 			
 			// See if the rhs is ok
-			object val = new Expression(rhs, scope).Execute();
+			object val = new Expression(rhs, scope).Execute(ref status);
 			if (!type.IsValid(val))
 				throw new CompilationError("cannot assign {0} to a variable of type {1}", rhs, type.name);
 
-			string expr = new Expression(name, scope).Execute().ToString();
+			string expr = new Expression(name, scope).Execute(ref status).ToString();
 			int address;
 			if (!int.TryParse(expr, out address))
 				throw new RuntimeError("Invalid memory address", expr);
@@ -343,11 +360,62 @@ namespace Cs_Compile_test.com {
 			if (!type.IsValidType(constructor))
 				throw new CompilationError("Cannot assign {0} to a variable of type {1}", constructor, type.name);
 
-			return type.GetConstructor().Call(scope, args);
+
+			ShadoObject obj = (ShadoObject)type.GetConstructor().Call(scope, args);
+			obj.name = this.name;
+			scope.AddVariable(obj);
+			return obj;
 		}
 
-		private static bool isMathExpression(string expression, ref object output) {
+		private ShadoObject executeGetValueOf() {
+
+			// See if it is a variable in the method scope
+			string modifiedExpr = rhs;
+			foreach (ShadoObject variable in scope.GetAllVariables()) {
+				if (variable.name == rhs)
+					return variable;
+				else
+					modifiedExpr = modifiedExpr.Replace(variable.name, variable.ToString());
+			}
+
+			// See if it is a variable in the global scope
+			foreach (ShadoObject variable in VM.instance.AllVariables()) {
+				if (variable.name == rhs)
+					return variable;
+				else {
+					modifiedExpr = modifiedExpr.Replace(variable.name, variable.ToString());
+				}
+			}
+
+			// Otherwise see if it is a math expression
+			object val = null;
+			if (isMathExpression(modifiedExpr, ref val))
+				return new ShadoObject(VM.GetSuperType(), val);
+
+			// See if it is a string
+			if (rhs.StartsWith("\"") && rhs.EndsWith("\""))
+				return new ShadoObject("string", rhs);
+
+			// See if it is a char
+			if (rhs.StartsWith("'") && rhs.EndsWith("'"))
+				return new ShadoObject("char", rhs);
+
+			// Otherwise throw an exception
+			throw new RuntimeError("Invalid expression\n\t--> {0}", rhs);
+		}
+
+		private bool isMathExpression(string expression, ref object output) {
 			try {
+				// First replace all the variables with their scope values
+				foreach (var variable in scope.GetAllVariables()) {
+					expression = expression.Replace(variable.name, variable.value?.ToString());
+				}
+
+				// Replace whats left with their global value
+				foreach (var variable in VM.instance.AllVariables()) {
+					expression = expression.Replace(variable.name, variable.value?.ToString());
+				}
+				
 				DataTable dt = new DataTable();
 				output = dt.Compute(expression, "");
 				return true;

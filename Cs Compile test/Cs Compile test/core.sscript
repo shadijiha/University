@@ -1,4 +1,6 @@
 // This is the core library of shado script
+#include "__PATH__/math.sscript"
+
 /**
  * This function prints the arg to the console
  * @param arg The argument to print
@@ -14,6 +16,27 @@ native void print(object arg);
  * @example: typeof(aString) --> string
  */
 native string typeof(object obj);
+
+/**
+ * Clears the console
+ */ 
+native void clear();
+
+/**
+ * Sleeps the main thread
+ * @param ms milliseconds to sleep
+ */
+native void sleep(int ms);
+
+/**
+ * Prints all the defined types in the VM
+ */
+native void print_all_types();
+
+/**
+ * Prints all types exluding premitives
+ */
+native void print_user_defined_types();
 
 /** 
  * All objects extend this class
@@ -31,12 +54,45 @@ class object {
     public native int hashCode();
 }
 
-class function  {
-    
+class function  {  
+}
+
+native class FileReader {
+
+    public native FileReader(string filepath);
+
+    public native void open();
+
+    public native void close();
+
+    public native string readLine();
+
+    public native bool hasNext();
+
+    public native string readToEnd();
+}
+
+native class FileWriter {
+
+    public native FileWriter(string filepath);
+
+    public native void open();
+
+    public native void close();
+
+    public native void write(string text);
+
+    public native void writeln(string text);
+
+    public native void flush();
+
+    public native void append();
 }
 
 /**
  * All arrays have this class as super class
+ *
+ * PLEASE NOTE: Objects are pushed into the array by value!
  */ 
 native class Array {
 

@@ -1,0 +1,56 @@
+// This is the core Math library of shado script
+
+/**
+ * This function compares 2 numbers and return the smaller one
+ *
+ * @param a the first number
+ * @param b the second number
+ * @returns the smaller number between the 2
+ */
+int min(int a, int b)   {
+    if (a < b)  {
+        return a;
+    }
+    return b;
+}
+
+/**
+ * This function compares 2 numbers and return the bigger one
+ *
+ * @param a the first number
+ * @param b the second number
+ * @returns the bigger number between the 2
+ */
+int max(int x, int y)   {
+    if (x > y)  {
+        return x;
+    }
+    return y;
+}
+
+/**
+ * @returns pi 
+ */
+double pi() {
+    return 3.14159265359;
+}
+
+double randomRange(int min, int max) {
+    double r = random();
+    return r * (max - min) + min;
+}
+
+/**
+ * This function returns a randomly generated double
+ */
+native double random();
+
+/**
+ * @returns The square root of a number
+ */
+native double sqrt(double number);
+
+/**
+ * @return a to the power of b
+ */
+native double pow(double a, double b);

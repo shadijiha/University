@@ -14,8 +14,6 @@ namespace Cs_Compile_test
 {
 	public class Compiler
 	{
-		private static Compiler current = null;
-
 		private string filecontent;
 		public string filename { get; private set; }
 		public uint lineNumber { get; set; }
@@ -36,7 +34,6 @@ namespace Cs_Compile_test
 		}
 
 		public void compile() {
-			current = this;
 			VM.instance.Initialize();
 
 			// Run the preprocessor
@@ -62,7 +59,7 @@ namespace Cs_Compile_test
 
 				// Replace prepressor constant
 				foreach (var constant in PreprocessorCommand.constants) {
-					line = line.Replace(constant.Key, constant.Value().ToString());
+					line = line.Replace(constant.Key, constant.Value(this).ToString());
 					lines[i] = line;
 				}
 
@@ -81,29 +78,6 @@ namespace Cs_Compile_test
 			}
 
 			filecontent = string.Join('\n', lines);
-		}
-
-		public static string GetCurrentInfo() {
-			try {
-				string line = current.filecontent.Split("\n")[current.lineNumber];
-				return $"{current.filename} @ line: {current.lineNumber + 1}\n" +
-				       $"--->\t{line}";
-			}
-			catch (Exception) {
-				return "(Unable to get line info)";
-			}
-		}
-
-		public static Compiler GetCurrent() {
-			return current;
-		}
-
-		public static void ResetLineCount() {
-			current.lineNumber = 0;
-		}
-
-		public static void IncrementLineCount(int i = 1) {
-			current.lineNumber += 1;
 		}
 
 		public static void compile(string code) {

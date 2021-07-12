@@ -1,0 +1,34 @@
+#include "__PATH__/core.sscript"
+//#include "__PATH__/main.shado"
+
+void test(int[] arr) {
+    int sec = 0;
+    while(true) {
+        print(sec);
+        sec = sec + 1;
+        sleep(1000);
+        clear();
+    }
+}
+
+int main()	{
+    int[] array = {9, 3, 12, 0, 7, 5};
+
+    FileWriter writer = new FileWriter("D:/Wamp64/www/GitHub/University/Cs Compile test/Cs Compile test/text.txt");
+    writer.open();
+    
+    int i = 0;
+    while(i < 10)   {
+        writer.writeln(random());
+        i = i + 1;
+    }
+    writer.writeln("Text!!!!");
+    writer.writeln("Testing the autoclosable!");
+    writer.close();
+
+    FileReader reader = new FileReader("D:/Wamp64/www/GitHub/University/Cs Compile test/Cs Compile test/text.txt");
+
+    reader.open();
+    string text = reader.readToEnd();
+    print(text);
+}

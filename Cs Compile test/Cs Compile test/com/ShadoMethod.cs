@@ -12,7 +12,7 @@ namespace Cs_Compile_test.com {
 		protected string returnType;
 		protected string[] argTypes;
 		protected MethodCall code;
-		protected bool optionalArgs;
+		public bool optionalArgs;
 		protected string fullType;
 
 		public ShadoMethod(string name, int argCount, string returnType, bool optionalArgs, string[] argTypes)
@@ -105,6 +105,10 @@ namespace Cs_Compile_test.com {
 				var o = (ShadoMethod) obj;
 				return name == o.name && argCount == o.argCount;
 			}
+		}
+
+		public override string ToString() {
+			return $"{name}: ${GetFullType()}";
 		}
 	}
 }

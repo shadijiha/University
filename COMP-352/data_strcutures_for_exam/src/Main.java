@@ -1,5 +1,3 @@
-import my.hashmaps.*;
-
 import java.util.*;
 
 /**
@@ -8,9 +6,11 @@ import java.util.*;
 
 public class Main {
 
+	static Random random = new Random();
+
 	public static void main(String[] args) {
 
-		int[] temp = {16, 27, 22, 59, 44, 32, 59, 33, 32, 71};
+		/*int[] temp = {16, 27, 22, 59, 44, 32, 59, 33, 32, 71};
 		for (int i : temp)
 			System.out.printf("%d: %d\n", i, i % 11);
 
@@ -27,9 +27,7 @@ public class Main {
 		H.remove(59);
 		H.put(33);
 		H.remove(32);
-		H.put(71);
-
-		System.out.println(H.getRawArrayAsString());
+		H.put(71);*/
 
 		List<String> participants = new ArrayList<>();
 		participants.add("Alfred");
@@ -39,13 +37,30 @@ public class Main {
 		participants.add("Jean");
 
 		int num = 3;
+		displayWinners(participants, 3, new ArrayList<>());
 	}
 
-	public static void displayWinners(List<String> participants, int numOfPrices) {
+	public static void displayWinners(List<String> A, int p, List<String> C) {
 
-		// Everybody is a winner
-		if (participants.size() < numOfPrices) {
-			System.out.println(participants);
+		int n = A.size();
+		if (n <= p) {
+			System.out.println(A);
+			return;
+		}
+
+		int randomStart = random.nextInt(n);
+		int radomEnd = random.nextInt(n);
+		displayWinnersUtil(A, new ArrayList<>(), Math.min(randomStart, radomEnd), Math.max(randomStart, radomEnd), 0, p);
+	}
+
+	public static void displayWinnersUtil(List<String> A, List<String> Temp, int start, int end, int index, int p) {
+
+		if (index == p)
+			System.out.println(Temp);
+
+		for (int i = start; i <= end; i++) {
+			Temp.add(A.get(i));
+			displayWinnersUtil(A, Temp, i + 1, end, index + 1, p);
 		}
 
 	}

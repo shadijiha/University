@@ -8,7 +8,7 @@ namespace Cs_Compile_test.com {
 	public class PreprocessorCommand
 	{
 		public readonly static List<PreprocessorCommand> commands = new List<PreprocessorCommand>();
-		public readonly static IDictionary<string, Func<object>> constants = new Dictionary<string, Func<object>>();
+		public readonly static IDictionary<string, Func<Compiler, object>> constants = new Dictionary<string, Func<Compiler,object>>();
 
 		public string name { get; }
 		public uint argCount { get; }
@@ -23,16 +23,23 @@ namespace Cs_Compile_test.com {
 		}
 
 		static PreprocessorCommand() {
+			Compiler compiler = null;
+
 			var include = new PreprocessorCommand("include", 1,
-				filename =>  File.ReadAllText(filename[0].Trim().Replace("\"", "").Replace("<", "").Replace(">", "")
-				));
+				filename => {
+					// Compile
+					new Compiler(filename[0].Trim().Replace("\"", "").Replace("<", "").Replace(">", "")
+					).compile();
+
+					return "";
+				});
 
 			commands.Add(include);
 
 			// Constants
-			constants.Add("__LINE__", () => Compiler.GetCurrent().lineNumber);
-			constants.Add("__FILE__", () => Compiler.GetCurrent().filename);
-			constants.Add("__PATH__", () => Directory.GetParent(Compiler.GetCurrent().filename));
+			constants.Add("__LINE__", compiler => compiler.lineNumber);
+			constants.Add("__FILE__", compiler => compiler.filename);
+			constants.Add("__PATH__", compiler => Directory.GetParent(compiler.filename));
 		}
 
 		public T Execute<T>(string[] args) {

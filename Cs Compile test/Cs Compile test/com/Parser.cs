@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Cs_Compile_test.com.exceptions;
+using Cs_Compile_test.com.expr;
+using Cs_Compile_test.com.interfaces;
 
 namespace Cs_Compile_test.com {
 	public static class Parser {
 
 		public static void ExtractMethods(string code) {
 
-			Compiler.ResetLineCount();
 			var blocks = ExtractBlocks(code);
 
 			foreach (string block in blocks) {
@@ -30,7 +31,7 @@ namespace Cs_Compile_test.com {
 
 				// Add it to the global scope
 				ShadoMethod method = new ShadoMethod(funcName, args.Length, tokens[0]);
-				List<Expression> methodCodeLines = new List<Expression>();
+				List<AbstractExpression> methodCodeLines = new List<AbstractExpression>();
 
 				// Add all args to method scope
 				for (int i = 0; i < args.Length; i++) {
@@ -39,13 +40,24 @@ namespace Cs_Compile_test.com {
 				}
 
 				// Parse method lines
-				Stack<char> scopeCalculator = new Stack<char>();	// This is used to know where if or for statement end
 				for (int i = 1; i < lines.Length - 1; i++) {
 					// Check if the statement is an if statement
-					bool booleanResult;
-					if (IsIfStatement(lines[i], method, out booleanResult)) {
-						// TODO: Create a classs Called abstract expression and a class called CompiledExpression
-						// That receives a lambda (for if and for loops)
+					if (ConditionalExpression.IsIfStatement(lines[i])) {
+						Range range = new Range(i, lines.Length);
+						var ifBlock = ExtractBlocks(string.Join('\n', lines[range]));
+						methodCodeLines.Add(new ConditionalExpression(ifBlock.First(), lines[i], method));
+
+						// Do not add the if statement content for parsing
+						i += ifBlock.First().Split("\n").Length;
+					}
+					// Else check if it is a for loop
+					else if (LoopExpression.IsLoopStatement(lines[i])) {
+						Range range = new Range(i, lines.Length);
+						var loopBlock = ExtractBlocks(string.Join('\n', lines[i..lines.Length]));
+						methodCodeLines.Add(new LoopExpression(loopBlock.First(), lines[i], method));
+
+						// Do not add the if statement content for parsing
+						i += loopBlock.First().Split("\n").Length;
 					}
 
 					// Otherwise just push an Expression
@@ -53,19 +65,27 @@ namespace Cs_Compile_test.com {
 				}
 
 				method.SetCode((ctx, args) => {
-					for (int i = 0; i < methodCodeLines.Count - 1; i++)
-						methodCodeLines[i].Execute();
 
-					return methodCodeLines[methodCodeLines.Count - 1].Execute();
+					var status = new ExecutionStatus();
+
+					int i = 0;
+					while (i < methodCodeLines.Count && status.status == ExecutionStatus.Type.OK) {
+						try {
+							methodCodeLines[i++].Execute(ref status);
+						}
+						catch (Exception e) {
+							throw new Exception(e.Message + $"\n\t @ line: {i + 1}\n" + $"--->\t{lines[i]}");
+						}
+					}
+
+					return status.value;
 				});
 
 				VM.instance.PushVariable(method);
-				Compiler.IncrementLineCount(lines.Length);
 			}
 		}
 
 		public static void ExtractClasses(string code) {
-			Compiler.ResetLineCount();
 			var blocks = ExtractBlocks(code);
 
 			foreach (string block in blocks) {
@@ -92,14 +112,12 @@ namespace Cs_Compile_test.com {
 
 					// Call constructor of all parent
 					foreach (var parent in clazz.GetParentClasses())
-						parent.GetConstructor().Call(ctx, null);
+						parent.GetConstructor().Call(ctx, args);
 
 					Console.WriteLine("Inside {0} constructor", className);
 					return new ShadoObject(clazz, null);
 				}));
 				VM.instance.AddType(clazz);
-
-				Compiler.IncrementLineCount(lines.Length);
 			}
 		}
 
@@ -116,7 +134,8 @@ namespace Cs_Compile_test.com {
 				}
 
 				if (line.Contains("}")) {
-					stack.Pop();
+					try { stack.Pop(); } catch (Exception) {}
+					
 					if (stack.Count == 0) {
 						blocks.Add(buffer.ToString() + "}");
 						buffer.Clear();
@@ -142,19 +161,6 @@ namespace Cs_Compile_test.com {
 			return new ExpressionSyntax("ANYclassANY{").Matches(line);
 		}
 
-		private static bool IsIfStatement(string line, ShadoObject scope, out bool result) {
-
-			line = line.Trim();
-
-			if (line.StartsWith("if")) {
-
-
-				return true;
-			}
-
-			result = false;
-			return false;
-		}
 		
 	}
 }

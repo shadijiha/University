@@ -10,7 +10,7 @@ namespace Cs_Compile_test.com.interfaces {
 		/// Executes an expression
 		/// </summary>
 		/// <returns>The object result of the execution</returns>
-		public object Execute();
+		public object Execute(ref ExecutionStatus status);
 
 	}
 }
