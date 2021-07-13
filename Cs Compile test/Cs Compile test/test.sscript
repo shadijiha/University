@@ -1,7 +1,7 @@
 #include "__PATH__/core.sscript"
 //#include "__PATH__/main.shado"
 
-void test(int[] arr) {
+void test() {
     int sec = 0;
     while(true) {
         print(sec);
@@ -12,7 +12,9 @@ void test(int[] arr) {
 }
 
 int main()	{
-    int[] array = {9, 3, 12, 0, 7, 5};
+
+
+    /*int[] array = {9, 3, 12, 0, 7, 5};
 
     FileWriter writer = new FileWriter("D:/Wamp64/www/GitHub/University/Cs Compile test/Cs Compile test/text.txt");
     writer.open();
@@ -30,5 +32,5 @@ int main()	{
 
     reader.open();
     string text = reader.readToEnd();
-    print(text);
+    print(text);*/
 }

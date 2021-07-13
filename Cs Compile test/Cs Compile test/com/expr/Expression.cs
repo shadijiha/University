@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Cs_Compile_test.com.exceptions;
+using Cs_Compile_test.com.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Cs_Compile_test.com.exceptions;
-using Cs_Compile_test.com.interfaces;
 
 namespace Cs_Compile_test.com {
 
-	public class ExpressionSyntax
-	{
+	public class ExpressionSyntax {
 		public readonly static string type = "TYPE";
 		public readonly static string identifier = "IDENTIFIER";
 		public readonly static string op = "OPERATOR";
@@ -61,7 +60,7 @@ namespace Cs_Compile_test.com {
 
 		public static string compileOperators() {
 			//string[] ops = {"=", "==", "!=", "!", "<", ">", "<=", ">=", "+", "*", "-", "/", "(", ")", "[", "]", "{", "}", "|", "%", "@", "$", "#", "^", "&", ".", "->", ",", ";" };
-			string[] ops = {"=", "%=", "+=", "-=", "*=", "/="};
+			string[] ops = { "=", "%=", "+=", "-=", "*=", "/=" };
 			StringBuilder builder = new StringBuilder();
 
 			uint count = 0;
@@ -81,10 +80,8 @@ namespace Cs_Compile_test.com {
 		}
 	}
 
-	public class Expression : AbstractExpression
-	{
-		public enum Type
-		{
+	public class Expression : AbstractExpression {
+		public enum Type {
 			DECLARATION, ASSIGNMENT, FUNC_CALL, OBJECT_FUNC_CALL, RETURN, POINTER_ASSIGNMENT, OBJECT_INSTATIATION, GET_VALUE
 		}
 
@@ -179,16 +176,15 @@ namespace Cs_Compile_test.com {
 				this.rhs = string.Join(' ', tokens.GetRange(2, tokens.Count - 2));
 				this.type = scope.GetVariable(name)?.type ?? VM.instance.Get(name)?.type;
 				this.expressionType = Type.ASSIGNMENT;
-			} 
+			}
 			// Get value of the variable
 			else if (new ExpressionSyntax("IDENTIFIER").Matches(raw)) {
 				name = raw.Trim();
 				rhs = raw.Trim();
 				expressionType = Type.GET_VALUE;
-			} 
-			else {
+			} else {
 				this.rhs = raw;
-			} 
+			}
 
 			// Remove the new line or the ; at the end
 			this.rhs = rhs.Trim();
@@ -202,7 +198,7 @@ namespace Cs_Compile_test.com {
 
 			// Check for pointer
 			object value = null;
-			ShadoObject pointer = null;	// If the current expression is an assignment to clone a method (change its name by variable assignment)
+			ShadoObject pointer = null; // If the current expression is an assignment to clone a method (change its name by variable assignment)
 
 			if (rhs.StartsWith("&")) {
 				var vname = rhs.Substring(1);
@@ -222,7 +218,7 @@ namespace Cs_Compile_test.com {
 					obj = scope.GetByAddress(int.Parse(ptr)) ?? MemoryManager.GetByAddress(int.Parse(ptr));
 				else
 					obj = scope.GetByAddress(int.Parse(scope.GetVariable(ptr).value.ToString()))
-					      ?? MemoryManager.GetByAddress(int.Parse(VM.instance.Get(ptr).value.ToString()));
+						  ?? MemoryManager.GetByAddress(int.Parse(VM.instance.Get(ptr).value.ToString()));
 
 				checkVariable(obj);
 
@@ -254,8 +250,7 @@ namespace Cs_Compile_test.com {
 				var obj = scope.GetVariable(rhs);
 				value = obj.value;
 				pointer = obj;
-			}
-			else if (isFunctionCall(rhs)) {
+			} else if (isFunctionCall(rhs)) {
 				value = new Expression(rhs, scope).Execute(ref status);
 			}
 
@@ -264,8 +259,7 @@ namespace Cs_Compile_test.com {
 				var method = new ShadoMethod(pointer as ShadoMethod);
 				method.name = name;
 				VM.instance.PushVariable(method);
-			}
-			else {
+			} else {
 				// Push The variable to the scope context
 				name = name == null ? rhs : name;
 				scope.AddOrUpdateVariable(type?.name ?? "object", name, value);
@@ -274,12 +268,12 @@ namespace Cs_Compile_test.com {
 			return value;
 		}
 
-		private object executeFuncCall(ref  ExecutionStatus status) {
+		private object executeFuncCall(ref ExecutionStatus status) {
 
 			// See if it is a native function declaration 
 			if (new ExpressionSyntax("native ANY;").Matches(raw.Trim()))
 				return null;
-			
+
 
 			// Parse function name
 			string functionName = rhs.Split("(")[0].Trim();
@@ -328,7 +322,7 @@ namespace Cs_Compile_test.com {
 
 		private object executePointerAssignment(ref ExecutionStatus status) {
 			this.type = scope.GetVariable(name).type;
-			
+
 			// See if the rhs is ok
 			object val = new Expression(rhs, scope).Execute(ref status);
 			if (!type.IsValid(val))
@@ -340,7 +334,7 @@ namespace Cs_Compile_test.com {
 				throw new RuntimeError("Invalid memory address", expr);
 
 			MemoryManager.GetByAddress(address).value = val;
-			
+
 			return null;
 		}
 
@@ -412,15 +406,14 @@ namespace Cs_Compile_test.com {
 				}
 
 				// Replace whats left with their global value
-				foreach (var variable in VM.instance.AllVariables()) {
-					expression = expression.Replace(variable.name, variable.value?.ToString());
-				}
-				
+				/*foreach (var variable in VM.instance.AllVariables()) {
+					expression = expression.Replace(variable.name, variable.ToString());
+				}*/
+
 				DataTable dt = new DataTable();
 				output = dt.Compute(expression, "");
 				return true;
-			}
-			catch (Exception) {}
+			} catch (Exception) { }
 			return false;
 		}
 

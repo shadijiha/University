@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Cs_Compile_test.com.exceptions;
+﻿using System.IO;
 
 namespace Cs_Compile_test.com.nativeTypes {
 
@@ -14,7 +10,7 @@ namespace Cs_Compile_test.com.nativeTypes {
 
 		protected override void initializeMethods() {
 			base.initializeMethods();
-			
+
 			ShadoMethod constructor = new ShadoMethod("FileReader", 1, "FileReader");
 			constructor.SetCode((ctx, args) => new ShadoObject(this, null).AddOrUpdateVariable("string", "filepath", args[0]));
 			AddMethod(constructor);
@@ -55,8 +51,8 @@ namespace Cs_Compile_test.com.nativeTypes {
 			base.initializeMethods();
 
 			ShadoMethod constructor = new ShadoMethod("FileWriter", 1, "FileWriter");
-			constructor.SetCode((ctx, args) => 
-				new ShadoObject(this, null).AddOrUpdateVariable("string", "filepath", args[0])	// Todo: This much be an evaluated expression in the future
+			constructor.SetCode((ctx, args) =>
+				new ShadoObject(this, null).AddOrUpdateVariable("string", "filepath", args[0])  // Todo: This much be an evaluated expression in the future
 				);
 			AddMethod(constructor);
 
@@ -70,10 +66,7 @@ namespace Cs_Compile_test.com.nativeTypes {
 
 			ShadoMethod close = new ShadoMethod("close", 0, "void");
 			close.SetCode((ctx, args) => {
-				StreamWriter stream = ctx.GetVariable("stream").value as StreamWriter;
-				if (stream == null)
-					throw new RuntimeError("Could not open stream to " + ctx.GetVariable("filepath"));
-				stream.Close();
+				this.GetWriteStream(ctx).Close();
 				return null;
 			});
 			AddMethod(close);

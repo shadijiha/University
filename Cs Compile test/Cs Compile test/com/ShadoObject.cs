@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Cs_Compile_test.com.exceptions;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Cs_Compile_test.com.exceptions;
 
 namespace Cs_Compile_test.com {
 	public class ShadoObject {
-		static readonly Random random = new Random();
 		public static readonly ShadoObject Global = new ShadoObject("object", "GLOBAL", null);
 
 		public ShadoClass type { get; set; }
@@ -23,20 +20,18 @@ namespace Cs_Compile_test.com {
 			if (type != null && type.name == "string")
 				this.value = value?.ToString().ReplaceFirstOccurrence("\"", "").ReplaceLastOccurrence("\"", "").Trim() ?? "";
 
-			this.id = random.Next(int.MaxValue);
+			this.id = VM.instance.random.Next(int.MaxValue);
 			this.instanceVariables = new List<ShadoObject>();
 
 			MemoryManager.AddVariable(this);
 		}
 
 		public ShadoObject(string type, string name, object value)
-			: this(VM.GetInstance().GetClass(type), name, value)
-		{
+			: this(VM.GetInstance().GetClass(type), name, value) {
 		}
 
 		public ShadoObject(string type, object value)
-			: this(type, "", value)
-		{
+			: this(type, "", value) {
 			name = "temp_" + GetHashCode();
 		}
 
@@ -78,8 +73,8 @@ namespace Cs_Compile_test.com {
 
 		public ShadoObject GetByAddress(int hashCode) {
 			var it = from obj in instanceVariables
-				where obj.GetHashCode() == hashCode
-				select obj;
+					 where obj.GetHashCode() == hashCode
+					 select obj;
 
 			return it.First();
 		}
@@ -113,7 +108,7 @@ namespace Cs_Compile_test.com {
 		}
 
 		public override string ToString() {
-			return type.GetMethod("toString").Call(this, null)?.ToString() ?? "null";
+			return type?.GetMethod("toString")?.Call(this, null)?.ToString() ?? "null";
 		}
 	}
 }
