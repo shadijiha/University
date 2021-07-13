@@ -13,6 +13,7 @@ void test() {
 
 int main()	{
 
+    print(fact(5));
 
     /*int[] array = {9, 3, 12, 0, 7, 5};
 
