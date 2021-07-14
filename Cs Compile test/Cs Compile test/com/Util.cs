@@ -92,7 +92,7 @@ namespace Cs_Compile_test.com {
 						o = temp.ToString() ?? o;
 					}
 
-					Console.Write(o + " ");
+					Console.Write(o);
 				}
 				Console.WriteLine();
 				return null;

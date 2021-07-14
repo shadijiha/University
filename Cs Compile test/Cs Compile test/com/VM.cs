@@ -59,6 +59,10 @@ namespace Cs_Compile_test.com {
 					}
 				}
 			}
+
+			classes.Clear();
+			variables.Clear();
+			hasInitialized = false;
 		}
 
 		public void InvokeMain(int argc = 0, string[] argv = null) {

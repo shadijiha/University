@@ -1,19 +1,22 @@
 #include "__PATH__/core.sscript"
 //#include "__PATH__/main.shado"
 
-void test() {
-    int sec = 0;
-    while(true) {
-        print(sec);
-        sec = sec + 1;
-        sleep(1000);
-        clear();
+class MyTest    {
+
+    void test() {
+        print("Hello from class");
     }
+
 }
 
 int main()	{
+    string temp = "This is a test";
+    string lower = temp.toUpperCase();
+    print(lower);
 
-    print(fact(5));
+    clear();
+    MyTest test = new MyTest();
+    test.test();
 
     /*int[] array = {9, 3, 12, 0, 7, 5};
 

@@ -16,7 +16,6 @@ namespace Cs_Compile_test {
 					new Compiler(path);
 				compiler.compile();
 				VM.instance.InvokeMain(args.Length, args);
-
 			} catch (Exception e) {
 				Console.WriteLine();
 				Console.WriteLine(e.Message);

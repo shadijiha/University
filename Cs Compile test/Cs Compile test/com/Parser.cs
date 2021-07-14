@@ -1,17 +1,22 @@
-﻿using System;
+﻿using Cs_Compile_test.com.exceptions;
+using Cs_Compile_test.com.expr;
+using Cs_Compile_test.com.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Cs_Compile_test.com.exceptions;
-using Cs_Compile_test.com.expr;
-using Cs_Compile_test.com.interfaces;
 
 namespace Cs_Compile_test.com {
 	public static class Parser {
 
-		public static void ExtractMethods(string code) {
+		/// <summary>
+		/// Parses the code and adds all the extacted methods to the class
+		/// </summary>
+		/// <param name="code">The code to parse</param>
+		/// <param name="clazz">The class to add the method to, if it is null, the methods are added to the global scope</param>
+		public static void ExtractMethods(string code, ShadoClass clazz = null) {
 
 			var blocks = ExtractBlocks(code);
 
@@ -72,8 +77,7 @@ namespace Cs_Compile_test.com {
 					while (i < methodCodeLines.Count && status.status == ExecutionStatus.Type.OK) {
 						try {
 							methodCodeLines[i++].Execute(ref status);
-						}
-						catch (Exception e) {
+						} catch (Exception e) {
 							throw new Exception(e.Message + $"\n\t @ line: {i + 1}\n" + $"--->\t{lines[i]}");
 						}
 					}
@@ -81,7 +85,10 @@ namespace Cs_Compile_test.com {
 					return status.value;
 				});
 
-				VM.instance.PushVariable(method);
+				if (clazz == null)
+					VM.instance.PushVariable(method);
+				else
+					clazz.AddMethod(method);
 			}
 		}
 
@@ -102,7 +109,7 @@ namespace Cs_Compile_test.com {
 				string className = "";
 				for (uint i = 0; i < tokens.Length; i++) {
 					if (tokens[i] == "class")
-						try { className = tokens[i + 1]; } catch (Exception) { throw new SyntaxError("Class does not have a name");}
+						try { className = tokens[i + 1]; } catch (Exception) { throw new SyntaxError("Class does not have a name"); }
 				}
 
 				// Register this class
@@ -114,10 +121,13 @@ namespace Cs_Compile_test.com {
 					foreach (var parent in clazz.GetParentClasses())
 						parent.GetConstructor().Call(ctx, args);
 
-					Console.WriteLine("Inside {0} constructor", className);
 					return new ShadoObject(clazz, null);
 				}));
 				VM.instance.AddType(clazz);
+
+				// Extract methods
+				Range r = new Range(1, lines.Length - 1);
+				ExtractMethods(string.Join('\n', lines[r]), clazz);
 			}
 		}
 
@@ -134,8 +144,8 @@ namespace Cs_Compile_test.com {
 				}
 
 				if (line.Contains("}")) {
-					try { stack.Pop(); } catch (Exception) {}
-					
+					try { stack.Pop(); } catch (Exception) { }
+
 					if (stack.Count == 0) {
 						blocks.Add(buffer.ToString() + "}");
 						buffer.Clear();
@@ -158,9 +168,8 @@ namespace Cs_Compile_test.com {
 		}
 
 		private static bool IsClassDefinition(string line) {
-			return new ExpressionSyntax("ANYclassANY{").Matches(line);
+			return new ExpressionSyntax("ANYclassANY{").Matches(line) ||
+				new ExpressionSyntax("ANYstructANY{").Matches(line);
 		}
-
-		
 	}
 }
