@@ -64,9 +64,10 @@ namespace Cs_Compile_test.com {
 						// Do not add the if statement content for parsing
 						i += loopBlock.First().Split("\n").Length;
 					}
-
-					// Otherwise just push an Expression
-					methodCodeLines.Add(new Expression(lines[i], method));
+					else {
+						// Otherwise just push an Expression
+						methodCodeLines.Add(new Expression(lines[i], method));
+					}
 				}
 
 				method.SetCode((ctx, args) => {

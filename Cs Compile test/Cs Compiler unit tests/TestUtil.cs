@@ -1,13 +1,14 @@
-﻿using Cs_Compile_test;
+﻿using System.IO;
+using Cs_Compile_test;
 using Cs_Compile_test.com;
 using System.Text;
 
 namespace Cs_Compiler_unit_tests {
 
-	public static class TestUtil {
+	public static class TestUtil
+	{
 
-		private const string CORE_LIB_LOCATION =
-			@"C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\core.sscript";
+		private static readonly string CORE_LIB_LOCATION = Directory.GetParent(Program.PATH).FullName + "\\Cs Compile test\\core.sscript";
 
 		public static string MainTemplate(params string[] lines) {
 			StringBuilder builder = new StringBuilder("int main()	{");

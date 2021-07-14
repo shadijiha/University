@@ -108,7 +108,7 @@ namespace Cs_Compile_test.com {
 		}
 
 		public override string ToString() {
-			return type?.GetMethod("toString")?.Call(this, null)?.ToString() ?? "null";
+			return type?.GetMethod("toString")?.Call(this, null)?.ToString() ?? value?.ToString() ?? "undefined@" + id;
 		}
 	}
 }

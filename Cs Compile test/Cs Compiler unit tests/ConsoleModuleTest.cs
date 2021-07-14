@@ -5,16 +5,7 @@ using System.IO;
 
 namespace Cs_Compiler_unit_tests {
 	[TestClass]
-	public class ConsoleModuleTest {
-
-		private StringWriter console;
-
-		[TestInitialize]
-		public void Setup() {
-			console = new StringWriter();
-			Console.SetOut(console);
-			Console.SetError(console);
-		}
+	public class ConsoleModuleTest : BaseTest {
 
 		[TestMethod]
 		public void Print_Simple_String() {
@@ -33,22 +24,19 @@ namespace Cs_Compiler_unit_tests {
 		}
 
 		[TestMethod]
+		public void Print_Array_Variable() {
+			string code = TestUtil.MainTemplate("int[] arr = {1, 2, 3, 4, 5, 6};", "print(arr)");
+			TestUtil.CompileAndRun(code);
+
+			Assert.AreEqual("[1, 2, 3, 4, 5, 6]\r\n", console.ToString());
+		}
+
+		[TestMethod]
 		public void Print_Multible_Args() {
 			string code = TestUtil.MainTemplate("print(\"Hehexd\", 123);");
 			TestUtil.CompileAndRun(code);
 
 			Assert.AreEqual("Hehexd123\r\n", console.ToString());
-		}
-
-		[TestCleanup]
-		public void CleanUp() {
-			// Now you have to restore default output stream
-			var standardOutput = new StreamWriter(Console.OpenStandardOutput());
-			standardOutput.AutoFlush = true;
-			Console.SetOut(standardOutput);
-
-			// Clear VM
-			VM.instance.Shutdown();
 		}
 	}
 }

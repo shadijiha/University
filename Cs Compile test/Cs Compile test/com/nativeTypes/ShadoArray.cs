@@ -83,7 +83,15 @@ namespace Cs_Compile_test.com.nativeTypes {
 				}));
 
 			AddMethod(new ShadoMethod("contains", 1, "bool")
-				.SetCode((ctx, args) => (ctx.value as List<object>).Contains(args[0])));
+				.SetCode((ctx, args) => {
+					var list = ctx.value as List<object>;
+					foreach (object o in list) {
+						if (o.Equals(args[0]) || o.ToString().Equals(args[0].ToString()))
+							return true;
+					}
+
+					return false;
+				}));
 		}
 
 	}

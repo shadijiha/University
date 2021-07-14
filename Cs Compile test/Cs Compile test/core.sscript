@@ -112,7 +112,7 @@ native class Array {
 
     public native void add(dynamic element);
 
-    public native void addAt(dynamic element);
+    public native void addAt(int index, dynamic element);
 
     public native dynamic pop();
 
@@ -140,7 +140,7 @@ native class string {
 
     public native bool contains(string other);
 
-    public native bool startWith(string s);
+    public native bool startsWith(string s);
 
     public native bool endsWith(string s);
 

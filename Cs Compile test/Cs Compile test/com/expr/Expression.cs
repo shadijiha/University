@@ -229,7 +229,7 @@ namespace Cs_Compile_test.com {
 			else if (isMathExpression(rhs, ref value)) { }
 			// It is a string assignment
 			else if (rhs.StartsWith("\"") && rhs.EndsWith("\"")) {
-				value = rhs;
+				value = rhs.ReplaceFirstOccurrence("\"", "").ReplaceLastOccurrence("\"", "");
 			}
 			// It is an array assignment
 			else if (rhs.StartsWith("{") && rhs.EndsWith("}")) {
@@ -388,7 +388,7 @@ namespace Cs_Compile_test.com {
 
 			// See if it is a string
 			if (rhs.StartsWith("\"") && rhs.EndsWith("\""))
-				return new ShadoObject("string", rhs);
+				return new ShadoObject("string", rhs.ReplaceFirstOccurrence("\"", "").ReplaceLastOccurrence("\"", ""));
 
 			// See if it is a char
 			if (rhs.StartsWith("'") && rhs.EndsWith("'"))

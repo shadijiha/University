@@ -1,19 +1,17 @@
 ﻿using Cs_Compile_test.com;
 using System;
+using System.IO;
 
 namespace Cs_Compile_test {
-	public class Program {
+	public class Program
+	{
+		public static readonly string PATH = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+
 		public static void Main(string[] args) {
 			try {
 
-#if true
-				string path = @"C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\test.sscript";
-#else
-				string path = @"D:\Wamp64\www\GitHub\University\Cs Compile test\Cs Compile test\test.sscript";
-#endif
-
 				Compiler compiler =
-					new Compiler(path);
+					new Compiler(PATH + "\\test.sscript");
 				compiler.compile();
 				VM.instance.InvokeMain(args.Length, args);
 			} catch (Exception e) {
