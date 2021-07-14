@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cs_Compile_test.com.interfaces;
 using System.Data;
 using System.Linq;
-using System.Text;
-using Cs_Compile_test.com.interfaces;
 
 namespace Cs_Compile_test.com.expr {
 
-	public class ConditionalExpression : AbstractExpression
-	{
+	public class ConditionalExpression : AbstractExpression {
 		private string block;
 		private ShadoObject scope;
 		private string condition;
@@ -25,7 +21,7 @@ namespace Cs_Compile_test.com.expr {
 				var lines = block.Split("\n");
 				lines = Clean(lines);
 
-				for (int i = 0; i < lines.Length - 1; i++) {
+				for (int i = 1; i < lines.Length - 1; i++) {
 					new Expression(lines[i], scope).Execute(ref status);
 				}
 

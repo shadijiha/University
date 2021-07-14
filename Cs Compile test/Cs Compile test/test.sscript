@@ -1,18 +1,24 @@
 #include "__PATH__/core.sscript"
 //#include "__PATH__/main.shado"
 
-void test(int[] arr) {
-    int sec = 0;
-    while(true) {
-        print(sec);
-        sec = sec + 1;
-        sleep(1000);
-        clear();
+class MyTest    {
+
+    void test() {
+        print("Hello from class");
     }
+
 }
 
 int main()	{
-    int[] array = {9, 3, 12, 0, 7, 5};
+    string temp = "This is a test";
+    string lower = temp.toUpperCase();
+    print(lower);
+
+    clear();
+    MyTest test = new MyTest();
+    test.test();
+
+    /*int[] array = {9, 3, 12, 0, 7, 5};
 
     FileWriter writer = new FileWriter("D:/Wamp64/www/GitHub/University/Cs Compile test/Cs Compile test/text.txt");
     writer.open();
@@ -30,5 +36,5 @@ int main()	{
 
     reader.open();
     string text = reader.readToEnd();
-    print(text);
+    print(text);*/
 }

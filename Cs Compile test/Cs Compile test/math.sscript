@@ -28,6 +28,46 @@ int max(int x, int y)   {
     return y;
 }
 
+int factorial(int n)    {
+
+    int product = 1;
+    int j = 1;
+    while(j <= n) {
+        product = product * j;
+        j = j + 1;
+    }
+    return product;
+}
+
+double sin(double a) {
+    double PI = pi();
+
+    a = a % (2 * PI);
+
+    if (a < 0) {
+        a = 2 * PI - a;
+    }
+
+    int sign = 1;
+    if (a > PI) {
+        a = a - PI;
+        sign = -1;
+    }
+
+    int PRECISION = 50;
+    double temp = 0;
+    int i = 0;
+    while (i <= PRECISION) {
+        double pow1 =  pow(-1, i);
+        double pow2 =  pow(a, 2 * i + 1);
+        int fac = factorial(2 * i + 1);
+        temp = temp + pow1 * (pow2 / fac);
+        i = i + 1;
+    }
+
+    return sign * temp;
+}
+
 /**
  * @returns pi 
  */

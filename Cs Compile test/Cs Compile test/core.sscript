@@ -38,6 +38,16 @@ native void print_all_types();
  */
 native void print_user_defined_types();
 
+/**
+ * Prints all the variable contained in the VM
+ */
+native void inspect_vm();
+
+/**
+ * Prints the content of the memory manager
+ */
+native void inspect_memory();
+
 /** 
  * All objects extend this class
  */

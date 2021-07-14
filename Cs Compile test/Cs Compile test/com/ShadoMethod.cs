@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Cs_Compile_test.com.exceptions;
+﻿using Cs_Compile_test.com.exceptions;
+using System;
 
 namespace Cs_Compile_test.com {
 	public class ShadoMethod : ShadoObject {
@@ -16,8 +14,7 @@ namespace Cs_Compile_test.com {
 		protected string fullType;
 
 		public ShadoMethod(string name, int argCount, string returnType, bool optionalArgs, string[] argTypes)
-			: base("function", name, null)
-		{
+			: base("function", name, null) {
 			this.argCount = argCount;
 			this.returnType = returnType;
 			this.argTypes = argTypes;
@@ -38,7 +35,7 @@ namespace Cs_Compile_test.com {
 
 		public ShadoMethod(string name, int argCount, string returnType, string[] argTypes)
 			: this(name, argCount, returnType, false, argTypes) {
-			
+
 		}
 
 		public ShadoMethod(String name, int argCount, String returnType)
@@ -102,13 +99,13 @@ namespace Cs_Compile_test.com {
 			else if (obj == this)
 				return true;
 			else {
-				var o = (ShadoMethod) obj;
+				var o = (ShadoMethod)obj;
 				return name == o.name && argCount == o.argCount;
 			}
 		}
 
 		public override string ToString() {
-			return $"{name}: ${GetFullType()}";
+			return name;
 		}
 	}
 }

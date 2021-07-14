@@ -2,35 +2,34 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
+using Cs_Compile_test.com;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Cs_Compile_test.com;
 
-namespace Cs_Compile_test
-{
-	public class Compiler
-	{
+namespace Cs_Compile_test {
+	public class Compiler {
 		private string filecontent;
 		public string filename { get; private set; }
 		public uint lineNumber { get; set; }
 
 		public Compiler(string filename) {
-			if (filename == null)
-				return;
+			if (filename != null) {
+				this.filename = filename;
+				StringBuilder builder = new StringBuilder();
 
-			this.filename = filename;
-			StringBuilder builder = new StringBuilder();
+				using StreamReader reader = new StreamReader(filename);
+				while (!reader.EndOfStream) {
+					builder.Append(reader.ReadLine()).Append("\n");
+				}
 
-			using StreamReader reader = new StreamReader(filename);
-			while (!reader.EndOfStream) {
-				builder.Append(reader.ReadLine()).Append("\n");
+				filecontent = builder.ToString();
+			} else {
+				filename = "";
+				filecontent = "";
+				lineNumber = 0;
 			}
-
-			filecontent = builder.ToString();
 		}
 
 		public void compile() {
@@ -42,7 +41,7 @@ namespace Cs_Compile_test
 			// Remove multiline comments
 			while (Regex.IsMatch(filecontent, @"\/\*[^*]*\*+([^/][^*]*\*+)*\/"))
 				filecontent = Regex.Replace(filecontent, @"\/\*[^*]*\*+([^/][^*]*\*+)*\/", "");
-			
+
 			// Run the class definer
 			Parser.ExtractClasses(filecontent);
 
@@ -59,17 +58,17 @@ namespace Cs_Compile_test
 
 				// Replace prepressor constant
 				foreach (var constant in PreprocessorCommand.constants) {
-					line = line.Replace(constant.Key, constant.Value(this).ToString());
+					line = line.Replace(constant.Key, constant.Value(this)?.ToString() ?? "");
 					lines[i] = line;
 				}
 
-				if (line.StartsWith("#"))	{
+				if (line.StartsWith("#")) {
 					// Extract command name
 					string[] tokens = Expression.SplitByExceptQuotes(line.Substring(1), " |	").ToArray();
 					PreprocessorCommand command = PreprocessorCommand.Get(tokens[0]);
 
 					lines[i] = command.Execute<string>(tokens.Skip(1).ToArray());
-					
+
 					// Go back to preprocess the file that just got included
 					lines = string.Join('\n', lines).Split('\n');
 					i = 0;

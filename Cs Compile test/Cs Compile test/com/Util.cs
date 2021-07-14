@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cs_Compile_test.com.exceptions;
+using Cs_Compile_test.com.nativeTypes;
+using System;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Cs_Compile_test.com.exceptions;
-using Cs_Compile_test.com.nativeTypes;
+using System.Threading;
 
 namespace Cs_Compile_test.com {
 	public static class Util {
@@ -58,8 +58,7 @@ namespace Cs_Compile_test.com {
 		}
 	}
 
-	public struct ExecutionStatus
-	{
+	public struct ExecutionStatus {
 		public Type status { get; set; }
 		public object value { get; set; }
 
@@ -70,6 +69,124 @@ namespace Cs_Compile_test.com {
 
 		public enum Type {
 			OK, RETURN, ABORT, BREAK, CONTINUE
+		}
+	}
+
+	public static class VMSetup {
+
+		public static void SetupBasicMethods(this VM vm) {
+			ShadoMethod method_print = new ShadoMethod("print", 1, "void", true, new string[] { "object" });
+			method_print.SetCode((context, obj) => {
+				foreach (object e in obj) {
+					string o = e?.ToString().Trim() ?? "\"null\"";
+					if (o.StartsWith("\"") && o.EndsWith("\"")) {
+						o = Regex.Unescape(o.Substring(1,
+							o.Length - 2)); // Keep the string literal without the quotes ("")
+					} else if (context.HasVariable(o) || vm.Get(o) != null) {
+						o = context.GetVariable(o)?.ToString() ??
+							VM.instance.Get(o)?.ToString(); // Get the value of the variable if it is not a raw string
+					}
+					// Otherwise try to find the type of the variable or just print the C# type (Mainly the variable is an R-value)
+					else {
+						ShadoObject temp = new ShadoObject(vm.GetTypeOf(e), e);
+						o = temp.ToString() ?? o;
+					}
+
+					Console.Write(o);
+				}
+				Console.WriteLine();
+				return null;
+			});
+			vm.PushVariable(method_print);
+
+			ShadoMethod method_typeof = new ShadoMethod("typeof", 1, "string", new string[] { "object" });
+			method_typeof.SetCode((ctx, obj) =>
+				ctx.GetVariable(obj[0].ToString())?.type.name ?? vm.Get(obj[0].ToString())?.type.name ?? vm.GetTypeOf(obj[0])?.name ?? "object");
+			vm.PushVariable(method_typeof);
+
+			ShadoMethod method_clear = new ShadoMethod("clear", 0, "void");
+			method_clear.SetCode((ctx, obj) => { Console.Clear(); return null; });
+			vm.PushVariable(method_clear);
+
+			ShadoMethod method_sleep = new ShadoMethod("sleep", 1, "void");
+			method_sleep.SetCode((ctx, obj) => { Thread.Sleep(int.Parse(obj[0].ToString())); return null; });
+			vm.PushVariable(method_sleep);
+		}
+
+		public static void SetupMathMethods(this VM vm) {
+			ShadoMethod method_random = new ShadoMethod("random", 0, "double");
+			method_random.SetCode((ctx, obj) => vm.random.NextDouble());
+			vm.PushVariable(method_random);
+
+			ShadoMethod method_sqrt = new ShadoMethod("sqrt", 1, "double");
+			method_sqrt.SetCode((ctx, obj) => Math.Sqrt(double.Parse(obj[0].ToString())));
+			vm.PushVariable(method_sqrt);
+
+			ShadoMethod method_pow = new ShadoMethod("pow", 2, "double");
+			method_pow.SetCode((ctx, obj) => Math.Pow(double.Parse(obj[0].ToString()), double.Parse(obj[1].ToString())));
+			vm.PushVariable(method_pow);
+		}
+
+		public static void SetupInspectMethods(this VM vm) {
+			ShadoMethod method_print_types = new ShadoMethod("print_all_types", 0, "void");
+			method_print_types.SetCode((ctx, obj) => {
+				foreach (var shadoClass in VM.instance.GetAllTypes()) {
+					Console.WriteLine("Type:\t{0}", shadoClass);
+					foreach (var shadoMethod in shadoClass.GetMethods()) {
+						Console.WriteLine("\t\t{0}\t{1}", shadoMethod.name, shadoMethod.GetFullType());
+					}
+				}
+				return null;
+			});
+			vm.PushVariable(method_print_types);
+
+			ShadoMethod print_user_defined_types = new ShadoMethod("print_user_defined_types", 0, "void");
+			print_user_defined_types.SetCode((ctx, obj) => {
+				foreach (var shadoClass in VM.instance.GetAllTypes()) {
+					if (shadoClass.GetType().Namespace.Contains("native"))
+						continue;
+
+					Console.WriteLine("Type:\t{0}", shadoClass);
+					foreach (var shadoMethod in shadoClass.GetMethods()) {
+						Console.WriteLine("\t\t{0}\t{1}", shadoMethod.name, shadoMethod.GetFullType());
+					}
+				}
+				return null;
+			});
+			vm.PushVariable(print_user_defined_types);
+
+			ShadoMethod inspect_vm = new ShadoMethod("inspect_vm", 0, "void");
+			inspect_vm.SetCode((ctx, obj) => {
+				StringBuilder builder = new StringBuilder("VM content:\n");
+
+				foreach (var variable in vm.AllVariables()) {
+					// See if it is a method, then get all its inner variable
+					builder.Append("\t");
+					if (variable is ShadoMethod method) {
+						builder.Append(method.name).Append(": ").Append(method.GetFullType());
+						foreach (var methodVar in method.GetAllVariables()) {
+							builder.Append("\t")
+								.Append(methodVar.name).Append("\t=>\t").Append(variable.value ?? "null").Append("\n");
+						}
+					} else {
+						// Otherwise
+						builder.Append(variable.name).Append("\t=>\t").Append(variable.value ?? "null");
+					}
+
+					builder.Append("\n");
+				}
+
+				Console.WriteLine(builder);
+				return null;
+			});
+			vm.PushVariable(inspect_vm);
+
+			ShadoMethod inspect_memory = new ShadoMethod("inspect_memory", 0, "void");
+			inspect_memory.SetCode((ctx, obj) => {
+				Console.WriteLine(MemoryManager.ToString());
+				return null;
+			});
+			vm.PushVariable(inspect_memory);
 		}
 	}
 }
