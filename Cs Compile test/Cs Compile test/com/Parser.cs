@@ -53,7 +53,7 @@ namespace Cs_Compile_test.com {
 						methodCodeLines.Add(new ConditionalExpression(ifBlock.First(), lines[i], method));
 
 						// Do not add the if statement content for parsing
-						i += ifBlock.First().Split("\n").Length;
+						i += ifBlock.First().Split("\n").Length - 1;
 					}
 					// Else check if it is a for loop
 					else if (LoopExpression.IsLoopStatement(lines[i])) {
@@ -62,9 +62,8 @@ namespace Cs_Compile_test.com {
 						methodCodeLines.Add(new LoopExpression(loopBlock.First(), lines[i], method));
 
 						// Do not add the if statement content for parsing
-						i += loopBlock.First().Split("\n").Length;
-					}
-					else {
+						i += loopBlock.First().Split("\n").Length - 1;
+					} else {
 						// Otherwise just push an Expression
 						methodCodeLines.Add(new Expression(lines[i], method));
 					}

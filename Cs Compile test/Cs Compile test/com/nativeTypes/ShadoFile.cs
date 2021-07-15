@@ -50,16 +50,26 @@ namespace Cs_Compile_test.com.nativeTypes {
 		protected override void initializeMethods() {
 			base.initializeMethods();
 
-			ShadoMethod constructor = new ShadoMethod("FileWriter", 1, "FileWriter");
+			ShadoMethod constructor = new ShadoMethod("FileWriter", 2, "FileWriter");
+			constructor.optionalArgs = true;
 			constructor.SetCode((ctx, args) =>
-				new ShadoObject(this, null).AddOrUpdateVariable("string", "filepath", args[0])  // Todo: This much be an evaluated expression in the future
+				new ShadoObject(this, null)
+					.AddOrUpdateVariable("string", "filepath", args[0])  // Todo: This much be an evaluated expression in the future
+					.AddOrUpdateVariable("bool", "append", args.Length >= 2 ? args[1] : false)
 				);
 			AddMethod(constructor);
 
 			ShadoMethod open = new ShadoMethod("open", 0, "void");
 			open.SetCode((ctx, args) => {
 				string filepath = ctx.GetVariable("filepath").value.ToString().Trim();
-				ctx.AddVariable("object", "stream", new StreamWriter(filepath));
+
+				bool append = false;
+				bool.TryParse(ctx.GetVariable("append").value.ToString().Trim(), out append);
+
+				ctx.AddVariable("object", "stream",
+						append ? File.AppendText(filepath) : new StreamWriter(filepath)
+						);
+
 				return null;
 			});
 			AddMethod(open);
@@ -92,15 +102,6 @@ namespace Cs_Compile_test.com.nativeTypes {
 				return null;
 			});
 			AddMethod(flush);
-
-			ShadoMethod append = new ShadoMethod("append", 1, "void");
-			append.SetCode((ctx, args) => {
-				var stream = this.GetWriteStream(ctx);
-				stream.BaseStream.Seek(0, SeekOrigin.End);
-				stream.Write(args[0].ToString());
-				return null;
-			});
-			AddMethod(append);
 		}
 	}
 }

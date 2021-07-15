@@ -30,7 +30,6 @@ C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.runtimeconfig.dev.json
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.dll
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\bin\Debug\netcoreapp3.1\Cs Compile test.pdb
-C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.csprojAssemblyReference.cache
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.AssemblyInfoInputs.cache
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.AssemblyInfo.cs
 C:\Users\shadi\Desktop\code\Projects\University\Cs Compile test\Cs Compile test\obj\Debug\netcoreapp3.1\Cs Compile test.dll

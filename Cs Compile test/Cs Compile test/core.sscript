@@ -84,7 +84,7 @@ native class FileReader {
 
 native class FileWriter {
 
-    public native FileWriter(string filepath);
+    public native FileWriter(string filepath, bool? append);
 
     public native void open();
 
@@ -95,8 +95,6 @@ native class FileWriter {
     public native void writeln(string text);
 
     public native void flush();
-
-    public native void append();
 }
 
 /**
