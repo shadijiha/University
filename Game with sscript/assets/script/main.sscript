@@ -1,0 +1,10 @@
+/**
+ * Put your script here
+ */
+#include "D:/Code/Projects/Compiler/Cs Compile test/core.sscript"
+#include "__PATH__/game.sscript"
+
+object main(int argc, string[] argv)  {
+    print(argv);    
+}
+

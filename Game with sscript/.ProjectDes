@@ -1,0 +1,8 @@
+// This file is responsible for providing
+// An overall description of the project
+// For the Project indexer
+
+lang: java
+name: Shado Java Graph
+description:  Having fun with 2D Graphics. Simulating natural ecosystems
+mainFile: EcosystemSimulation.java

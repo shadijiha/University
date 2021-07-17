@@ -1,0 +1,27 @@
+/**
+ *
+ * This file is to use in Game with sscript test
+ */
+
+class Player    {
+    public static void moveTo(int x, int y) {
+        print("goto-", x, "-", y);
+    }
+}
+
+void moveRight()    {
+    print("right");
+}
+
+void moveLeft()    {
+    print("left");
+}
+
+void moveTop()    {
+    print("top");
+}
+
+void moveBottom()    {
+    print("bottom");
+}
+
