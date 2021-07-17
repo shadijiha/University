@@ -5,23 +5,30 @@
 
 class Player    {
     public static void moveTo(int x, int y) {
-        print("goto-", x, "-", y);
+        println("x:", x);
+        println("y:", y);
     }
 }
 
-void moveRight()    {
-    print("right");
-}
+class PlayerLocationLoader  {
+    public static void load()  {
+        FileReader reader = new FileReader("__PATH__/data");
+        reader.open();
 
-void moveLeft()    {
-    print("left");
-}
+        string line = reader.readLine();
 
-void moveTop()    {
-    print("top");
-}
+        reader.close();
 
-void moveBottom()    {
-    print("bottom");
+        return line.split(" ");
+    }
+
+    public static void update(int x, int y) {
+        FileWriter writer = new FileWriter("__PATH__/data");
+        writer.open();
+        writer.write(x);
+        writer.write(" ");
+        writer.write(y);
+        writer.close();
+    }
 }
 

@@ -28,7 +28,6 @@ public class SettingsScene extends Scene {
 		String scriptFile = Env.get("sscript_file");
 		String exeFile = Env.get("sscript_compiler") + "\\" + Env.get("sscript_exe");
 		String command = String.format("\"%s\" --filepath \"%s\"", exeFile, scriptFile);
-		System.out.println(command);
 		File dir = new File(Env.get("sscript_compiler"));
 
 
@@ -52,21 +51,17 @@ public class SettingsScene extends Scene {
 	private void processLine(String line) {
 		var player = mainScene.getPlayer().position;
 		line = line.trim();
-		switch (line) {
-			case "right":
-				player.x += Tile.DIMENSION;
-				break;
-			case "left":
-				player.x -= Tile.DIMENSION;
-				break;
-			case "top":
-				player.y -= Tile.DIMENSION;
-				break;
-			case "bottom":
-				player.y += Tile.DIMENSION;
-				break;
-			default:
-				System.out.println(line);
+
+		System.out.println(line);
+
+		if (line.startsWith("x:")) {
+			var temp = line.replace("x:", "");
+			player.x = Integer.parseInt(temp) * Tile.DIMENSION;
+			return;
+		} else if (line.startsWith("y:")) {
+			var temp = line.replace("y:", "");
+			player.y = Integer.parseInt(temp) * Tile.DIMENSION;
+			return;
 		}
 	}
 

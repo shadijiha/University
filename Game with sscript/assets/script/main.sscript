@@ -1,10 +1,40 @@
 /**
  * Put your script here
  */
-#include "D:/Code/Projects/Compiler/Cs Compile test/core.sscript"
+//#include "D:/Code/Projects/Compiler/Cs Compile test/core.sscript"
 #include "__PATH__/game.sscript"
 
-object main(int argc, string[] argv)  {
-    print(argv);    
+int main(int argc, string[] argv)  {
+    string[] pos = PlayerLocationLoader.load();
+    int x = pos.at(0);
+    int y = pos.at(1);
+    int targetX = x + 5;
+    int targetY = y + 5;
+
+    while(x < targetX) {
+        Player.moveTo(x, y);
+        x = x + 1;
+        sleep(300);
+    }
+
+    while(x > targetX) {
+        Player.moveTo(x, y);
+        x = x - 1;
+        sleep(300);
+    }
+
+    while(y < targetY) {
+        Player.moveTo(x, y)
+        y = y + 1;
+        sleep(300);
+    }
+
+    while(y > targetY) {
+        Player.moveTo(x, y)
+        y = y - 1;
+        sleep(300);
+    }
+
+    PlayerLocationLoader.update(x, y);
 }
 

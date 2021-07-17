@@ -1,9 +1,16 @@
-import com.engin.*;
+import com.engin.Renderer;
+import com.engin.Scene;
+import com.engin.Util;
+import com.engin.logger.Log;
 
 import java.awt.*;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
+import java.util.Scanner;
 
 public class MainScene extends Scene {
 
@@ -39,7 +46,18 @@ public class MainScene extends Scene {
 		}
 
 		// Init player
-		player = new Tile(Util.random(0, mapWidth - 2) * Tile.DIMENSION, Util.random(0, mapHeight - 2) * Tile.DIMENSION, "P");
+		int xP = Util.random(0, mapWidth - 2);
+		int yP = Util.random(0, mapHeight - 2);
+		player = new Tile(xP * Tile.DIMENSION, yP * Tile.DIMENSION, "P");
+
+		// Write this info in data file so ssscript can get it
+		try {
+			PrintWriter writer = new PrintWriter(new FileOutputStream("assets/script/data"));
+			writer.println(xP + " " + yP);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			Log.error(e);
+		}
 	}
 
 	@Override
