@@ -1,9 +1,13 @@
-import com.engin.*;
-import com.engin.io.*;
+import com.engin.Renderer;
+import com.engin.Scene;
+import com.engin.io.Input;
 import com.engin.shapes.Rectangle;
 
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -21,10 +25,12 @@ public class SettingsScene extends Scene {
 	}
 
 	private void playScript() throws IOException {
-		String scriptFile = "C:\\Users\\shadi\\Desktop\\Game with sscript\\assets\\script\\main.sscript";
-		String exeFile = "D:\\Code\\Projects\\Compiler\\Cs Compile test\\bin\\Release\\netcoreapp3.1\\CsCompiletest.exe";
+		String scriptFile = Env.get("sscript_file");
+		String exeFile = Env.get("sscript_compiler") + "\\" + Env.get("sscript_exe");
 		String command = String.format("\"%s\" --filepath \"%s\"", exeFile, scriptFile);
-		File dir = new File("D:\\Code\\Projects\\Compiler\\Cs Compile test\\bin\\Release\\netcoreapp3.1");
+		System.out.println(command);
+		File dir = new File(Env.get("sscript_compiler"));
+
 
 		ProcessBuilder pb =
 				new ProcessBuilder(command);
