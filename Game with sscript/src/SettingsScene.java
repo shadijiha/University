@@ -1,6 +1,5 @@
 import com.engin.Renderer;
 import com.engin.Scene;
-import com.engin.io.Input;
 import com.engin.shapes.Rectangle;
 
 import java.awt.*;
@@ -68,17 +67,19 @@ public class SettingsScene extends Scene {
 	@Override
 	public void init(Renderer renderer) {
 		playBtn.setTexture("assets/gameicons/PNG/Black/2x/right.png");
+		playBtn.onClick((pos, dt) -> {
+			System.out.println("Clicked!");
+//			try {
+//				playScript();
+//			} catch (IOException e) {
+//				Log.error(e);
+//			}
+		});
 	}
 
 	@Override
 	public void update(float dt) {
-		if (isClicked(playBtn)) {
-			try {
-				playScript();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		playBtn.update(dt);
 	}
 
 	@Override
@@ -89,14 +90,5 @@ public class SettingsScene extends Scene {
 		g.setFont(new Font("Arial", Font.PLAIN, 20));
 		g.drawString("Play script", 450, 30);
 		g.setFont(f);
-	}
-
-	private boolean isClicked(Rectangle r) {
-		var position = r.getPosition();
-		var dimension = r.getDimensions();
-		return (position.x < Input.getMouseX() + 1 &&
-				position.x + dimension.x > Input.getMouseX() &&
-				position.y < Input.getMouseY() + 1 &&
-				position.y + dimension.y > Input.getMouseY()) && Input.mouseIsPressed();
 	}
 }

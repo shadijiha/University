@@ -4,11 +4,14 @@
 
 package com.engin.shapes;
 
+import com.engin.io.Input;
+
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.geom.Ellipse2D;
 
 public class Circle extends Shape {
 
+	@Deprecated
 	public Circle(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
@@ -41,5 +44,27 @@ public class Circle extends Shape {
 		g.drawOval((int) position.x, (int) position.y, (int) dimension.x, (int) dimension.y);
 
 		g.setColor(__color);
+	}
+
+	/**
+	 * @return Returns true if the mouse if being clicked and hovering the shape
+	 * Must be overridden by children because each shape has different hit box
+	 */
+	@Override
+	protected boolean isClicked() {
+		float distX = Input.getMouseX() - position.x;
+		float distY = Input.getMouseY() - position.y;
+
+		float distanceSquared = (distX * distX) + (distY * distY);
+
+
+		if (distanceSquared <= getRadius() * getRadius()) {
+			return Input.mouseIsPressed();
+		}
+		return false;
+	}
+
+	public int getRadius() {
+		return (int) ((dimension.x + dimension.y) / 2);
 	}
 }
